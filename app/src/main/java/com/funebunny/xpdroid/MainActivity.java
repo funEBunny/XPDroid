@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -32,10 +33,25 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    // Added by PRB
+    private String[] menuOptions;
+    private DrawerLayout drawerLayout;
+    private ListView drawerList;
+    // <Added by PRB
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // >Added by PRB
+        menuOptions  = getResources().getStringArray(R.array.menu_options);
+        //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);  //No sé para qué es
+        drawerList   = (ListView) findViewById(R.id.navigation_drawer);
+
+        drawerList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,menuOptions));
+        //drawerList.setOnClickListener(new DrawerItemClickListener());   //No sé para qué es
+        // <Added by PRB
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

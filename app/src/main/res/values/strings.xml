@@ -11,4 +11,21 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="inicio">Inicio</string>
+    <string name="favorito">Favorito</string>
+    <string name="programable">Programable</string>
+    <string name="manual">Manual</string>
+    <string name="objetivo">Objetivo</string>
+    <string name="recordatorio">Recordatorio</string>
+
+    <string-array name="menu_options">
+        <item>@string/inicio</item>
+        <item>@string/favorito</item>
+        <item>@string/programable</item>
+        <item>@string/manual</item>
+        <item>@string/objetivo</item>
+        <item>@string/recordatorio</item>
+    </string-array>
+
 </resources>
