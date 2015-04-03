@@ -28,7 +28,7 @@ public class ServicioGastos implements IServicioGastos {
     }
 
     @Override
-    public void guardatGasto(String nombre, String monto, Categoria categoria) {
+    public void guardarGasto(String nombre, String monto, Categoria categoria) {
 
         Gasto gasto = new Gasto();
         gasto.nombre=nombre;
@@ -38,7 +38,7 @@ public class ServicioGastos implements IServicioGastos {
     }
 
     @Override
-    public void guardatCategoria(String nombre) {
+    public void guardarCategoria(String nombre) {
         Categoria categoria=new Categoria();
         categoria.nombre=nombre;
         categoria.save();
