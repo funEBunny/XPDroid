@@ -10,12 +10,18 @@ import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
 
+import java.util.Calendar;
+
 public class CrearGastoActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
+        // Fijar por defecto la fecha del día
+        final Calendar c = Calendar.getInstance();
+        EditText fecha = (EditText) findViewById(R.id.fecha);
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH)+1).append("/").append(c.get(Calendar.YEAR)));
     }
 
 

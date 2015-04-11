@@ -9,17 +9,28 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/descripcion"
+        android:hint="@string/descripcion"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/datePicker"
+        android:layout_alignLeft="@+id/fecha"
+        android:layout_alignStart="@+id/fecha" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
         android:id="@+id/fecha"
-        android:layout_marginTop="65dp"
         android:hint="@string/fecha"
-        android:layout_marginLeft="55dp"
-        android:layout_marginStart="55dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:clickable="false"
+        android:layout_above="@+id/categoria"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:clickable="false" />
+        android:layout_marginBottom="68dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -31,4 +42,38 @@
         android:layout_alignBottom="@+id/fecha"
         android:layout_toRightOf="@+id/fecha"
         android:layout_toEndOf="@+id/fecha" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoria"
+        android:hint="@string/categoria"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/fecha"
+        android:layout_alignStart="@+id/fecha"
+        android:layout_toLeftOf="@+id/datePicker"
+        android:layout_toStartOf="@+id/datePicker" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/importe"
+        android:hint="@string/importe"
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/categoria"
+        android:layout_alignLeft="@+id/categoria"
+        android:layout_alignStart="@+id/categoria" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guardar"
+        android:id="@+id/guardar"
+        android:layout_below="@+id/importe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:onClick="guardarGasto" />
+
 </RelativeLayout>
