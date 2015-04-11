@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias">
+        <item>@string/categoria1</item>
+        <item>@string/categoria2</item>
+        <item>@string/categoria3</item>
+        <item>@string/categoria4</item>
+        <item>@string/categoria5</item>
+    </string-array>
+
+    <string-array name="nav_drawer_items">
+        <item>@string/navdrawitem1</item>
+        <item>@string/navdrawitem2</item>
+        <item>@string/navdrawitem3</item>
+        <item>@string/navdrawitem4</item>
+        <item>@string/navdrawitem5</item>
+        <item>@string/navdrawitem6</item>
+    </string-array>
+
+</resources>

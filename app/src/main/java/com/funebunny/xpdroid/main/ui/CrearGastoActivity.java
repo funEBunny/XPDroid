@@ -1,14 +1,16 @@
 package com.funebunny.xpdroid.main.ui;
 
 import android.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
 
 import java.util.Calendar;
 
@@ -21,7 +23,7 @@ public class CrearGastoActivity extends ActionBarActivity {
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH)+1).append("/").append(c.get(Calendar.YEAR)));
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH) + 1).append("/").append(c.get(Calendar.YEAR)));
     }
 
 
@@ -53,4 +55,23 @@ public class CrearGastoActivity extends ActionBarActivity {
         newFragment.show(getFragmentManager(), "datePicker");
     }
     //<Added by PRB
+
+    public void guardarGasto(View view){
+
+        String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
+
+        String fecha = ((EditText) findViewById(R.id.fecha)).getText().toString();
+
+        String importe = ((EditText) findViewById(R.id.importe)).getText().toString();
+
+        String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
+
+        Gasto gasto = new Gasto();
+        gasto.setImporte(importe);
+        gasto.setDescripcion(descripcion);
+        gasto.setFecha(fecha);
+        gasto.setCategoria(categoria);
+        gasto.save();
+
+    }
 }

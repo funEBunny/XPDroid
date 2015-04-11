@@ -5,14 +5,13 @@
     <string name="action_agregar">Agregar Gasto</string>
     <string name="action_settings">Settings</string>
 
-    <string-array name="nav_drawer_items">
-        <item>Inicio</item>
-        <item>Gastos Favoritos</item>
-        <item>Gastos Programables</item>
-        <item>Objetivos</item>
-        <item>Recordatorios</item>
-        <item>Ayuda</item>
-    </string-array>
+    <string name="navdrawitem1">Inicio</string>
+    <string name="navdrawitem2">Gastos Favoritos</string>
+    <string name="navdrawitem3">Gastos Programables</string>
+    <string name="navdrawitem4">Objetivos</string>
+    <string name="navdrawitem5">Recordatorios</string>
+    <string name="navdrawitem6">Ayuda</string>
+
 
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
@@ -30,4 +29,9 @@
     <string name="importe">Importe</string>
     <string name="guardar">Guardar</string>
 
+    <string name="categoria1">Transportes</string>
+    <string name="categoria2">Alimentos</string>
+    <string name="categoria3">Supermercado</string>
+    <string name="categoria4">Ocio</string>
+    <string name="categoria5">Indumentaria</string>
 </resources>

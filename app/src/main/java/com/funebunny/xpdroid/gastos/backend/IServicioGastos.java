@@ -18,11 +18,7 @@ public interface IServicioGastos {
 
     List<Gasto> obtenerGastosPorCategoria(Categoria categoria);
 
-    void guardarGasto(String nombre, String monto, Categoria categoria);
-
-    void guardarCategoria(String nombre);
-
-
+    Categoria obtenerCategoria(String categoria);
 
 
 }

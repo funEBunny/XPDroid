@@ -43,7 +43,7 @@
         android:layout_toRightOf="@+id/fecha"
         android:layout_toEndOf="@+id/fecha" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/categoria"
@@ -52,7 +52,8 @@
         android:layout_alignLeft="@+id/fecha"
         android:layout_alignStart="@+id/fecha"
         android:layout_toLeftOf="@+id/datePicker"
-        android:layout_toStartOf="@+id/datePicker" />
+        android:layout_toStartOf="@+id/datePicker"
+        android:entries="@array/categorias"/>
 
     <EditText
         android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.dao.Categoria;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,19 +29,12 @@ public class ServicioGastos implements IServicioGastos {
     }
 
     @Override
-    public void guardarGasto(String nombre, String monto, Categoria categoria) {
-
-        Gasto gasto = new Gasto();
-        gasto.nombre=nombre;
-        gasto.monto=monto;
-        gasto.categoria=categoria;
-        gasto.save();
-    }
-
-    @Override
-    public void guardarCategoria(String nombre) {
-        Categoria categoria=new Categoria();
-        categoria.nombre=nombre;
-        categoria.save();
+    public Categoria obtenerCategoria(String categoria) {
+        Categoria categoria1=null;
+        ArrayList<Categoria> categorias = new Select().from(Categoria.class).orderBy("Nombre ASC").where("Nombre=?", categoria).execute();
+        if (!categorias.isEmpty()){
+            categoria1 = categorias.get(0);
+        }
+        return categoria1;
     }
 }

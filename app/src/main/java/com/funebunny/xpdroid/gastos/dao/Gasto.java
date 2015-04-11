@@ -10,21 +10,58 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Gasto")
 public class Gasto extends Model {
 
-    @Column(name = "Nombre")
-    public String nombre;
+    @Column(name = "Descripcion")
+    private String descripcion;
 
-    @Column(name = "Monto")
-    public String monto;
+    @Column(name = "Importe")
+    private String importe;
 
     @Column(name = "Categoria")
-    public Categoria categoria;
+    private String categoria;
+
+    @Column(name = "Fecha")
+    public String fecha;
+
+    private String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getImporte() {
+        return importe;
+    }
+
+    public void setImporte(String importe) {
+        this.importe = importe;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getFecha() {
+
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
     @Override
     public String toString() {
         return "Gasto{" +
-                "Nombre = '" + nombre + '\'' +
-                "Monto = '" + monto + '\'' +
-                ", Categoria = " + categoria.nombre +
+                "descripcion='" + descripcion + '\'' +
+                ", importe='" + importe + '\'' +
+                ", categoria=" + categoria +
+                ", fecha='" + fecha + '\'' +
                 '}';
     }
 }
