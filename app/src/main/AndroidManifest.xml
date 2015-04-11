@@ -20,6 +20,10 @@
             android:name=".main.ui.CrearGastoActivity"
             android:label="@string/title_activity_crear_gasto" >
         </activity>
+        <activity
+            android:name=".main.ui.GastosFavoritosActivity"
+            android:label="@string/title_activity_gastos_favoritos" >
+        </activity>
     </application>
 
 </manifest>

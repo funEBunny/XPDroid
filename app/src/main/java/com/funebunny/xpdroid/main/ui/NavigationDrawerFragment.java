@@ -103,7 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 R.layout.navigation_drawer_list_item,
                 R.id.navigation_drawer_list_item,
-                getResources().getStringArray(R.array.menu_options_array)));
+                getResources().getStringArray(R.array.nav_drawer_items)));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

@@ -5,7 +5,7 @@
     <string name="action_agregar">Agregar Gasto</string>
     <string name="action_settings">Settings</string>
 
-    <string-array name="menu_options_array">
+    <string-array name="nav_drawer_items">
         <item>Inicio</item>
         <item>Gastos Favoritos</item>
         <item>Gastos Programables</item>
@@ -13,10 +13,17 @@
         <item>Recordatorios</item>
         <item>Ayuda</item>
     </string-array>
-    <string name="title_activity_crear_gasto">CrearGasto</string>
+
+    <string name="title_activity_crear_gasto">Crear Gasto</string>
+    <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>
     <string name="calendario">Calendario</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="inicio">Esta es la pagina de Inicio</string>
+    <string name="gastos_favoritos">Esta es la pagina de Gastos Favoritos</string>
+    <string name="gastos_programables">Esta es la pagina de Gastos Programables</string>
+    <string name="objetivos">Esta es la pagina de Objetivos</string>
+    <string name="recordatorios">Esta es la pagina de Recordatorios</string>
+    <string name="ayuda">Esta es la pagina de Ayuda</string>
 
 </resources>
