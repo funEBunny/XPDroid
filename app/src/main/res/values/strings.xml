@@ -15,5 +15,8 @@
     </string-array>
     <string name="title_activity_crear_gasto">CrearGasto</string>
     <string name="fecha">Fecha</string>
+    <string name="calendario">Calendario</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

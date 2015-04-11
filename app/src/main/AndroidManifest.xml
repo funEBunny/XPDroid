@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.ui.CrearGasto"
+            android:name=".main.ui.CrearGastoActivity"
             android:label="@string/title_activity_crear_gasto" >
         </activity>
     </application>
