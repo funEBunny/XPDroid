@@ -13,5 +13,7 @@
         <item>Recordatorios</item>
         <item>Ayuda</item>
     </string-array>
+    <string name="title_activity_crear_gasto">CrearGasto</string>
+    <string name="fecha">Fecha</string>
 
 </resources>
