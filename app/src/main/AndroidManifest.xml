@@ -24,6 +24,10 @@
             android:name=".main.ui.GastosFavoritosActivity"
             android:label="@string/title_activity_gastos_favoritos" >
         </activity>
+        <activity
+            android:name=".main.ui.CrearGastoProgramableActivity"
+            android:label="@string/title_activity_crear_gasto_programable" >
+        </activity>
     </application>
 
 </manifest>

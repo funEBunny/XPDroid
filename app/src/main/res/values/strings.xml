@@ -29,5 +29,9 @@
     <string name="categoria">Categoría</string>
     <string name="importe">Importe</string>
     <string name="guardar">Guardar</string>
+    <string name="title_activity_crear_gasto_programable">Crear Gasto Programable</string>
+    <string name="reloj">Reloj</string>
+    <string name="horario">Horario</string>
+    <string name="repeticion">Repetición</string>
 
 </resources>
