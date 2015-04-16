@@ -33,5 +33,6 @@
     <string name="reloj">Reloj</string>
     <string name="horario">Horario</string>
     <string name="repeticion">Repetición</string>
+    <string name="title_activity_crear_gasto_favorito">Crear Gasto Favorito</string>
 
 </resources>
