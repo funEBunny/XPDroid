@@ -34,5 +34,7 @@
     <string name="horario">Horario</string>
     <string name="repeticion">Repetición</string>
     <string name="title_activity_crear_gasto_favorito">Crear Gasto Favorito</string>
+    <string name="title_activity_crear_objetivo">Crear Objetivo</string>
+    <string name="duracion">Duración</string>
 
 </resources>

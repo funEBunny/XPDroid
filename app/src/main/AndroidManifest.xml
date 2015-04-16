@@ -32,6 +32,10 @@
             android:name=".main.ui.CrearGastoFavoritoActivity"
             android:label="@string/title_activity_crear_gasto_favorito" >
         </activity>
+        <activity
+            android:name=".main.ui.CrearObjetivoActivity"
+            android:label="@string/title_activity_crear_objetivo" >
+        </activity>
     </application>
 
 </manifest>
