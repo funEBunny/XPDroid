@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.funebunny.xpdroid" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.funebunny.xpdroid" >
 
     <application
         android:allowBackup="true"
@@ -19,10 +18,6 @@
         <activity
             android:name=".main.ui.CrearGastoActivity"
             android:label="@string/title_activity_crear_gasto" >
-        </activity>
-        <activity
-            android:name=".main.ui.GastosFavoritosActivity"
-            android:label="@string/title_activity_gastos_favoritos" >
         </activity>
         <activity
             android:name=".main.ui.CrearGastoProgramableActivity"

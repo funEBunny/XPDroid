@@ -19,55 +19,67 @@ import com.funebunny.xpdroid.R;
 
 
 public class MainActivity   extends ActionBarActivity
-                            implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+                            implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
+                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks  {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+    // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
+    // Used to store the last screen title. For use in {@link #restoreActionBar()}.
     private CharSequence mTitle;
 
-    // Added by PRB
     private String[] navigationDrawerItems;
     private DrawerLayout drawerLayout;
     private ListView drawerList;
-    // <Added by PRB
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // >Added by PRB
         navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
         //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);  //No sé para qué es
         drawerList   = (ListView) findViewById(R.id.navigation_drawer);
 
-        drawerList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, navigationDrawerItems));
-        //drawerList.setOnClickListener(new DrawerItemClickListener());   //No sé para qué es
-        // <Added by PRB
+        drawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.navigation_drawer_list_item, navigationDrawerItems));
+        //drawerList.setOnClickListener(new DrawerItemClickListener());
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //To allow Up navigation with the app icon in the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
+    @Override //Implementing method from NavigationDrawerFragment.NavigationDrawerCallbacks
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+
+        //TODO: ACA DEBERIA GENERAR INSTANCIAS CADA UNO DE LOS FRAGMENTS DE ACUERDO AL VALOR DE position
+
+        switch(position){
+            case 0: { //Pagina de Inicio
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+            case 1: { //Gastos Favoritos
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+        }
+    }
+
+    @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
+    public void onGastosFavoritosItemSelected(String id) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
     }
 
     public void restoreActionBar() {
@@ -123,7 +135,7 @@ public class MainActivity   extends ActionBarActivity
 
 
 
-
+    //TODO: VA A SER UTILIZADO SOLO PARA LA OPCION DE NAV DRAWER "Inicio"
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -132,16 +144,16 @@ public class MainActivity   extends ActionBarActivity
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_DRAWER_ITEM_POSITION = "section_number";
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int itemSelected) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
+            args.putInt(ARG_DRAWER_ITEM_POSITION, itemSelected); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
             fragment.setArguments(args);
             return fragment;
         }
@@ -152,24 +164,17 @@ public class MainActivity   extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Bundle args = this.getArguments();
-            int sectionNumber = (int) args.get(ARG_SECTION_NUMBER); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
+            int sectionNumber = (int) args.get(ARG_DRAWER_ITEM_POSITION); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
             // OJO que desde MainActiviy.onNavigationDrawerItemSelected se manda la posicion + 1
-            int layoutResource = -1;
-            switch (sectionNumber) {
-                case 1: layoutResource = R.layout.fragment_main; break;
-                case 2: layoutResource = R.layout.activity_gastos_favoritos; break;
-                default: layoutResource = R.layout.fragment_main; break;
-            }
 
-            View rootView = inflater.inflate(layoutResource, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         }
 
     }
