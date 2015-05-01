@@ -17,16 +17,16 @@ import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
 
-public class CrearGastoActivity extends ActionBarActivity {
+public class CrearGastoActivity extends XPDroidActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
-
+        //Listener para ocultar teclado cuando se toca fuera de un Edit Text
+        setupUI(findViewById(R.id.crear_gasto));
         // Botón para volver a actividad anterior
         getSupportActionBar().setHomeButtonEnabled(true);
-
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);

@@ -67,6 +67,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.MainActivity" />
         </activity>
+        <activity
+            android:name=".main.ui.XPDroidActivity"
+            android:label="@string/title_activity_xpdroid" >
+        </activity>
     </application>
 
 </manifest>
