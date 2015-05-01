@@ -31,6 +31,10 @@
             android:name=".main.ui.CrearObjetivoActivity"
             android:label="@string/title_activity_crear_objetivo" >
         </activity>
+        <activity
+            android:name=".main.ui.CrearRecordatorioActivity"
+            android:label="@string/title_activity_crear_recordatorio" >
+        </activity>
     </application>
 
 </manifest>
