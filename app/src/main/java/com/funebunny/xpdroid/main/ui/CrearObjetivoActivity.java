@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.utilities.AppConstants;
+
+import java.util.Calendar;
 
 public class CrearObjetivoActivity extends ActionBarActivity {
 
@@ -15,6 +19,11 @@ public class CrearObjetivoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_objetivo);
+
+        // Fijar por defecto la fecha del día
+        final Calendar c = Calendar.getInstance();
+        EditText fecha = (EditText) findViewById(R.id.fecha);
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
     }
 
 

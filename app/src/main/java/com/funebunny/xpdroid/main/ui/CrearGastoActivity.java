@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
 
@@ -20,14 +21,12 @@ public class CrearGastoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
-
         // Botón para volver a actividad anterior
         getSupportActionBar().setHomeButtonEnabled(true);
-
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH) + 1).append("/").append(c.get(Calendar.YEAR)));
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
     }
 
 

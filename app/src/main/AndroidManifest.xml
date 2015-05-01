@@ -37,19 +37,35 @@
         </activity>
         <activity
             android:name=".main.ui.CrearGastoProgramableActivity"
-            android:label="@string/title_activity_crear_gasto_programable" >
+            android:label="@string/title_activity_crear_gasto_programable"
+            android:parentActivityName=".main.ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.MainActivity" />
         </activity>
         <activity
             android:name=".main.ui.CrearGastoFavoritoActivity"
-            android:label="@string/title_activity_crear_gasto_favorito" >
+            android:label="@string/title_activity_crear_gasto_favorito"
+            android:parentActivityName=".main.ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.MainActivity" />
         </activity>
         <activity
             android:name=".main.ui.CrearObjetivoActivity"
-            android:label="@string/title_activity_crear_objetivo" >
+            android:label="@string/title_activity_crear_objetivo"
+            android:parentActivityName=".main.ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.MainActivity" />
         </activity>
         <activity
             android:name=".main.ui.CrearRecordatorioActivity"
-            android:label="@string/title_activity_crear_recordatorio" >
+            android:label="@string/title_activity_crear_recordatorio"
+            android:parentActivityName=".main.ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.MainActivity" />
         </activity>
     </application>
 
