@@ -13,6 +13,8 @@ public class CrearGastoFavoritoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto_favorito);
+        // Botón para volver a actividad anterior
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 

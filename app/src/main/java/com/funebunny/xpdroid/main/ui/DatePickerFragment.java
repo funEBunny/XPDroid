@@ -8,6 +8,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
 
@@ -29,7 +30,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int anio, int mes, int dia) {
 
         EditText fecha = (EditText) this.getActivity().findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(dia).append("/").append(mes+1).append("/").append(anio));
+        fecha.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
 
     }
 }

@@ -3,13 +3,17 @@ package com.funebunny.xpdroid.main.ui;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.utilities.AppConstants;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 
 import java.util.Calendar;
@@ -27,7 +31,7 @@ public class CrearGastoActivity extends ActionBarActivity {
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH) + 1).append("/").append(c.get(Calendar.YEAR)));
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
     }
 
 
@@ -72,6 +76,10 @@ public class CrearGastoActivity extends ActionBarActivity {
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 
         servicioGastos.guardarGasto(descripcion,importe,categoria,fecha);
-
+        //Mostrar mensaje de agregar gasto
+        Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+        this.finish();
     }
 }
