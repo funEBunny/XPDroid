@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -82,12 +83,14 @@ public class MainActivity   extends ActionBarActivity
 
     }
 
+    /*
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
+    */
 
     public void onSectionAttached(int number) {
         //String[] navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
@@ -105,7 +108,12 @@ public class MainActivity   extends ActionBarActivity
             // Only show items in the action bar relevant to this screen if the drawer is not showing.
             // Otherwise, let the drawer decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+            //restoreActionBar();
+            ActionBar actionBar = getSupportActionBar();
+            //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(mTitle);
+
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -121,6 +129,9 @@ public class MainActivity   extends ActionBarActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_agregar) {
+            Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
+            startActivity(intentCrearGasto);
         }
 
         return super.onOptionsItemSelected(item);
