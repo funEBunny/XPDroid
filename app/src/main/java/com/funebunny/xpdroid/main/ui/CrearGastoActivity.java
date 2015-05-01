@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 
 import java.util.Calendar;
 
@@ -61,6 +61,7 @@ public class CrearGastoActivity extends ActionBarActivity {
     //<Added by PRB
 
     public void guardarGasto(View view){
+        ServicioGastos servicioGastos = new ServicioGastos();
 
         String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
 
@@ -70,12 +71,7 @@ public class CrearGastoActivity extends ActionBarActivity {
 
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 
-        Gasto gasto = new Gasto();
-        gasto.setImporte(importe);
-        gasto.setDescripcion(descripcion);
-        gasto.setFecha(fecha);
-        gasto.setCategoria(categoria);
-        gasto.save();
+        servicioGastos.guardarGasto(descripcion,importe,categoria,fecha);
 
     }
 }

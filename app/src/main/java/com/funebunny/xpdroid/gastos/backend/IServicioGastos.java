@@ -13,5 +13,17 @@ public interface IServicioGastos {
 
     List<Gasto> obtenerGastosPorCategoria(String categoria);
 
+    List<Gasto> obtenerGastosPorFecha(String mes, String anio);
+
+    /**
+     *
+     * @param descripcion
+     * @param importe
+     * @param categoria
+     * @param fecha
+     */
+   void guardarGasto(String descripcion, String importe, String categoria, String fecha );
+
+
 
 }
