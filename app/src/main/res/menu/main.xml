@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
 
     <item android:id="@+id/action_agregar"
-        android:title="@string/action_agregar"
+        android:title="@string/action_crear_gasto"
         android:icon="@drawable/ic_action_new"
         app:showAsAction="always" />
 

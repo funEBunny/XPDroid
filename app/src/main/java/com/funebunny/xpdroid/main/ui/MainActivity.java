@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
@@ -132,6 +134,11 @@ public class MainActivity   extends ActionBarActivity
         } else if (id == R.id.action_agregar) {
             Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
             startActivity(intentCrearGasto);
+
+            //Mostrar mensaje de agregar gasto
+            Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -175,7 +182,8 @@ public class MainActivity   extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Bundle args = this.getArguments();
-            int sectionNumber = (int) args.get(ARG_DRAWER_ITEM_POSITION); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
+            int sectionNumber = (int) args.get(ARG_DRAWER_ITEM_POSITION);
+            // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
             // OJO que desde MainActiviy.onNavigationDrawerItemSelected se manda la posicion + 1
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);

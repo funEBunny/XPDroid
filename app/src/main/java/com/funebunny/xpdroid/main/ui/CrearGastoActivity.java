@@ -3,11 +3,13 @@ package com.funebunny.xpdroid.main.ui;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
@@ -62,11 +64,8 @@ public class CrearGastoActivity extends ActionBarActivity {
     public void guardarGasto(View view){
 
         String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
-
         String fecha = ((EditText) findViewById(R.id.fecha)).getText().toString();
-
         String importe = ((EditText) findViewById(R.id.importe)).getText().toString();
-
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 
         Gasto gasto = new Gasto();
@@ -75,6 +74,12 @@ public class CrearGastoActivity extends ActionBarActivity {
         gasto.setFecha(fecha);
         gasto.setCategoria(categoria);
         gasto.save();
+
+        //Mostrar mensaje de agregar gasto
+        Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+        this.finish();
 
     }
 }
