@@ -7,11 +7,12 @@
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
-    <string name="navdrawitem2">Gastos Favoritos</string>
-    <string name="navdrawitem3">Gastos Programables</string>
-    <string name="navdrawitem4">Objetivos</string>
-    <string name="navdrawitem5">Recordatorios</string>
-    <string name="navdrawitem6">Ayuda</string>
+    <string name="navdrawitem2">Historial Gastos</string>
+    <string name="navdrawitem3">Gastos Favoritos</string>
+    <string name="navdrawitem4">Gastos Programables</string>
+    <string name="navdrawitem5">Objetivos</string>
+    <string name="navdrawitem6">Recordatorios</string>
+    <string name="navdrawitem7">Ayuda</string>
 
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>

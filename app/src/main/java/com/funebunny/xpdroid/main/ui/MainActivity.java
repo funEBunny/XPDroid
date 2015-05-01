@@ -23,7 +23,8 @@ import com.funebunny.xpdroid.R;
 
 public class MainActivity   extends ActionBarActivity
                             implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
-                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks  {
+                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
+                                        HistorialGastosItemFragment.HistorialGastosItemCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -72,6 +73,12 @@ public class MainActivity   extends ActionBarActivity
             }
             case 1: { //Gastos Favoritos
                 fragmentManager.beginTransaction()
+                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+            case 2: { //Gastos Favoritos
+                fragmentManager.beginTransaction()
                         .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
                         .commit();
                 break;
@@ -80,8 +87,14 @@ public class MainActivity   extends ActionBarActivity
     }
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
-    public void onGastosFavoritosItemSelected(String id) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+     public void onGastosFavoritosItemSelected(String id) {
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+
+    }
+
+    @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
+    public void onHistorialGastosItemSelected(String id) {
+        //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
 
@@ -95,7 +108,7 @@ public class MainActivity   extends ActionBarActivity
     */
 
     public void onSectionAttached(int number) {
-        //String[] navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
+        String[] navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
         for(int i=1;i< navigationDrawerItems.length+1;i++) {
             if (number==i){
                     mTitle = navigationDrawerItems[i-1];
@@ -112,7 +125,7 @@ public class MainActivity   extends ActionBarActivity
             getMenuInflater().inflate(R.menu.main, menu);
             //restoreActionBar();
             ActionBar actionBar = getSupportActionBar();
-            //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(mTitle);
 

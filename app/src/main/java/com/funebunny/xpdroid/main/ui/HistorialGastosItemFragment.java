@@ -16,20 +16,16 @@ import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the
- * {@link com.funebunny.xpdroid.main.ui.GastosFavoritosItemFragment.GastosFavoritosItemCallbacks}
+ * Activities containing this fragment MUST implement the {@link HistorialGastosItemCallbacks}
  * interface.
  */
-public class GastosFavoritosItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class HistorialGastosItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,10 +38,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     private String mParam1;
     private String mParam2;
 
-    //private List<String> columnas = new ArrayList<String>();
-    private String[] columnas;
-
-    private GastosFavoritosItemCallbacks mListener;
+    private HistorialGastosItemCallbacks mListener;
 
     /**
      * The fragment's ListView/GridView.
@@ -59,8 +52,8 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static GastosFavoritosItemFragment newInstance(int itemSelected) {
-        GastosFavoritosItemFragment fragment = new GastosFavoritosItemFragment();
+    public static HistorialGastosItemFragment newInstance(int itemSelected) {
+        HistorialGastosItemFragment fragment = new HistorialGastosItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, "param1");
         args.putString(ARG_PARAM2, "param2");
@@ -73,7 +66,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public GastosFavoritosItemFragment() {
+    public HistorialGastosItemFragment() {
     }
 
     @Override
@@ -85,17 +78,14 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
-
         // TODO: Change Adapter to display your content
-
         mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, DummyContent.ITEMS);
+                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gastosfavoritositem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -111,10 +101,10 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (GastosFavoritosItemCallbacks) activity;
+            mListener = (HistorialGastosItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement onGastosFavoritosItemSelected");
+            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -130,7 +120,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onGastosFavoritosItemSelected(DummyContent.ITEMS.get(position).id);
+            mListener.onHistorialGastosItemSelected(DummyContent.ITEMS.get(position).id);
         }
     }
 
@@ -148,13 +138,18 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     }
 
     /**
-     * This interface must be implemented by activities that contain this fragment to allow an interaction in this fragment
-     * to be communicated to the activity and potentially other fragments contained in that activity.
-     * <p/> See the Android Training lesson <a href= "http://developer.android.com/training/basics/fragments/communicating.html">Communicating with Other Fragments</a> for more information.
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
      */
-    public interface GastosFavoritosItemCallbacks {
+    public interface HistorialGastosItemCallbacks {
         // TODO: Update argument type and name
-        public void onGastosFavoritosItemSelected(String id);
+        public void onHistorialGastosItemSelected(String id);
     }
 
 }
