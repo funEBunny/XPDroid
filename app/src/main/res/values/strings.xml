@@ -32,6 +32,9 @@
     <string name="reloj">Reloj</string>
     <string name="horario">Horario</string>
     <string name="repeticion">Repetición</string>
+    <string name="title_activity_crear_gasto_favorito">Crear Gasto Favorito</string>
+    <string name="title_activity_crear_objetivo">Crear Objetivo</string>
+    <string name="duracion">Duración</string>
 
     <string name="categoria1">Transportes</string>
     <string name="categoria2">Alimentos</string>
