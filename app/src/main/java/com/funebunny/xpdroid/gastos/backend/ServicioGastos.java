@@ -15,18 +15,18 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<Gasto> obtenerGastos() {
-        return new Select().from(Gasto.class).orderBy("Nombre ASC").execute();
+        return new Select().from(Gasto.class).orderBy("Categoria ASC").execute();
     }
 
     @Override
     public List<Gasto> obtenerGastosPorCategoria(String categoria) {
-        return new Select().from(Gasto.class).where("Categoria = ?", categoria,categoria).orderBy("Nombre ASC").execute();
+        return new Select().from(Gasto.class).where("Categoria = ?", categoria,categoria).execute();
     }
 
     @Override
     public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
-        String fecha = anio+mes;
-        return new Select().from(Gasto.class).where("Fecha LIKE ?",fecha ).orderBy("Nombre ASC").execute();
+        String fecha = "%"+anio+mes+"%";
+        return new Select().from(Gasto.class).where("Fecha LIKE ?",fecha ).orderBy("Categoria ASC").execute();
     }
 
     @Override

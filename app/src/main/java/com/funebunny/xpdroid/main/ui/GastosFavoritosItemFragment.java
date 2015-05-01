@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 
 import java.util.ArrayList;
@@ -80,17 +82,23 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
+//       if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//
+//        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
 
         // TODO: Change Adapter to display your content
 
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, DummyContent.ITEMS);
+//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+//                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, DummyContent.ITEMS);
+
+        ServicioGastos servicioGastos = new ServicioGastos();
+        List<Gasto> gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
+        mAdapter = new ArrayAdapter<Gasto>(getActivity(),
+                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, gastos);
+
     }
 
     @Override
