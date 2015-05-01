@@ -14,6 +14,12 @@
         <item>Ayuda</item>
     </string-array>
 
+    <string-array name="gastos_favoritos_columnas">
+        <item>Nombre</item>
+        <item>Categoria</item>
+        <item>Monto</item>
+    </string-array>
+
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>
@@ -25,5 +31,7 @@
     <string name="objetivos">Esta es la pagina de Objetivos</string>
     <string name="recordatorios">Esta es la pagina de Recordatorios</string>
     <string name="ayuda">Esta es la pagina de Ayuda</string>
+    <string name="title_activity_inicio">Inicio Activity</string>
+
 
 </resources>
