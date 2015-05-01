@@ -20,6 +20,10 @@ public class CrearGastoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
+
+        // Botón para volver a actividad anterior
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);

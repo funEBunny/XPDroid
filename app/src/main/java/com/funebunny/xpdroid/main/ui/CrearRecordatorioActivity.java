@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
+
+import java.util.Calendar;
 
 public class CrearRecordatorioActivity extends ActionBarActivity {
 
@@ -15,6 +18,11 @@ public class CrearRecordatorioActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_recordatorio);
+
+        // Fijar por defecto la fecha del día
+        final Calendar c = Calendar.getInstance();
+        EditText fecha = (EditText) findViewById(R.id.fecha);
+        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH) + 1).append("/").append(c.get(Calendar.YEAR)));
     }
 
 
@@ -48,5 +56,6 @@ public class CrearRecordatorioActivity extends ActionBarActivity {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
+    public void guardarRecordatorio(View v) {}
     // < Added by PRB
 }

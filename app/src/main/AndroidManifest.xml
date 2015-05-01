@@ -29,7 +29,11 @@
         </activity>
         <activity
             android:name=".main.ui.CrearGastoActivity"
-            android:label="@string/title_activity_crear_gasto" >
+            android:label="@string/title_activity_crear_gasto"
+            android:parentActivityName=".main.ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.MainActivity" />
         </activity>
         <activity
             android:name=".main.ui.CrearGastoProgramableActivity"
