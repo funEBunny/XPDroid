@@ -12,12 +12,6 @@
     <string name="navdrawitem5">Recordatorios</string>
     <string name="navdrawitem6">Ayuda</string>
 
-    <string-array name="gastos_favoritos_columnas">
-        <item>Nombre</item>
-        <item>Categoria</item>
-        <item>Monto</item>
-    </string-array>
-
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>
@@ -30,6 +24,7 @@
     <string name="recordatorios">Esta es la pagina de Recordatorios</string>
     <string name="ayuda">Esta es la pagina de Ayuda</string>
     <string name="descripcion">Descripción</string>
+    <string name="nombre">Nombre</string>
     <string name="categoria">Categoría</string>
     <string name="importe">Importe</string>
     <string name="guardar">Guardar</string>
@@ -46,4 +41,5 @@
     <string name="categoria3">Supermercado</string>
     <string name="categoria4">Ocio</string>
     <string name="categoria5">Indumentaria</string>
+
 </resources>

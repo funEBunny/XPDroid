@@ -1,8 +1,5 @@
 package com.funebunny.xpdroid.gastos.backend;
 
-import android.support.v7.internal.widget.ListViewCompat;
-
-import com.funebunny.xpdroid.gastos.dao.Categoria;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 
 import java.util.List;
@@ -14,11 +11,7 @@ public interface IServicioGastos {
 
     List<Gasto> obtenerGastos();
 
-    List<Categoria> obtenerCategorias();
-
-    List<Gasto> obtenerGastosPorCategoria(Categoria categoria);
-
-    Categoria obtenerCategoria(String categoria);
+    List<Gasto> obtenerGastosPorCategoria(String categoria);
 
 
 }
