@@ -12,9 +12,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
-import com.funebunny.xpdroid.utilities.AppConstants;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
 
@@ -75,7 +74,7 @@ public class CrearGastoActivity extends ActionBarActivity {
 
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 
-        servicioGastos.guardarGasto(descripcion,importe,categoria,fecha);
+        servicioGastos.guardarGasto(descripcion, importe, categoria, fecha);
         //Mostrar mensaje de agregar gasto
         Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
