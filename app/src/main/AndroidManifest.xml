@@ -5,7 +5,19 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name="com.activeandroid.app.Application">
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Pickrand.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="5" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.funebunny.xpdroid.gastos.dao.Gasto" />
+
         <activity
             android:name=".main.ui.MainActivity"
             android:label="@string/app_name" >
