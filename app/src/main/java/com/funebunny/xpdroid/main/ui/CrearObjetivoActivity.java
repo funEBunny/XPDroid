@@ -6,29 +6,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
 
-import java.util.Calendar;
-
-public class CrearGastoActivity extends ActionBarActivity {
+public class CrearObjetivoActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_gasto);
-        // Fijar por defecto la fecha del día
-        final Calendar c = Calendar.getInstance();
-        EditText fecha = (EditText) findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.MONTH)+1).append("/").append(c.get(Calendar.YEAR)));
+        setContentView(R.layout.activity_crear_objetivo);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_crear_gasto, menu);
+        getMenuInflater().inflate(R.menu.menu_crear_objetivo, menu);
         return true;
     }
 

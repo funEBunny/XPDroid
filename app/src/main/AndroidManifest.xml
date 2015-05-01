@@ -19,7 +19,22 @@
             android:name=".main.ui.CrearGastoActivity"
             android:label="@string/title_activity_crear_gasto" >
         </activity>
-
+        <activity
+            android:name=".main.ui.GastosFavoritosActivity"
+            android:label="@string/title_activity_gastos_favoritos" >
+        </activity>
+        <activity
+            android:name=".main.ui.CrearGastoProgramableActivity"
+            android:label="@string/title_activity_crear_gasto_programable" >
+        </activity>
+        <activity
+            android:name=".main.ui.CrearGastoFavoritoActivity"
+            android:label="@string/title_activity_crear_gasto_favorito" >
+        </activity>
+        <activity
+            android:name=".main.ui.CrearObjetivoActivity"
+            android:label="@string/title_activity_crear_objetivo" >
+        </activity>
     </application>
 
 </manifest>

@@ -31,7 +31,17 @@
     <string name="objetivos">Esta es la pagina de Objetivos</string>
     <string name="recordatorios">Esta es la pagina de Recordatorios</string>
     <string name="ayuda">Esta es la pagina de Ayuda</string>
-    <string name="title_activity_inicio">Inicio Activity</string>
 
-
+    <string name="descripcion">Descripción</string>
+    <string name="categoria">Categoría</string>
+    <string name="importe">Importe</string>
+    <string name="guardar">Guardar</string>
+    <string name="title_activity_crear_gasto_programable">Crear Gasto Programable</string>
+    <string name="reloj">Reloj</string>
+    <string name="horario">Horario</string>
+    <string name="repeticion">Repetición</string>
+    <string name="title_activity_crear_gasto_favorito">Crear Gasto Favorito</string>
+    <string name="title_activity_crear_objetivo">Crear Objetivo</string>
+    <string name="duracion">Duración</string>
+    
 </resources>
