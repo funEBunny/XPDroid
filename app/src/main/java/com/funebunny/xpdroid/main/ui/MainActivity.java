@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class MainActivity   extends ActionBarActivity
                         .commit();
                 break;
             }
-            case 1: { //Gastos Favoritos
+            case 1: { //Historial de Gastos
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
                         .commit();
@@ -141,10 +142,10 @@ public class MainActivity   extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+/*        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_agregar) {
+        } else if (id == R.id.action_agregar_gasto) {
             Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
             startActivity(intentCrearGasto);
 
@@ -152,6 +153,54 @@ public class MainActivity   extends ActionBarActivity
             Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
+        }*/
+
+        switch (id){
+            case R.id.action_settings: { return true; }
+
+            case R.id.action_crear_gasto: {
+                Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
+                startActivity(intentCrearGasto);
+
+                //Mostrar mensaje de crear gasto
+                Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                break;
+            }
+
+            case R.id.action_crear_gasto_favorito: {
+                Intent intentCrearGastoFavorito = new Intent(this, CrearGastoFavoritoActivity.class);
+                startActivity(intentCrearGastoFavorito);
+
+                //Mostrar mensaje de crear gasto favorito
+                Toast toast = Toast.makeText(this, R.string.action_crear_gasto_favorito, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                break;
+            }
+
+            case R.id.action_crear_gasto_programable: {
+                Intent intentCrearGastoProgramable = new Intent(this, CrearGastoProgramableActivity.class);
+                startActivity(intentCrearGastoProgramable);
+
+                //Mostrar mensaje de crear gasto programable
+                Toast toast = Toast.makeText(this, R.string.action_crear_gasto_programable, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                break;
+            }
+
+            case R.id.action_crear_objetivo: {
+                Intent intentCrearObjetivo = new Intent(this, CrearObjetivoActivity.class);
+                startActivity(intentCrearObjetivo);
+
+                //Mostrar mensaje de crear gasto programable
+                Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -209,6 +258,14 @@ public class MainActivity   extends ActionBarActivity
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         }
 
+        // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            setHasOptionsMenu(true);
+        }
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_crear_gasto, menu);
+        }
     }
 
 }

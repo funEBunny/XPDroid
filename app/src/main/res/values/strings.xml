@@ -3,6 +3,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_crear_gasto">Crear Gasto!</string>
+    <string name="action_crear_gasto_favorito">Crear Gasto Favorito!</string>
+    <string name="action_crear_gasto_programable">Crear Gasto Programable!</string>
+    <string name="action_crear_objetivo">Crear Objetivo de Gastos!</string>
+    <string name="action_crear_recordatorio">Crear Recordatorio!</string>
     <string name="gasto_guardado_mensaje">Gasto guardado éxitosamente!</string>
     <string name="action_settings">Settings</string>
 

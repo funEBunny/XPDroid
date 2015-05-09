@@ -44,6 +44,7 @@ public class XPDroidActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Lógica para ocultar teclado cuando se toca fuera del EditText activo
     public void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.

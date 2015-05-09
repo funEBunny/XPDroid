@@ -33,4 +33,5 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         fecha.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
 
     }
+
 }

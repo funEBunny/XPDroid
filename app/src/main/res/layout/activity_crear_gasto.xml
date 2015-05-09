@@ -58,7 +58,8 @@
         android:layout_toLeftOf="@+id/datePicker"
         android:layout_toStartOf="@+id/datePicker"
         android:entries="@array/categorias"
-        android:hint="@string/categoria" />
+        android:hint="@string/categoria"
+        android:prompt="@string/categoria" />
 
     <EditText
         android:id="@+id/importe"
