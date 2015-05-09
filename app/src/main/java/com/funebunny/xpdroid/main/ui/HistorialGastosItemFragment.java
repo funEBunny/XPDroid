@@ -14,7 +14,11 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -73,14 +77,20 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//
+//        // TODO: Change Adapter to display your content
+//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+//                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
+        ServicioGastos servicioGastos = new ServicioGastos();
+        List<Gasto> gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
+        mAdapter = new ArrayAdapter<Gasto>(getActivity(),
+                R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
+
     }
 
     @Override
