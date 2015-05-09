@@ -39,7 +39,7 @@ public class Scheduler extends Service {
     public void onCreate() {
         Toast.makeText(this, "Servicio creado", Toast.LENGTH_LONG).show();
         Log.d("SERVICEBOOT", "Servicio creado");
-        iniciarCronometro();
+       // iniciarCronometro();
     }
 
 
