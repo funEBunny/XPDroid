@@ -4,6 +4,9 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by schmidt0 on 3/28/2015.
  */
@@ -47,8 +50,14 @@ public class Gasto extends Model {
     }
 
     public String getFecha() {
-
-        return fecha;
+        SimpleDateFormat viewFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat daoFormat = new SimpleDateFormat("yyyyMMdd");
+        try {
+            return viewFormat.format(daoFormat.parse(fecha));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setFecha(String fecha) {
@@ -58,10 +67,10 @@ public class Gasto extends Model {
     @Override
     public String toString() {
         return "Gasto{" +
-                "descripcion='" + descripcion + '\'' +
-                ", importe='" + importe + '\'' +
-                ", categoria=" + categoria +
-                ", fecha='" + fecha + '\'' +
+                "descripcion='" + getDescripcion() + '\'' +
+                ", importe='" + getImporte() + '\'' +
+                ", categoria=" + getCategoria() +
+                ", fecha='" + getFecha() + '\'' +
                 '}';
     }
 }
