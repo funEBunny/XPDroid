@@ -23,6 +23,12 @@
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>
     <string name="calendario">Calendario</string>
+    <!--<string name="spinner_mes">Mes</string>-->
+    <!--<string name="boton_mostrar">Mostrar</string>-->
+    <!--<string name="seleccionar_periodo">Seleccione el periodo: </string>-->
+    <!--<string name="anio">Año</string>-->
+    <!--<string name="mes_anio_historial">Mes y Año</string>-->
+
 
     <string name="inicio">Esta es la pagina de Inicio</string>
     <string name="gastos_favoritos">Esta es la pagina de Gastos Favoritos</string>

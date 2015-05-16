@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.funebunny.xpdroid.main.ui.HistorialGastosItemFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.funebunny.xpdroid.main.ui.HistorialGastosItemFragment"
+    android:orientation="vertical">
 
-    <ListView android:id="@android:id/list" android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<LinearLayout  android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/seleccionar_periodo" />-->
+        <!--<EditText-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="date"-->
+            <!--android:id="@+id/mes_anio_historial"-->
+            <!--android:hint="@string/mes_anio_historial"-->
+            <!--android:clickable="false" />-->
+        <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/monthYearPicker"-->
+            <!--android:src="@drawable/ic_calendar"-->
+            <!--android:onClick="mostrarDatePicker"/>-->
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/boton_mostrar"-->
+            <!--android:id="@+id/boton_mostrar_historial"-->
+            <!--android:onClick="guardarGasto"-->
+            <!--android:layout_gravity="right|top" />-->
+    <!--</LinearLayout>-->
 
-    <TextView android:id="@android:id/empty" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center" />
+    <ListView android:id="@android:id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-</FrameLayout>
+</LinearLayout>
+
+
+
