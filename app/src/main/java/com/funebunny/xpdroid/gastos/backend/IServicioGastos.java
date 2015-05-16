@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.gastos.backend;
 
 import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface IServicioGastos {
      */
    void guardarGasto(String descripcion, String importe, String categoria, String fecha );
 
-
+   List<GastoProgramable> obtenerGastosProgramables();
 
 }
