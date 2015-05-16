@@ -6,4 +6,6 @@ package com.funebunny.xpdroid.utilities;
 public class AppConstants {
 
     public static final char SEPARADOR_FECHA = '/';
+    public static final String ARG_DRAWER_ITEM_POSITION = "section_number";
+
 }

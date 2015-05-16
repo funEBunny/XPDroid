@@ -20,12 +20,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 
 public class MainActivity   extends ActionBarActivity
                             implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
                                         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
-                                        HistorialGastosItemFragment.HistorialGastosItemCallbacks {
+                                        HistorialGastosItemFragment.HistorialGastosItemCallbacks,
+                                        NotificacionesItemFragment.NotificacionesItemCallbacks{
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -84,6 +86,36 @@ public class MainActivity   extends ActionBarActivity
                         .commit();
                 break;
             }
+            case 3: { //Gastos Programables
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
+//                        .commit();
+//                break;
+            }
+            case 4: { //Objetivos
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
+//                        .commit();
+//                break;
+            }
+            case 5: { //Recordatorios
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
+//                        .commit();
+//                break;
+            }
+            case 6: { //Notificaciones
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, NotificacionesItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+            case 7: { //Ayuda
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
+//                        .commit();
+//                break;
+            }
         }
     }
 
@@ -98,7 +130,10 @@ public class MainActivity   extends ActionBarActivity
         //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
+    @Override
+    public void onNotificacionesItemSelected(String id) {
 
+    }
     /*
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -195,7 +230,7 @@ public class MainActivity   extends ActionBarActivity
                 Intent intentCrearObjetivo = new Intent(this, CrearObjetivoActivity.class);
                 startActivity(intentCrearObjetivo);
 
-                //Mostrar mensaje de crear gasto programable
+                //Mostrar mensaje de crear gasto objetivo
                 Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
@@ -208,13 +243,6 @@ public class MainActivity   extends ActionBarActivity
 
 
 
-
-
-
-
-
-
-
     //TODO: VA A SER UTILIZADO SOLO PARA LA OPCION DE NAV DRAWER "Inicio"
     /**
      * A placeholder fragment containing a simple view.
@@ -224,8 +252,6 @@ public class MainActivity   extends ActionBarActivity
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String ARG_DRAWER_ITEM_POSITION = "section_number";
-
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -233,7 +259,7 @@ public class MainActivity   extends ActionBarActivity
         public static PlaceholderFragment newInstance(int itemSelected) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_DRAWER_ITEM_POSITION, itemSelected); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
+            args.putInt(AppConstants.ARG_DRAWER_ITEM_POSITION, itemSelected); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
             fragment.setArguments(args);
             return fragment;
         }
@@ -244,7 +270,7 @@ public class MainActivity   extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Bundle args = this.getArguments();
-            int sectionNumber = (int) args.get(ARG_DRAWER_ITEM_POSITION);
+            int sectionNumber = (int) args.get(AppConstants.ARG_DRAWER_ITEM_POSITION);
             // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
             // OJO que desde MainActiviy.onNavigationDrawerItemSelected se manda la posicion + 1
 
@@ -255,7 +281,7 @@ public class MainActivity   extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         }
 
         // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
