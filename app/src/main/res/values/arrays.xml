@@ -32,4 +32,19 @@
         <item>@string/importe</item>
     </string-array>
 
+    <!--<string-array name="spinner_meses">-->
+        <!--<item><string>Enero</string></item>-->
+        <!--<item><string>Febrero</string></item>-->
+        <!--<item><string>Marzo</string></item>-->
+        <!--<item><string>Abril</string></item>-->
+        <!--<item><string>Mayo</string></item>-->
+        <!--<item><string>Junio</string></item>-->
+        <!--<item><string>Julio</string></item>-->
+        <!--<item><string>Agosto</string></item>-->
+        <!--<item><string>Septiembre</string></item>-->
+        <!--<item><string>Octubre</string></item>-->
+        <!--<item><string>Noviembre</string></item>-->
+        <!--<item><string>Diciembre</string></item>-->
+    <!--</string-array>-->
+
 </resources>

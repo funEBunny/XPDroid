@@ -25,8 +25,9 @@ import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class MainActivity   extends ActionBarActivity
                             implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
-                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
                                         HistorialGastosItemFragment.HistorialGastosItemCallbacks,
+                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
+                                        GastosProgramablesItemFragment.GastosProgramablesItemCallbacks, 
                                         NotificacionesItemFragment.NotificacionesItemCallbacks{
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -86,11 +87,11 @@ public class MainActivity   extends ActionBarActivity
                         .commit();
                 break;
             }
-            case 3: { //Gastos Programables
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
+            case 3: { //Gastos Gastos Programbables
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, GastosProgramablesItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
             }
             case 4: { //Objetivos
 //                fragmentManager.beginTransaction()
@@ -119,14 +120,20 @@ public class MainActivity   extends ActionBarActivity
         }
     }
 
-    @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
-     public void onGastosFavoritosItemSelected(String id) {
+    @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
+    public void onHistorialGastosItemSelected(String id) {
         //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
 
-    @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
-    public void onHistorialGastosItemSelected(String id) {
+    @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
+    public void onGastosFavoritosItemSelected(String id) {
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+
+    }
+
+    @Override //Implementing method from GastosProgramablesItemFragment.GastosProgramablesItemCallbacks
+    public void onGastosProgramablesItemSelected(String id) {
         //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
@@ -240,6 +247,13 @@ public class MainActivity   extends ActionBarActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
 
 
 
