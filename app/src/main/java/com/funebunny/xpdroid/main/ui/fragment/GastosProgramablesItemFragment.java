@@ -1,7 +1,6 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,12 +16,8 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -30,10 +25,10 @@ import java.util.List;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link HistorialGastosItemCallbacks}
+ * Activities containing this fragment MUST implement the {@link GastosProgramablesItemCallbacks}
  * interface.
  */
-public class HistorialGastosItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class GastosProgramablesItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,8 +41,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private String mParam1;
     private String mParam2;
 
-    private HistorialGastosItemCallbacks mListener;
-    private List<Gasto> gastos = new ArrayList<Gasto>();
+    private GastosProgramablesItemCallbacks mListener;
 
     /**
      * The fragment's ListView/GridView.
@@ -61,8 +55,8 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static HistorialGastosItemFragment newInstance(int itemSelected) {
-        HistorialGastosItemFragment fragment = new HistorialGastosItemFragment();
+    public static GastosProgramablesItemFragment newInstance(int itemSelected) {
+        GastosProgramablesItemFragment fragment = new GastosProgramablesItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, "param1");
         args.putString(ARG_PARAM2, "param2");
@@ -75,7 +69,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public HistorialGastosItemFragment() {
+    public GastosProgramablesItemFragment() {
     }
 
     @Override
@@ -86,20 +80,15 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
-//
-//        // TODO: Change Adapter to display your content
-//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
 
-        ServicioGastos servicioGastos = new ServicioGastos();
-        this.gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
-        mAdapter = new ArrayAdapter<Gasto>(getActivity(), R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
-
+        // TODO: Change Adapter to display your content
+        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                R.layout.gastos_programables_list_item, R.id.gastos_programables_list_item, DummyContent.ITEMS);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_gastosprogramablesitem_list, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -115,10 +104,10 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (HistorialGastosItemCallbacks) activity;
+            mListener = (GastosProgramablesItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
+            throw new ClassCastException(activity.toString() + " must implement onGastosProgramablesItemSelected");
         }
     }
 
@@ -128,12 +117,13 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         mListener = null;
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onHistorialGastosItemSelected(DummyContent.ITEMS.get(position).id);
+            mListener.onGastosProgramablesItemSelected(DummyContent.ITEMS.get(position).id);
         }
     }
 
@@ -160,9 +150,9 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface HistorialGastosItemCallbacks {
+    public interface GastosProgramablesItemCallbacks {
         // TODO: Update argument type and name
-        public void onHistorialGastosItemSelected(String id);
+        public void onGastosProgramablesItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
@@ -171,7 +161,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         setHasOptionsMenu(true);
     }
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_crear_gasto, menu);
+        inflater.inflate(R.menu.menu_crear_gasto_programable, menu);
     }
 
 }

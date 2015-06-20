@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;

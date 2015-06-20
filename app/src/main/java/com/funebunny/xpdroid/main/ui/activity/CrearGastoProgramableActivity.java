@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 
 public class CrearGastoProgramableActivity extends ActionBarActivity {
 

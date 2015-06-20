@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;

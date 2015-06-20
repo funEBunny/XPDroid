@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.funebunny.xpdroid.main.ui.CrearGastoActivity">
+    tools:context="com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity">
 
     <item android:id="@+id/action_crear_gasto"
     android:title="@string/action_crear_gasto"

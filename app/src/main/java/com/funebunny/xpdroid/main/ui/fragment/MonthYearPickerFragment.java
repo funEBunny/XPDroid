@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,12 +10,13 @@ import android.widget.EditText;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 /**
  * Created by provirabosch on 11/04/2015.
  */
-public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class MonthYearPickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,10 +29,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int anio, int mes, int dia) {
-
-        EditText fecha = (EditText) this.getActivity().findViewById(R.id.fecha);
-        fecha.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
-
+//        EditText mesAnioHistorial = (EditText) this.getActivity().findViewById(R.id.mes_anio_historial);
+//        String monthString = new DateFormatSymbols().getMonths()[mes];
+//        mesAnioHistorial.setText(new StringBuilder().append(monthString).append(" ").append(anio));
     }
-
 }

@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui;
+package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,15 +20,20 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
+import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 
 public class MainActivity   extends ActionBarActivity
-                            implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
-                                        HistorialGastosItemFragment.HistorialGastosItemCallbacks,
-                                        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
-                                        GastosProgramablesItemFragment.GastosProgramablesItemCallbacks, 
-                                        NotificacionesItemFragment.NotificacionesItemCallbacks{
+                            implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        HistorialGastosItemFragment.HistorialGastosItemCallbacks,
+        GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
+        GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
+        NotificacionesItemFragment.NotificacionesItemCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
