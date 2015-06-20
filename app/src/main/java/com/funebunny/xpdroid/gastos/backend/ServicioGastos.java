@@ -29,13 +29,13 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<Gasto> obtenerGastosPorCategoria(String categoria) {
-        return new Select().from(Gasto.class).where("Categoria = ?", categoria,categoria).execute();
+        return new Select().from(Gasto.class).where("Categoria = ?", categoria, categoria).execute();
     }
 
     @Override
     public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
-        String fecha = "%"+anio+mes+"%";
-        return new Select().from(Gasto.class).where("Fecha LIKE ?",fecha ).orderBy("Categoria ASC").execute();
+        String fecha = "%" + anio + mes + "%";
+        return new Select().from(Gasto.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ServicioGastos implements IServicioGastos {
         gasto.setDescripcion(descripcion);
         gasto.setCategoria(categoria);
 
-        String fechaGasto="";
+        String fechaGasto = "";
         SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyyMMdd");
         try {
@@ -62,26 +62,53 @@ public class ServicioGastos implements IServicioGastos {
         ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).execute();
         for (int i = 0; i < gastosProgLista.size(); i++) {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
-            Integer diaSemana = gastoProgramableDAO.getDiaSemana();
-            Integer diaMes = gastoProgramableDAO.getDiaMes();
-            Integer mes = gastoProgramableDAO.getMes();
+            int repeticion = gastoProgramableDAO.getRepeticion();
             List<GastoProgramable> gastos = new ArrayList<>();
 
-            if ((diaSemana==null) && (diaMes==null) && (mes==null)){
-                GastoProgSemanal gastoProgDiario = new GastoProgSemanal();
-                gastos.add(gastoProgDiario);
-            }else if((diaSemana!=null) && (diaMes==null) && (mes==null)){
-                GastoProgSemanal gastoProgSemanal = new GastoProgSemanal();
-                gastos.add(gastoProgSemanal);
-            }else if((diaSemana==null) && (diaMes!=null) && (mes==null)){
-                GastoProgMensual gastoProgMensual = new GastoProgMensual();
-                gastos.add(gastoProgMensual);
-            }else if((diaSemana==null) && (diaMes!=null) && (mes!=null)){
-                GastoProgAnual gastoProgAnual = new GastoProgAnual();
-                gastos.add(gastoProgAnual);
+            switch (repeticion){
+                case GastoProgramableDAO.DIARIO:{
+                    GastoProgDiario gastoProgDiario = new GastoProgDiario();
+                    gastos.add(gastoProgDiario);
+                    break;
+                }
+                case GastoProgramableDAO.SEMANAL:{
+                    GastoProgSemanal gastoProgSemanal = new GastoProgSemanal();
+                    gastos.add(gastoProgSemanal);
+                    break;
+                }
+                case GastoProgramableDAO.MENSUAL:{
+                    GastoProgMensual gastoProgMensual = new GastoProgMensual();
+                    gastos.add(gastoProgMensual);
+                    break;
+                }
+                case GastoProgramableDAO.ANUAL:{
+                    GastoProgAnual gastoProgAnual = new GastoProgAnual();
+                    gastos.add(gastoProgAnual);
+                    break;
+                }
             }
         }
         return null;
+    }
+
+    @Override
+    public void guardarGastoProgramable(GastoProgramable gp) {
+
+        GastoProgramableDAO gpd = new GastoProgramableDAO();
+
+        if (gp instanceof GastoProgDiario) {
+            gpd.setRepeticion(GastoProgramableDAO.DIARIO);
+        }else if (gp instanceof GastoProgSemanal){
+            int diaSemana = ((GastoProgSemanal) gp).getDiaSemana();
+            gpd.setDiaSemana(diaSemana);
+            gpd.setRepeticion(GastoProgramableDAO.SEMANAL);
+        }
+
+        gpd.setCategoria(gp.getCategoria());
+        gpd.setDescripcion(gp.getDescripcion());
+        gpd.setImporte(gp.getImporte());
+        gpd.setHora(gp.getHora());
+        gpd.save();
     }
 
 }

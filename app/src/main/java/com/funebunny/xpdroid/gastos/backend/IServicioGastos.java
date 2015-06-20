@@ -23,8 +23,12 @@ public interface IServicioGastos {
      * @param categoria
      * @param fecha
      */
-   void guardarGasto(String descripcion, String importe, String categoria, String fecha );
+    void guardarGasto(String descripcion, String importe, String categoria, String fecha );
 
-   List<GastoProgramable> obtenerGastosProgramables();
+    List<GastoProgramable> obtenerGastosProgramables();
+
+    void guardarGastoProgramable(GastoProgramable gp);
+
+
 
 }
