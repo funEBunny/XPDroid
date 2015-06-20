@@ -25,7 +25,7 @@ public class Gasto extends Model {
     @Column(name = "Fecha")
     public String fecha;
 
-    private String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 

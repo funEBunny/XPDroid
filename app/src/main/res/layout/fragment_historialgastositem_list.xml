@@ -34,9 +34,42 @@
             <!--android:layout_gravity="right|top" />-->
     <!--</LinearLayout>-->
 
-    <ListView android:id="@android:id/list"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:text="@string/ultimos_gastos_titulo"
+        android:textColor="#ff0000ff"
+        android:textSize="@dimen/abc_text_size_medium_material" />
+
+    <ListView android:id="@+id/historial_gastos_lista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--<TableRow android:id="@+id/historial_gastos_table_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:id="@+id/textView2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoria"
+                android:id="@+id/textView3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Importe"
+                android:id="@+id/textView4" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripcion"
+                android:id="@+id/textView5" />
+        </TableRow>-->
+    </ListView>
 
 </LinearLayout>
 

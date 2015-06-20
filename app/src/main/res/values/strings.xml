@@ -50,6 +50,7 @@
     <string name="duracion">Duración</string>
     <string name="title_activity_crear_recordatorio">Crear Recordatorio</string>
     <string name="title_activity_xpdroid">Actividad Base de XPDroid</string>
+    <string name="ultimos_gastos_titulo">Ultimos Gastos Realizados:</string>
 
     <string name="categoria1">Transportes</string>
     <string name="categoria2">Alimentos</string>

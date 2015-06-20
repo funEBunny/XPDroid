@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/historial_gastos_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,4 +11,46 @@
 
     android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingRight="?android:attr/listPreferredItemPaddingRight"/>
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight">-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/historial_gastos_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/historial_gastos_lista_fecha"
+            android:textSize="@dimen/abc_text_size_medium_material"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/historial_gastos_lista_categoria"
+            android:textSize="@dimen/abc_text_size_medium_material"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/historial_gastos_lista_importe"
+            android:textSize="@dimen/abc_text_size_medium_material"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/historial_gastos_lista_descripcion"
+            android:textSize="@dimen/abc_text_size_medium_material"/>
+</LinearLayout>
+<!--</TextView>-->
+

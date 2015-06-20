@@ -12,12 +12,14 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.main.ui.activity.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 
@@ -49,16 +51,15 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private HistorialGastosItemCallbacks mListener;
     private List<Gasto> gastos = new ArrayList<Gasto>();
 
-    /**
-     * The fragment's ListView/GridView.
-     */
+    // The fragment's ListView/GridView
     private AbsListView mListView;
+    private AbsListView mListView2;
 
-    /**
-     * The Adapter which will be used to populate the ListView/GridView with
-     * Views.
-     */
+    private ListView mTableGastosUltimos;
+
+    //The Adapter which will be used to populate the ListView/GridView with Views.
     private ListAdapter mAdapter;
+    private ListAdapter mAdapter2;
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {
@@ -93,7 +94,8 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
         ServicioGastos servicioGastos = new ServicioGastos();
         this.gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
-        mAdapter = new ArrayAdapter<Gasto>(getActivity(), R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
+        //mAdapter = new ArrayAdapter<Gasto>(getActivity(), R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
+        mAdapter2 = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
     }
 
@@ -102,11 +104,18 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        //mListView = (AbsListView) view.findViewById(android.R.id.list);
+        //mListView = (AbsListView) view.findViewById(R.id.historial_gastos_lista);
+//        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+
+        mListView2 = (ListView) view.findViewById(R.id.historial_gastos_lista);
+        ((AdapterView<ListAdapter>) mListView2).setAdapter(mAdapter2);
+
+        //mTableGastosUltimos = (ListView) view.findViewById(R.id.ultimos_gastos_tabla);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        mListView2.setOnItemClickListener(this);
 
         return view;
     }
