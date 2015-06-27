@@ -36,6 +36,9 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
+        if(mes.length()==1) {
+            mes = "0" + mes;
+        }
         String fecha = "%" + anio + mes + "%";
         return new Select().from(Gasto.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
     }
