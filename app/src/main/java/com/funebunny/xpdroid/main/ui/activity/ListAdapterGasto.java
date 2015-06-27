@@ -56,8 +56,12 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
                 if (categoria != null) {
                     categoria.setText(gasto.getCategoria());
                 }
-                if (importe != null && position != 0) {
-                    importe.setText("$"+gasto.getImporte());
+                if (importe != null) {
+                    if(position == 0) {
+                        importe.setText(gasto.getImporte());
+                    } else {
+                        importe.setText("$" + gasto.getImporte());
+                    }
                 }
                 if (descripcion != null) {
                     descripcion.setText(gasto.getDescripcion());
