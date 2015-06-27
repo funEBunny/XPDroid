@@ -11,7 +11,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,7 +39,9 @@ public class Scheduler extends Service {
     public void onCreate() {
         Toast.makeText(this, "Servicio creado", Toast.LENGTH_LONG).show();
         Log.d("SERVICEBOOT", "Servicio creado");
-       // iniciarCronometro();
+        ServicioGastos servicioGastos = new ServicioGastos();
+        List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
+        iniciarCronometro(gastoProgramables);
     }
 
 
@@ -45,12 +52,23 @@ public class Scheduler extends Service {
         pararCronometro();
     }
 
-    private void iniciarCronometro() {
+    private void iniciarCronometro(final List<GastoProgramable> gastoProgramables) {
         temporizador.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                Log.d("SERVICEBOOT", "Notoficacion lanzada");
-                NM = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                NM.notify(NOTIFICATION_ID,notificacion());
+                int hour = Calendar.getInstance().get(Calendar.HOUR);
+                int minute = Calendar.getInstance().get(Calendar.MINUTE);
+                String horaActual = String.valueOf(hour)+String.valueOf(minute);
+                for (int i = 0; i <gastoProgramables.size(); i++) {
+                    GastoProgramable gastoProgramable = gastoProgramables.get(i);
+                    int hora = gastoProgramable.getHora();
+                    String sHoraGasto = String.valueOf(hora);
+                    if (sHoraGasto.equalsIgnoreCase(horaActual)){
+                        Log.d("SERVICEBOOT", "Notoficacion lanzada");
+                        NM = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                        NM.notify(NOTIFICATION_ID,notificacion());
+                    }
+
+                }
             }
         }, 0, INTERVALO_ACTUALIZACION);
     }

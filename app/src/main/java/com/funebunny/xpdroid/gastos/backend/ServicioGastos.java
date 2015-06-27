@@ -66,12 +66,9 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<GastoProgramable> obtenerGastosProgramablesDelDia() {
-        Calendar today = Calendar.getInstance();
-        int dia = today.get(Calendar.DAY_OF_MONTH);
-        int mes = today.get(Calendar.MONTH);
-        int anio = today.get(Calendar.YEAR);
 
-        ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).where("anio = ? AND mes = ? AND dia = ?",anio,mes,dia).execute();
+
+        ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).execute();
         for (int i = 0; i < gastosProgLista.size(); i++) {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
             int repeticion = gastoProgramableDAO.getRepeticion();

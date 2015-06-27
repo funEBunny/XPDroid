@@ -10,6 +10,33 @@ import com.activeandroid.annotation.Table;
 @Table(name = "GastoProgramable")
 public class GastoProgramableDAO extends Model {
 
+    @Column(name = "diaMes")
+    private Integer diaMes = null;
+
+    @Column(name = "mes")
+    private Integer mes = null;
+
+    @Column(name = "hora")
+    private Integer hora = null;
+
+    @Column(name = "diaSemana")
+    private Integer diaSemana = null;
+
+    @Column(name = "anio")
+    private Integer anio = null;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "importe")
+    private String importe;
+
+    @Column(name = "categoria")
+    private String categoria;
+
+    @Column(name = "repeticion")
+
+    private int repeticion;
     public static final int DIARIO = 1;
     public static final int SEMANAL = 2;
     public static final int MENSUAL = 3;
@@ -87,31 +114,5 @@ public class GastoProgramableDAO extends Model {
         this.anio = anio;
     }
 
-    @Column(name = "diaMes")
-    private Integer diaMes = null;
-
-    @Column(name = "mes")
-    private Integer mes = null;
-
-    @Column(name = "hora")
-    private Integer hora = null;
-
-    @Column(name = "diaSemana")
-    private Integer diaSemana = null;
-
-    @Column(name = "anio")
-    private Integer anio = null;
-
-    @Column(name = "descripcion")
-    private String descripcion;
-
-    @Column(name = "importe")
-    private String importe;
-
-    @Column(name = "categoria")
-    private String categoria;
-
-    @Column(name = "repeticion")
-    private int repeticion;
 
 }

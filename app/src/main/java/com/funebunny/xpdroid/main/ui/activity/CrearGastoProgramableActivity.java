@@ -1,6 +1,8 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,8 @@ import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
@@ -120,7 +124,19 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         ServicioGastos servicioGastos = new ServicioGastos();
         servicioGastos.guardarGastoProgramable(gp);
 
+        List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
+        int hour = Calendar.getInstance().get(Calendar.HOUR);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE);
+        String horaActual = String.valueOf(hour)+String.valueOf(minute);
+        for (int i = 0; i <gastoProgramables.size(); i++) {
+            GastoProgramable gastoProgramable = gastoProgramables.get(i);
+            int hora = gastoProgramable.getHora();
+            String sHoraGasto = String.valueOf(hora);
+            if (sHoraGasto.equalsIgnoreCase(horaActual)){
+                Log.d("SERVICEBOOT", "Notoficacion lanzada");
+            }
 
+        }
     }
 
     private int getDiaSemana(String diaSemana){
