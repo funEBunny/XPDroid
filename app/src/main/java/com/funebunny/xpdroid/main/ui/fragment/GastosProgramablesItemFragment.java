@@ -107,7 +107,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
             mListener = (GastosProgramablesItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement onGastosProgramablesItemSelected");
+            throw new ClassCastException(activity.toString() + " must implement GastosProgramablesItemCallbacks.onGastosProgramablesItemSelected");
         }
     }
 

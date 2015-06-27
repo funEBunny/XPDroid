@@ -119,7 +119,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
             mListener = (GastosFavoritosItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement onGastosFavoritosItemSelected");
+            throw new ClassCastException(activity.toString() + " must implement GastosFavoritosItemCallbacks.onGastosFavoritosItemSelected");
         }
     }
 

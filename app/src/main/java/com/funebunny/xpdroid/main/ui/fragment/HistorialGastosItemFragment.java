@@ -24,6 +24,7 @@ import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -93,10 +94,20 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
 
         ServicioGastos servicioGastos = new ServicioGastos();
-        this.gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
+        this.addGastoTitulos();
+        this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH)+1)),
+                                                                String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
         //mAdapter = new ArrayAdapter<Gasto>(getActivity(), R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
         mAdapter2 = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
+    }
+
+    private void addGastoTitulos(){
+        Gasto gastoTitulos = new Gasto();
+        gastoTitulos.setImporte("IMPORTE");
+        gastoTitulos.setDescripcion("DESCRIPCION");
+        gastoTitulos.setCategoria("CATEGORIA");
+        this.gastos.add(0,gastoTitulos);
     }
 
     @Override
@@ -127,7 +138,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
             mListener = (HistorialGastosItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
+            throw new ClassCastException(activity.toString() + " must implement HistorialGastosItemCallbacks.onHistorialGastosItemSelected");
         }
     }
 

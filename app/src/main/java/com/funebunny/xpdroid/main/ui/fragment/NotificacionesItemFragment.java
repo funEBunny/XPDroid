@@ -105,8 +105,7 @@ public class NotificacionesItemFragment extends Fragment implements AbsListView.
             mListener = (NotificacionesItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new ClassCastException(activity.toString() + " must implement NotificacionesItemCallbacks.onNotificacionesItemSelected");
         }
     }
 
