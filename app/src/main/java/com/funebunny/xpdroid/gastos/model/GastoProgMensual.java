@@ -5,4 +5,12 @@ package com.funebunny.xpdroid.gastos.model;
  */
 public class GastoProgMensual extends GastoProgramable {
     private int diaMes;
+
+    public int getDiaMes() {
+        return diaMes;
+    }
+
+    public void setDiaMes(int diaMes) {
+        this.diaMes = diaMes;
+    }
 }

@@ -27,6 +27,8 @@ public interface IServicioGastos {
 
     List<GastoProgramable> obtenerGastosProgramables();
 
+    List<GastoProgramable> obtenerGastosProgramablesDelDia();
+
     void guardarGastoProgramable(GastoProgramable gp);
 
 

@@ -48,7 +48,6 @@ public class MainActivity   extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
         //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);  //No sé para qué es
         drawerList   = (ListView) findViewById(R.id.navigation_drawer);

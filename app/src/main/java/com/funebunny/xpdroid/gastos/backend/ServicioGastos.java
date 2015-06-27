@@ -1,7 +1,5 @@
 package com.funebunny.xpdroid.gastos.backend;
 
-import com.activeandroid.Model;
-import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO;
@@ -14,6 +12,7 @@ import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -21,6 +20,9 @@ import java.util.List;
  */
 public class ServicioGastos implements IServicioGastos {
 
+   // @Inject
+    public ServicioGastos() {
+    }
 
     @Override
     public List<Gasto> obtenerGastos() {
@@ -29,7 +31,7 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<Gasto> obtenerGastosPorCategoria(String categoria) {
-        return new Select().from(Gasto.class).where("Categoria = ?", categoria, categoria).execute();
+        return new Select().from(Gasto.class).where("Categoria = ?", categoria).execute();
     }
 
     @Override
@@ -59,34 +61,56 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<GastoProgramable> obtenerGastosProgramables() {
-        ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).execute();
+        return null;
+    }
+
+    @Override
+    public List<GastoProgramable> obtenerGastosProgramablesDelDia() {
+        Calendar today = Calendar.getInstance();
+        int dia = today.get(Calendar.DAY_OF_MONTH);
+        int mes = today.get(Calendar.MONTH);
+        int anio = today.get(Calendar.YEAR);
+
+        ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).where("anio = ? AND mes = ? AND dia = ?",anio,mes,dia).execute();
         for (int i = 0; i < gastosProgLista.size(); i++) {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
             int repeticion = gastoProgramableDAO.getRepeticion();
             List<GastoProgramable> gastos = new ArrayList<>();
-
+            GastoProgramable gastoProgramable;
             switch (repeticion){
-                case GastoProgramableDAO.DIARIO:{
-                    GastoProgDiario gastoProgDiario = new GastoProgDiario();
-                    gastos.add(gastoProgDiario);
-                    break;
-                }
                 case GastoProgramableDAO.SEMANAL:{
-                    GastoProgSemanal gastoProgSemanal = new GastoProgSemanal();
-                    gastos.add(gastoProgSemanal);
+                    gastoProgramable = new GastoProgSemanal();
+                    ((GastoProgSemanal)gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
+                    gastos.add(gastoProgramable);
                     break;
                 }
                 case GastoProgramableDAO.MENSUAL:{
-                    GastoProgMensual gastoProgMensual = new GastoProgMensual();
-                    gastos.add(gastoProgMensual);
+                    gastoProgramable = new GastoProgMensual();
+                    ((GastoProgMensual)gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+                    gastos.add(gastoProgramable);
                     break;
                 }
                 case GastoProgramableDAO.ANUAL:{
-                    GastoProgAnual gastoProgAnual = new GastoProgAnual();
-                    gastos.add(gastoProgAnual);
+                    gastoProgramable = new GastoProgAnual();
+                    gastos.add(gastoProgramable);
+                    break;
+                }
+                default:{
+                    gastoProgramable = new GastoProgDiario();
+                    gastos.add(gastoProgramable);
                     break;
                 }
             }
+
+            Integer hora = gastoProgramableDAO.getHora();
+            String categoria = gastoProgramableDAO.getCategoria();
+            String importe = gastoProgramableDAO.getImporte();
+            String descripcion = gastoProgramableDAO.getDescripcion();
+
+            gastoProgramable.setImporte(importe);
+            gastoProgramable.setCategoria(categoria);
+            gastoProgramable.setDescripcion(descripcion);
+            gastoProgramable.setHora(hora);
         }
         return null;
     }

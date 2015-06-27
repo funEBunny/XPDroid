@@ -7,4 +7,12 @@ public class GastoProgAnual extends GastoProgramable {
 
     private int diaMes;
     private int mes;
+
+    public int getDiaMes() {
+        return diaMes;
+    }
+
+    public void setDiaMes(int diaMes) {
+        this.diaMes = diaMes;
+    }
 }
