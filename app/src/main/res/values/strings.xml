@@ -57,5 +57,14 @@
     <string name="categoria3">Supermercado</string>
     <string name="categoria4">Ocio</string>
     <string name="categoria5">Indumentaria</string>
+    <string name="lunes">Lunes</string>
+    <string name="martes">Martes</string>
+    <string name="miercoles">Miércoles</string>
+    <string name="jueves">Jueves</string>
+    <string name="viernes">Viernes</string>
+    <string name="sabado">Sabado</string>
+    <string name="domingo">Domingo</string>
+    <string name="diario">Diario</string>
+    <string name="semanal">Semanal</string>
 
 </resources>
