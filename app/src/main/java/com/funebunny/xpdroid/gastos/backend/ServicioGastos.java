@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.gastos.backend;
 
 import android.util.Log;
 
+import com.activeandroid.Model;
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO;
@@ -105,11 +106,13 @@ public class ServicioGastos implements IServicioGastos {
             String categoria = gastoProgramableDAO.getCategoria();
             String importe = gastoProgramableDAO.getImporte();
             String descripcion = gastoProgramableDAO.getDescripcion();
+            Long id = gastoProgramableDAO.getId();
 
             gastoProgramable.setImporte(importe);
             gastoProgramable.setCategoria(categoria);
             gastoProgramable.setDescripcion(descripcion);
             gastoProgramable.setHora(hora);
+            gastoProgramable.setId(id);
             Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
             gastos.add(gastoProgramable);
         }
@@ -134,6 +137,13 @@ public class ServicioGastos implements IServicioGastos {
         gpd.setImporte(gp.getImporte());
         gpd.setHora(gp.getHora());
         gpd.save();
+    }
+
+    @Override
+    public void eliminarGastoProgramable(GastoProgramable gp) {
+        Log.d("XPDROID", "Eliminando Gasto: "+gp.toString());
+        GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, gp.getId());
+        delGP.delete();
     }
 
 }
