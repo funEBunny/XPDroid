@@ -12,11 +12,13 @@
         android:text="@string/ultimos_gastos_titulo"
         android:textColor="#ff0000ff"
         android:textSize="@dimen/abc_text_size_medium_material"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="10dp" />
 
     <ListView android:id="@+id/historial_gastos_lista"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>
 
