@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,14 +47,14 @@ public class CrearGastoActivity extends XPDroidActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
     //>Added by PRB
@@ -63,7 +64,7 @@ public class CrearGastoActivity extends XPDroidActivity {
     }
     //<Added by PRB
 
-    public void guardarGasto(View view){
+    public void guardarGasto(View view) {
         ServicioGastos servicioGastos = new ServicioGastos();
 
         String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
@@ -77,7 +78,7 @@ public class CrearGastoActivity extends XPDroidActivity {
         servicioGastos.guardarGasto(descripcion, importe, categoria, fecha);
         //Mostrar mensaje de agregar gasto
         Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
         this.finish();
     }
