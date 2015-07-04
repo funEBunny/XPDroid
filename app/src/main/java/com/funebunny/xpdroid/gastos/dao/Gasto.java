@@ -12,6 +12,18 @@ import java.text.SimpleDateFormat;
  */
 @Table(name = "Gasto")
 public class Gasto extends Model {
+    public Gasto(String descripcion, String importe, String categoria, String fecha) {
+        super();
+        this.descripcion = descripcion;
+        this.importe = importe;
+        this.categoria = categoria;
+        this.fecha = fecha;
+    }
+
+    public Gasto() {
+       super();
+    }
+
 
     @Column(name = "Descripcion")
     private String descripcion;

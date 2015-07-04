@@ -1,5 +1,7 @@
 package com.funebunny.xpdroid.gastos.backend;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO;
@@ -71,33 +73,30 @@ public class ServicioGastos implements IServicioGastos {
     public List<GastoProgramable> obtenerGastosProgramablesDelDia() {
 
 
+        List<GastoProgramable> gastos = new ArrayList<>();
         ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).execute();
+
         for (int i = 0; i < gastosProgLista.size(); i++) {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
-            int repeticion = gastoProgramableDAO.getRepeticion();
-            List<GastoProgramable> gastos = new ArrayList<>();
             GastoProgramable gastoProgramable;
+            int repeticion = gastoProgramableDAO.getRepeticion();
             switch (repeticion){
                 case GastoProgramableDAO.SEMANAL:{
                     gastoProgramable = new GastoProgSemanal();
                     ((GastoProgSemanal)gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
-                    gastos.add(gastoProgramable);
                     break;
                 }
                 case GastoProgramableDAO.MENSUAL:{
                     gastoProgramable = new GastoProgMensual();
                     ((GastoProgMensual)gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
-                    gastos.add(gastoProgramable);
                     break;
                 }
                 case GastoProgramableDAO.ANUAL:{
                     gastoProgramable = new GastoProgAnual();
-                    gastos.add(gastoProgramable);
                     break;
                 }
                 default:{
                     gastoProgramable = new GastoProgDiario();
-                    gastos.add(gastoProgramable);
                     break;
                 }
             }
@@ -111,13 +110,15 @@ public class ServicioGastos implements IServicioGastos {
             gastoProgramable.setCategoria(categoria);
             gastoProgramable.setDescripcion(descripcion);
             gastoProgramable.setHora(hora);
+            Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
+            gastos.add(gastoProgramable);
         }
-        return null;
+        return gastos;
     }
 
     @Override
     public void guardarGastoProgramable(GastoProgramable gp) {
-
+        Log.d("XPDROID", "Guardando Gasto: "+gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();
 
         if (gp instanceof GastoProgDiario) {

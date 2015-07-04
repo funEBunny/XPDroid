@@ -28,6 +28,17 @@ public abstract class GastoProgramable {
     public static final int DICIEMBRE = 11;
 
     private String descripcion;
+
+    @Override
+    public String toString() {
+        return "GastoProgramable{" +
+                "descripcion='" + descripcion + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", importe='" + importe + '\'' +
+                ", hora=" + hora +
+                '}';
+    }
+
     private String categoria;
     private String importe;
     private int hora;

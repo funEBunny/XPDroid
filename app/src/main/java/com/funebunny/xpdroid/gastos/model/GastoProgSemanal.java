@@ -7,6 +7,13 @@ public class GastoProgSemanal extends GastoProgramable{
 
     private int diaSemana;
 
+    @Override
+    public String toString() {
+        return "GastoProgSemanal{" +
+                "diaSemana=" + diaSemana +
+                "} " + super.toString();
+    }
+
     public int getDiaSemana() {
         return diaSemana;
     }

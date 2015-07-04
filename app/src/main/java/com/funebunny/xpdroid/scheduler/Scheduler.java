@@ -14,6 +14,8 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +43,39 @@ public class Scheduler extends Service {
         Log.d("SERVICEBOOT", "Servicio creado");
         ServicioGastos servicioGastos = new ServicioGastos();
         List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
+
+
+
         iniciarCronometro(gastoProgramables);
+    }
+
+    private void lauchNotification(List<GastoProgramable> gastoProgramables) {
+        Log.d("SERVICEBOOT", "Starting Notification Launcher");
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE);
+        String horaActual = String.valueOf(hour)+":"+String.valueOf(minute);
+        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
+        String horaFormateada="0";
+
+        try {
+            horaFormateada = myFormat.format(fromUser.parse(horaActual));
+            Log.d("SERVICEBOOT", "Hora Actual = "+horaFormateada);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i <gastoProgramables.size(); i++) {
+            GastoProgramable gastoProgramable = gastoProgramables.get(i);
+            int hora = gastoProgramable.getHora();
+            String sHoraGasto = String.valueOf(hora);
+            Log.d("SERVICEBOOT", "Hora Gasto = "+sHoraGasto);
+            if (sHoraGasto.equalsIgnoreCase(horaFormateada)){
+                Log.d("SERVICEBOOT", "Notoficacion lanzada");
+                NM = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                NM.notify(NOTIFICATION_ID, notificacion(gastoProgramable));
+            }
+
+        }
     }
 
 
@@ -55,20 +89,7 @@ public class Scheduler extends Service {
     private void iniciarCronometro(final List<GastoProgramable> gastoProgramables) {
         temporizador.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                int hour = Calendar.getInstance().get(Calendar.HOUR);
-                int minute = Calendar.getInstance().get(Calendar.MINUTE);
-                String horaActual = String.valueOf(hour)+String.valueOf(minute);
-                for (int i = 0; i <gastoProgramables.size(); i++) {
-                    GastoProgramable gastoProgramable = gastoProgramables.get(i);
-                    int hora = gastoProgramable.getHora();
-                    String sHoraGasto = String.valueOf(hora);
-                    if (sHoraGasto.equalsIgnoreCase(horaActual)){
-                        Log.d("SERVICEBOOT", "Notoficacion lanzada");
-                        NM = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                        NM.notify(NOTIFICATION_ID,notificacion());
-                    }
-
-                }
+                lauchNotification(gastoProgramables);
             }
         }, 0, INTERVALO_ACTUALIZACION);
     }
@@ -80,12 +101,12 @@ public class Scheduler extends Service {
 
 
 
-    private Notification notificacion() {
+    private Notification notificacion( GastoProgramable gastoProgramable) {
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
 
         nBuilder.setSmallIcon(R.drawable.ic_scheduler);
-        nBuilder.setContentTitle("App Services");
-        nBuilder.setContentText("Servicio Iniciado");
+        nBuilder.setContentTitle(gastoProgramable.getCategoria());
+        nBuilder.setContentText(gastoProgramable.getImporte());
         nBuilder.setDefaults(Notification.DEFAULT_ALL);
         nBuilder.setAutoCancel(true);
         return nBuilder.build();

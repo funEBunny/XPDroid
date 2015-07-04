@@ -13,13 +13,13 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="Pickrand.db" />
+            android:value="xpdroid.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="5" />
+            android:value="2" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.funebunny.xpdroid.gastos.dao.Gasto" />
+            android:value="com.funebunny.xpdroid.gastos.dao.Gasto com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO" />
 
         <service android:name=".scheduler.Scheduler">
         <intent-filter>

@@ -123,19 +123,6 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         ServicioGastos servicioGastos = new ServicioGastos();
         servicioGastos.guardarGastoProgramable(gp);
 
-        List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
-        int hour = Calendar.getInstance().get(Calendar.HOUR);
-        int minute = Calendar.getInstance().get(Calendar.MINUTE);
-        String horaActual = String.valueOf(hour)+String.valueOf(minute);
-        for (int i = 0; i <gastoProgramables.size(); i++) {
-            GastoProgramable gastoProgramable = gastoProgramables.get(i);
-            int hora = gastoProgramable.getHora();
-            String sHoraGasto = String.valueOf(hora);
-            if (sHoraGasto.equalsIgnoreCase(horaActual)){
-                Log.d("SERVICEBOOT", "Notoficacion lanzada");
-            }
-
-        }
     }
 
     private int getDiaSemana(String diaSemana){
