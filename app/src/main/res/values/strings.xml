@@ -24,7 +24,7 @@
     <string name="fecha">Fecha</string>
     <string name="calendario">Calendario</string>
     <!--<string name="spinner_mes">Mes</string>-->
-    <!--<string name="boton_mostrar">Mostrar</string>-->
+    <string name="boton_mostrar_mas_gastos">Mostrar mas Gastos</string>
     <!--<string name="seleccionar_periodo">Seleccione el periodo: </string>-->
     <!--<string name="anio">Año</string>-->
     <!--<string name="mes_anio_historial">Mes y Año</string>-->
@@ -50,7 +50,8 @@
     <string name="duracion">Duración</string>
     <string name="title_activity_crear_recordatorio">Crear Recordatorio</string>
     <string name="title_activity_xpdroid">Actividad Base de XPDroid</string>
-    <string name="ultimos_gastos_titulo">Ultimos Gastos Realizados:</string>
+    <string name="ultimos_gastos_titulo">Ultimos 10 Gastos Realizados:</string>
+    <string name="ver_mas_gastos_titulo">Ver Mas Gastos Realizados</string>
 
     <string name="categoria1">Transportes</string>
     <string name="categoria2">Alimentos</string>

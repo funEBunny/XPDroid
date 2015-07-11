@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:text="@string/ver_mas_gastos_titulo"
+            android:textColor="#ff73a092"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:layout_gravity="center" />
+
+        <ImageButton android:id="@+id/boton_ver_historial_gastos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/boton_mostrar_mas_gastos"
+            android:src="@drawable/ic_historial"
+            android:clickable="true"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,7 +42,8 @@
         android:textColor="#ff0000ff"
         android:textSize="@dimen/abc_text_size_medium_material"
         android:textStyle="bold|italic"
-        android:layout_marginLeft="10dp" />
+        android:layout_margin="10dp"
+        android:layout_gravity="center_vertical" />
 
     <ListView android:id="@+id/historial_gastos_lista"
         android:layout_width="match_parent"
@@ -21,6 +51,3 @@
         android:layout_marginLeft="10dp" />
 
 </LinearLayout>
-
-
-
