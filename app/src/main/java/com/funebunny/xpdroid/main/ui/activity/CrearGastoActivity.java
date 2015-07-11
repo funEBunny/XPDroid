@@ -1,7 +1,11 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
+import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.Menu;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
+import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
@@ -80,6 +85,7 @@ public class CrearGastoActivity extends XPDroidActivity {
         Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
+
         this.finish();
     }
 }

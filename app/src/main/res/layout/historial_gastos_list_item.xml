@@ -1,41 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/historial_gastos_list_item2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall" >
 
-    <TextView android:id="@+id/historial_gastos_lista_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/historial_gastos_list_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:orientation="vertical"
+    android:layout_marginBottom="5dp">
 
-    <TextView android:id="@+id/historial_gastos_lista_categoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_below="@+id/historial_gastos_lista_fecha"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
 
-    <TextView android:id="@+id/historial_gastos_lista_importe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_below="@+id/historial_gastos_lista_fecha"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignRight="@+id/historial_gastos_lista_fecha" />
+        <TextView android:id="@+id/historial_gastos_lista_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="#ff000000" />
 
-    <TextView android:id="@+id/historial_gastos_lista_descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_below="@+id/historial_gastos_lista_categoria"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        <TextView android:id="@+id/historial_gastos_lista_fecha"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"
+            android:layout_marginTop="5dp" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <TextView android:id="@+id/historial_gastos_lista_descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:ellipsize="end"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:singleLine="true"
+            android:maxWidth="180dp" />
+
+        <TextView android:id="@+id/historial_gastos_lista_importe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold"
+            android:textColor="#ffff8100"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+</LinearLayout>
 
