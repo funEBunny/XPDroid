@@ -59,7 +59,8 @@
             android:gravity="right"
             android:layout_marginBottom="5dp"
             android:textStyle="bold"
-            android:textColor="#ffff8100" />
+            android:textColor="#ffff8100"
+            android:singleLine="true" />
 
     </LinearLayout>
 

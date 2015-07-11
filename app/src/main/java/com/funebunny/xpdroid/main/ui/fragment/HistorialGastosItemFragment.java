@@ -127,6 +127,12 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1)),
                                                                 String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
+        View view = getView();
+        mListView = (ListView) view.findViewById(R.id.historial_gastos_lista);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        // Set OnItemClickListener so we can be notified on item clicks
+        mListView.setOnItemClickListener(this);
     }
 
     @Override

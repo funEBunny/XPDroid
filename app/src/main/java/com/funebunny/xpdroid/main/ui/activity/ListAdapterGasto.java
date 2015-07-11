@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -47,23 +49,16 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
                 TextView descripcion = (TextView) view.findViewById(R.id.historial_gastos_lista_descripcion);
 
                 if (fecha != null) {
-                    /*if(position == 0) {
-                        fecha.setText("FECHA");
-                    } else {
-                        fecha.setText(gasto.getFecha());
-                    }*/
                     fecha.setText(gasto.getFecha());
                 }
                 if (categoria != null) {
                     categoria.setText(gasto.getCategoria());
                 }
                 if (importe != null) {
-                    /*if(position == 0) {
-                        importe.setText(gasto.getImporte());
-                    } else {
-                        importe.setText("$" + gasto.getImporte());
-                    }*/
-                    importe.setText("$" + gasto.getImporte());
+                    NumberFormat format2 = NumberFormat.getInstance();
+                    format2.setMaximumFractionDigits(2);
+                    format2.setMaximumIntegerDigits(6);
+                    importe.setText("$" + format2.format(Double.valueOf(gasto.getImporte())));
                 }
                 if (descripcion != null) {
                     descripcion.setText(gasto.getDescripcion());
