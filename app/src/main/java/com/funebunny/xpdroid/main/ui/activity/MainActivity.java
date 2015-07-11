@@ -81,7 +81,8 @@ public class MainActivity   extends ActionBarActivity
             }
             case 1: { //Historial de Gastos
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
+                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1), "HistorialGastos")
+                        .addToBackStack("HistorialGastos")
                         .commit();
                 break;
             }
