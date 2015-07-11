@@ -47,21 +47,23 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
                 TextView descripcion = (TextView) view.findViewById(R.id.historial_gastos_lista_descripcion);
 
                 if (fecha != null) {
-                    if(position == 0) {
+                    /*if(position == 0) {
                         fecha.setText("FECHA");
                     } else {
                         fecha.setText(gasto.getFecha());
-                    }
+                    }*/
+                    fecha.setText(gasto.getFecha());
                 }
                 if (categoria != null) {
                     categoria.setText(gasto.getCategoria());
                 }
                 if (importe != null) {
-                    if(position == 0) {
+                    /*if(position == 0) {
                         importe.setText(gasto.getImporte());
                     } else {
                         importe.setText("$" + gasto.getImporte());
-                    }
+                    }*/
+                    importe.setText("$" + gasto.getImporte());
                 }
                 if (descripcion != null) {
                     descripcion.setText(gasto.getDescripcion());

@@ -60,9 +60,8 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
     //The Adapter which will be used to populate the ListView/GridView with Views.
     private ListAdapter mAdapter;
-    private ListAdapter mAdapter2;
 
-    private ServicioGastos servicioGastos;
+    private ServicioGastos servicioGastos = new ServicioGastos();;
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {
@@ -90,45 +89,21 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
-//
-//        // TODO: Change Adapter to display your content
-//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_2, android.R.id.text1, DummyContent.ITEMS);
 
-        servicioGastos = new ServicioGastos();
-        this.addGastoTitulos();
         this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH)+1)),
                                                                 String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
-        //mAdapter = new ArrayAdapter<Gasto>(getActivity(), R.layout.historial_gastos_list_item, R.id.historial_gastos_list_item, gastos);
-        mAdapter2 = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
+        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
-    }
-
-    private void addGastoTitulos(){
-        Gasto gastoTitulos = new Gasto();
-        gastoTitulos.setImporte("IMPORTE");
-        gastoTitulos.setDescripcion("DESCRIPCION");
-        gastoTitulos.setCategoria("CATEGORIA");
-        this.gastos.add(0,gastoTitulos);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
-
-        // Set the adapter
-        //mListView = (AbsListView) view.findViewById(android.R.id.list);
-        //mListView = (AbsListView) view.findViewById(R.id.historial_gastos_lista);
-//        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
-
-        mListView2 = (ListView) view.findViewById(R.id.historial_gastos_lista);
-        ((AdapterView<ListAdapter>) mListView2).setAdapter(mAdapter2);
-
-        //mTableGastosUltimos = (ListView) view.findViewById(R.id.ultimos_gastos_tabla);
+        mListView = (ListView) view.findViewById(R.id.historial_gastos_lista);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView2.setOnItemClickListener(this);
+        mListView.setOnItemClickListener(this);
 
         return view;
     }
@@ -142,6 +117,16 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement HistorialGastosItemCallbacks.onHistorialGastosItemSelected");
         }
+    }
+
+    // PRB - Refresh del reporte al volver al fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.gastos.clear();
+        this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1)),
+                                                                String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
+        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
     }
 
     @Override
@@ -195,17 +180,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_gasto, menu);
     }
-    // PRB - Refresh del reporte al volver al fragment
-    @Override
-    public void onResume(){
-        super.onResume();
-        this.gastos.clear();
-        this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH)+1)),
-                String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
-        mAdapter2 = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
-        mListView2 = (ListView) getView().findViewById(R.id.historial_gastos_lista);
-        ((AdapterView<ListAdapter>) mListView2).setAdapter(mAdapter2);
-        mListView2.setOnItemClickListener(this);
-    }
+
 }
