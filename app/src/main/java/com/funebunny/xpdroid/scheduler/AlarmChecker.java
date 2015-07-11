@@ -1,17 +1,14 @@
 package com.funebunny.xpdroid.scheduler;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
@@ -21,37 +18,27 @@ import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
- * Created by schmidt0 on 5/9/2015.
+ * Created by schmidt0 on 7/11/2015.
  */
-public class Scheduler extends Service implements Runnable {
+public class AlarmChecker extends BroadcastReceiver {
 
-    private Timer temporizador = new Timer();
-    private static final long INTERVALO_ACTUALIZACION = 60000; // En ms
-    public static final int NOTIFICATION_ID = 1;
+    public int NOTIFICATION_ID = 0;
     private static NotificationManager NM;
     private static ServicioGastos servicioGastos;
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+    private int notificationNumber=0;
 
     @Override
-    public void onCreate() {
-        Toast.makeText(this, "Servicio creado", Toast.LENGTH_LONG).show();
-        Log.d("SERVICEBOOT", "Servicio creado");
-        ServicioGastos servicioGastos = new ServicioGastos();
-//        iniciarCronometro(servicioGastos);
-
-
+    public void onReceive(Context context, Intent intent) {
+        Log.d("SERVICEBOOT", "Intent received");
+        if (servicioGastos==null){
+            servicioGastos = new ServicioGastos();
+        }
+        lauchNotification(servicioGastos,context);
     }
-
-    private void lauchNotification(ServicioGastos servicioGastos) {
+    private void lauchNotification(ServicioGastos servicioGastos,Context context) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
         List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -74,39 +61,18 @@ public class Scheduler extends Service implements Runnable {
             Log.d("SERVICEBOOT", "Hora Gasto = "+hora);
             if (hora<=horaFormateada){
                 Log.d("SERVICEBOOT", "Notoficacion lanzada");
-                NM = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                NM.notify(NOTIFICATION_ID, notificacion(gastoProgramable));
+                NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                NOTIFICATION_ID = NOTIFICATION_ID +1;
+                Log.d("SERVICEBOOT", "NOTIFICATION_ID = "+NOTIFICATION_ID);
+                NM.notify(+ NOTIFICATION_ID, notificacion(gastoProgramable,context));
                 servicioGastos.eliminarGastoProgramable(gastoProgramable);
             }
 
         }
     }
+    private Notification notificacion( GastoProgramable gastoProgramable,Context context ) {
 
-
-    @Override
-    public void onDestroy() {
-        Toast.makeText(this, "Servicio destruido", Toast.LENGTH_LONG).show();
-        Log.d("SERVICEBOOT", "Servicio destruido");
-        pararCronometro();
-    }
-
-    private void iniciarCronometro(final ServicioGastos servicioGastos) {
-        temporizador.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                lauchNotification(servicioGastos);
-            }
-        }, 0, INTERVALO_ACTUALIZACION);
-    }
-
-    private void pararCronometro() {
-        if (temporizador != null)
-            temporizador.cancel();
-    }
-
-
-
-    private Notification notificacion( GastoProgramable gastoProgramable) {
-        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
+        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
 
         nBuilder.setSmallIcon(R.drawable.ic_scheduler);
         nBuilder.setContentTitle(gastoProgramable.getCategoria());
@@ -115,20 +81,18 @@ public class Scheduler extends Service implements Runnable {
         nBuilder.setAutoCancel(true);
          /* Increase notification number every time a new notification arrives */
         /*nBuilder.setNumber(++numMessages);*/
-        Intent resultIntent = new Intent(this.getApplicationContext(), CrearGastoActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this.getApplicationContext());
+        Intent resultIntent = new Intent(context, CrearGastoActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(CrearGastoActivity.class);
 
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         nBuilder.setContentIntent(resultPendingIntent);
+        notificationNumber ++;
+        Log.d("SERVICEBOOT", "notificationNumber = "+notificationNumber);
+        nBuilder.setNumber(notificationNumber);
         return nBuilder.build();
     }
 
-
-    @Override
-    public void run() {
-        lauchNotification(servicioGastos);
-    }
 }

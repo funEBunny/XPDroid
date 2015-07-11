@@ -1,34 +1,34 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
+import android.app.AlarmManager;
 import android.app.DialogFragment;
-import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.IServicioGastos;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
+import com.funebunny.xpdroid.scheduler.AlarmChecker;
+import com.funebunny.xpdroid.scheduler.Scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +123,13 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         ServicioGastos servicioGastos = new ServicioGastos();
         servicioGastos.guardarGastoProgramable(gp);
 
+        String formatTime = null;
+        try {
+            formatTime = fromUser.format(fromUser.parse(horario));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        activarAlarma(formatTime);
     }
 
     private int getDiaSemana(String diaSemana){
@@ -136,5 +143,19 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             default:return 1;
         }
     }
-    // < Added by PRB
+
+    private void activarAlarma(String time){
+        Context applicationContext = getApplicationContext();
+        AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+        String[] splitTime = time.split(":");
+        String hora = splitTime[0];
+        String minutos = splitTime[1];
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
+        Intent myIntent = new Intent(applicationContext, AlarmChecker.class);
+        pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, myIntent, 0);
+        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
 }
