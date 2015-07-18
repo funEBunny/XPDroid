@@ -4,10 +4,8 @@
     tools:context="com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity">
     <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"-->
         <!--android:orderInCategory="100" app:showAsAction="never" />-->
-
     <item android:id="@+id/action_crear_gasto_programable"
         android:title="@string/action_crear_gasto_programable"
         android:icon="@drawable/ic_action_new"
         app:showAsAction="always" />
-
 </menu>

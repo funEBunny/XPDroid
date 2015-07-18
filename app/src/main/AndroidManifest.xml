@@ -96,7 +96,7 @@
             android:label="@string/title_activity_xpdroid" >
         </activity>
         <activity
-            android:name=".main.ui.activity.CrearGastoProgramableActivityV2"
+            android:name=".main.ui.activity.CrearGastoProgramableActivity"
             android:label="@string/title_activity_crear_gasto_programable"
             android:parentActivityName=".main.ui.activity.MainActivity" >
             <meta-data

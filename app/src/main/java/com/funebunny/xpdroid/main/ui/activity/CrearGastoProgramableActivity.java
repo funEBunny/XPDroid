@@ -6,24 +6,20 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.IServicioGastos;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.scheduler.AlarmChecker;
-import com.funebunny.xpdroid.scheduler.Scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,38 +32,34 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto_programable);
-        //Listener para ocultar teclado cuando se toca fuera de un Edit Text
-//        setupUI(findViewById(R.id.rl_descripcion));
-//        setupUI(findViewById(R.id.rl_importe));
-//        setupUI(findViewById(R.id.rl_horario));
-        Spinner repeticion = (Spinner) findViewById(R.id.spn_repeticion);
 
-   
+        getSupportActionBar().setHomeButtonEnabled(true);
+        // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
+        Spinner repeticion = (Spinner) findViewById(R.id.sp_repeticion);
+
         repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 if (((Spinner) findViewById(R.id.spn_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
-                     findViewById(R.id.spn_dias_semana).setVisibility(View.VISIBLE);
-                 } else {
-                     findViewById(R.id.spn_dias_semana).setVisibility(View.INVISIBLE);
-                 }
-             }
+                                                 @Override
+                                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                     if (((Spinner) findViewById(R.id.sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
+                                                         findViewById(R.id.sp_dias_semana).setVisibility(View.VISIBLE);
+                                                     } else {
+                                                         findViewById(R.id.sp_dias_semana).setVisibility(View.INVISIBLE);
+                                                     }
+                                                 }
 
-             @Override
-             public void onNothingSelected(AdapterView<?> parent) {
+                                                 @Override
+                                                 public void onNothingSelected(AdapterView<?> parent) {
 
-             }
-         }
-
+                                                 }
+                                             }
         );
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_crear_gasto_programable, menu);
+        getMenuInflater().inflate(R.menu.menu_crear_gasto_programable, menu);
         return true;
     }
 
@@ -85,21 +77,20 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         }
     }
 
-    // > Added by PRB
-
+    //Métodos custom XPDroid
     public void mostrarTimePicker(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
-/*    public void guardarGastoProgramable(View view) {
+    public void guardarGastoProgramable(View view) {
 
-        String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
-        String repeticion = ((Spinner) findViewById(R.id.repeticion)).getSelectedItem().toString();
-        String horario = ((EditText) findViewById(R.id.horario)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.importe)).getText().toString();
-        String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
-        String diaSemana = ((Spinner) findViewById(R.id.dias_semana)).getSelectedItem().toString();
+        String descripcion = ((EditText) findViewById(R.id.et_descripcion)).getText().toString();
+        String repeticion = ((Spinner) findViewById(R.id.sp_repeticion)).getSelectedItem().toString();
+        String horario = ((EditText) findViewById(R.id.et_horario)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.et_importe)).getText().toString();
+        String categoria = ((Spinner) findViewById(R.id.sp_categoria)).getSelectedItem().toString();
+        String diaSemana = ((Spinner) findViewById(R.id.sp_dias_semana)).getSelectedItem().toString();
 
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
@@ -160,5 +151,5 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra("notifID",id);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id, myIntent, 0);
         alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-    }*/
+    }
 }

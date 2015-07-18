@@ -1,168 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity"
     android:id="@+id/ll_crear_gasto_programable"
-    android:focusableInTouchMode="false">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:id="@+id/rl_repeticion"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:layout_weight="1">
 
         <Spinner
-            android:id="@+id/spn_repeticion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/sp_repeticion"
             android:entries="@array/repeticion"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_centerInParent="true"
-            android:nextFocusForward="@+id/et_descripcion"/>
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:id="@+id/rl_descripcion"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:layout_weight="1">
 
         <EditText
-            android:id="@+id/et_descripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/et_descripcion"
             android:hint="@string/descripcion"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_centerInParent="true"
-            android:maxLines="1"
-            android:nextFocusForward="@+id/spn_categoria"
-            android:inputType="text" />
-
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/rl_categoria"
-        android:layout_weight="1"
-        android:focusableInTouchMode="false"
-        android:focusable="false">
+        android:layout_weight="1">
 
         <Spinner
-            android:id="@+id/spn_categoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/descripcion"
+            android:id="@+id/sp_categoria"
             android:entries="@array/categorias"
-            android:hint="@string/categoria"
-            android:prompt="@string/categoria"
-            android:layout_centerInParent="true"
-            android:focusable="false"
-            android:nextFocusForward="@+id/et_importe"
-            android:focusableInTouchMode="false" />
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/rl_importe"
-        android:layout_weight="1"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:layout_weight="1">
 
         <EditText
-            android:id="@+id/et_importe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/categoria"
-            android:hint="@string/importe"
             android:inputType="numberDecimal"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_centerInParent="true"
-            android:nextFocusForward="@+id/et_horario"
-            android:maxLines="1" />
+            android:ems="10"
+            android:id="@+id/et_importe"
+            android:hint="@string/importe"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:id="@+id/rl_horario">
+        android:id="@+id/rl_horario"
+        android:layout_weight="1">
 
         <EditText
-            android:id="@+id/et_horario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/horario"
             android:inputType="time"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_centerInParent="true"
-            android:maxLines="1" />
+            android:ems="10"
+            android:id="@+id/et_horario"
+            android:hint="@string/horario"
+            android:layout_centerInParent="true" />
 
         <ImageButton
-            android:id="@+id/ibt_timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/et_horario"
-            android:layout_toRightOf="@+id/et_horario"
-            android:contentDescription="@string/reloj"
-            android:onClick="mostrarTimePicker"
+            android:id="@+id/ib_time_picker"
             android:src="@drawable/ic_time"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_alignBottom="@+id/et_horario" />
+            android:layout_alignBottom="@+id/et_horario"
+            android:layout_toRightOf="@+id/et_horario"
+            android:layout_toEndOf="@+id/et_horario"
+            android:onClick="mostrarTimePicker" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/rl_dias_semana"
-        android:layout_weight="1"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:layout_weight="1">
 
         <Spinner
-            android:id="@+id/spn_dias_semana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/sp_dias_semana"
             android:entries="@array/dias_semana"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:id="@+id/rl_guardar"
-        android:focusableInTouchMode="false"
-        android:focusable="false">
+        android:layout_weight="1">
 
         <Button
-            android:id="@+id/btn_guardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            android:onClick="guardarGastoProgramable"
             android:text="@string/guardar"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignWithParentIfMissing="false"
-            android:layout_centerInParent="true" />
+            android:id="@+id/bt_guardar"
+            android:layout_centerInParent="true"
+            android:onClick="guardarGastoProgramable" />
     </RelativeLayout>
-
 </LinearLayout>
