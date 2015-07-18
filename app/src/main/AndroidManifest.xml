@@ -94,16 +94,8 @@
         </activity>
         <activity
             android:name=".main.ui.activity.XPDroidActivity"
-            android:label="@string/title_activity_xpdroid" >
-        </activity>
-        <activity
-            android:name=".main.ui.activity.CrearGastoProgramableActivity"
-            android:label="@string/title_activity_crear_gasto_programable"
-            android:parentActivityName=".main.ui.activity.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.ui.activity.MainActivity" />
-        </activity>
+            android:label="@string/title_activity_xpdroid"></activity>
+
         <activity
             android:name=".main.ui.activity.HistorialGastosCompletoActivity"
             android:label="@string/title_activity_historial_gastos_completo"
