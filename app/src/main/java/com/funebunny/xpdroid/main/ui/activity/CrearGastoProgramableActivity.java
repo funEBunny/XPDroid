@@ -1,27 +1,37 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.backend.IServicioGastos;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
+import com.funebunny.xpdroid.scheduler.AlarmChecker;
+import com.funebunny.xpdroid.scheduler.Scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
 //        setupUI(findViewById(R.id.rl_horario));
         Spinner repeticion = (Spinner) findViewById(R.id.spn_repeticion);
 
+   
         repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -81,15 +92,15 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
-    // < Added by PRB
+
     public void guardarGastoProgramable(View view) {
 
-        String descripcion = ((EditText) findViewById(R.id.et_descripcion)).getText().toString();
-        String repeticion = ((Spinner) findViewById(R.id.spn_repeticion)).getSelectedItem().toString();
-        String horario = ((EditText) findViewById(R.id.et_horario)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.et_importe)).getText().toString();
-        String categoria = ((Spinner) findViewById(R.id.spn_categoria)).getSelectedItem().toString();
-        String diaSemana = ((Spinner) findViewById(R.id.spn_dias_semana)).getSelectedItem().toString();
+        String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
+        String repeticion = ((Spinner) findViewById(R.id.repeticion)).getSelectedItem().toString();
+        String horario = ((EditText) findViewById(R.id.horario)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.importe)).getText().toString();
+        String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
+        String diaSemana = ((Spinner) findViewById(R.id.dias_semana)).getSelectedItem().toString();
 
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
@@ -117,6 +128,13 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         ServicioGastos servicioGastos = new ServicioGastos();
         servicioGastos.guardarGastoProgramable(gp);
 
+        String formatTime = null;
+        try {
+            formatTime = fromUser.format(fromUser.parse(horario));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        activarAlarma(formatTime);
     }
 
     private int getDiaSemana(String diaSemana){
@@ -131,4 +149,18 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         }
     }
 
+    private void activarAlarma(String time){
+        Context applicationContext = getApplicationContext();
+        AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+        String[] splitTime = time.split(":");
+        String hora = splitTime[0];
+        String minutos = splitTime[1];
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
+        Intent myIntent = new Intent(applicationContext, AlarmChecker.class);
+        pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, myIntent, 0);
+        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
 }

@@ -55,10 +55,11 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
                     categoria.setText(gasto.getCategoria());
                 }
                 if (importe != null) {
-                    NumberFormat format2 = NumberFormat.getInstance();
-                    format2.setMaximumFractionDigits(2);
-                    format2.setMaximumIntegerDigits(6);
-                    importe.setText("$" + format2.format(Double.valueOf(gasto.getImporte())));
+                    NumberFormat format = NumberFormat.getInstance();
+                    format.setMaximumFractionDigits(2);
+                    format.setMaximumIntegerDigits(6);
+
+                    importe.setText("$" + format.format(Double.valueOf(gasto.getImporte())));
                 }
                 if (descripcion != null) {
                     descripcion.setText(gasto.getDescripcion());
