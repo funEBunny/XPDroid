@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="com.activeandroid.app.Application"
@@ -102,6 +103,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".main.ui.activity.HistorialGastosCompletoActivity"
+            android:label="@string/title_activity_historial_gastos_completo"
+            android:parentActivityName=".main.ui.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.funebunny.xpdroid.main.ui.activity.MainActivity" />
         </activity>
     </application>
 

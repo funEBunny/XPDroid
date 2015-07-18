@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -127,7 +128,18 @@ public class MainActivity   extends ActionBarActivity
 
     @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
     public void onHistorialGastosItemSelected(String id) {
-        //FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+    }
+    public void verHistorial(View view) {
+        Intent intentHistorialGastosCompleto = new Intent(this, HistorialGastosCompletoActivity.class);
+        startActivity(intentHistorialGastosCompleto);
+
+        //Mostrar mensaje de crear gasto objetivo
+        Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
 
     }
 

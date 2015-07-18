@@ -23,6 +23,7 @@
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>
+    <string name="dia_o_mes">Dia o Mes</string>
     <string name="calendario">Calendario</string>
     <!--<string name="spinner_mes">Mes</string>-->
     <string name="boton_mostrar_mas_gastos">Mostrar mas Gastos</string>
@@ -68,5 +69,8 @@
     <string name="domingo">Domingo</string>
     <string name="diario">Diario</string>
     <string name="semanal">Semanal</string>
+    <string name="title_activity_historial_gastos_completo">HistorialGastosCompletoActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

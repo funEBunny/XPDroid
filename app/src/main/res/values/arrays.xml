@@ -47,6 +47,11 @@
         <item>@string/semanal</item>
     </string-array>
 
+    <string-array name="dia_o_mes" >
+        <item>Dia</item>
+        <item>Mes</item>
+    </string-array>
+
     <!--<string-array name="spinner_meses">-->
         <!--<item><string>Enero</string></item>-->
         <!--<item><string>Febrero</string></item>-->

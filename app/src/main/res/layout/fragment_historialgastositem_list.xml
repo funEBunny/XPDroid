@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -28,9 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:contentDescription="@string/boton_mostrar_mas_gastos"
-            android:src="@drawable/ic_drawer"
+            android:src="@drawable/ic_historial"
             android:clickable="true"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:onClick="verHistorial"/>
 
     </LinearLayout>
 
