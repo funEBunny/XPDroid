@@ -39,7 +39,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
             Spinner spinCategoria = (Spinner)findViewById(R.id.categoria);
             spinCategoria.setSelection(((ArrayAdapter) spinCategoria.getAdapter()).getPosition(categoria));
-            ((EditText) findViewById(R.id.et_importe)).setText(importe);
+            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(importe);
             ((EditText) findViewById(R.id.descripcion)).setText(descripcion);
 
         }
@@ -82,7 +82,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         String fecha = ((EditText) findViewById(R.id.fecha)).getText().toString();
 
-        String importe = ((EditText) findViewById(R.id.et_importe)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
 
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 

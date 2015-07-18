@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/et_importe"
+        android:id="@+id/activity_crear_gasto_programable_et_importe"
         android:layout_marginTop="43dp"
         android:hint="@string/importe"
         android:layout_alignParentTop="true"
@@ -25,11 +25,11 @@
         android:id="@+id/categoria"
         android:hint="@string/categoria"
         android:layout_marginTop="39dp"
-        android:layout_below="@+id/et_importe"
-        android:layout_alignRight="@+id/et_importe"
-        android:layout_alignEnd="@+id/et_importe"
-        android:layout_alignLeft="@+id/et_importe"
-        android:layout_alignStart="@+id/et_importe" />
+        android:layout_below="@+id/activity_crear_gasto_programable_et_importe"
+        android:layout_alignRight="@+id/activity_crear_gasto_programable_et_importe"
+        android:layout_alignEnd="@+id/activity_crear_gasto_programable_et_importe"
+        android:layout_alignLeft="@+id/activity_crear_gasto_programable_et_importe"
+        android:layout_alignStart="@+id/activity_crear_gasto_programable_et_importe" />
 
     <EditText
         android:layout_width="wrap_content"

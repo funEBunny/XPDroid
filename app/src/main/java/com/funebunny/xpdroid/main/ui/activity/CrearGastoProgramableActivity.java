@@ -37,15 +37,15 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
-        Spinner repeticion = (Spinner) findViewById(R.id.sp_repeticion);
+        Spinner repeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
 
         repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                  @Override
                                                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                     if (((Spinner) findViewById(R.id.sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
-                                                         findViewById(R.id.sp_dias_semana).setVisibility(View.VISIBLE);
+                                                     if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
+                                                         findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.VISIBLE);
                                                      } else {
-                                                         findViewById(R.id.sp_dias_semana).setVisibility(View.INVISIBLE);
+                                                         findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
                                                      }
                                                  }
 
@@ -87,12 +87,12 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
 
     public void guardarGastoProgramable(View view) {
 
-        String descripcion = ((EditText) findViewById(R.id.et_descripcion)).getText().toString();
-        String repeticion = ((Spinner) findViewById(R.id.sp_repeticion)).getSelectedItem().toString();
-        String horario = ((EditText) findViewById(R.id.et_horario)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.et_importe)).getText().toString();
-        String categoria = ((Spinner) findViewById(R.id.sp_categoria)).getSelectedItem().toString();
-        String diaSemana = ((Spinner) findViewById(R.id.sp_dias_semana)).getSelectedItem().toString();
+        String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).getText().toString();
+        String repeticion = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString();
+        String horario = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
+        String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
+        String diaSemana = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana)).getSelectedItem().toString();
 
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");

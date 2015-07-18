@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/et_horario"
+        android:id="@+id/activity_crear_gasto_programable_et_horario"
         android:layout_marginTop="31dp"
         android:hint="@string/horario"
         android:layout_below="@+id/fecha"
@@ -49,9 +49,9 @@
         android:src="@drawable/ic_time"
         android:contentDescription="@string/reloj"
         android:onClick="mostrarTimePicker"
-        android:layout_alignBottom="@+id/et_horario"
-        android:layout_toRightOf="@+id/et_horario"
-        android:layout_toEndOf="@+id/et_horario" />
+        android:layout_alignBottom="@+id/activity_crear_gasto_programable_et_horario"
+        android:layout_toRightOf="@+id/activity_crear_gasto_programable_et_horario"
+        android:layout_toEndOf="@+id/activity_crear_gasto_programable_et_horario" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -59,10 +59,10 @@
         android:id="@+id/spn_repeticion"
         android:hint="@string/repeticion"
         android:layout_marginTop="27dp"
-        android:layout_below="@+id/et_horario"
+        android:layout_below="@+id/activity_crear_gasto_programable_et_horario"
         android:layout_toLeftOf="@+id/ibt_timePicker"
-        android:layout_alignLeft="@+id/et_horario"
-        android:layout_alignStart="@+id/et_horario" />
+        android:layout_alignLeft="@+id/activity_crear_gasto_programable_et_horario"
+        android:layout_alignStart="@+id/activity_crear_gasto_programable_et_horario" />
 
     <EditText
         android:layout_width="wrap_content"

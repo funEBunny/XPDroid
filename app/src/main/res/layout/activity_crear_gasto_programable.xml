@@ -5,19 +5,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity"
-    android:id="@+id/ll_crear_gasto_programable"
+    android:id="@+id/activity_crear_gasto_programable_ll_main"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_repeticion"
+        android:id="@+id/activity_crear_gasto_programable_rl_repeticion"
         android:layout_weight="1">
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sp_repeticion"
+            android:id="@+id/activity_crear_gasto_programable_sp_repeticion"
             android:entries="@array/repeticion"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -25,13 +25,13 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_descripcion"
+        android:id="@+id/activity_crear_gasto_programable_rl_descripcion"
         android:layout_weight="1">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/et_descripcion"
+            android:id="@+id/activity_crear_gasto_programable_et_descripcion"
             android:hint="@string/descripcion"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -39,13 +39,13 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_categoria"
+        android:id="@+id/activity_crear_gasto_programable_rl_categoria"
         android:layout_weight="1">
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sp_categoria"
+            android:id="@+id/activity_crear_gasto_programable_sp_categoria"
             android:entries="@array/categorias"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -53,7 +53,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_importe"
+        android:id="@+id/activity_crear_gasto_programable_rl_importe"
         android:layout_weight="1">
 
         <EditText
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/et_importe"
+            android:id="@+id/activity_crear_gasto_programable_et_importe"
             android:hint="@string/importe"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -69,7 +69,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_horario"
+        android:id="@+id/activity_crear_gasto_programable_rl_horario"
         android:layout_weight="1">
 
         <EditText
@@ -77,31 +77,31 @@
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
-            android:id="@+id/et_horario"
+            android:id="@+id/activity_crear_gasto_programable_et_horario"
             android:hint="@string/horario"
             android:layout_centerInParent="true" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ib_time_picker"
+            android:id="@+id/activity_crear_gasto_programable_ib_time_picker"
             android:src="@drawable/ic_time"
-            android:layout_alignBottom="@+id/et_horario"
-            android:layout_toRightOf="@+id/et_horario"
-            android:layout_toEndOf="@+id/et_horario"
+            android:layout_alignBottom="@+id/activity_crear_gasto_programable_et_horario"
+            android:layout_toRightOf="@+id/activity_crear_gasto_programable_et_horario"
+            android:layout_toEndOf="@+id/activity_crear_gasto_programable_et_horario"
             android:onClick="mostrarTimePicker" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_dias_semana"
+        android:id="@+id/activity_crear_gasto_programable_rl_dias_semana"
         android:layout_weight="1">
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sp_dias_semana"
+            android:id="@+id/activity_crear_gasto_programable_sp_dias_semana"
             android:entries="@array/dias_semana"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -109,14 +109,14 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/rl_guardar"
+        android:id="@+id/activity_crear_gasto_programable_rl_guardar"
         android:layout_weight="1">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/guardar"
-            android:id="@+id/bt_guardar"
+            android:id="@+id/activity_crear_gasto_programable_bt_guardar"
             android:layout_centerInParent="true"
             android:onClick="guardarGastoProgramable" />
     </RelativeLayout>
