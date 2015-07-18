@@ -118,6 +118,45 @@ public class ServicioGastos implements IServicioGastos {
     }
 
     @Override
+    public GastoProgramable obtenerGastoProgramablePorID(Long id) {
+
+
+        ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).where("Id = ?", id).execute();
+
+            GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(0);
+            GastoProgramable gastoProgramable;
+            int repeticion = gastoProgramableDAO.getRepeticion();
+
+            switch (repeticion) {
+                case GastoProgramableDAO.SEMANAL: {
+                    gastoProgramable = new GastoProgSemanal();
+                    ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
+                    break;
+                }
+                case GastoProgramableDAO.MENSUAL: {
+                    gastoProgramable = new GastoProgMensual();
+                    ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+                    break;
+                }
+                case GastoProgramableDAO.ANUAL: {
+                    gastoProgramable = new GastoProgAnual();
+                    break;
+                }
+                default: {
+                    gastoProgramable = new GastoProgDiario();
+                    break;
+                }
+            }
+            gastoProgramable.setImporte(gastoProgramableDAO.getImporte());
+            gastoProgramable.setCategoria(gastoProgramableDAO.getCategoria());
+            gastoProgramable.setDescripcion(gastoProgramableDAO.getDescripcion());
+            gastoProgramable.setHora(gastoProgramableDAO.getHora());
+            gastoProgramable.setId(gastoProgramableDAO.getId());
+            Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
+            return gastoProgramable;
+    }
+
+    @Override
     public Long guardarGastoProgramable(GastoProgramable gp) {
         Log.d("XPDROID", "Guardando Gasto: "+gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();

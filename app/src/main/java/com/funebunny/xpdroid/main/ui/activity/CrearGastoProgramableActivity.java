@@ -125,7 +125,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        activarAlarma(formatTime, id.intValue());
+        activarAlarma(formatTime, id);
         //Mostrar mensaje de agregar gasto
         Toast toast = Toast.makeText(this, R.string.gasto_programado_mensaje, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -146,7 +146,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         }
     }
 
-    private void activarAlarma(String time, int id){
+    private void activarAlarma(String time, Long id){
         Context applicationContext = getApplicationContext();
         AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         String[] splitTime = time.split(":");
@@ -157,7 +157,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
         calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
         Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra("notifID",id);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id, myIntent, 0);
-        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id.intValue(), myIntent, 0);
+        //alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 }

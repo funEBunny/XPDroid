@@ -29,6 +29,8 @@ public interface IServicioGastos {
 
     List<GastoProgramable> obtenerGastosProgramablesDelDia();
 
+    GastoProgramable obtenerGastoProgramablePorID(Long id);
+
     Long guardarGastoProgramable(GastoProgramable gp);
 
     void eliminarGastoProgramable(GastoProgramable gp);

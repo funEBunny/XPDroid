@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class AlarmChecker extends BroadcastReceiver {
 
-    public int NOTIFICATION_ID = 0;
+    public Long NOTIFICATION_ID = 0L;
     private static NotificationManager NM;
     private static ServicioGastos servicioGastos;
 
@@ -36,20 +36,27 @@ public class AlarmChecker extends BroadcastReceiver {
         if (servicioGastos==null){
             servicioGastos = new ServicioGastos();
         }
-        int notifID = intent.getIntExtra("notifID", NOTIFICATION_ID);
+        Long notifID = intent.getLongExtra("notifID", NOTIFICATION_ID);
         lauchNotification(servicioGastos,context,notifID);
     }
-    private void lauchNotification(ServicioGastos servicioGastos,Context context,int notifID) {
+    private void lauchNotification(ServicioGastos servicioGastos,Context context,Long notifID) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
-        List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
+        GastoProgramable gastoProgramable = servicioGastos.obtenerGastoProgramablePorID(notifID);
+/*
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int minute = Calendar.getInstance().get(Calendar.MINUTE);
         String horaActual = String.valueOf(hour)+":"+String.valueOf(minute);
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
         int horaFormateada = 0;
+*/
 
-        try {
+        Log.d("SERVICEBOOT", "Notoficacion lanzada");
+        NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.d("SERVICEBOOT", "NOTIFICATION_ID = " + notifID);
+        NM.notify(notifID.intValue(), notificacion(gastoProgramable, context));
+
+/*        try {
             horaFormateada = Integer.parseInt(myFormat.format(fromUser.parse(horaActual)));
             Log.d("SERVICEBOOT", "Hora Actual = "+horaFormateada);
         } catch (ParseException e) {
@@ -63,21 +70,21 @@ public class AlarmChecker extends BroadcastReceiver {
             if (hora<=horaFormateada){
                 Log.d("SERVICEBOOT", "Notoficacion lanzada");
                 NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                Log.d("SERVICEBOOT", "NOTIFICATION_ID = "+notifID);
-                NM.notify(notifID, notificacion(gastoProgramable,context,notifID));
-                servicioGastos.eliminarGastoProgramable(gastoProgramable);
+                Log.d("SERVICEBOOT", "NOTIFICATION_ID = " + notifID);
+                NM.notify(notifID, notificacion(gastoProgramable, context, notifID));
+                //servicioGastos.eliminarGastoProgramable(gastoProgramable);
             }
 
-        }
+        }*/
     }
-    private Notification notificacion( GastoProgramable gastoProgramable,Context context, int notifID ) {
+    private Notification notificacion( GastoProgramable gastoProgramable,Context context ) {
 
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
 
-        nBuilder.setSmallIcon(R.drawable.ic_scheduler);
-        nBuilder.setContentTitle(gastoProgramable.getCategoria());
-        nBuilder.setContentText(gastoProgramable.getImporte());
         nBuilder.setDefaults(Notification.DEFAULT_ALL);
+        nBuilder.setSmallIcon(R.drawable.ic_xpdroid_notification);
+        nBuilder.setContentTitle(gastoProgramable.getCategoria());
+        nBuilder.setContentText(gastoProgramable.getDescripcion()+": $"+ gastoProgramable.getImporte());
         nBuilder.setAutoCancel(true);
         Intent resultIntent = new Intent(context, CrearGastoActivity.class);
         Bundle bundle = new Bundle();
@@ -94,8 +101,8 @@ public class AlarmChecker extends BroadcastReceiver {
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         nBuilder.setContentIntent(resultPendingIntent);
-        Log.d("SERVICEBOOT", "notificationNumber = "+notifID);
-        nBuilder.setNumber(notifID);
+        Log.d("SERVICEBOOT", "notificationNumber = "+gastoProgramable.getId());
+        nBuilder.setNumber(gastoProgramable.getId().intValue());
         return nBuilder.build();
     }
 
