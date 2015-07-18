@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/categoria"
+        android:id="@+id/activity_crear_gasto_sp_categoria"
         android:hint="@string/categoria"
         android:layout_marginTop="39dp"
         android:layout_below="@+id/activity_crear_gasto_programable_et_importe"
@@ -34,14 +34,14 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/descripcion"
+        android:id="@+id/activity_crear_gasto_et_descripcion"
         android:layout_marginTop="45dp"
         android:hint="@string/descripcion"
-        android:layout_below="@+id/categoria"
-        android:layout_alignLeft="@+id/categoria"
-        android:layout_alignStart="@+id/categoria"
-        android:layout_alignRight="@+id/categoria"
-        android:layout_alignEnd="@+id/categoria" />
+        android:layout_below="@+id/activity_crear_gasto_sp_categoria"
+        android:layout_alignLeft="@+id/activity_crear_gasto_sp_categoria"
+        android:layout_alignStart="@+id/activity_crear_gasto_sp_categoria"
+        android:layout_alignRight="@+id/activity_crear_gasto_sp_categoria"
+        android:layout_alignEnd="@+id/activity_crear_gasto_sp_categoria" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         android:text="@string/guardar"
         android:id="@+id/guardar"
         android:layout_marginTop="61dp"
-        android:layout_below="@+id/descripcion"
+        android:layout_below="@+id/activity_crear_gasto_et_descripcion"
         android:layout_centerHorizontal="true"
         android:onClick="guardarGastoFavorito" />
 </RelativeLayout>

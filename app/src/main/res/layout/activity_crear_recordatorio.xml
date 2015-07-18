@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/fecha"
+        android:id="@+id/activity_crear_gasto_et_fecha"
         android:hint="@string/fecha"
         android:clickable="false"
         android:layout_marginTop="30dp"
@@ -23,13 +23,13 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
+        android:id="@+id/activity_crear_gasto_ib_date_picker"
         android:src="@drawable/ic_calendar"
         android:contentDescription="@string/calendario"
         android:onClick="mostrarDatePicker"
-        android:layout_alignBottom="@+id/fecha"
-        android:layout_toRightOf="@+id/fecha"
-        android:layout_toEndOf="@+id/fecha" />
+        android:layout_alignBottom="@+id/activity_crear_gasto_et_fecha"
+        android:layout_toRightOf="@+id/activity_crear_gasto_et_fecha"
+        android:layout_toEndOf="@+id/activity_crear_gasto_et_fecha" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         android:id="@+id/activity_crear_gasto_programable_et_horario"
         android:layout_marginTop="31dp"
         android:hint="@string/horario"
-        android:layout_below="@+id/fecha"
+        android:layout_below="@+id/activity_crear_gasto_et_fecha"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
@@ -67,7 +67,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/descripcion"
+        android:id="@+id/activity_crear_gasto_et_descripcion"
         android:hint="@string/descripcion"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/spn_repeticion"
@@ -82,7 +82,7 @@
         android:id="@+id/guardar"
         android:onClick="guardarRecordatorio"
         android:layout_marginTop="47dp"
-        android:layout_below="@+id/descripcion"
+        android:layout_below="@+id/activity_crear_gasto_et_descripcion"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

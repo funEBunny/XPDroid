@@ -24,7 +24,7 @@ public class CrearRecordatorioActivity extends ActionBarActivity {
 
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
-        EditText fecha = (EditText) findViewById(R.id.fecha);
+        EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
         fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
     }
 

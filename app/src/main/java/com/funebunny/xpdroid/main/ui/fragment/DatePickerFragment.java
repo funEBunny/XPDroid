@@ -29,7 +29,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int anio, int mes, int dia) {
 
-        EditText fecha = (EditText) this.getActivity().findViewById(R.id.fecha);
+        EditText fecha = (EditText) this.getActivity().findViewById(R.id.activity_crear_gasto_et_fecha);
         fecha.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
 
     }

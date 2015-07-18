@@ -25,10 +25,10 @@ public class CrearGastoActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
         //Listener para ocultar teclado cuando se toca fuera de un Edit Text
-        setupUI(findViewById(R.id.crear_gasto));
+//        setupUI(findViewById(R.id.crear_gasto));
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
-        EditText fecha = (EditText) findViewById(R.id.fecha);
+        EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
         fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
         Bundle extras = getIntent().getExtras();
 
@@ -37,10 +37,10 @@ public class CrearGastoActivity extends XPDroidActivity {
             String importe = extras.getString("importe");
             String descripcion = extras.getString("descripcion");
 
-            Spinner spinCategoria = (Spinner)findViewById(R.id.categoria);
+            Spinner spinCategoria = (Spinner)findViewById(R.id.activity_crear_gasto_sp_categoria);
             spinCategoria.setSelection(((ArrayAdapter) spinCategoria.getAdapter()).getPosition(categoria));
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(importe);
-            ((EditText) findViewById(R.id.descripcion)).setText(descripcion);
+            ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(descripcion);
 
         }
     }
@@ -78,13 +78,13 @@ public class CrearGastoActivity extends XPDroidActivity {
     public void guardarGasto(View view) {
         ServicioGastos servicioGastos = new ServicioGastos();
 
-        String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
+        String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).getText().toString();
 
-        String fecha = ((EditText) findViewById(R.id.fecha)).getText().toString();
+        String fecha = ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).getText().toString();
 
-        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).getText().toString();
 
-        String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
+        String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria)).getSelectedItem().toString();
 
         servicioGastos.guardarGasto(descripcion, importe, categoria, fecha);
         //Mostrar mensaje de agregar gasto
