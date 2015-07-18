@@ -60,6 +60,7 @@ public class ServicioGastos implements IServicioGastos {
             e.printStackTrace();
         }
         gasto.setFecha(fechaGasto);
+        Log.d("XPDROID", "Guardando Gasto: "+gasto.toString());
         gasto.save();
     }
 
@@ -158,7 +159,7 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public Long guardarGastoProgramable(GastoProgramable gp) {
-        Log.d("XPDROID", "Guardando Gasto: "+gp.toString());
+        Log.d("XPDROID", "Programando Gasto: "+gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();
 
         if (gp instanceof GastoProgDiario) {
