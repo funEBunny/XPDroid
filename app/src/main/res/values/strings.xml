@@ -8,6 +8,7 @@
     <string name="action_crear_objetivo">Crear Objetivo de Gastos!</string>
     <string name="action_crear_recordatorio">Crear Recordatorio!</string>
     <string name="gasto_guardado_mensaje">Gasto guardado éxitosamente!</string>
+    <string name="gasto_programado_mensaje">Gasto programado éxitosamente!</string>
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
