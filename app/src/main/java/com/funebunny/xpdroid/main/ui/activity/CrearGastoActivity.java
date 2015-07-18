@@ -39,7 +39,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
             Spinner spinCategoria = (Spinner)findViewById(R.id.activity_crear_gasto_sp_categoria);
             spinCategoria.setSelection(((ArrayAdapter) spinCategoria.getAdapter()).getPosition(categoria));
-            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(importe);
+            ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(importe);
             ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(descripcion);
 
         }
