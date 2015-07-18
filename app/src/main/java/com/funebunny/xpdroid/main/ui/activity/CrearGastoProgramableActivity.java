@@ -6,12 +6,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
@@ -124,6 +126,12 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             e.printStackTrace();
         }
         activarAlarma(formatTime, id.intValue());
+        //Mostrar mensaje de agregar gasto
+        Toast toast = Toast.makeText(this, R.string.gasto_programado_mensaje, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+
+        this.finish();
     }
 
     private int getDiaSemana(String diaSemana){
