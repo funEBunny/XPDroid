@@ -228,7 +228,7 @@ public class MainActivity   extends ActionBarActivity
             }
 
             case R.id.action_crear_gasto_programable: {
-                Intent intentCrearGastoProgramable = new Intent(this, CrearGastoProgramableActivity.class);
+                Intent intentCrearGastoProgramable = new Intent(this, CrearGastoProgramableActivityV2.class);
                 startActivity(intentCrearGastoProgramable);
 
                 //Mostrar mensaje de crear gasto programable

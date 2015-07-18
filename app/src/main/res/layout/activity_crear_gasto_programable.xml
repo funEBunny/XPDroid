@@ -1,81 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/crear_gasto_programable"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_crear_gasto_programable"
+    android:focusableInTouchMode="false">
 
-    <Spinner
-        android:id="@+id/repeticion"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/repeticion" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/rl_repeticion"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
-    <EditText
-        android:id="@+id/descripcion"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/repeticion"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/descripcion" />
+        <Spinner
+            android:id="@+id/spn_repeticion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/repeticion"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerInParent="true"
+            android:nextFocusForward="@+id/et_descripcion"/>
+    </RelativeLayout>
 
-    <Spinner
-        android:id="@+id/categoria"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/descripcion"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/categorias"
-        android:hint="@string/categoria"
-        android:prompt="@string/categoria" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/rl_descripcion"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
-    <EditText
-        android:id="@+id/importe"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/categoria"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/importe"
-        android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/et_descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/descripcion"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:nextFocusForward="@+id/spn_categoria"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/horario"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/importe"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="@string/horario"
-        android:inputType="time" />
+    </RelativeLayout>
 
-    <ImageButton
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/horario"
-        android:layout_toEndOf="@+id/horario"
-        android:layout_toRightOf="@+id/horario"
-        android:contentDescription="@string/reloj"
-        android:onClick="mostrarTimePicker"
-        android:src="@drawable/ic_time" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/rl_categoria"
+        android:layout_weight="1"
+        android:focusableInTouchMode="false"
+        android:focusable="false">
 
+        <Spinner
+            android:id="@+id/spn_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descripcion"
+            android:entries="@array/categorias"
+            android:hint="@string/categoria"
+            android:prompt="@string/categoria"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:nextFocusForward="@+id/et_importe"
+            android:focusableInTouchMode="false" />
+    </RelativeLayout>
 
-    <Spinner
-        android:id="@+id/dias_semana"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/horario"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/dias_semana"
-        android:visibility="invisible" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/rl_importe"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
-    <Button
-        android:id="@+id/guardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="guardarGastoProgramable"
-        android:text="@string/guardar" />
+        <EditText
+            android:id="@+id/et_importe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/categoria"
+            android:hint="@string/importe"
+            android:inputType="numberDecimal"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerInParent="true"
+            android:nextFocusForward="@+id/et_horario"
+            android:maxLines="1" />
+    </RelativeLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:id="@+id/rl_horario">
+
+        <EditText
+            android:id="@+id/et_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/horario"
+            android:inputType="time"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerInParent="true"
+            android:maxLines="1" />
+
+        <ImageButton
+            android:id="@+id/ibt_timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/et_horario"
+            android:layout_toRightOf="@+id/et_horario"
+            android:contentDescription="@string/reloj"
+            android:onClick="mostrarTimePicker"
+            android:src="@drawable/ic_time"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignBottom="@+id/et_horario" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/rl_dias_semana"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+
+        <Spinner
+            android:id="@+id/spn_dias_semana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/dias_semana"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/rl_guardar"
+        android:focusableInTouchMode="false"
+        android:focusable="false">
+
+        <Button
+            android:id="@+id/btn_guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:onClick="guardarGastoProgramable"
+            android:text="@string/guardar"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+</LinearLayout>

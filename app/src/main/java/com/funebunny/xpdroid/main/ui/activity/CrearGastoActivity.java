@@ -1,12 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.app.Activity;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +13,6 @@ import android.widget.Toast;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
-import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
@@ -31,8 +25,6 @@ public class CrearGastoActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_gasto);
         //Listener para ocultar teclado cuando se toca fuera de un Edit Text
         setupUI(findViewById(R.id.crear_gasto));
-        // Botón para volver a actividad anterior
-        getSupportActionBar().setHomeButtonEnabled(true);
         // Fijar por defecto la fecha del día
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);
@@ -76,7 +68,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         String fecha = ((EditText) findViewById(R.id.fecha)).getText().toString();
 
-        String importe = ((EditText) findViewById(R.id.importe)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.et_importe)).getText().toString();
 
         String categoria = ((Spinner) findViewById(R.id.categoria)).getSelectedItem().toString();
 

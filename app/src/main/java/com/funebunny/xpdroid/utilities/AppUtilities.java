@@ -1,7 +1,7 @@
 package com.funebunny.xpdroid.utilities;
 
-import android.app.Activity;
-import android.view.inputmethod.InputMethodManager;
+        import android.app.Activity;
+        import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by provirabosch on 01/05/2015.

@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/horario"
+        android:id="@+id/et_horario"
         android:layout_marginTop="31dp"
         android:hint="@string/horario"
         android:layout_below="@+id/fecha"
@@ -45,24 +45,24 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
+        android:id="@+id/ibt_timePicker"
         android:src="@drawable/ic_time"
         android:contentDescription="@string/reloj"
         android:onClick="mostrarTimePicker"
-        android:layout_alignBottom="@+id/horario"
-        android:layout_toRightOf="@+id/horario"
-        android:layout_toEndOf="@+id/horario" />
+        android:layout_alignBottom="@+id/et_horario"
+        android:layout_toRightOf="@+id/et_horario"
+        android:layout_toEndOf="@+id/et_horario" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/repeticion"
+        android:id="@+id/spn_repeticion"
         android:hint="@string/repeticion"
         android:layout_marginTop="27dp"
-        android:layout_below="@+id/horario"
-        android:layout_toLeftOf="@+id/timePicker"
-        android:layout_alignLeft="@+id/horario"
-        android:layout_alignStart="@+id/horario" />
+        android:layout_below="@+id/et_horario"
+        android:layout_toLeftOf="@+id/ibt_timePicker"
+        android:layout_alignLeft="@+id/et_horario"
+        android:layout_alignStart="@+id/et_horario" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -70,10 +70,10 @@
         android:id="@+id/descripcion"
         android:hint="@string/descripcion"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/repeticion"
-        android:layout_alignStart="@+id/repeticion"
-        android:layout_alignRight="@+id/repeticion"
-        android:layout_alignEnd="@+id/repeticion" />
+        android:layout_alignLeft="@+id/spn_repeticion"
+        android:layout_alignStart="@+id/spn_repeticion"
+        android:layout_alignRight="@+id/spn_repeticion"
+        android:layout_alignEnd="@+id/spn_repeticion" />
 
     <Button
         android:layout_width="wrap_content"

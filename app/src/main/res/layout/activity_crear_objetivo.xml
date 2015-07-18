@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/importe"
+        android:id="@+id/et_importe"
         android:layout_marginTop="34dp"
         android:hint="@string/importe"
         android:layout_alignParentTop="true"
@@ -27,7 +27,7 @@
         android:id="@+id/fecha"
         android:hint="@string/fecha"
         android:clickable="false"
-        android:layout_below="@+id/importe"
+        android:layout_below="@+id/et_importe"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp" />
 

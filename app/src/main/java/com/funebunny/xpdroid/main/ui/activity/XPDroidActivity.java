@@ -19,6 +19,8 @@ public class XPDroidActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xpdroid);
+        // Botón para volver a actividad anterior
+//        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 

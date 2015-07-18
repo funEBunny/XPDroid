@@ -62,7 +62,7 @@
         android:prompt="@string/categoria" />
 
     <EditText
-        android:id="@+id/importe"
+        android:id="@+id/et_importe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/categoria"
@@ -77,7 +77,7 @@
         android:id="@+id/guardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/importe"
+        android:layout_below="@+id/et_importe"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="59dp"
         android:onClick="guardarGasto"

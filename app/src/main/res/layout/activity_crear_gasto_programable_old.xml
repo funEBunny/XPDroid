@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/crear_gasto_programable"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/spn_repeticion"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/repeticion" />
+
+    <EditText
+        android:id="@+id/descripcion"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spn_repeticion"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/descripcion" />
+
+    <Spinner
+        android:id="@+id/categoria"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descripcion"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/categorias"
+        android:hint="@string/categoria"
+        android:prompt="@string/categoria" />
+
+    <EditText
+        android:id="@+id/et_importe"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categoria"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/importe"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/et_horario"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_importe"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/horario"
+        android:inputType="time" />
+
+    <ImageButton
+        android:id="@+id/ibt_timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/et_horario"
+        android:layout_toEndOf="@+id/et_horario"
+        android:layout_toRightOf="@+id/et_horario"
+        android:contentDescription="@string/reloj"
+        android:onClick="mostrarTimePicker"
+        android:src="@drawable/ic_time" />
+
+
+    <Spinner
+        android:id="@+id/dias_semana"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_horario"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/dias_semana"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="guardarGastoProgramable"
+        android:text="@string/guardar" />
+
+</RelativeLayout>
