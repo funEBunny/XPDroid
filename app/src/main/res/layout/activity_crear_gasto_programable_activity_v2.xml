@@ -117,6 +117,7 @@
             android:layout_height="wrap_content"
             android:text="@string/guardar"
             android:id="@+id/bt_guardar"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:onClick="guardarGastoProgramable" />
     </RelativeLayout>
 </LinearLayout>

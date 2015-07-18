@@ -31,7 +31,6 @@ import java.util.Calendar;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
-    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +92,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
-    public void guardarGastoProgramable(View view) {
+/*    public void guardarGastoProgramable(View view) {
 
         String descripcion = ((EditText) findViewById(R.id.descripcion)).getText().toString();
         String repeticion = ((Spinner) findViewById(R.id.repeticion)).getSelectedItem().toString();
@@ -124,9 +123,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         gp.setImporte(importe);
         gp.setDescripcion(descripcion);
         gp.setCategoria(categoria);
-
         ServicioGastos servicioGastos = new ServicioGastos();
-        servicioGastos.guardarGastoProgramable(gp);
+        Long id = servicioGastos.guardarGastoProgramable(gp);
 
         String formatTime = null;
         try {
@@ -134,7 +132,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        activarAlarma(formatTime);
+        activarAlarma(formatTime, id.intValue());
     }
 
     private int getDiaSemana(String diaSemana){
@@ -149,7 +147,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         }
     }
 
-    private void activarAlarma(String time){
+    private void activarAlarma(String time, int id){
         Context applicationContext = getApplicationContext();
         AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         String[] splitTime = time.split(":");
@@ -159,8 +157,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
         calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
-        Intent myIntent = new Intent(applicationContext, AlarmChecker.class);
-        pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, myIntent, 0);
+        Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra("notifID",id);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id, myIntent, 0);
         alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-    }
+    }*/
 }

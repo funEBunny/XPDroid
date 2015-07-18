@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,6 +30,19 @@ public class CrearGastoActivity extends XPDroidActivity {
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.fecha);
         fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            String categoria = extras.getString("categoria");
+            String importe = extras.getString("importe");
+            String descripcion = extras.getString("descripcion");
+
+            Spinner spinCategoria = (Spinner)findViewById(R.id.categoria);
+            spinCategoria.setSelection(((ArrayAdapter) spinCategoria.getAdapter()).getPosition(categoria));
+            ((EditText) findViewById(R.id.et_importe)).setText(importe);
+            ((EditText) findViewById(R.id.descripcion)).setText(descripcion);
+
+        }
     }
 
 

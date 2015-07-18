@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:contentDescription="@string/boton_mostrar_mas_gastos"
-            android:src="@drawable/ic_historial"
+            android:src="@drawable/ic_drawer"
             android:clickable="true"
             android:layout_gravity="center" />
 

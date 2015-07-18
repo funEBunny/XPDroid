@@ -1,6 +1,10 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
+import android.app.AlarmManager;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,9 +20,11 @@ import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
+import com.funebunny.xpdroid.scheduler.AlarmChecker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class CrearGastoProgramableActivityV2 extends XPDroidActivity {
 
@@ -89,7 +95,7 @@ public class CrearGastoProgramableActivityV2 extends XPDroidActivity {
 
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
-        String horaFormateada = "0";
+        String horaFormateada="0";
         try {
             horaFormateada = myFormat.format(fromUser.parse(horario));
         } catch (ParseException e) {
@@ -98,10 +104,10 @@ public class CrearGastoProgramableActivityV2 extends XPDroidActivity {
 
         GastoProgramable gp;
 
-        if (repeticion == getResources().getString(R.string.semanal)) {
+        if (repeticion == getResources().getString(R.string.semanal)){
             gp = new GastoProgSemanal();
-            ((GastoProgSemanal) gp).setDiaSemana(getDiaSemana(diaSemana));
-        } else {
+            ((GastoProgSemanal)gp).setDiaSemana(getDiaSemana(diaSemana));
+        }else{
             gp = new GastoProgDiario();
         }
 
@@ -109,28 +115,42 @@ public class CrearGastoProgramableActivityV2 extends XPDroidActivity {
         gp.setImporte(importe);
         gp.setDescripcion(descripcion);
         gp.setCategoria(categoria);
-
         ServicioGastos servicioGastos = new ServicioGastos();
-        servicioGastos.guardarGastoProgramable(gp);
+        Long id = servicioGastos.guardarGastoProgramable(gp);
 
+        String formatTime = null;
+        try {
+            formatTime = fromUser.format(fromUser.parse(horario));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        activarAlarma(formatTime, id.intValue());
     }
 
-    private int getDiaSemana(String diaSemana) {
-        switch (diaSemana) {
-            case "lunes":
-                return 2;
-            case "martes":
-                return 3;
-            case "miercoles":
-                return 4;
-            case "jueves":
-                return 5;
-            case "viernes":
-                return 6;
-            case "sabado":
-                return 7;
-            default:
-                return 1;
+    private int getDiaSemana(String diaSemana){
+        switch (diaSemana){
+            case "lunes":return 2;
+            case "martes":return 3;
+            case "miercoles":return 4;
+            case "jueves":return 5;
+            case "viernes":return 6;
+            case "sabado":return 7;
+            default:return 1;
         }
+    }
+
+    private void activarAlarma(String time, int id){
+        Context applicationContext = getApplicationContext();
+        AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+        String[] splitTime = time.split(":");
+        String hora = splitTime[0];
+        String minutos = splitTime[1];
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
+        Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra("notifID",id);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id, myIntent, 0);
+        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 }

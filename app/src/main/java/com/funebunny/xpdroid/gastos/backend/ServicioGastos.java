@@ -2,7 +2,6 @@ package com.funebunny.xpdroid.gastos.backend;
 
 import android.util.Log;
 
-import com.activeandroid.Model;
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO;
@@ -15,7 +14,6 @@ import com.funebunny.xpdroid.gastos.model.GastoProgramable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -120,7 +118,7 @@ public class ServicioGastos implements IServicioGastos {
     }
 
     @Override
-    public void guardarGastoProgramable(GastoProgramable gp) {
+    public Long guardarGastoProgramable(GastoProgramable gp) {
         Log.d("XPDROID", "Guardando Gasto: "+gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();
 
@@ -137,6 +135,8 @@ public class ServicioGastos implements IServicioGastos {
         gpd.setImporte(gp.getImporte());
         gpd.setHora(gp.getHora());
         gpd.save();
+        return gpd.getId();
+
     }
 
     @Override

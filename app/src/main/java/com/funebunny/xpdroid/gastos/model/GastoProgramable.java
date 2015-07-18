@@ -27,8 +27,12 @@ public abstract class GastoProgramable {
     public static final int NOVIEMBRE = 10;
     public static final int DICIEMBRE = 11;
 
-    private String descripcion;
     private Long id;
+    private String descripcion;
+    private String categoria;
+    private String importe;
+    private int hora;
+
 
     public Long getId() {
         return id;
@@ -47,10 +51,6 @@ public abstract class GastoProgramable {
                 ", hora=" + hora +
                 '}';
     }
-
-    private String categoria;
-    private String importe;
-    private int hora;
 
     public int getHora() {
         return hora;

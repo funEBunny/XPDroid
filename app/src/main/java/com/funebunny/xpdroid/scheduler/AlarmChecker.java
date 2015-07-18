@@ -7,6 +7,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -28,7 +29,6 @@ public class AlarmChecker extends BroadcastReceiver {
     public int NOTIFICATION_ID = 0;
     private static NotificationManager NM;
     private static ServicioGastos servicioGastos;
-    private int notificationNumber=0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -36,9 +36,10 @@ public class AlarmChecker extends BroadcastReceiver {
         if (servicioGastos==null){
             servicioGastos = new ServicioGastos();
         }
-        lauchNotification(servicioGastos,context);
+        int notifID = intent.getIntExtra("notifID", NOTIFICATION_ID);
+        lauchNotification(servicioGastos,context,notifID);
     }
-    private void lauchNotification(ServicioGastos servicioGastos,Context context) {
+    private void lauchNotification(ServicioGastos servicioGastos,Context context,int notifID) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
         List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -62,15 +63,14 @@ public class AlarmChecker extends BroadcastReceiver {
             if (hora<=horaFormateada){
                 Log.d("SERVICEBOOT", "Notoficacion lanzada");
                 NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                NOTIFICATION_ID = NOTIFICATION_ID +1;
-                Log.d("SERVICEBOOT", "NOTIFICATION_ID = "+NOTIFICATION_ID);
-                NM.notify(+ NOTIFICATION_ID, notificacion(gastoProgramable,context));
+                Log.d("SERVICEBOOT", "NOTIFICATION_ID = "+notifID);
+                NM.notify(notifID, notificacion(gastoProgramable,context,notifID));
                 servicioGastos.eliminarGastoProgramable(gastoProgramable);
             }
 
         }
     }
-    private Notification notificacion( GastoProgramable gastoProgramable,Context context ) {
+    private Notification notificacion( GastoProgramable gastoProgramable,Context context, int notifID ) {
 
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
 
@@ -79,9 +79,14 @@ public class AlarmChecker extends BroadcastReceiver {
         nBuilder.setContentText(gastoProgramable.getImporte());
         nBuilder.setDefaults(Notification.DEFAULT_ALL);
         nBuilder.setAutoCancel(true);
-         /* Increase notification number every time a new notification arrives */
-        /*nBuilder.setNumber(++numMessages);*/
         Intent resultIntent = new Intent(context, CrearGastoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("categoria",gastoProgramable.getCategoria());
+        bundle.putString("descripcion",gastoProgramable.getDescripcion());
+        bundle.putString("importe",gastoProgramable.getImporte());
+        bundle.putInt("hora",gastoProgramable.getHora());
+        bundle.putLong("id",gastoProgramable.getId());
+        resultIntent.putExtras(bundle);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(CrearGastoActivity.class);
 
@@ -89,9 +94,8 @@ public class AlarmChecker extends BroadcastReceiver {
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         nBuilder.setContentIntent(resultPendingIntent);
-        notificationNumber ++;
-        Log.d("SERVICEBOOT", "notificationNumber = "+notificationNumber);
-        nBuilder.setNumber(notificationNumber);
+        Log.d("SERVICEBOOT", "notificationNumber = "+notifID);
+        nBuilder.setNumber(notifID);
         return nBuilder.build();
     }
 
