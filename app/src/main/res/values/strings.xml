@@ -70,6 +70,8 @@
     <string name="domingo">Domingo</string>
     <string name="diario">Diario</string>
     <string name="semanal">Semanal</string>
+    <string name="mensual">Mensual</string>
+    <string name="anual">Anual</string>
     <string name="title_activity_historial_gastos_completo">HistorialGastosCompletoActivity</string>
 
 </resources>

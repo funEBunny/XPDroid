@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -6,73 +6,52 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    tools:context="com.funebunny.xpdroid.main.ui.activity.CrearObjetivoActivity">
+    tools:context="com.funebunny.xpdroid.main.ui.activity.CrearObjetivoActivity"
+    android:id="@+id/activity_crear_objetivo_ll_main"
+    android:orientation="vertical">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/activity_crear_gasto_programable_et_importe"
-        android:layout_marginTop="34dp"
-        android:hint="@string/importe"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/activity_crear_objetivo_rl_periodo">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/activity_crear_gasto_et_fecha"
-        android:hint="@string/fecha"
-        android:clickable="false"
-        android:layout_below="@+id/activity_crear_gasto_programable_et_importe"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_crear_objetivo_sp_periodo"
+            android:layout_centerInParent="true"
+            android:entries="@array/periodo" />
+    </RelativeLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_crear_gasto_ib_date_picker"
-        android:src="@drawable/ic_calendar"
-        android:contentDescription="@string/calendario"
-        android:onClick="mostrarDatePicker"
-        android:layout_alignBottom="@+id/activity_crear_gasto_et_fecha"
-        android:layout_toRightOf="@+id/activity_crear_gasto_et_fecha"
-        android:layout_toEndOf="@+id/activity_crear_gasto_et_fecha" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/activity_crear_objetivo_rl_importe">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/duracion"
-        android:hint="@string/duracion"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/activity_crear_gasto_et_fecha"
-        android:layout_alignLeft="@+id/activity_crear_gasto_et_fecha"
-        android:layout_alignStart="@+id/activity_crear_gasto_et_fecha"
-        android:layout_toLeftOf="@+id/activity_crear_gasto_ib_date_picker"
-        android:layout_toStartOf="@+id/activity_crear_gasto_ib_date_picker" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/activity_crear_objetivo_et_importe"
+            android:layout_centerInParent="true"
+            android:hint="@string/importe" />
+    </RelativeLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_crear_gasto_et_descripcion"
-        android:layout_marginTop="30dp"
-        android:hint="@string/descripcion"
-        android:layout_below="@+id/duracion"
-        android:layout_alignRight="@+id/duracion"
-        android:layout_alignEnd="@+id/duracion"
-        android:layout_alignLeft="@+id/duracion"
-        android:layout_alignStart="@+id/duracion" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/activity_crear_objetivo_rl_guardar">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/guardar"
-        android:id="@+id/guardar"
-        android:onClick="guardarObjetivo"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/activity_crear_gasto_et_descripcion"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guardar"
+            android:id="@+id/button"
+            android:layout_centerInParent="true"
+            android:onClick="guardarObjetivo" />
+    </RelativeLayout>
+</LinearLayout>

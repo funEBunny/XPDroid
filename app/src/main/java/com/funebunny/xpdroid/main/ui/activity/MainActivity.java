@@ -27,14 +27,16 @@ import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 
-public class MainActivity   extends ActionBarActivity
-                            implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+public class MainActivity extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         HistorialGastosItemFragment.HistorialGastosItemCallbacks,
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
+        ObjetivosItemFragment.ObjetivosItemCallbacks,
         NotificacionesItemFragment.NotificacionesItemCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -52,9 +54,9 @@ public class MainActivity   extends ActionBarActivity
         setContentView(R.layout.activity_main);
         navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
         //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);  //No sé para qué es
-        drawerList   = (ListView) findViewById(R.id.navigation_drawer);
+        drawerList = (ListView) findViewById(R.id.navigation_drawer);
 
-        drawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.navigation_drawer_list_item, navigationDrawerItems));
+        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_drawer_list_item, navigationDrawerItems));
         //drawerList.setOnClickListener(new DrawerItemClickListener());
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -74,7 +76,7 @@ public class MainActivity   extends ActionBarActivity
 
         //TODO: ACA DEBERIA GENERAR INSTANCIAS CADA UNO DE LOS FRAGMENTS DE ACUERDO AL VALOR DE position
 
-        switch(position){
+        switch (position) {
             case 0: { //Pagina de Inicio
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -83,8 +85,7 @@ public class MainActivity   extends ActionBarActivity
             }
             case 1: { //Historial de Gastos
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1), "HistorialGastos")
-                        .addToBackStack("HistorialGastos")
+                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
                         .commit();
                 break;
             }
@@ -101,10 +102,10 @@ public class MainActivity   extends ActionBarActivity
                 break;
             }
             case 4: { //Objetivos
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, ObjetivosItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
             }
             case 5: { //Recordatorios
 //                fragmentManager.beginTransaction()
@@ -133,6 +134,7 @@ public class MainActivity   extends ActionBarActivity
 
 
     }
+
     public void verHistorial(View view) {
         Intent intentHistorialGastosCompleto = new Intent(this, HistorialGastosCompletoActivity.class);
         //Animacion desde derecha a izquierda
@@ -152,13 +154,20 @@ public class MainActivity   extends ActionBarActivity
 
     }
 
-    @Override //Implementing method from GastosProgramablesItemFragment.GastosProgramablesItemCallbacks
+    @Override
+    //Implementing method from GastosProgramablesItemFragment.GastosProgramablesItemCallbacks
     public void onGastosProgramablesItemSelected(String id) {
         //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
+
     @Override
     public void onNotificacionesItemSelected(String id) {
+
+    }
+
+    @Override
+    public void onObjetivosItemSelected(String id) {
 
     }
     /*
@@ -172,10 +181,10 @@ public class MainActivity   extends ActionBarActivity
 
     public void onSectionAttached(int number) {
         String[] navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
-        for(int i=1;i< navigationDrawerItems.length+1;i++) {
-            if (number==i){
-                    mTitle = navigationDrawerItems[i-1];
-                    break;
+        for (int i = 1; i < navigationDrawerItems.length + 1; i++) {
+            if (number == i) {
+                mTitle = navigationDrawerItems[i - 1];
+                break;
             }
         }
     }
@@ -229,7 +238,7 @@ public class MainActivity   extends ActionBarActivity
 
                 //Mostrar mensaje de crear gasto
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 break;
             }
@@ -240,7 +249,7 @@ public class MainActivity   extends ActionBarActivity
 
                 //Mostrar mensaje de crear gasto favorito
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto_favorito, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 break;
             }
@@ -251,7 +260,7 @@ public class MainActivity   extends ActionBarActivity
 
                 //Mostrar mensaje de crear gasto programable
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto_programable, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 break;
             }
@@ -262,7 +271,7 @@ public class MainActivity   extends ActionBarActivity
 
                 //Mostrar mensaje de crear gasto objetivo
                 Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 break;
             }
@@ -281,6 +290,7 @@ public class MainActivity   extends ActionBarActivity
 
 
     //TODO: VA A SER UTILIZADO SOLO PARA LA OPCION DE NAV DRAWER "Inicio"
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -326,6 +336,7 @@ public class MainActivity   extends ActionBarActivity
             super.onActivityCreated(savedInstanceState);
             setHasOptionsMenu(true);
         }
+
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             inflater.inflate(R.menu.menu_crear_gasto, menu);
         }

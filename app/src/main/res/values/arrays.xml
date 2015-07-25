@@ -47,6 +47,13 @@
         <item>@string/semanal</item>
     </string-array>
 
+    <string-array name="periodo" >
+        <item>@string/diario</item>
+        <item>@string/semanal</item>
+        <item>@string/mensual</item>
+        <item>@string/anual</item>
+    </string-array>
+
     <string-array name="dia_o_mes" >
         <item>Dia</item>
         <item>Mes</item>

@@ -20,11 +20,6 @@ public class CrearObjetivoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_objetivo);
-
-        // Fijar por defecto la fecha del día
-        final Calendar c = Calendar.getInstance();
-        EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
     }
 
 
@@ -40,20 +35,18 @@ public class CrearObjetivoActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    //>Added by PRB
-    public void mostrarDatePicker(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
+// Custom methods - PRB
+
+    public void guardarObjetivo(View view) {
+
     }
-    //<Added by PRB
 }
