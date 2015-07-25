@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.business.GastosService;
 import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.model.GastoProgramable;
@@ -29,6 +30,7 @@ import java.util.Calendar;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
+    GastosService gastosService = new GastosService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,38 +97,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
         String diaSemana = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana)).getSelectedItem().toString();
 
-        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
-        String horaFormateada="0";
-        try {
-            horaFormateada = myFormat.format(fromUser.parse(horario));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        GastoProgramable gp;
-
-        if (repeticion == getResources().getString(R.string.semanal)){
-            gp = new GastoProgSemanal();
-            ((GastoProgSemanal)gp).setDiaSemana(getDiaSemana(diaSemana));
-        }else{
-            gp = new GastoProgDiario();
-        }
-
-        gp.setHora(Integer.parseInt(horaFormateada));
-        gp.setImporte(importe);
-        gp.setDescripcion(descripcion);
-        gp.setCategoria(categoria);
-        ServicioGastos servicioGastos = new ServicioGastos();
-        Long id = servicioGastos.guardarGastoProgramable(gp);
-
-        String formatTime = null;
-        try {
-            formatTime = fromUser.format(fromUser.parse(horario));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        activarAlarma(formatTime, id);
+        gastosService.guardarGastoProgramable(getApplicationContext(), descripcion, repeticion, horario, importe, categoria, diaSemana);
         //Mostrar mensaje de agregar gasto
         Toast toast = Toast.makeText(this, R.string.gasto_programado_mensaje, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -135,31 +106,4 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         this.finish();
     }
 
-    private int getDiaSemana(String diaSemana){
-        switch (diaSemana){
-            case "lunes":return 2;
-            case "martes":return 3;
-            case "miercoles":return 4;
-            case "jueves":return 5;
-            case "viernes":return 6;
-            case "sabado":return 7;
-            default:return 1;
-        }
-    }
-
-    private void activarAlarma(String time, Long id){
-        Context applicationContext = getApplicationContext();
-        AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
-        String[] splitTime = time.split(":");
-        String hora = splitTime[0];
-        String minutos = splitTime[1];
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
-        Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra("notifID",id);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id.intValue(), myIntent, 0);
-        //alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
 }
