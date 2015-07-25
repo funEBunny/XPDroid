@@ -30,6 +30,13 @@ public class CrearGastoActivity extends XPDroidActivity {
         final Calendar c = Calendar.getInstance();
         EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
         fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -44,7 +51,6 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,10 +94,19 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         servicioGastos.guardarGasto(descripcion, importe, categoria, fecha);
         //Mostrar mensaje de agregar gasto
-        Toast toast = Toast.makeText(this, R.string.gasto_guardado_mensaje, Toast.LENGTH_SHORT);
+        int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
+        showMessage(gasto_guardado_mensaje);
+        this.finish();
+    }
+
+    private void showMessage(int message) {
+        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
-
-        this.finish();
+    }
+    private void showMessage(String message) {
+        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
     }
 }

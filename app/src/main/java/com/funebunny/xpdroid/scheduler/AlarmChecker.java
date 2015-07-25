@@ -99,7 +99,7 @@ public class AlarmChecker extends BroadcastReceiver {
 
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(gastoProgramable.getId().intValue(), PendingIntent.FLAG_ONE_SHOT);
         nBuilder.setContentIntent(resultPendingIntent);
         Log.d("SERVICEBOOT", "notificationNumber = "+gastoProgramable.getId());
         nBuilder.setNumber(gastoProgramable.getId().intValue());
