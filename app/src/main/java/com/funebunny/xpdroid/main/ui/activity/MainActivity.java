@@ -17,8 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
@@ -146,6 +147,21 @@ public class MainActivity extends ActionBarActivity
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
 
+    }
+
+    public void tratarGasto(View view){
+
+        String descripcion = ((TextView) view.findViewById(R.id.historial_gastos_lista_descripcion)).getText().toString();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("descripcion",descripcion);
+//        bundle.putString("importe",gastoProgramable.getImporte());
+//        bundle.putInt("hora",gastoProgramable.getHora());
+//        bundle.putLong("id",gastoProgramable.getId());
+
+        Intent i = new Intent(MainActivity.this, TratarGastoActivity.class);
+        i.putExtra("gasto",bundle);
+        startActivity(i);
     }
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks

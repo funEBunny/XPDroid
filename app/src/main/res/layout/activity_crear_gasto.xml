@@ -46,8 +46,8 @@
             android:layout_alignBottom="@+id/activity_crear_gasto_et_fecha"
             android:layout_toEndOf="@+id/activity_crear_gasto_et_fecha"
             android:layout_toRightOf="@+id/activity_crear_gasto_et_fecha"
-            android:onClick="mostrarDatePicker"
-            android:src="@drawable/ic_calendar" />
+            android:src="@drawable/ic_calendar"
+            android:onClick="mostrarDatePicker" />
         />
     </RelativeLayout>
 
