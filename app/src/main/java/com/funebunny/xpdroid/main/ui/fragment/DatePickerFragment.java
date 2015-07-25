@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.main.ui.activity.HistorialGastosCompletoActivity;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
@@ -16,6 +18,13 @@ import java.util.Calendar;
  * Created by provirabosch on 11/04/2015.
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+    private static EditText fechaActivity;
+
+    public static DatePickerFragment newInstance (EditText fecha){
+        fechaActivity = fecha;
+        return new DatePickerFragment();
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,8 +38,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int anio, int mes, int dia) {
 
-        EditText fecha = (EditText) this.getActivity().findViewById(R.id.activity_crear_gasto_et_fecha);
-        fecha.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
+        fechaActivity.setText(new StringBuilder().append(dia).append(AppConstants.SEPARADOR_FECHA).append(mes+1).append(AppConstants.SEPARADOR_FECHA).append(anio));
 
     }
 

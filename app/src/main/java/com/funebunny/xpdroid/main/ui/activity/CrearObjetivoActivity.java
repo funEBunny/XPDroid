@@ -38,6 +38,7 @@ public class CrearObjetivoActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                overridePendingTransition(R.animator.in_left, R.animator.out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

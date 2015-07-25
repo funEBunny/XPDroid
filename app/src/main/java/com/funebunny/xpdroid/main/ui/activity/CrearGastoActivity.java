@@ -77,7 +77,8 @@ public class CrearGastoActivity extends XPDroidActivity {
 
     //>Added by PRB
     public void mostrarDatePicker(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
+        EditText fecha = (EditText) this.findViewById(R.id.activity_crear_gasto_et_fecha);
+        DialogFragment newFragment = DatePickerFragment.newInstance(fecha);
         newFragment.show(getFragmentManager(), "datePicker");
     }
     //<Added by PRB

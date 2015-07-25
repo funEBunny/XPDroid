@@ -38,32 +38,29 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
             view = vi.inflate(R.layout.historial_gastos_list_item, null);
         }
 
-        // No cargar mas de 10
-        if(position <= 10) {
-            Gasto gasto = getItem(position);
+        Gasto gasto = getItem(position);
 
-            if (gasto != null) {
-                TextView fecha = (TextView) view.findViewById(R.id.historial_gastos_lista_fecha);
-                TextView categoria = (TextView) view.findViewById(R.id.historial_gastos_lista_categoria);
-                TextView importe = (TextView) view.findViewById(R.id.historial_gastos_lista_importe);
-                TextView descripcion = (TextView) view.findViewById(R.id.historial_gastos_lista_descripcion);
+        if (gasto != null) {
+            TextView fecha = (TextView) view.findViewById(R.id.historial_gastos_lista_fecha);
+            TextView categoria = (TextView) view.findViewById(R.id.historial_gastos_lista_categoria);
+            TextView importe = (TextView) view.findViewById(R.id.historial_gastos_lista_importe);
+            TextView descripcion = (TextView) view.findViewById(R.id.historial_gastos_lista_descripcion);
 
-                if (fecha != null) {
-                    fecha.setText(gasto.getFecha());
-                }
-                if (categoria != null) {
-                    categoria.setText(gasto.getCategoria());
-                }
-                if (importe != null) {
-                    NumberFormat format = NumberFormat.getInstance();
-                    format.setMaximumFractionDigits(2);
-                    format.setMaximumIntegerDigits(6);
+            if (fecha != null) {
+                fecha.setText(gasto.getFecha());
+            }
+            if (categoria != null) {
+                categoria.setText(gasto.getCategoria());
+            }
+            if (importe != null) {
+                NumberFormat format = NumberFormat.getInstance();
+                format.setMaximumFractionDigits(2);
+                format.setMaximumIntegerDigits(6);
 
-                    importe.setText("$" + format.format(Double.valueOf(gasto.getImporte())));
-                }
-                if (descripcion != null) {
-                    descripcion.setText(gasto.getDescripcion());
-                }
+                importe.setText("$" + format.format(Double.valueOf(gasto.getImporte())));
+            }
+            if (descripcion != null) {
+                descripcion.setText(gasto.getDescripcion());
             }
         }
 

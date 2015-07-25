@@ -8,6 +8,15 @@
         <item>@string/categoria5</item>
     </string-array>
 
+    <string-array name="categorias_busqueda" >
+        <item>@string/categoria0</item>
+        <item>@string/categoria1</item>
+        <item>@string/categoria2</item>
+        <item>@string/categoria3</item>
+        <item>@string/categoria4</item>
+        <item>@string/categoria5</item>
+    </string-array>
+
     <string-array name="nav_drawer_items">
         <item>@string/navdrawitem1</item>
         <item>@string/navdrawitem2</item>
@@ -52,11 +61,6 @@
         <item>@string/semanal</item>
         <item>@string/mensual</item>
         <item>@string/anual</item>
-    </string-array>
-
-    <string-array name="dia_o_mes" >
-        <item>Dia</item>
-        <item>Mes</item>
     </string-array>
 
     <!--<string-array name="spinner_meses">-->
