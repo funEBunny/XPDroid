@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -134,10 +135,12 @@ public class MainActivity   extends ActionBarActivity
     }
     public void verHistorial(View view) {
         Intent intentHistorialGastosCompleto = new Intent(this, HistorialGastosCompletoActivity.class);
-        startActivity(intentHistorialGastosCompleto);
+        //Animacion desde derecha a izquierda
+        Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
+        startActivity(intentHistorialGastosCompleto, animation);
 
         //Mostrar mensaje de crear gasto objetivo
-        Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, R.string.action_ver_historial, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
 
@@ -214,12 +217,15 @@ public class MainActivity   extends ActionBarActivity
             toast.show();
         }*/
 
+        //Animacion desde derecha a izquierda
+        Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
+
         switch (id){
             case R.id.action_settings: { return true; }
 
             case R.id.action_crear_gasto: {
                 Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
-                startActivity(intentCrearGasto);
+                startActivity(intentCrearGasto, animation);
 
                 //Mostrar mensaje de crear gasto
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
@@ -230,7 +236,7 @@ public class MainActivity   extends ActionBarActivity
 
             case R.id.action_crear_gasto_favorito: {
                 Intent intentCrearGastoFavorito = new Intent(this, CrearGastoFavoritoActivity.class);
-                startActivity(intentCrearGastoFavorito);
+                startActivity(intentCrearGastoFavorito, animation);
 
                 //Mostrar mensaje de crear gasto favorito
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto_favorito, Toast.LENGTH_SHORT);
@@ -241,7 +247,7 @@ public class MainActivity   extends ActionBarActivity
 
             case R.id.action_crear_gasto_programable: {
                 Intent intentCrearGastoProgramable = new Intent(this, CrearGastoProgramableActivity.class);
-                startActivity(intentCrearGastoProgramable);
+                startActivity(intentCrearGastoProgramable, animation);
 
                 //Mostrar mensaje de crear gasto programable
                 Toast toast = Toast.makeText(this, R.string.action_crear_gasto_programable, Toast.LENGTH_SHORT);
@@ -252,7 +258,7 @@ public class MainActivity   extends ActionBarActivity
 
             case R.id.action_crear_objetivo: {
                 Intent intentCrearObjetivo = new Intent(this, CrearObjetivoActivity.class);
-                startActivity(intentCrearObjetivo);
+                startActivity(intentCrearObjetivo, animation);
 
                 //Mostrar mensaje de crear gasto objetivo
                 Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);

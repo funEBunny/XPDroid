@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.main.ui.activity;
+package com.funebunny.xpdroid.main.ui.activity.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
