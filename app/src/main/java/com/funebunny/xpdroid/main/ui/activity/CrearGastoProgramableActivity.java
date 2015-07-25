@@ -61,7 +61,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_crear_gasto_programable, menu);
+//        getMenuInflater().inflate(R.menu.menu_crear_gasto_programable, menu);
         return true;
     }
 

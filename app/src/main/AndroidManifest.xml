@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.funebunny.xpdroid" >
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -22,7 +22,7 @@
             android:name="AA_MODELS"
             android:value="com.funebunny.xpdroid.gastos.dao.Gasto com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO" />
 
-<!--
+        <!--
         <service android:name=".scheduler.Scheduler">
         <intent-filter>
             <action android:name="com.funebunny.xpdroid.scheduler.MyScheduler"/>
@@ -35,22 +35,23 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
--->
+        -->
 
-        <receiver android:name=".scheduler.AlarmChecker">
-            <!--<intent-filter>-->
-                <!--<action android:name="com.funebunny.xpdroid.scheduler.MyAlarm"/>-->
-            <!--</intent-filter>-->
+        <receiver android:name=".scheduler.AlarmChecker" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="com.funebunny.xpdroid.scheduler.MyAlarm"/> -->
+            <!-- </intent-filter> -->
         </receiver>
 
         <activity
             android:name=".main.ui.activity.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".main.ui.activity.CrearGastoActivity"
@@ -94,8 +95,7 @@
         </activity>
         <activity
             android:name=".main.ui.activity.XPDroidActivity"
-            android:label="@string/title_activity_xpdroid"></activity>
-
+            android:label="@string/title_activity_xpdroid" />
         <activity
             android:name=".main.ui.activity.HistorialGastosCompletoActivity"
             android:label="@string/title_activity_historial_gastos_completo"
@@ -103,6 +103,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.funebunny.xpdroid.main.ui.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".main.ui.activity.InicioActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
