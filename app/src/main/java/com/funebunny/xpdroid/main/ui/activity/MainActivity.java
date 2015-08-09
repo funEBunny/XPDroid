@@ -152,15 +152,18 @@ public class MainActivity extends ActionBarActivity
     public void tratarGasto(View view){
 
         String descripcion = ((TextView) view.findViewById(R.id.historial_gastos_lista_descripcion)).getText().toString();
+        String fecha       = ((TextView) view.findViewById(R.id.historial_gastos_lista_fecha)).getText().toString();
+        String categoria   = ((TextView) view.findViewById(R.id.historial_gastos_lista_categoria)).getText().toString();
+        String importe     = ((TextView) view.findViewById(R.id.historial_gastos_lista_importe)).getText().toString();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("descripcion",descripcion);
-//        bundle.putString("importe",gastoProgramable.getImporte());
-//        bundle.putInt("hora",gastoProgramable.getHora());
-//        bundle.putLong("id",gastoProgramable.getId());
+        Bundle gasto = new Bundle();
+        gasto.putString("descripcion", descripcion);
+        gasto.putString("fecha", fecha);
+        gasto.putString("categoria", categoria);
+        gasto.putString("importe", importe);
 
-        Intent i = new Intent(MainActivity.this, TratarGastoActivity.class);
-        i.putExtra("gasto",bundle);
+        Intent i = new Intent(this, TratarGastoActivity.class);
+        i.putExtras(gasto);
         startActivity(i);
     }
 

@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,16 +21,20 @@ public class TratarGastoActivity extends XPDroidActivity {
         setContentView(R.layout.activity_tratar_gasto);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle gasto = getIntent().getExtras();
 
+        if (gasto != null) {
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-
-            String descripcion = extras.getString("descripcion");
+            String descripcion = gasto.getString("descripcion");
+            String fecha       = gasto.getString("fecha");
+            String categoria   = gasto.getString("categoria");
+            String importe     = gasto.getString("importe");
 
             ((EditText) findViewById(R.id.activity_tratar_gasto_et_descripcion)).setText(descripcion);
-
+            ((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).setText(fecha);
+            ((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).setText(importe);
+            Spinner sCategoria = (Spinner)findViewById(R.id.activity_tratar_gasto_sp_categoria);
+            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(categoria));
         }
 
     }
