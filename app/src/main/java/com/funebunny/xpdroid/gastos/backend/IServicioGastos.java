@@ -35,6 +35,8 @@ public interface IServicioGastos {
 
     void eliminarGastoProgramable(GastoProgramable gp);
 
+    void eliminarGasto(Gasto gasto);
+
 
 
 }

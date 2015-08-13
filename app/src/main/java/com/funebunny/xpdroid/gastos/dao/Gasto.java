@@ -1,9 +1,13 @@
 package com.funebunny.xpdroid.gastos.dao;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -11,7 +15,7 @@ import java.text.SimpleDateFormat;
  * Created by schmidt0 on 3/28/2015.
  */
 @Table(name = "Gasto")
-public class Gasto extends Model {
+public class Gasto extends Model implements Serializable {
     public Gasto(String descripcion, String importe, String categoria, String fecha) {
         super();
         this.descripcion = descripcion;
@@ -23,6 +27,9 @@ public class Gasto extends Model {
     public Gasto() {
        super();
     }
+
+    //PRB - Se agrega atributo gId ya que la clase Model no es Serializable y el mId se pierde entre actividades
+    private Long gId;
 
 
     @Column(name = "Descripcion")
@@ -84,5 +91,13 @@ public class Gasto extends Model {
                 ", categoria=" + getCategoria() +
                 ", fecha='" + getFecha() + '\'' +
                 '}';
+    }
+
+    public Long getgId() {
+        return gId;
+    }
+
+    public void setgId(Long gId) {
+        this.gId = gId;
     }
 }

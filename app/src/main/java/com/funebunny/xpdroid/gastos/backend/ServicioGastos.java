@@ -186,4 +186,9 @@ public class ServicioGastos implements IServicioGastos {
         delGP.delete();
     }
 
+    @Override
+    public void eliminarGasto(Gasto gasto) {
+        gasto.delete(Gasto.class,gasto.getgId());
+    }
+
 }

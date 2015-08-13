@@ -91,18 +91,20 @@
             android:id="@+id/activity_tratar_gasto_bt_actualizar"
             android:layout_centerVertical="true"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:onClick="actualizarGasto" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/borrar"
+            android:text="@string/eliminar"
             android:id="@+id/activity_tratar_gasto_bt_borrar"
             android:layout_alignTop="@+id/activity_tratar_gasto_bt_actualizar"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:onClick="eliminarGasto" />
     </LinearLayout>
 </LinearLayout>

@@ -2,12 +2,14 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
@@ -46,8 +48,19 @@ public class XPDroidActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    protected void showMessage(int message) {
+        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+    }
+    protected void showMessage(String message) {
+        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+    }
+
     // Lógica para ocultar teclado cuando se toca fuera del EditText activo
-    public void setupUI(View view) {
+    protected void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
         if(!(view instanceof EditText)) {

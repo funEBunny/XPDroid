@@ -101,14 +101,4 @@ public class CrearGastoActivity extends XPDroidActivity {
         this.finish();
     }
 
-    private void showMessage(int message) {
-        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
-    }
-    private void showMessage(String message) {
-        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
-    }
 }

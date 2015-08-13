@@ -10,6 +10,7 @@
     <string name="action_ver_historial">Buscar mas Gastos!</string>
     <string name="gasto_guardado_mensaje">Gasto guardado éxitosamente!</string>
     <string name="gasto_programado_mensaje">Gasto programado éxitosamente!</string>
+    <string name="gasto_eliminado_mensaje">Gasto eliminado éxitosamente!</string>
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
@@ -80,5 +81,6 @@
     <string name="title_activity_tratar_gasto">Tratar Gasto</string>
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
+    <string name="eliminar">Eliminar</string>
 
 </resources>

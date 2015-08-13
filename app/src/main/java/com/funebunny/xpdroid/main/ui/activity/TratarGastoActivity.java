@@ -11,9 +11,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarGastoActivity extends XPDroidActivity {
+
+    private Gasto gasto;
+    private ServicioGastos servicioGastos = new ServicioGastos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +27,16 @@ public class TratarGastoActivity extends XPDroidActivity {
         setContentView(R.layout.activity_tratar_gasto);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Bundle gasto = getIntent().getExtras();
+        Bundle bGasto = getIntent().getExtras();
+        gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
 
         if (gasto != null) {
 
-            String descripcion = gasto.getString("descripcion");
-            String fecha       = gasto.getString("fecha");
-            String categoria   = gasto.getString("categoria");
-            String importe     = gasto.getString("importe");
-
-            ((EditText) findViewById(R.id.activity_tratar_gasto_et_descripcion)).setText(descripcion);
-            ((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).setText(fecha);
-            ((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).setText(importe);
-            Spinner sCategoria = (Spinner)findViewById(R.id.activity_tratar_gasto_sp_categoria);
-            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(categoria));
+            ((EditText) findViewById(R.id.activity_tratar_gasto_et_descripcion)).setText(gasto.getDescripcion());
+            ((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).setText(gasto.getFecha());
+            ((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).setText(gasto.getImporte());
+            Spinner sCategoria = (Spinner) findViewById(R.id.activity_tratar_gasto_sp_categoria);
+            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
         }
 
     }
@@ -60,10 +62,26 @@ public class TratarGastoActivity extends XPDroidActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     //>Added by PRB
     public void mostrarDatePicker(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public void actualizarGasto(View v) {
+
+    }
+
+    public void eliminarGasto(View v) {
+
+        if (gasto != null) {
+            servicioGastos.eliminarGasto(gasto);
+            //Mostrar mensaje de gasto eliminado
+            int gasto_guardado_mensaje = R.string.gasto_eliminado_mensaje;
+            showMessage(gasto_guardado_mensaje);
+            this.finish();
+        }
     }
     //<Added by PRB
 }

@@ -64,7 +64,10 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
             }
         }
 
+        view.setTag(gasto); //Test PRB - Anclar el objeto Gasto a la vista
+
         return view;
+
     }
 
 }

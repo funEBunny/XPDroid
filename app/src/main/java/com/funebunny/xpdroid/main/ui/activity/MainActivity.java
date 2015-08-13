@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -30,6 +32,8 @@ import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
+
+import static com.funebunny.xpdroid.R.id.historial_gastos_lista;
 
 
 public class MainActivity extends ActionBarActivity
@@ -86,7 +90,7 @@ public class MainActivity extends ActionBarActivity
             }
             case 1: { //Historial de Gastos
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
+                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1),"historial")
                         .commit();
                 break;
             }
@@ -151,19 +155,13 @@ public class MainActivity extends ActionBarActivity
 
     public void tratarGasto(View view){
 
-        String descripcion = ((TextView) view.findViewById(R.id.historial_gastos_lista_descripcion)).getText().toString();
-        String fecha       = ((TextView) view.findViewById(R.id.historial_gastos_lista_fecha)).getText().toString();
-        String categoria   = ((TextView) view.findViewById(R.id.historial_gastos_lista_categoria)).getText().toString();
-        String importe     = ((TextView) view.findViewById(R.id.historial_gastos_lista_importe)).getText().toString();
-
-        Bundle gasto = new Bundle();
-        gasto.putString("descripcion", descripcion);
-        gasto.putString("fecha", fecha);
-        gasto.putString("categoria", categoria);
-        gasto.putString("importe", importe);
+        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
+        gasto.setgId(gasto.getId());   //Setear Id serializable ya que el mId no es serializable
+        Bundle bGasto = new Bundle();
+        bGasto.putSerializable(AppConstants.GASTO,gasto);
 
         Intent i = new Intent(this, TratarGastoActivity.class);
-        i.putExtras(gasto);
+        i.putExtras(bGasto);
         startActivity(i);
     }
 
