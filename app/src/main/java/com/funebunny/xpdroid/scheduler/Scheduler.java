@@ -1,6 +1,5 @@
 package com.funebunny.xpdroid.scheduler;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,14 +13,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,7 +33,7 @@ public class Scheduler extends Service implements Runnable {
     private static final long INTERVALO_ACTUALIZACION = 60000; // En ms
     public static final int NOTIFICATION_ID = 1;
     private static NotificationManager NM;
-    private static ServicioGastos servicioGastos;
+    private static ServicioGastosDAO servicioGastos;
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -45,13 +43,13 @@ public class Scheduler extends Service implements Runnable {
     public void onCreate() {
         Toast.makeText(this, "Servicio creado", Toast.LENGTH_LONG).show();
         Log.d("SERVICEBOOT", "Servicio creado");
-        ServicioGastos servicioGastos = new ServicioGastos();
+        ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 //        iniciarCronometro(servicioGastos);
 
 
     }
 
-    private void lauchNotification(ServicioGastos servicioGastos) {
+    private void lauchNotification(ServicioGastosDAO servicioGastos) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
         List<GastoProgramable> gastoProgramables = servicioGastos.obtenerGastosProgramablesDelDia();
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -90,7 +88,7 @@ public class Scheduler extends Service implements Runnable {
         pararCronometro();
     }
 
-    private void iniciarCronometro(final ServicioGastos servicioGastos) {
+    private void iniciarCronometro(final ServicioGastosDAO servicioGastos) {
         temporizador.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 lauchNotification(servicioGastos);

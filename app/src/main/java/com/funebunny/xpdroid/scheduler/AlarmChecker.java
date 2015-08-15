@@ -12,14 +12,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by schmidt0 on 7/11/2015.
@@ -28,18 +23,18 @@ public class AlarmChecker extends BroadcastReceiver {
 
     public Long NOTIFICATION_ID = 0L;
     private static NotificationManager NM;
-    private static ServicioGastos servicioGastos;
+    private static ServicioGastosDAO servicioGastos;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("SERVICEBOOT", "Intent received");
         if (servicioGastos==null){
-            servicioGastos = new ServicioGastos();
+            servicioGastos = new ServicioGastosDAO();
         }
         Long notifID = intent.getLongExtra("notifID", NOTIFICATION_ID);
         lauchNotification(servicioGastos,context,notifID);
     }
-    private void lauchNotification(ServicioGastos servicioGastos,Context context,Long notifID) {
+    private void lauchNotification(ServicioGastosDAO servicioGastos,Context context,Long notifID) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
         GastoProgramable gastoProgramable = servicioGastos.obtenerGastoProgramablePorID(notifID);
 /*

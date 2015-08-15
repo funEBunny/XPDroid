@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.gastos.dao;
+package com.funebunny.xpdroid.gastos.backend.dao;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

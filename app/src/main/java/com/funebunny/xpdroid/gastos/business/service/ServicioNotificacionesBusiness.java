@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.gastos.business;
+package com.funebunny.xpdroid.gastos.business.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,12 +7,15 @@ import android.content.Intent;
 
 import com.funebunny.xpdroid.scheduler.AlarmChecker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by schmidt0 on 7/25/2015.
  */
-public class NotificationsService {
+public class ServicioNotificacionesBusiness {
 
     public static final int ZERO_SEGUNDOS = 0;
     public static final int HORA = 0;
@@ -51,10 +54,25 @@ public class NotificationsService {
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora));
         calendar.set(Calendar.MINUTE, Integer.parseInt(minutos));
         calendar.set(Calendar.SECOND, ZERO_SEGUNDOS);
-        if (dia!=0){
+        if (dia!=0&&isFechaFutura(time)){
             calendar.add(Calendar.DAY_OF_WEEK,dia);
         }
         return calendar;
+    }
+
+    private boolean isFechaFutura(String time) {
+        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
+        Date today = Calendar.getInstance().getTime();
+        try {
+            Date date = fromUser.parse(time);
+            if (date.after(today)){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (ParseException e) {
+           return false;
+        }
     }
 
 }

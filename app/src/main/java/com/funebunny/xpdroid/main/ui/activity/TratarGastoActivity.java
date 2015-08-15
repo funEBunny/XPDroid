@@ -1,7 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,15 +10,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarGastoActivity extends XPDroidActivity {
 
     private Gasto gasto;
-    private ServicioGastos servicioGastos = new ServicioGastos();
+    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

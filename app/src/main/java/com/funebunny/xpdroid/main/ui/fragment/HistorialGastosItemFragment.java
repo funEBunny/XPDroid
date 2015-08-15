@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
@@ -57,7 +57,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     //The Adapter which will be used to populate the ListView/GridView with Views.
     private ListAdapter mAdapter;
 
-    private ServicioGastos servicioGastos = new ServicioGastos();
+    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {

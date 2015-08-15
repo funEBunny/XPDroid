@@ -1,11 +1,11 @@
-package com.funebunny.xpdroid.gastos.business;
+package com.funebunny.xpdroid.gastos.business.service;
 
 import android.content.Context;
 
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
-import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,12 +14,13 @@ import java.util.Calendar;
 /**
  * Created by schmidt0 on 7/25/2015.
  */
-public class GastosService {
+public class ServicioGastosBusiness {
 
     private static final String SEMANAL = "Semanal";
     private static final String DIARIO = "Diario";
 
-    NotificationsService notificationsService = new NotificationsService();
+    ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
+    ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
     public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana){
 
@@ -45,7 +46,7 @@ public class GastosService {
         gp.setImporte(importe);
         gp.setDescripcion(descripcion);
         gp.setCategoria(categoria);
-        ServicioGastos servicioGastos = new ServicioGastos();
+
         Long id = servicioGastos.guardarGastoProgramable(gp);
 
         String formatTime = null;

@@ -8,9 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 

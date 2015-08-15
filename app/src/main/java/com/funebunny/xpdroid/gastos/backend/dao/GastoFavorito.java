@@ -1,11 +1,8 @@
-package com.funebunny.xpdroid.gastos.dao;
+package com.funebunny.xpdroid.gastos.backend.dao;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by schmidt0 on 3/28/2015.

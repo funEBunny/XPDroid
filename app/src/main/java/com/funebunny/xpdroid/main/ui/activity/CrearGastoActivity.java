@@ -2,17 +2,15 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -84,7 +82,7 @@ public class CrearGastoActivity extends XPDroidActivity {
     //<Added by PRB
 
     public void guardarGasto(View view) {
-        ServicioGastos servicioGastos = new ServicioGastos();
+        ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).getText().toString();
 

@@ -1,28 +1,26 @@
-package com.funebunny.xpdroid.gastos.backend;
+package com.funebunny.xpdroid.gastos.backend.service;
 
 import android.util.Log;
 
 import com.activeandroid.query.Select;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
-import com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO;
-import com.funebunny.xpdroid.gastos.model.GastoProgAnual;
-import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
-import com.funebunny.xpdroid.gastos.model.GastoProgMensual;
-import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoProgramableDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgAnual;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgMensual;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by schmidt0 on 4/3/2015.
  */
-public class ServicioGastos implements IServicioGastos {
+public class ServicioGastosDAO implements IServicioGastosDAO {
 
     // @Inject
-    public ServicioGastos() {
+    public ServicioGastosDAO() {
     }
 
     @Override

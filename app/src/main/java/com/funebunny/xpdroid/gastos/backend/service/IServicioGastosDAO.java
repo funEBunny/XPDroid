@@ -1,14 +1,14 @@
-package com.funebunny.xpdroid.gastos.backend;
+package com.funebunny.xpdroid.gastos.backend.service;
 
-import com.funebunny.xpdroid.gastos.dao.Gasto;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 
 import java.util.List;
 
 /**
  * Created by schmidt0 on 4/3/2015.
  */
-public interface IServicioGastos {
+public interface IServicioGastosDAO {
 
     List<Gasto> obtenerGastos();
 

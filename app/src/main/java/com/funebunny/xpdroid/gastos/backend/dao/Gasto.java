@@ -1,7 +1,4 @@
-package com.funebunny.xpdroid.gastos.dao;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.funebunny.xpdroid.gastos.backend.dao;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

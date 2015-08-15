@@ -1,4 +1,4 @@
-package com.funebunny.xpdroid.gastos.model;
+package com.funebunny.xpdroid.gastos.business.model;
 
 /**
  * Created by schmidt0 on 5/16/2015.

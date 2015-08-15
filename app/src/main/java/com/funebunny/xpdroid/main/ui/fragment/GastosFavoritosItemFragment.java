@@ -91,7 +91,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                 R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, DummyContent.ITEMS);
 
-//        ServicioGastos servicioGastos = new ServicioGastos();
+//        ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 //        List<Gasto> gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
 //        mAdapter = new ArrayAdapter<Gasto>(getActivity(),
 //                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, gastos);

@@ -17,14 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -32,8 +29,6 @@ import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
-
-import static com.funebunny.xpdroid.R.id.historial_gastos_lista;
 
 
 public class MainActivity extends ActionBarActivity

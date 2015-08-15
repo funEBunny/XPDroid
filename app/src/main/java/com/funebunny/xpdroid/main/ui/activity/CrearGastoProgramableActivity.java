@@ -1,10 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.app.AlarmManager;
 import android.app.DialogFragment;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -16,21 +12,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.ServicioGastos;
-import com.funebunny.xpdroid.gastos.business.GastosService;
-import com.funebunny.xpdroid.gastos.model.GastoProgDiario;
-import com.funebunny.xpdroid.gastos.model.GastoProgSemanal;
-import com.funebunny.xpdroid.gastos.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
-import com.funebunny.xpdroid.scheduler.AlarmChecker;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
-    GastosService gastosService = new GastosService();
+    ServicioGastosBusiness gastosService = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
