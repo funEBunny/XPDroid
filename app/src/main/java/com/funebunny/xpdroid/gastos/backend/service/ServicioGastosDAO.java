@@ -172,9 +172,9 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     }
 
     @Override
-    public void eliminarGastoProgramable(GastoProgramable gp) {
-        Log.d("XPDROID", "Eliminando Gasto: " + gp.toString());
-        GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, gp.getId());
+    public void eliminarGastoProgramable(Long id) {
+        Log.d("XPDROID", "Eliminando Gasto: " + id);
+        GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, id);
         delGP.delete();
     }
 

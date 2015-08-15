@@ -44,6 +44,13 @@ public class ServicioNotificacionesBusiness {
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), repeticion, pendingIntent);
     }
 
+    public void desactivarAlarma(Context applicationContext,Long id){
+        AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra(NOTIF_ID, id);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id.intValue(), myIntent, 0);
+        alarm.cancel(pendingIntent);
+    }
+
     private Calendar getCalendar(String time, int dia) {
         String[] splitTime = time.split(SEPARADOR_HORA);
         String hora = splitTime[HORA];

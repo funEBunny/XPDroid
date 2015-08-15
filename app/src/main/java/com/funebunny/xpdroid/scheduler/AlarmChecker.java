@@ -37,40 +37,11 @@ public class AlarmChecker extends BroadcastReceiver {
     private void lauchNotification(ServicioGastosDAO servicioGastos,Context context,Long notifID) {
         Log.d("SERVICEBOOT", "Starting Notification Launcher");
         GastoProgramable gastoProgramable = servicioGastos.obtenerGastoProgramablePorID(notifID);
-/*
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int minute = Calendar.getInstance().get(Calendar.MINUTE);
-        String horaActual = String.valueOf(hour)+":"+String.valueOf(minute);
-        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
-        int horaFormateada = 0;
-*/
-
         Log.d("SERVICEBOOT", "Notoficacion lanzada");
         NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Log.d("SERVICEBOOT", "NOTIFICATION_ID = " + notifID);
         NM.notify(notifID.intValue(), notificacion(gastoProgramable, context));
 
-/*        try {
-            horaFormateada = Integer.parseInt(myFormat.format(fromUser.parse(horaActual)));
-            Log.d("SERVICEBOOT", "Hora Actual = "+horaFormateada);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i <gastoProgramables.size(); i++) {
-            GastoProgramable gastoProgramable = gastoProgramables.get(i);
-            int hora = gastoProgramable.getHora();
-            //String sHoraGasto = String.valueOf(hora);
-            Log.d("SERVICEBOOT", "Hora Gasto = "+hora);
-            if (hora<=horaFormateada){
-                Log.d("SERVICEBOOT", "Notoficacion lanzada");
-                NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                Log.d("SERVICEBOOT", "NOTIFICATION_ID = " + notifID);
-                NM.notify(notifID, notificacion(gastoProgramable, context, notifID));
-                //servicioGastos.eliminarGastoProgramable(gastoProgramable);
-            }
-
-        }*/
     }
     private Notification notificacion( GastoProgramable gastoProgramable,Context context ) {
 

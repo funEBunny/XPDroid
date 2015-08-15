@@ -88,4 +88,10 @@ public class ServicioGastosBusiness {
 
     }
 
+    public void eliminarGastoProgramable(Context applicationContext, Long id){
+
+        servicioGastosDAO.eliminarGastoProgramable(id);
+        notificationsService.desactivarAlarma(applicationContext, id);
+    }
+
 }

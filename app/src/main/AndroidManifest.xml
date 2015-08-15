@@ -22,38 +22,12 @@
             android:name="AA_MODELS"
             android:value="com.funebunny.xpdroid.gastos.dao.Gasto com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO" />
 
-        <!--
-        <service android:name=".scheduler.Scheduler">
-        <intent-filter>
-            <action android:name="com.funebunny.xpdroid.scheduler.MyScheduler"/>
-        </intent-filter>
-        </service>
-
-        <receiver android:name=".scheduler.Receiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.HOME" />
-            </intent-filter>
-        </receiver>
-        -->
-
         <receiver android:name=".scheduler.AlarmChecker" >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="com.funebunny.xpdroid.scheduler.MyAlarm"/> -->
-            <!-- </intent-filter> -->
         </receiver>
 
         <activity
             android:name=".main.ui.activity.MainActivity"
             android:label="@string/app_name" >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".main.ui.activity.CrearGastoActivity"
