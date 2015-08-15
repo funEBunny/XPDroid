@@ -8,7 +8,7 @@ import com.activeandroid.annotation.Table;
  * Created by schmidt0 on 3/28/2015.
  */
 @Table(name = "GastoFavorito")
-public class GastoFavorito extends Model {
+public class GastoFavoritoDAO extends Model {
 
     @Column(name = "Descripcion")
     private String descripcion;
@@ -20,7 +20,7 @@ public class GastoFavorito extends Model {
     private String categoria;
 
 
-    private String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 

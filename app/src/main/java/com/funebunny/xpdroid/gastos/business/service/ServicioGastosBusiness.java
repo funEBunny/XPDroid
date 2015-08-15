@@ -3,6 +3,7 @@ package com.funebunny.xpdroid.gastos.business.service;
 import android.content.Context;
 
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
@@ -20,7 +21,7 @@ public class ServicioGastosBusiness {
     private static final String DIARIO = "Diario";
 
     ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
-    ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
+    ServicioGastosDAO servicioGastosDAO = new ServicioGastosDAO();
 
     public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana){
 
@@ -47,7 +48,7 @@ public class ServicioGastosBusiness {
         gp.setDescripcion(descripcion);
         gp.setCategoria(categoria);
 
-        Long id = servicioGastos.guardarGastoProgramable(gp);
+        Long id = servicioGastosDAO.guardarGastoProgramable(gp);
 
         String formatTime = null;
         try {
@@ -76,4 +77,15 @@ public class ServicioGastosBusiness {
         }
         return dia;
     }
+
+    public void guardarGastoFavorito(String descripcion, String importe, String categoria){
+
+        GastoFavorito gastoFavorito = new GastoFavorito();
+        gastoFavorito.setDescripcion(descripcion);
+        gastoFavorito.setImporte(importe);
+        gastoFavorito.setCategoria(categoria);
+        servicioGastosDAO.guardarGastoFavorito(gastoFavorito);
+
+    }
+
 }

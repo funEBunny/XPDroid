@@ -17,7 +17,7 @@ import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
-    ServicioGastosBusiness gastosService = new ServicioGastosBusiness();
+    private ServicioGastosBusiness gastosService = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

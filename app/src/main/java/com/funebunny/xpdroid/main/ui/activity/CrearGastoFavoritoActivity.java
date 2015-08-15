@@ -5,10 +5,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 
-public class CrearGastoFavoritoActivity extends ActionBarActivity {
+public class CrearGastoFavoritoActivity extends XPDroidActivity {
+
+    ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +46,15 @@ public class CrearGastoFavoritoActivity extends ActionBarActivity {
         }
     }
 
-//  Custom methods - PRB
-
     public void guardarGastoFavorito(View view) {
 
+        String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
+        String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
+        servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);
+        //Mostrar mensaje de favorito guardado
+        int gasto_favorito_guardado_mensaje = R.string.gasto_favorito_guardado_mensaje;
+        showMessage(gasto_favorito_guardado_mensaje);
+        this.finish();
     }
 }

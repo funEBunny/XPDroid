@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoFavoritoDAO;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoProgramableDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgAnual;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgMensual;
@@ -196,5 +198,60 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         ArrayList<Gasto> gastosLista = new Select().from(Gasto.class).where("Id = ?", id).execute();
         return gastosLista.get(0);
     }
+
+
+    // Gastos Favoritos
+
+    @Override
+    public Long guardarGastoFavorito(GastoFavorito gf) {
+
+        GastoFavoritoDAO gfd = new GastoFavoritoDAO();
+        gfd.setDescripcion(gf.getDescripcion());
+        gfd.setImporte(gf.getImporte());
+        gfd.setCategoria(gf.getCategoria());
+        gfd.save();
+        return gfd.getId();
+    }
+
+    @Override
+    public void eliminarGastoFavorito(Long id) {
+        obtenerGastoFavoritoPorId(id).delete();
+    }
+
+    @Override
+    public void actualizarGastoFavorito(GastoFavorito gf) {
+
+        GastoFavoritoDAO gfd = obtenerGastoFavoritoPorId(gf.getId());
+        gfd.setDescripcion(gf.getDescripcion());
+        gfd.setCategoria(gf.getCategoria());
+        gfd.setImporte(gf.getImporte());
+        gfd.save();
+    }
+
+    @Override
+    public List<GastoFavorito> obtenerGastosFavoritos() {
+
+        List<GastoFavorito> gastosFav = new ArrayList<>();
+        ArrayList<GastoFavoritoDAO> gastosFavDAO = new Select().from(GastoFavoritoDAO.class).execute();
+
+        for (int i = 0; i < gastosFavDAO.size(); i++) {
+
+            GastoFavoritoDAO gfd = gastosFavDAO.get(i);
+            GastoFavorito gf = new GastoFavorito();
+
+            gf.setId(gfd.getId());
+            gf.setDescripcion(gfd.getDescripcion());
+            gf.setImporte(gfd.getImporte());
+            gf.setCategoria(gfd.getCategoria());
+            gastosFav.add(gf);
+        }
+        return gastosFav;
+    }
+
+    private GastoFavoritoDAO obtenerGastoFavoritoPorId(Long id) {
+        ArrayList<GastoFavoritoDAO> gastosFavLista = new Select().from(GastoFavoritoDAO.class).where("Id = ?", id).execute();
+        return gastosFavLista.get(0);
+    }
+
 
 }
