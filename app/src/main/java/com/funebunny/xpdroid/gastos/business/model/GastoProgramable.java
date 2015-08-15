@@ -1,10 +1,12 @@
 package com.funebunny.xpdroid.gastos.business.model;
 
+import java.io.Serializable;
+
 /**
  * Created by schmidt0 on 5/16/2015.
  */
 
-public abstract class GastoProgramable {
+public abstract class GastoProgramable implements Serializable {
 
     public static final int DOMINGO = 1;
     public static final int LUNES = 2;

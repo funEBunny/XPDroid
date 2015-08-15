@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <ListView android:id="@android:id/list" android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:text="@string/ver_mas_gastos_titulo"
+            android:textColor="#ff73a092"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:layout_gravity="center" />
 
-    <TextView android:id="@android:id/empty" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center" />
+        <ImageButton android:id="@+id/boton_ver_lista_gastos_programables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/boton_mostrar_mas_gastos"
+            android:src="@drawable/ic_historial"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:onClick="verHistorial"/>
 
-</FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:text="@string/gastos_mes_titulo"
+        android:textColor="#ff0000ff"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold|italic"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_vertical" />
+
+    <ListView android:id="@+id/lista_gastos_programables_lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp" />
+
+</LinearLayout>

@@ -39,8 +39,6 @@ public interface IServicioGastosDAO {
 
     List<GastoProgramable> obtenerGastosProgramables();
 
-    List<GastoProgramable> obtenerGastosProgramablesDelDia();
-
     GastoProgramable obtenerGastoProgramablePorID(Long id);
 
     Long guardarGastoProgramable(GastoProgramable gp);

@@ -58,11 +58,6 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public List<GastoProgramable> obtenerGastosProgramables() {
-        return null;
-    }
-
-    @Override
-    public List<GastoProgramable> obtenerGastosProgramablesDelDia() {
 
 
         List<GastoProgramable> gastos = new ArrayList<>();

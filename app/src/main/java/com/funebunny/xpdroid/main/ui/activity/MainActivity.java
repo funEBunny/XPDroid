@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -153,12 +156,24 @@ public class MainActivity extends ActionBarActivity
         Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
         gasto.setgId(gasto.getId());   //Setear Id serializable ya que el mId no es serializable
         Bundle bGasto = new Bundle();
-        bGasto.putSerializable(AppConstants.GASTO,gasto);
+        bGasto.putSerializable(AppConstants.GASTO, gasto);
 
         Intent i = new Intent(this, TratarGastoActivity.class);
         i.putExtras(bGasto);
         startActivity(i);
     }
+    public void tratarGastoProgramable(View view){
+
+        GastoProgramable gasto = (GastoProgramable) view.findViewById(R.id.gastos_programables_list_item).getTag();
+        Bundle bGasto = new Bundle();
+        bGasto.putSerializable(AppConstants.GASTO,gasto);
+        ServicioGastosBusiness sg = new ServicioGastosBusiness();
+        sg.eliminarGastoProgramable(getApplicationContext(),gasto.getId());
+/*        Intent i = new Intent(this, TratarGastoActivity.class);
+        i.putExtras(bGasto);
+        startActivity(i);*/
+    }
+
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
     public void onGastosFavoritosItemSelected(String id) {

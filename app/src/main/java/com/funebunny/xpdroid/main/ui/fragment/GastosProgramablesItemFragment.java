@@ -10,14 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-
+import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoProgramable;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -42,7 +47,8 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
     private String mParam2;
 
     private GastosProgramablesItemCallbacks mListener;
-
+    private List<GastoProgramable> gastosProgramables = new ArrayList<GastoProgramable>();
+    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
     /**
      * The fragment's ListView/GridView.
      */
@@ -81,9 +87,8 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.gastos_programables_list_item, R.id.gastos_programables_list_item, DummyContent.ITEMS);
+        this.gastosProgramables.addAll(servicioGastos.obtenerGastosProgramables());
+        mAdapter = new ListAdapterGastoProgramable(getActivity(), R.layout.gastos_programables_list_item, gastosProgramables);
     }
 
     @Override
@@ -91,7 +96,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         View view = inflater.inflate(R.layout.fragment_gastosprogramablesitem_list, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (AbsListView) view.findViewById(R.id.lista_gastos_programables_lista);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -110,6 +115,24 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
             throw new ClassCastException(activity.toString() + " must implement GastosProgramablesItemCallbacks.onGastosProgramablesItemSelected");
         }
     }
+
+
+    // PRB - Refresh del reporte al volver al fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.gastosProgramables.clear();
+        this.gastosProgramables.addAll(servicioGastos.obtenerGastosProgramables());
+        mAdapter = new ListAdapterGastoProgramable(getActivity(), R.layout.gastos_programables_list_item, gastosProgramables);
+        View view = getView();
+
+        mListView = (ListView) view.findViewById(R.id.lista_gastos_programables_lista);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        // Set OnItemClickListener so we can be notified on item clicks
+        mListView.setOnItemClickListener(this);
+    }
+
 
     @Override
     public void onDetach() {
