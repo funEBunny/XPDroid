@@ -28,7 +28,7 @@ public class Gasto extends Model implements Serializable {
        super();
     }
 
-    //PRB - Se agrega atributo gId ya que la clase Model no es Serializable y el mId se pierde entre actividades
+    //PRB - Se agrega atributo gId ya que el mId de la clase Model no es Serializable
     private Long gId;
 
 
@@ -80,7 +80,16 @@ public class Gasto extends Model implements Serializable {
     }
 
     public void setFecha(String fecha) {
-        this.fecha = fecha;
+
+        String fechaGasto = "";
+        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyyMMdd");
+        try {
+            fechaGasto = myFormat.format(fromUser.parse(fecha));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.fecha = fechaGasto;
     }
 
     @Override

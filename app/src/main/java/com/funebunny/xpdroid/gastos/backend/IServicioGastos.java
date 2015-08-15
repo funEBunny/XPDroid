@@ -35,8 +35,10 @@ public interface IServicioGastos {
 
     void eliminarGastoProgramable(GastoProgramable gp);
 
-    void eliminarGasto(Gasto gasto);
+    void eliminarGasto(Long id);
 
+    void actualizarGasto(Gasto gasto);
 
+    Gasto obtenerGastoPorId(Long id);
 
 }

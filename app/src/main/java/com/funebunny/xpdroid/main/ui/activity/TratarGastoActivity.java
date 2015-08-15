@@ -65,21 +65,31 @@ public class TratarGastoActivity extends XPDroidActivity {
 
     //>Added by PRB
     public void mostrarDatePicker(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
+        EditText fecha = (EditText) this.findViewById(R.id.activity_tratar_gasto_et_fecha);
+        DialogFragment newFragment = DatePickerFragment.newInstance(fecha);
         newFragment.show(getFragmentManager(), "datePicker");
     }
 
     public void actualizarGasto(View v) {
-
+        if (gasto != null) {
+            gasto.setDescripcion(((EditText) findViewById(R.id.activity_tratar_gasto_et_descripcion)).getText().toString());
+            gasto.setImporte(((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).getText().toString());
+            gasto.setFecha(((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).getText().toString());
+            gasto.setCategoria(((Spinner) findViewById(R.id.activity_tratar_gasto_sp_categoria)).getSelectedItem().toString());
+            servicioGastos.actualizarGasto(gasto);
+            //Mostrar mensaje de gasto actualizado
+            int gasto_actualizado_mensaje = R.string.gasto_actualizado_mensaje;
+            showMessage(gasto_actualizado_mensaje);
+            this.finish();
+        }
     }
 
     public void eliminarGasto(View v) {
-
         if (gasto != null) {
-            servicioGastos.eliminarGasto(gasto);
+            servicioGastos.eliminarGasto(gasto.getgId());
             //Mostrar mensaje de gasto eliminado
-            int gasto_guardado_mensaje = R.string.gasto_eliminado_mensaje;
-            showMessage(gasto_guardado_mensaje);
+            int gasto_eliminado_mensaje = R.string.gasto_eliminado_mensaje;
+            showMessage(gasto_eliminado_mensaje);
             this.finish();
         }
     }

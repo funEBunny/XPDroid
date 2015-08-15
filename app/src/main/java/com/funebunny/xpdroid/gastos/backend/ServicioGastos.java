@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ServicioGastos implements IServicioGastos {
 
-   // @Inject
+    // @Inject
     public ServicioGastos() {
     }
 
@@ -37,7 +37,7 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
-        if(mes.length()==1) {
+        if (mes.length() == 1) {
             mes = "0" + mes;
         }
         String fecha = "%" + anio + mes + "%";
@@ -50,17 +50,9 @@ public class ServicioGastos implements IServicioGastos {
         gasto.setImporte(importe);
         gasto.setDescripcion(descripcion);
         gasto.setCategoria(categoria);
+        gasto.setFecha(fecha);
 
-        String fechaGasto = "";
-        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyyMMdd");
-        try {
-            fechaGasto = myFormat.format(fromUser.parse(fecha));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        gasto.setFecha(fechaGasto);
-        Log.d("XPDROID", "Guardando Gasto: "+gasto.toString());
+        Log.d("XPDROID", "Guardando Gasto: " + gasto.toString());
         gasto.save();
     }
 
@@ -80,22 +72,22 @@ public class ServicioGastos implements IServicioGastos {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
             GastoProgramable gastoProgramable;
             int repeticion = gastoProgramableDAO.getRepeticion();
-            switch (repeticion){
-                case GastoProgramableDAO.SEMANAL:{
+            switch (repeticion) {
+                case GastoProgramableDAO.SEMANAL: {
                     gastoProgramable = new GastoProgSemanal();
-                    ((GastoProgSemanal)gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
+                    ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
                     break;
                 }
-                case GastoProgramableDAO.MENSUAL:{
+                case GastoProgramableDAO.MENSUAL: {
                     gastoProgramable = new GastoProgMensual();
-                    ((GastoProgMensual)gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+                    ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
                     break;
                 }
-                case GastoProgramableDAO.ANUAL:{
+                case GastoProgramableDAO.ANUAL: {
                     gastoProgramable = new GastoProgAnual();
                     break;
                 }
-                default:{
+                default: {
                     gastoProgramable = new GastoProgDiario();
                     break;
                 }
@@ -124,47 +116,47 @@ public class ServicioGastos implements IServicioGastos {
 
         ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).where("Id = ?", id).execute();
 
-            GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(0);
-            GastoProgramable gastoProgramable;
-            int repeticion = gastoProgramableDAO.getRepeticion();
+        GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(0);
+        GastoProgramable gastoProgramable;
+        int repeticion = gastoProgramableDAO.getRepeticion();
 
-            switch (repeticion) {
-                case GastoProgramableDAO.SEMANAL: {
-                    gastoProgramable = new GastoProgSemanal();
-                    ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
-                    break;
-                }
-                case GastoProgramableDAO.MENSUAL: {
-                    gastoProgramable = new GastoProgMensual();
-                    ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
-                    break;
-                }
-                case GastoProgramableDAO.ANUAL: {
-                    gastoProgramable = new GastoProgAnual();
-                    break;
-                }
-                default: {
-                    gastoProgramable = new GastoProgDiario();
-                    break;
-                }
+        switch (repeticion) {
+            case GastoProgramableDAO.SEMANAL: {
+                gastoProgramable = new GastoProgSemanal();
+                ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
+                break;
             }
-            gastoProgramable.setImporte(gastoProgramableDAO.getImporte());
-            gastoProgramable.setCategoria(gastoProgramableDAO.getCategoria());
-            gastoProgramable.setDescripcion(gastoProgramableDAO.getDescripcion());
-            gastoProgramable.setHora(gastoProgramableDAO.getHora());
-            gastoProgramable.setId(gastoProgramableDAO.getId());
-            Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
-            return gastoProgramable;
+            case GastoProgramableDAO.MENSUAL: {
+                gastoProgramable = new GastoProgMensual();
+                ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+                break;
+            }
+            case GastoProgramableDAO.ANUAL: {
+                gastoProgramable = new GastoProgAnual();
+                break;
+            }
+            default: {
+                gastoProgramable = new GastoProgDiario();
+                break;
+            }
+        }
+        gastoProgramable.setImporte(gastoProgramableDAO.getImporte());
+        gastoProgramable.setCategoria(gastoProgramableDAO.getCategoria());
+        gastoProgramable.setDescripcion(gastoProgramableDAO.getDescripcion());
+        gastoProgramable.setHora(gastoProgramableDAO.getHora());
+        gastoProgramable.setId(gastoProgramableDAO.getId());
+        Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
+        return gastoProgramable;
     }
 
     @Override
     public Long guardarGastoProgramable(GastoProgramable gp) {
-        Log.d("XPDROID", "Programando Gasto: "+gp.toString());
+        Log.d("XPDROID", "Programando Gasto: " + gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();
 
         if (gp instanceof GastoProgDiario) {
             gpd.setRepeticion(GastoProgramableDAO.DIARIO);
-        }else if (gp instanceof GastoProgSemanal){
+        } else if (gp instanceof GastoProgSemanal) {
             int diaSemana = ((GastoProgSemanal) gp).getDiaSemana();
             gpd.setDiaSemana(diaSemana);
             gpd.setRepeticion(GastoProgramableDAO.SEMANAL);
@@ -181,14 +173,30 @@ public class ServicioGastos implements IServicioGastos {
 
     @Override
     public void eliminarGastoProgramable(GastoProgramable gp) {
-        Log.d("XPDROID", "Eliminando Gasto: "+gp.toString());
+        Log.d("XPDROID", "Eliminando Gasto: " + gp.toString());
         GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, gp.getId());
         delGP.delete();
     }
 
     @Override
-    public void eliminarGasto(Gasto gasto) {
-        gasto.delete(Gasto.class,gasto.getgId());
+    public void eliminarGasto(Long id) {
+        obtenerGastoPorId(id).delete();
+    }
+
+    @Override
+    public void actualizarGasto(Gasto gasto) {
+        Gasto gastoDb = obtenerGastoPorId(gasto.getgId());
+        gastoDb.setDescripcion(gasto.getDescripcion());
+        gastoDb.setImporte(gasto.getImporte());
+        gastoDb.setCategoria(gasto.getCategoria());
+        gastoDb.setFecha(gasto.getFecha());
+        gastoDb.save();
+    }
+
+    @Override
+    public Gasto obtenerGastoPorId(Long id) {
+        ArrayList<Gasto> gastosLista = new Select().from(Gasto.class).where("Id = ?", id).execute();
+        return gastosLista.get(0);
     }
 
 }
