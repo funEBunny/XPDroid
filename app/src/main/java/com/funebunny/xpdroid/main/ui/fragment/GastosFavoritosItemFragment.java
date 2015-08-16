@@ -12,13 +12,22 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -41,10 +50,11 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     private String mParam1;
     private String mParam2;
 
-    //private List<String> columnas = new ArrayList<String>();
     private String[] columnas;
 
     private GastosFavoritosItemCallbacks mListener;
+    private List<GastoFavorito> gastosFavoritos = new ArrayList<GastoFavorito>();
+    private ServicioGastosBusiness servicioGastos = new ServicioGastosBusiness();
 
     /**
      * The fragment's ListView/GridView.
@@ -79,22 +89,18 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//
+//        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
 
-        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
+        gastosFavoritos.addAll(servicioGastos.obtenerGastosFavoritos());
 
         // TODO: Change Adapter to display your content
 
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, DummyContent.ITEMS);
-
-//        ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
-//        List<Gasto> gastos = servicioGastos.obtenerGastosPorFecha("05","2015");
-//        mAdapter = new ArrayAdapter<Gasto>(getActivity(),
-//                R.layout.gastos_favoritos_list_item, R.id.gastos_favoritos_list_item, gastos);
+        mAdapter = new ListAdapterGastoFavorito(getActivity(), R.layout.gastos_favoritos_list_item, gastosFavoritos);
 
     }
 
@@ -103,7 +109,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         View view = inflater.inflate(R.layout.fragment_gastosfavoritositem_list, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (ListView) view.findViewById(R.id.fragment_gastosfavoritositem_list_lv_lista);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -112,6 +118,23 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         return view;
     }
 
+
+    // PRB - Refresh del reporte al volver al fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.gastosFavoritos.clear();
+        this.gastosFavoritos.addAll(servicioGastos.obtenerGastosFavoritos());
+
+        mAdapter = new ListAdapterGastoFavorito(getActivity(), R.layout.gastos_favoritos_list_item, gastosFavoritos);
+        View view = getView();
+
+        mListView = (ListView) view.findViewById(R.id.fragment_gastosfavoritositem_list_lv_lista);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        // Set OnItemClickListener so we can be notified on item clicks
+        mListView.setOnItemClickListener(this);
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

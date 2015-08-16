@@ -48,9 +48,9 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
 
     public void guardarGastoFavorito(View view) {
 
-        String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
-        String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
+        String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_descripcion)).getText().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).getText().toString();
+        String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria)).getSelectedItem().toString();
         servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);
         //Mostrar mensaje de favorito guardado
         int gasto_favorito_guardado_mensaje = R.string.gasto_favorito_guardado_mensaje;

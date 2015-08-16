@@ -11,6 +11,7 @@ import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by schmidt0 on 7/25/2015.
@@ -86,6 +87,18 @@ public class ServicioGastosBusiness {
         gastoFavorito.setCategoria(categoria);
         servicioGastosDAO.guardarGastoFavorito(gastoFavorito);
 
+    }
+
+    public List<GastoFavorito> obtenerGastosFavoritos(){
+        return servicioGastosDAO.obtenerGastosFavoritos();
+    }
+
+    public void eliminarGastoFavorito(Long id){
+        servicioGastosDAO.eliminarGastoFavorito(id);
+    }
+
+    public void actualizarGastoFavorito(GastoFavorito gf){
+        servicioGastosDAO.actualizarGastoFavorito(gf);
     }
 
     public void eliminarGastoProgramable(Context applicationContext, Long id){

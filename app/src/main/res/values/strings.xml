@@ -13,6 +13,8 @@
     <string name="gasto_eliminado_mensaje">Gasto eliminado exitosamente!</string>
     <string name="gasto_actualizado_mensaje">Gasto actualizado exitosamente!</string>
     <string name="gasto_favorito_guardado_mensaje">Favorito guardado exitosamente!</string>
+    <string name="favorito_eliminado_mensaje">Favorito eliminado exitosamente!</string>
+    <string name="favorito_actualizado_mensaje">Favorito actualizado exitosamente!</string>
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
@@ -58,6 +60,7 @@
     <string name="title_activity_crear_recordatorio">Crear Recordatorio</string>
     <string name="title_activity_xpdroid">Actividad Base de XPDroid</string>
     <string name="gastos_mes_titulo">Gastos del Mes Realizados:</string>
+    <string name="gastos_favoritos_titulo">Gastos Favoritos:</string>
     <string name="ver_mas_gastos_titulo">Buscar Gastos Realizados</string>
 
     <string name="boton_buscar">Buscar</string>
@@ -84,5 +87,8 @@
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="title_activity_tratar_gasto_favorito">Tratar Gasto Favorito</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
@@ -88,7 +89,7 @@ public class MainActivity extends ActionBarActivity
             }
             case 1: { //Historial de Gastos
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1),"historial")
+                        .replace(R.id.container, HistorialGastosItemFragment.newInstance(position + 1))
                         .commit();
                 break;
             }
@@ -162,6 +163,18 @@ public class MainActivity extends ActionBarActivity
         i.putExtras(bGasto);
         startActivity(i);
     }
+
+    public void tratarGastoFavorito(View view){
+
+        GastoFavorito gf = (GastoFavorito) view.findViewById(R.id.gastos_favoritos_list_item_ll_main).getTag();
+        Bundle bgf = new Bundle();
+        bgf.putSerializable(AppConstants.GASTO_FAVORITO, gf);
+
+        Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
+        i.putExtras(bgf);
+        startActivity(i);
+    }
+
     public void tratarGastoProgramable(View view){
 
         GastoProgramable gasto = (GastoProgramable) view.findViewById(R.id.gastos_programables_list_item).getTag();

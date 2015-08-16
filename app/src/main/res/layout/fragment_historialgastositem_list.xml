@@ -39,12 +39,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
-        android:text="@string/gastos_mes_titulo"
         android:textColor="#ff0000ff"
         android:textSize="@dimen/abc_text_size_medium_material"
         android:textStyle="bold|italic"
         android:layout_margin="10dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:text="@string/gastos_mes_titulo" />
 
     <ListView android:id="@+id/historial_gastos_lista"
         android:layout_width="match_parent"
