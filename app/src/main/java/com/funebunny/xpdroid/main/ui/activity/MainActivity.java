@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +34,9 @@ import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -71,6 +75,7 @@ public class MainActivity extends ActionBarActivity
 
         //To allow Up navigation with the app icon in the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override //Implementing method from NavigationDrawerFragment.NavigationDrawerCallbacks
@@ -343,6 +348,7 @@ public class MainActivity extends ActionBarActivity
          * Returns a new instance of this fragment for the given section
          * number.
          */
+
         public static PlaceholderFragment newInstance(int itemSelected) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -362,6 +368,7 @@ public class MainActivity extends ActionBarActivity
             // OJO que desde MainActiviy.onNavigationDrawerItemSelected se manda la posicion + 1
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             return rootView;
         }
 

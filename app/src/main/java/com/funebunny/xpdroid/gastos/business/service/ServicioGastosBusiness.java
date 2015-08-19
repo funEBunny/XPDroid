@@ -7,6 +7,7 @@ import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,11 +25,11 @@ public class ServicioGastosBusiness {
     ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
     ServicioGastosDAO servicioGastosDAO = new ServicioGastosDAO();
 
-    public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana){
+    public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana) {
 
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat myFormat = new SimpleDateFormat("HHmm");
-        String horaFormateada="0";
+        String horaFormateada = "0";
         try {
             horaFormateada = myFormat.format(fromUser.parse(horario));
         } catch (ParseException e) {
@@ -37,10 +38,10 @@ public class ServicioGastosBusiness {
 
         GastoProgramable gp;
 
-        if (SEMANAL.equalsIgnoreCase(repeticion)){
+        if (SEMANAL.equalsIgnoreCase(repeticion)) {
             gp = new GastoProgSemanal();
-            ((GastoProgSemanal)gp).setDiaSemana(getDiaSemana(diaSemana));
-        }else{
+            ((GastoProgSemanal) gp).setDiaSemana(getDiaSemana(diaSemana));
+        } else {
             gp = new GastoProgDiario();
         }
 
@@ -58,28 +59,50 @@ public class ServicioGastosBusiness {
             e.printStackTrace();
         }
 
-        if (SEMANAL.equalsIgnoreCase(repeticion)){
+        if (SEMANAL.equalsIgnoreCase(repeticion)) {
             notificationsService.activarAlarmaSemanal(applicationContext, getDiaSemana(diaSemana), formatTime, id);
-        }else{
+        } else {
             notificationsService.activarAlarmaDiaria(applicationContext, formatTime, id);
         }
     }
 
-    private int getDiaSemana(String diaSemana){
-        int dia=0;
-        switch (diaSemana){
-            case "Lunes":dia= Calendar.MONDAY;break;
-            case "Martes":dia=  Calendar.TUESDAY;break;
-            case "Miercoles":dia=  Calendar.WEDNESDAY;break;
-            case "Jueves":dia=  Calendar.THURSDAY;break;
-            case "Viernes":dia=  Calendar.FRIDAY;break;
-            case "Sabado":dia=  Calendar.SATURDAY;break;
-            default:dia=  Calendar.SATURDAY;break;
+    public void eliminarGastoProgramable(Context applicationContext, Long id) {
+
+        servicioGastosDAO.eliminarGastoProgramable(id);
+        notificationsService.desactivarAlarma(applicationContext, id);
+    }
+
+    private int getDiaSemana(String diaSemana) {
+        int dia = 0;
+        switch (diaSemana) {
+            case "Lunes":
+                dia = Calendar.MONDAY;
+                break;
+            case "Martes":
+                dia = Calendar.TUESDAY;
+                break;
+            case "Miercoles":
+                dia = Calendar.WEDNESDAY;
+                break;
+            case "Jueves":
+                dia = Calendar.THURSDAY;
+                break;
+            case "Viernes":
+                dia = Calendar.FRIDAY;
+                break;
+            case "Sabado":
+                dia = Calendar.SATURDAY;
+                break;
+            default:
+                dia = Calendar.SATURDAY;
+                break;
         }
         return dia;
     }
 
-    public void guardarGastoFavorito(String descripcion, String importe, String categoria){
+
+    // Gastos Favoritos
+    public void guardarGastoFavorito(String descripcion, String importe, String categoria) {
 
         GastoFavorito gastoFavorito = new GastoFavorito();
         gastoFavorito.setDescripcion(descripcion);
@@ -89,22 +112,38 @@ public class ServicioGastosBusiness {
 
     }
 
-    public List<GastoFavorito> obtenerGastosFavoritos(){
+    public List<GastoFavorito> obtenerGastosFavoritos() {
         return servicioGastosDAO.obtenerGastosFavoritos();
     }
 
-    public void eliminarGastoFavorito(Long id){
+    public void eliminarGastoFavorito(Long id) {
         servicioGastosDAO.eliminarGastoFavorito(id);
     }
 
-    public void actualizarGastoFavorito(GastoFavorito gf){
+    public void actualizarGastoFavorito(GastoFavorito gf) {
         servicioGastosDAO.actualizarGastoFavorito(gf);
     }
 
-    public void eliminarGastoProgramable(Context applicationContext, Long id){
+    // Objetivos
 
-        servicioGastosDAO.eliminarGastoProgramable(id);
-        notificationsService.desactivarAlarma(applicationContext, id);
+    public void guardarObjetivo(String periodo, String importe){
+
+        Objetivo objetivo = new Objetivo();
+        objetivo.setPeriodo(periodo);
+        objetivo.setImporte(importe);
+        servicioGastosDAO.guardarObjetivo(objetivo);
+
     }
 
+    public List<Objetivo> obtenerObjetivos(){
+        return servicioGastosDAO.obtenerObjetivos();
+    }
+
+    public void eliminarObjetivo(Long id){
+        servicioGastosDAO.eliminarObjetivo(id);
+    }
+
+    public void actualizarObjetivo(Objetivo obj){
+        servicioGastosDAO.actualizarObjetivo(obj);
+    }
 }

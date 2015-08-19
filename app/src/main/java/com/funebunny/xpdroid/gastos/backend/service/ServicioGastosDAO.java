@@ -6,12 +6,14 @@ import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoFavoritoDAO;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoProgramableDAO;
+import com.funebunny.xpdroid.gastos.backend.dao.ObjetivoDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgAnual;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgMensual;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -248,5 +250,55 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         return gastosFavLista.get(0);
     }
 
+    // Objetivos
 
+    @Override
+    public Long guardarObjetivo(Objetivo obj) {
+
+        ObjetivoDAO objDAO = new ObjetivoDAO();
+        objDAO.setPeriodo(obj.getPeriodo());
+        objDAO.setImporte(obj.getImporte());
+        objDAO.save();
+        return objDAO.getId();
+    }
+
+    @Override
+    public void eliminarObjetivo(Long id) {
+        obtenerObjetivoPorId(id).delete();
+    }
+
+    @Override
+    public void actualizarObjetivo(Objetivo obj) {
+
+        ObjetivoDAO objDAO = obtenerObjetivoPorId(obj.getId());
+        objDAO.setPeriodo(obj.getPeriodo());
+        objDAO.setImporte(obj.getImporte());
+        objDAO.save();
+    }
+
+    @Override
+    public List<Objetivo> obtenerObjetivos() {
+
+        List<Objetivo> objetivos = new ArrayList<>();
+        ArrayList<ObjetivoDAO> objetivosDAO = new Select().from(ObjetivoDAO.class).execute();
+
+        for (int i = 0; i < objetivosDAO.size(); i++) {
+
+            ObjetivoDAO objDAO = objetivosDAO.get(i);
+            Objetivo obj = new Objetivo();
+
+            obj.setId(objDAO.getId());
+            obj.setPeriodo(objDAO.getPeriodo());
+            obj.setImporte(objDAO.getImporte());
+
+            objetivos.add(obj);
+        }
+
+        return objetivos;
+    }
+
+    private ObjetivoDAO obtenerObjetivoPorId(Long id){
+        ArrayList<ObjetivoDAO> objetivosLista = new Select().from(ObjetivoDAO.class).where("Id = ?", id).execute();
+        return objetivosLista.get(0);
+    }
 }

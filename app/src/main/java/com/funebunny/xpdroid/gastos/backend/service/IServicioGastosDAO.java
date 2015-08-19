@@ -4,6 +4,7 @@ import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoFavoritoDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.util.List;
 
@@ -54,5 +55,15 @@ public interface IServicioGastosDAO {
     void actualizarGastoFavorito(GastoFavorito gf);
 
     List<GastoFavorito> obtenerGastosFavoritos();
+
+    // Objetivos
+
+    Long guardarObjetivo(Objetivo obj);
+
+    void eliminarObjetivo(Long id);
+
+    void actualizarObjetivo(Objetivo obj);
+
+    List<Objetivo> obtenerObjetivos();
 
 }
