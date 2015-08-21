@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="@string/eliminar"
             android:id="@+id/activity_tratar_gasto_favorito_bt_eliminar"
-            android:layout_alignTop="@+id/button2"
+            android:layout_alignTop="@+id/activity_tratar_objetivo_bt_actualizar"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="1"

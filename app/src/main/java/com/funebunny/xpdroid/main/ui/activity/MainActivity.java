@@ -26,6 +26,7 @@ import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
@@ -178,6 +179,18 @@ public class MainActivity extends ActionBarActivity
         Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
         i.putExtras(bgf);
         startActivity(i);
+    }
+
+    public void tratarObjetivo(View view){
+
+        Objetivo obj = (Objetivo) view.findViewById(R.id.objetivos_list_item_ll_main).getTag();
+        Bundle bobj = new Bundle();
+        bobj.putSerializable(AppConstants.OBJETIVO, obj);
+
+        Intent i = new Intent(this, TratarObjetivoActivity.class);
+        i.putExtras(bobj);
+        startActivity(i);
+
     }
 
     public void tratarGastoProgramable(View view){

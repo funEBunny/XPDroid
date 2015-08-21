@@ -97,6 +97,10 @@
             android:name=".main.ui.activity.TratarGastoFavoritoActivity"
             android:label="@string/title_activity_tratar_gasto_favorito" >
         </activity>
+        <activity
+            android:name=".main.ui.activity.TratarObjetivoActivity"
+            android:label="@string/title_activity_tratar_objetivo" >
+        </activity>
     </application>
 
 </manifest>

@@ -10,14 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterObjetivo;
 import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -42,7 +49,8 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     private String mParam2;
 
     private ObjetivosItemCallbacks mListener;
-
+    private List<Objetivo> objetivos = new ArrayList<Objetivo>();
+    private ServicioGastosBusiness servicioGastos = new ServicioGastosBusiness();
     /**
      * The fragment's ListView/GridView.
      */
@@ -81,9 +89,11 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
+        objetivos.addAll(servicioGastos.obtenerObjetivos());
+
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+
+        mAdapter = new ListAdapterObjetivo(getActivity(), R.layout.objetivos_list_item, objetivos);
     }
 
     @Override
@@ -92,13 +102,30 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
         View view = inflater.inflate(R.layout.fragment_objetivositem, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (ListView) view.findViewById(R.id.fragment_objetivositem_list_lv_lista);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 
         return view;
+    }
+
+    // PRB - Refresh del reporte al volver al fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.objetivos.clear();
+        this.objetivos.addAll(servicioGastos.obtenerObjetivos());
+
+        mAdapter = new ListAdapterObjetivo(getActivity(), R.layout.objetivos_list_item, objetivos);
+        View view = getView();
+
+        mListView = (ListView) view.findViewById(R.id.fragment_objetivositem_list_lv_lista);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        // Set OnItemClickListener so we can be notified on item clicks
+        mListView.setOnItemClickListener(this);
     }
 
     @Override
