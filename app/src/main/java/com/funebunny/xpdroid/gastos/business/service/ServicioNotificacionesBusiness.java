@@ -5,9 +5,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.scheduler.AlarmChecker;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -81,12 +82,21 @@ public class ServicioNotificacionesBusiness {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
         Date today = Calendar.getInstance().getTime();
         String todayTime = timeFormat.format(today);
-        String timeToCompare = time.replace(":","");
+        String timeToCompare = time.replace(":", "");
 
         if (Integer.valueOf(todayTime)>Integer.valueOf(timeToCompare)) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void actualizarAlarma(Context applicationContext, GastoProgramable gastoProgramable) {
+        desactivarAlarma(applicationContext, gastoProgramable.getId());
+        if (gastoProgramable instanceof GastoProgSemanal){
+            activarAlarmaSemanal(applicationContext, ((GastoProgSemanal) gastoProgramable).getDiaSemana(), gastoProgramable.getHora(), gastoProgramable.getId());
+        }else{
+            activarAlarmaDiaria(applicationContext, gastoProgramable.getHora(), gastoProgramable.getId());
         }
     }
 

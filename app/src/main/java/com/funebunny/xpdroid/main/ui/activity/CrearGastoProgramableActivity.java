@@ -71,7 +71,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
 
     //Métodos custom XPDroid
     public void mostrarTimePicker(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        EditText viewById = (EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario);
+        DialogFragment newFragment = TimePickerFragment.newInstance(viewById);
         newFragment.show(getFragmentManager(), "timePicker");
     }
 

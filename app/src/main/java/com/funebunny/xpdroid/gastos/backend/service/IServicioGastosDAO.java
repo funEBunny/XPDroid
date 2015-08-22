@@ -46,6 +46,8 @@ public interface IServicioGastosDAO {
 
     void eliminarGastoProgramable(Long id);
 
+    void actualizarGastoProgramable(GastoProgramable gastoProgramable);
+
    // Gastos Favoritos
 
     Long guardarGastoFavorito(GastoFavorito gf);

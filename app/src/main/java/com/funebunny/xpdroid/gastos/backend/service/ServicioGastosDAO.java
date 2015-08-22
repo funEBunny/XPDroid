@@ -90,7 +90,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
                 }
             }
 
-            Integer hora = gastoProgramableDAO.getHora();
+            String hora = gastoProgramableDAO.getHora();
             String categoria = gastoProgramableDAO.getCategoria();
             String importe = gastoProgramableDAO.getImporte();
             String descripcion = gastoProgramableDAO.getDescripcion();
@@ -173,6 +173,16 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         Log.d("XPDROID", "Eliminando Gasto: " + id);
         GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, id);
         delGP.delete();
+    }
+
+    @Override
+    public void actualizarGastoProgramable(GastoProgramable gastoProgramable) {
+        GastoProgramableDAO gastoDb = GastoProgramableDAO.load(GastoProgramableDAO.class, gastoProgramable.getId());
+        gastoDb.setDescripcion(gastoProgramable.getDescripcion());
+        gastoDb.setImporte(gastoProgramable.getImporte());
+        gastoDb.setCategoria(gastoProgramable.getCategoria());
+        gastoDb.setHora(gastoProgramable.getHora());
+        gastoDb.save();
     }
 
     @Override

@@ -1,0 +1,142 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.funebunny.xpdroid.main.ui.activity.TratarGastoProgramableActivity"
+    android:orientation="vertical"
+    android:id="@+id/activity_tratar_gasto_programable_ll_main">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_repeticion"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_tratar_gasto_programable_sp_repeticion"
+            android:entries="@array/repeticion"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_descripcion"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_tratar_gasto_programable_et_descripcion"
+            android:hint="@string/descripcion"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_categoria"
+        android:layout_weight="1">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_tratar_gasto_programable_sp_categoria"
+            android:entries="@array/categorias"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_importe"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/activity_tratar_gasto_programable_et_importe"
+            android:hint="@string/importe"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_horario"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/activity_tratar_gasto_programable_et_horario"
+            android:hint="@string/horario"
+            android:layout_centerInParent="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_tratar_gasto_programable_ib_time_picker"
+            android:src="@drawable/ic_time"
+            android:layout_alignBottom="@+id/activity_tratar_gasto_programable_et_horario"
+            android:layout_toRightOf="@+id/activity_tratar_gasto_programable_et_horario"
+            android:layout_toEndOf="@+id/activity_tratar_gasto_programable_et_horario"
+            android:onClick="mostrarTimePicker" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_tratar_gasto_programable_rl_dias_semana"
+        android:layout_weight="1">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_tratar_gasto_programable_sp_dias_semana"
+            android:entries="@array/dias_semana"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/activity_tratar_gasto_programable_ll_opciones">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/actualizar"
+            android:id="@+id/activity_tratar_gasto_programable_bt_actualizar"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:onClick="actualizarGastoProgramable" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/eliminar"
+            android:id="@+id/activity_tratar_gasto_programable_bt_eliminar"
+            android:layout_alignTop="@+id/activity_tratar_gasto_programable_bt_actualizar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:onClick="eliminarGastoProgramable" />
+    </LinearLayout>
+</LinearLayout>

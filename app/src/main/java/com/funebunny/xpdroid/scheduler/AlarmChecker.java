@@ -57,7 +57,7 @@ public class AlarmChecker extends BroadcastReceiver {
         bundle.putString("categoria",gastoProgramable.getCategoria());
         bundle.putString("descripcion",gastoProgramable.getDescripcion());
         bundle.putString("importe",gastoProgramable.getImporte());
-        bundle.putInt("hora",gastoProgramable.getHora());
+        bundle.putString("hora",gastoProgramable.getHora());
         bundle.putLong("id",gastoProgramable.getId());
         resultIntent.putExtras(bundle);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);

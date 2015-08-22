@@ -5,6 +5,7 @@ package com.funebunny.xpdroid.gastos.business.model;
  */
 public class GastoProgSemanal extends GastoProgramable{
 
+    public static String SEMANAL = "Semanal";
     private int diaSemana;
 
     @Override

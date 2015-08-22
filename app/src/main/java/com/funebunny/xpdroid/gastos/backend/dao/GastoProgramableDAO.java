@@ -4,6 +4,9 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by schmidt0 on 5/16/2015.
  */
@@ -74,12 +77,24 @@ public class GastoProgramableDAO extends Model {
         this.mes = mes;
     }
 
-    public Integer getHora() {
-        return hora;
+    public String getHora() {
+        SimpleDateFormat toUser = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat fromDB = new SimpleDateFormat("HHmm");
+        try {
+            return toUser.format(fromDB.parse(String.valueOf(hora)));
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
-    public void setHora(Integer hora) {
-        this.hora = hora;
+    public void setHora(String hora) {
+        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat toDB = new SimpleDateFormat("HHmm");
+        try {
+            this.hora = Integer.valueOf(toDB.format(fromUser.parse(hora)));
+        } catch (ParseException e) {
+            this.hora =0;
+        }
     }
 
     public Integer getDiaSemana() {

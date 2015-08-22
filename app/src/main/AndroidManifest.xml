@@ -101,6 +101,10 @@
             android:name=".main.ui.activity.TratarObjetivoActivity"
             android:label="@string/title_activity_tratar_objetivo" >
         </activity>
+        <activity
+            android:name=".main.ui.activity.TratarGastoProgramableActivity"
+            android:label="@string/title_activity_tratar_gasto_programable" >
+        </activity>
     </application>
 
 </manifest>

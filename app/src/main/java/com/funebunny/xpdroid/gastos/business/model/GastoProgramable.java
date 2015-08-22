@@ -1,6 +1,9 @@
 package com.funebunny.xpdroid.gastos.business.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by schmidt0 on 5/16/2015.
@@ -54,12 +57,28 @@ public abstract class GastoProgramable implements Serializable {
                 '}';
     }
 
-    public int getHora() {
-        return hora;
+    public String getHora() {
+        SimpleDateFormat toUser = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat fromDB = new SimpleDateFormat("HHmm");
+        try {
+            String sHora = String.valueOf(hora);
+            Date from = fromDB.parse(sHora);
+            String to = toUser.format(from);
+            return to;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
-    public void setHora(int hora) {
-        this.hora = hora;
+    public void setHora(String hora) {
+        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat toDB = new SimpleDateFormat("HHmm");
+        try {
+            this.hora = Integer.valueOf(toDB.format(fromUser.parse(hora)));
+        } catch (ParseException e) {
+           this.hora =0;
+        }
     }
 
     public String getDescripcion() {

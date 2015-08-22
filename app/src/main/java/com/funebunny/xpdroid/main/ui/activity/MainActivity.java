@@ -17,13 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
-import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
@@ -36,9 +34,6 @@ import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -189,7 +184,6 @@ public class MainActivity extends ActionBarActivity
         Objetivo obj = (Objetivo) view.findViewById(R.id.objetivos_list_item_ll_main).getTag();
         Bundle bobj = new Bundle();
         bobj.putSerializable(AppConstants.OBJETIVO, obj);
-
         Intent i = new Intent(this, TratarObjetivoActivity.class);
         i.putExtras(bobj);
         startActivity(i);
@@ -200,12 +194,10 @@ public class MainActivity extends ActionBarActivity
 
         GastoProgramable gasto = (GastoProgramable) view.findViewById(R.id.gastos_programables_list_item).getTag();
         Bundle bGasto = new Bundle();
-        bGasto.putSerializable(AppConstants.GASTO,gasto);
-        ServicioGastosBusiness sg = new ServicioGastosBusiness();
-        sg.eliminarGastoProgramable(getApplicationContext(),gasto.getId());
-/*        Intent i = new Intent(this, TratarGastoActivity.class);
+        bGasto.putSerializable(AppConstants.GASTO_PROGRAMABLE,gasto);
+        Intent i = new Intent(this, TratarGastoProgramableActivity.class);
         i.putExtras(bGasto);
-        startActivity(i);*/
+        startActivity(i);
     }
 
 

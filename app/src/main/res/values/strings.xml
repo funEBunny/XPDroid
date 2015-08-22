@@ -93,6 +93,9 @@
     <string name="eliminar">Eliminar</string>
     <string name="title_activity_tratar_gasto_favorito">Tratar Gasto Favorito</string>
     <string name="title_activity_tratar_objetivo">Tratar Objetivo</string>
+    <string name="title_activity_tratar_gasto_programable">TratarGastoProgramableActivity</string>
+    <string name="programado_actualizado_mensaje">Gasto Programado Actualizado</string>
+    <string name="programado_eliminado_mensaje">Gasto Programado Eliminado</string>
 
     <string name="info_limite_objetivos_alcanzado">Límite de objetivos alcanzado</string>
     <string name="objetivo_existente">Objetivo %1$s existente</string>
