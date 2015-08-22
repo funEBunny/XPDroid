@@ -63,13 +63,15 @@ public class ServicioObjetivosDAO implements IServicioObjetivosDAO {
         Objetivo objetivo = null;
 
         ArrayList<ObjetivoDAO> objetivosDAO = new Select().from(ObjetivoDAO.class).where("Periodo = ?", periodo).execute();
-        ObjetivoDAO objDAO = objetivosDAO.get(0);
 
-        if (objDAO != null) {
+        if (!objetivosDAO.isEmpty()) {
+
+            ObjetivoDAO objDAO = objetivosDAO.get(0);
             objetivo = new Objetivo();
             objetivo.setId(objDAO.getId());
             objetivo.setPeriodo(objDAO.getPeriodo());
             objetivo.setImporte(objDAO.getImporte());
+
         }
         return objetivo;
     }
