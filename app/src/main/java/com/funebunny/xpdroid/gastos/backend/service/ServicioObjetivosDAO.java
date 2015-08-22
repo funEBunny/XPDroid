@@ -57,7 +57,24 @@ public class ServicioObjetivosDAO implements IServicioObjetivosDAO {
         return objetivos;
     }
 
-    private ObjetivoDAO obtenerObjetivoPorId(Long id){
+
+    public Objetivo obtenerObjetivoPorPeriodo(String periodo) {
+
+        Objetivo objetivo = null;
+
+        ArrayList<ObjetivoDAO> objetivosDAO = new Select().from(ObjetivoDAO.class).where("Periodo = ?", periodo).execute();
+        ObjetivoDAO objDAO = objetivosDAO.get(0);
+
+        if (objDAO != null) {
+            objetivo = new Objetivo();
+            objetivo.setId(objDAO.getId());
+            objetivo.setPeriodo(objDAO.getPeriodo());
+            objetivo.setImporte(objDAO.getImporte());
+        }
+        return objetivo;
+    }
+
+    private ObjetivoDAO obtenerObjetivoPorId(Long id) {
         ArrayList<ObjetivoDAO> objetivosLista = new Select().from(ObjetivoDAO.class).where("Id = ?", id).execute();
         return objetivosLista.get(0);
     }

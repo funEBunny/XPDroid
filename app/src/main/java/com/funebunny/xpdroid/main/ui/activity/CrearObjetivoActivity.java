@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,14 @@ public class CrearObjetivoActivity extends XPDroidActivity {
     public void guardarObjetivo(View view) {
 
         String periodo = ((Spinner) findViewById(R.id.activity_crear_objetivo_sp_periodo)).getSelectedItem().toString();
+
+        if (servicioObjetivosBusiness.tipoObjetivoExiste(periodo)){
+            Resources res = getResources();
+            String mensaje = String.format(res.getString(R.string.objetivo_existente), periodo);
+            showMessage(mensaje);
+            return;
+        }
+
         String importe = ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).getText().toString();
         servicioObjetivosBusiness.guardarObjetivo(periodo, importe);
         //Mostrar mensaje de objetivo guardado

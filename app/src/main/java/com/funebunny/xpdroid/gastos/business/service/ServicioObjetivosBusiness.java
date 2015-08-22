@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.gastos.business.service;
 
 import com.funebunny.xpdroid.gastos.backend.service.ServicioObjetivosDAO;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.List;
 
@@ -31,5 +32,15 @@ public class ServicioObjetivosBusiness implements IServicioObjetivosBusiness {
 
     public void actualizarObjetivo(Objetivo obj){
         servicioObjetivosDAO.actualizarObjetivo(obj);
+    }
+
+    @Override
+    public boolean isLimiteObjetivosAlcanzado() {
+        return (servicioObjetivosDAO.obtenerObjetivos().size() == AppConstants.CANT_MAX_OBJETIVOS);
+    }
+
+    @Override
+    public boolean tipoObjetivoExiste(String periodo) {
+        return servicioObjetivosDAO.obtenerObjetivoPorPeriodo(periodo) !=null;
     }
 }

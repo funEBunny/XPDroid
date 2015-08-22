@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.gastos.backend.service;
 
+import com.funebunny.xpdroid.gastos.backend.dao.ObjetivoDAO;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface IServicioObjetivosDAO {
     void actualizarObjetivo(Objetivo obj);
 
     List<Objetivo> obtenerObjetivos();
+
+    Objetivo obtenerObjetivoPorPeriodo(String periodo);
 
 }
