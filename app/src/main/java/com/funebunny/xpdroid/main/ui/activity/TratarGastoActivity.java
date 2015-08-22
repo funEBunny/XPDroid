@@ -10,14 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarGastoActivity extends XPDroidActivity {
 
-    private Gasto gasto;
+    private GastoDAO gasto;
     private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
     @Override
@@ -27,7 +27,7 @@ public class TratarGastoActivity extends XPDroidActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bGasto = getIntent().getExtras();
-        gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
+        gasto = (GastoDAO) bGasto.getSerializable(AppConstants.GASTO);
 
         if (gasto != null) {
 

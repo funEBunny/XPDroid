@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
 /**
  * Created by Adru on 6/20/2015.
  */
-public class ListAdapterGasto extends ArrayAdapter<Gasto> {
+public class ListAdapterGasto extends ArrayAdapter<GastoDAO> {
 
     public ListAdapterGasto(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
 
-    public ListAdapterGasto(Context context, int resource, List<Gasto> items) {
+    public ListAdapterGasto(Context context, int resource, List<GastoDAO> items) {
         super(context, resource, items);
     }
 
@@ -37,7 +37,7 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
             view = vi.inflate(R.layout.historial_gastos_list_item, null);
         }
 
-        Gasto gasto = getItem(position);
+        GastoDAO gasto = getItem(position);
 
         if (gasto != null) {
             TextView fecha = (TextView) view.findViewById(R.id.historial_gastos_lista_fecha);
@@ -63,7 +63,7 @@ public class ListAdapterGasto extends ArrayAdapter<Gasto> {
             }
         }
 
-        view.setTag(gasto); //Test PRB - Anclar el objeto Gasto a la vista
+        view.setTag(gasto); //Test PRB - Anclar el objeto GastoDAO a la vista
 
         return view;
 

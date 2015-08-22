@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat;
  * Created by schmidt0 on 3/28/2015.
  */
 @Table(name = "Gasto")
-public class Gasto extends Model implements Serializable {
-    public Gasto(String descripcion, String importe, String categoria, String fecha) {
+public class GastoDAO extends Model implements Serializable {
+    public GastoDAO(String descripcion, String importe, String categoria, String fecha) {
         super();
         this.descripcion = descripcion;
         this.importe = importe;
@@ -21,7 +21,7 @@ public class Gasto extends Model implements Serializable {
         this.fecha = fecha;
     }
 
-    public Gasto() {
+    public GastoDAO() {
        super();
     }
 
@@ -91,7 +91,7 @@ public class Gasto extends Model implements Serializable {
 
     @Override
     public String toString() {
-        return "Gasto{" +
+        return "GastoDAO{" +
                 "descripcion='" + getDescripcion() + '\'' +
                 ", importe='" + getImporte() + '\'' +
                 ", categoria=" + getCategoria() +

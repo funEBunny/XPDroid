@@ -47,7 +47,7 @@ public class GastoFavoritoDAO extends Model {
 
     @Override
     public String toString() {
-        return "Gasto{" +
+        return "GastoDAO{" +
                 "descripcion='" + getDescripcion() + '\'' +
                 ", importe='" + getImporte() + '\'' +
                 ", categoria=" + getCategoria() +

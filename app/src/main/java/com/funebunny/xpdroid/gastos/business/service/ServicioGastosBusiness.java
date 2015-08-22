@@ -139,4 +139,9 @@ public class ServicioGastosBusiness {
         servicioGastosDAO.actualizarGastoProgramable(gastoProgramable);
 
     }
+
+    // Gastos
+    public void guardarGasto(String descripcion, String importe, String categoria, String fecha){
+        servicioGastosDAO.guardarGasto(descripcion, importe, categoria, fecha);
+    }
 }

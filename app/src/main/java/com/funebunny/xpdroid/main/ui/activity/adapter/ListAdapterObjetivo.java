@@ -42,6 +42,8 @@ public class ListAdapterObjetivo extends ArrayAdapter<Objetivo> {
 
         if (objetivo != null) {
 
+            view.setTag(objetivo); //Test PRB - Anclar el objeto a la vista
+
             TextView periodo = (TextView) view.findViewById(R.id.objetivos_list_item_tv_periodo);
             TextView importe = (TextView) view.findViewById(R.id.objetivos_list_item_tv_importe);
 
@@ -56,8 +58,6 @@ public class ListAdapterObjetivo extends ArrayAdapter<Objetivo> {
                 importe.setText("$" + format.format(Double.valueOf(objetivo.getImporte())));
             }
         }
-
-        view.setTag(objetivo); //Test PRB - Anclar el objeto a la vista
 
         return view;
 

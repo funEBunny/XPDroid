@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
@@ -49,7 +49,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private String mParam2;
 
     private HistorialGastosItemCallbacks mListener;
-    private List<Gasto> gastos = new ArrayList<Gasto>();
+    private List<GastoDAO> gastos = new ArrayList<GastoDAO>();
 
     // The fragment's ListView/GridView
     private AbsListView mListView;

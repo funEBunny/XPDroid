@@ -17,16 +17,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.main.ui.activity.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -35,8 +37,14 @@ import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-public class MainActivity extends ActionBarActivity
+
+public class MainActivity extends XPDroidActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         HistorialGastosItemFragment.HistorialGastosItemCallbacks,
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
@@ -54,6 +62,7 @@ public class MainActivity extends ActionBarActivity
     private ListView drawerList;
 
     private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +167,7 @@ public class MainActivity extends ActionBarActivity
 
     public void tratarGasto(View view){
 
-        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
+        GastoDAO gasto = (GastoDAO) view.findViewById(R.id.historial_gastos_list_item).getTag();
         gasto.setgId(gasto.getId());   //Setear Id serializable ya que el mId no es serializable
         Bundle bGasto = new Bundle();
         bGasto.putSerializable(AppConstants.GASTO, gasto);
@@ -177,6 +186,23 @@ public class MainActivity extends ActionBarActivity
         Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
         i.putExtras(bgf);
         startActivity(i);
+    }
+
+    public void crearGastoPorFavorito(View view){
+        // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal
+        View parentView = (View) view.getParent();
+        GastoFavorito gf = (GastoFavorito) parentView.findViewById(R.id.gasto_favorito_button_ll_main).getTag();
+
+        String descripcion = gf.getDescripcion();
+        String importe = gf.getImporte();
+        String categoria = gf.getCategoria();
+        Date fecha = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormat = dateFormat.format(fecha);
+        servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
+        //Mostrar mensaje de agregar gasto
+        int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
+        showMessage(gasto_guardado_mensaje);
     }
 
     public void tratarObjetivo(View view){
@@ -365,6 +391,10 @@ public class MainActivity extends ActionBarActivity
          * Returns a new instance of this fragment for the given section
          * number.
          */
+        private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+        private List<GastoFavorito> gastosFavoritos = new ArrayList<GastoFavorito>();
+        private GridView mGridView;
+        private ButtonAdapterGastoFavorito mAdapter;
 
         public static PlaceholderFragment newInstance(int itemSelected) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -385,6 +415,12 @@ public class MainActivity extends ActionBarActivity
             // OJO que desde MainActiviy.onNavigationDrawerItemSelected se manda la posicion + 1
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            gastosFavoritos.addAll(servicioGastosBusiness.obtenerGastosFavoritos());
+            mAdapter = new ButtonAdapterGastoFavorito(getActivity(), R.layout.gasto_favorito_button, gastosFavoritos);
+
+            mGridView = (GridView) rootView.findViewById(R.id.fragment_main_gv_favoritos);
+            mGridView.setAdapter(mAdapter);
 
             return rootView;
         }

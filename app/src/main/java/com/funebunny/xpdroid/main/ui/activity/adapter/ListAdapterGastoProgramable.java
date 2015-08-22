@@ -63,7 +63,7 @@ public class ListAdapterGastoProgramable extends ArrayAdapter<GastoProgramable> 
             }
         }
 
-        view.setTag(gastoProgramable); //Test PRB - Anclar el objeto Gasto a la vista
+        view.setTag(gastoProgramable); //Test PRB - Anclar el objeto GastoDAO a la vista
 
         return view;
 

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 
 import java.text.NumberFormat;
@@ -42,6 +41,8 @@ public class ListAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
 
         if (gastoFavorito != null) {
 
+            view.setTag(gastoFavorito); //Test PRB - Anclar el objeto
+
             TextView categoria = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_categoria);
             TextView importe = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_importe);
             TextView descripcion = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_descripcion);
@@ -60,8 +61,6 @@ public class ListAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
                 descripcion.setText(gastoFavorito.getDescripcion());
             }
         }
-
-        view.setTag(gastoFavorito); //Test PRB - Anclar el objeto GastoFavorito a la vista
 
         return view;
 

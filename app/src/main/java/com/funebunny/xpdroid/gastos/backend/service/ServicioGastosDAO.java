@@ -3,17 +3,15 @@ package com.funebunny.xpdroid.gastos.backend.service;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoFavoritoDAO;
 import com.funebunny.xpdroid.gastos.backend.dao.GastoProgramableDAO;
-import com.funebunny.xpdroid.gastos.backend.dao.ObjetivoDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgAnual;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgMensual;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
-import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,33 +26,33 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     }
 
     @Override
-    public List<Gasto> obtenerGastos() {
-        return new Select().from(Gasto.class).orderBy("Categoria ASC").execute();
+    public List<GastoDAO> obtenerGastos() {
+        return new Select().from(GastoDAO.class).orderBy("Categoria ASC").execute();
     }
 
     @Override
-    public List<Gasto> obtenerGastosPorCategoria(String categoria) {
-        return new Select().from(Gasto.class).where("Categoria = ?", categoria).execute();
+    public List<GastoDAO> obtenerGastosPorCategoria(String categoria) {
+        return new Select().from(GastoDAO.class).where("Categoria = ?", categoria).execute();
     }
 
     @Override
-    public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
+    public List<GastoDAO> obtenerGastosPorFecha(String mes, String anio) {
         if (mes.length() == 1) {
             mes = "0" + mes;
         }
         String fecha = "%" + anio + mes + "%";
-        return new Select().from(Gasto.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
+        return new Select().from(GastoDAO.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
     }
 
     @Override
     public void guardarGasto(String descripcion, String importe, String categoria, String fecha) {
-        Gasto gasto = new Gasto();
+        GastoDAO gasto = new GastoDAO();
         gasto.setImporte(importe);
         gasto.setDescripcion(descripcion);
         gasto.setCategoria(categoria);
         gasto.setFecha(fecha);
 
-        Log.d("XPDROID", "Guardando Gasto: " + gasto.toString());
+        Log.d("XPDROID", "Guardando GastoDAO: " + gasto.toString());
         gasto.save();
     }
 
@@ -101,7 +99,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gastoProgramable.setDescripcion(descripcion);
             gastoProgramable.setHora(hora);
             gastoProgramable.setId(id);
-            Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
+            Log.d("XPDROID", "Obteniendo GastoDAO: " + gastoProgramable.toString());
             gastos.add(gastoProgramable);
         }
         return gastos;
@@ -142,13 +140,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         gastoProgramable.setDescripcion(gastoProgramableDAO.getDescripcion());
         gastoProgramable.setHora(gastoProgramableDAO.getHora());
         gastoProgramable.setId(gastoProgramableDAO.getId());
-        Log.d("XPDROID", "Obteniendo Gasto: " + gastoProgramable.toString());
+        Log.d("XPDROID", "Obteniendo GastoDAO: " + gastoProgramable.toString());
         return gastoProgramable;
     }
 
     @Override
     public Long guardarGastoProgramable(GastoProgramable gp) {
-        Log.d("XPDROID", "Programando Gasto: " + gp.toString());
+        Log.d("XPDROID", "Programando GastoDAO: " + gp.toString());
         GastoProgramableDAO gpd = new GastoProgramableDAO();
 
         if (gp instanceof GastoProgDiario) {
@@ -170,7 +168,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public void eliminarGastoProgramable(Long id) {
-        Log.d("XPDROID", "Eliminando Gasto: " + id);
+        Log.d("XPDROID", "Eliminando GastoDAO: " + id);
         GastoProgramableDAO delGP = GastoProgramableDAO.load(GastoProgramableDAO.class, id);
         delGP.delete();
     }
@@ -191,18 +189,18 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     }
 
     @Override
-    public void actualizarGasto(Gasto gasto) {
-        Gasto gastoDb = obtenerGastoPorId(gasto.getgId());
-        gastoDb.setDescripcion(gasto.getDescripcion());
-        gastoDb.setImporte(gasto.getImporte());
-        gastoDb.setCategoria(gasto.getCategoria());
-        gastoDb.setFecha(gasto.getFecha());
-        gastoDb.save();
+    public void actualizarGasto(GastoDAO gasto) {
+        GastoDAO gastoDAO = obtenerGastoPorId(gasto.getgId());
+        gastoDAO.setDescripcion(gasto.getDescripcion());
+        gastoDAO.setImporte(gasto.getImporte());
+        gastoDAO.setCategoria(gasto.getCategoria());
+        gastoDAO.setFecha(gasto.getFecha());
+        gastoDAO.save();
     }
 
     @Override
-    public Gasto obtenerGastoPorId(Long id) {
-        ArrayList<Gasto> gastosLista = new Select().from(Gasto.class).where("Id = ?", id).execute();
+    public GastoDAO obtenerGastoPorId(Long id) {
+        ArrayList<GastoDAO> gastosLista = new Select().from(GastoDAO.class).where("Id = ?", id).execute();
         return gastosLista.get(0);
     }
 

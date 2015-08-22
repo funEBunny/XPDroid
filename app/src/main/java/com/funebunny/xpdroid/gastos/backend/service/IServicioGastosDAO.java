@@ -1,10 +1,8 @@
 package com.funebunny.xpdroid.gastos.backend.service;
 
-import com.funebunny.xpdroid.gastos.backend.dao.Gasto;
-import com.funebunny.xpdroid.gastos.backend.dao.GastoFavoritoDAO;
+import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
-import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
 import java.util.List;
 
@@ -15,11 +13,11 @@ public interface IServicioGastosDAO {
 
     // Gastos
 
-    List<Gasto> obtenerGastos();
+    List<GastoDAO> obtenerGastos();
 
-    List<Gasto> obtenerGastosPorCategoria(String categoria);
+    List<GastoDAO> obtenerGastosPorCategoria(String categoria);
 
-    List<Gasto> obtenerGastosPorFecha(String mes, String anio);
+    List<GastoDAO> obtenerGastosPorFecha(String mes, String anio);
 
     /**
      *
@@ -32,9 +30,9 @@ public interface IServicioGastosDAO {
 
     void eliminarGasto(Long id);
 
-    void actualizarGasto(Gasto gasto);
+    void actualizarGasto(GastoDAO gasto);
 
-    Gasto obtenerGastoPorId(Long id);
+    GastoDAO obtenerGastoPorId(Long id);
 
     // Gastos Programables
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/gasto_favorito_button_ll_main">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAllCaps="false"
+        android:id="@+id/gasto_favorito_button_bt_gasto"
+        android:onClick="crearGastoPorFavorito" />
+</LinearLayout>
