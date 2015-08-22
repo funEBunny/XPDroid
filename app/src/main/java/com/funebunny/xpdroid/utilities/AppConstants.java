@@ -10,5 +10,6 @@ public class AppConstants {
     public static final String GASTO = "gasto";
     public static final String GASTO_FAVORITO = "gasto favorito";
     public static final String OBJETIVO = "objetivo";
+    public static final int CANT_MAX_OBJETIVOS = 4;
 
 }

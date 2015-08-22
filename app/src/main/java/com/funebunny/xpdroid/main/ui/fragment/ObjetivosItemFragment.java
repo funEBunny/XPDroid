@@ -18,6 +18,7 @@ import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterObjetivo;
@@ -50,7 +51,7 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 
     private ObjetivosItemCallbacks mListener;
     private List<Objetivo> objetivos = new ArrayList<Objetivo>();
-    private ServicioGastosBusiness servicioGastos = new ServicioGastosBusiness();
+    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
     /**
      * The fragment's ListView/GridView.
      */
@@ -89,7 +90,7 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        objetivos.addAll(servicioGastos.obtenerObjetivos());
+        objetivos.addAll(servicioObjetivosBusiness.obtenerObjetivos());
 
         // TODO: Change Adapter to display your content
 
@@ -116,7 +117,7 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     public void onResume() {
         super.onResume();
         this.objetivos.clear();
-        this.objetivos.addAll(servicioGastos.obtenerObjetivos());
+        this.objetivos.addAll(servicioObjetivosBusiness.obtenerObjetivos());
 
         mAdapter = new ListAdapterObjetivo(getActivity(), R.layout.objetivos_list_item, objetivos);
         View view = getView();

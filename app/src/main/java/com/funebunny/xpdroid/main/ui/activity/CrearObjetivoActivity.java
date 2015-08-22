@@ -1,7 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,15 +9,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
-import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
-import com.funebunny.xpdroid.utilities.AppConstants;
-
-import java.util.Calendar;
+import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
 
 public class CrearObjetivoActivity extends XPDroidActivity {
 
-    ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +49,16 @@ public class CrearObjetivoActivity extends XPDroidActivity {
     public void guardarObjetivo(View view) {
 
         String periodo = ((Spinner) findViewById(R.id.activity_crear_objetivo_sp_periodo)).getSelectedItem().toString();
+
+        if (servicioObjetivosBusiness.tipoObjetivoExiste(periodo)){
+            Resources res = getResources();
+            String mensaje = String.format(res.getString(R.string.objetivo_existente), periodo);
+            showMessage(mensaje);
+            return;
+        }
+
         String importe = ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).getText().toString();
-        servicioGastosBusiness.guardarObjetivo(periodo, importe);
+        servicioObjetivosBusiness.guardarObjetivo(periodo, importe);
         //Mostrar mensaje de objetivo guardado
         int objetivo_guardado_mensaje = R.string.objetivo_guardado_mensaje;
         showMessage(objetivo_guardado_mensaje);

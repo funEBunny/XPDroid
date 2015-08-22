@@ -28,6 +28,7 @@ import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -56,6 +57,8 @@ public class MainActivity extends ActionBarActivity
     private String[] navigationDrawerItems;
     private DrawerLayout drawerLayout;
     private ListView drawerList;
+
+    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -324,6 +327,15 @@ public class MainActivity extends ActionBarActivity
             }
 
             case R.id.action_crear_objetivo: {
+
+                if (servicioObjetivosBusiness.isLimiteObjetivosAlcanzado()){
+                    //Mostrar mensaje de crear gasto objetivo
+                    Toast toast = Toast.makeText(this, R.string.info_limite_objetivos_alcanzado, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                    break;
+                }
+
                 Intent intentCrearObjetivo = new Intent(this, CrearObjetivoActivity.class);
                 startActivity(intentCrearObjetivo, animation);
 
