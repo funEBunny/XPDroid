@@ -123,27 +123,4 @@ public class ServicioGastosBusiness {
     public void actualizarGastoFavorito(GastoFavorito gf) {
         servicioGastosDAO.actualizarGastoFavorito(gf);
     }
-
-    // Objetivos
-
-    public void guardarObjetivo(String periodo, String importe){
-
-        Objetivo objetivo = new Objetivo();
-        objetivo.setPeriodo(periodo);
-        objetivo.setImporte(importe);
-        servicioGastosDAO.guardarObjetivo(objetivo);
-
-    }
-
-    public List<Objetivo> obtenerObjetivos(){
-        return servicioGastosDAO.obtenerObjetivos();
-    }
-
-    public void eliminarObjetivo(Long id){
-        servicioGastosDAO.eliminarObjetivo(id);
-    }
-
-    public void actualizarObjetivo(Objetivo obj){
-        servicioGastosDAO.actualizarObjetivo(obj);
-    }
 }

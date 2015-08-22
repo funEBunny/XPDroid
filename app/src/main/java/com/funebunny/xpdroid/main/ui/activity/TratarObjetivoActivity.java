@@ -11,13 +11,13 @@ import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarObjetivoActivity extends XPDroidActivity {
 
     private Objetivo objetivo;
-    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class TratarObjetivoActivity extends XPDroidActivity {
         if (objetivo != null){
             objetivo.setImporte(((EditText) findViewById(R.id.activity_tratar_objetivo_et_importe)).getText().toString());
             objetivo.setPeriodo(((Spinner) findViewById(R.id.activity_tratar_objetivo_sp_periodo)).getSelectedItem().toString());
-            servicioGastosBusiness.actualizarObjetivo(objetivo);
+            servicioObjetivosBusiness.actualizarObjetivo(objetivo);
             //Mostrar mensaje de objetivo actualizado
             int objetivo_actualizado_mensaje = R.string.objetivo_actualizado_mensaje;
             showMessage(objetivo_actualizado_mensaje);
@@ -75,7 +75,7 @@ public class TratarObjetivoActivity extends XPDroidActivity {
     public void eliminarObjetivo(View v){
 
         if (objetivo != null) {
-            servicioGastosBusiness.eliminarObjetivo(objetivo.getId());
+            servicioObjetivosBusiness.eliminarObjetivo(objetivo.getId());
             //Mostrar mensaje de favorito eliminado
             int objetivo_eliminado_mensaje = R.string.objetivo_eliminado_mensaje;
             showMessage(objetivo_eliminado_mensaje);

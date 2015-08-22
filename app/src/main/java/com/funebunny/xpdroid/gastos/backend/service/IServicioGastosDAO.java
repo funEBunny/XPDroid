@@ -56,14 +56,4 @@ public interface IServicioGastosDAO {
 
     List<GastoFavorito> obtenerGastosFavoritos();
 
-    // Objetivos
-
-    Long guardarObjetivo(Objetivo obj);
-
-    void eliminarObjetivo(Long id);
-
-    void actualizarObjetivo(Objetivo obj);
-
-    List<Objetivo> obtenerObjetivos();
-
 }
