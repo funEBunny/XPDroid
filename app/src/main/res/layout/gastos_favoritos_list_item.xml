@@ -6,7 +6,8 @@
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:orientation="vertical"
     android:layout_marginBottom="5dp"
-    android:onClick="tratarGastoFavorito">
+    android:onClick="tratarGastoFavorito"
+    android:longClickable="false">
 
     <LinearLayout
         android:layout_width="fill_parent"

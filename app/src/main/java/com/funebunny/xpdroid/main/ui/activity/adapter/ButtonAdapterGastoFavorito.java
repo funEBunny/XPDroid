@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +35,18 @@ public class ButtonAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
 
         GastoFavorito gastoFavorito = getItem(position);
 
-        if (gastoFavorito != null){
+        if (gastoFavorito != null) {
 
             view.setTag(gastoFavorito); //Test PRB - Anclar el objeto
 
             Button bGastoFavorito = (Button) view.findViewById(R.id.gasto_favorito_button_bt_gasto);
 
-            if (bGastoFavorito !=null){
-                bGastoFavorito.setText(gastoFavorito.getDescripcion());
+            if (bGastoFavorito != null) {
+
+                bGastoFavorito.setText(Html.fromHtml("<b><big>" + gastoFavorito.getDescripcion() +
+                        "&nbsp;&nbsp;$" + gastoFavorito.getImporte() + "</big></b>" + "<br />" +
+                        "<small>" + gastoFavorito.getCategoria() + "</small>"));
+
             }
 
         }

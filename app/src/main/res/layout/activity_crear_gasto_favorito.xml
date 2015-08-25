@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_favorito_et_descripcion"
             android:layout_centerInParent="true"
+            android:inputType="textCapSentences"
             android:hint="@string/descripcion" />
     </RelativeLayout>
 

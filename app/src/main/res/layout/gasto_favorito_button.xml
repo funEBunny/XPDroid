@@ -9,5 +9,6 @@
         android:layout_height="fill_parent"
         android:textAllCaps="false"
         android:id="@+id/gasto_favorito_button_bt_gasto"
-        android:onClick="crearGastoPorFavorito" />
+        android:onClick="crearGastoPorFavorito"
+        android:textAlignment="center" />
 </LinearLayout>
