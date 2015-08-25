@@ -99,5 +99,6 @@
 
     <string name="info_limite_objetivos_alcanzado">Límite de objetivos alcanzado</string>
     <string name="objetivo_existente">Objetivo %1$s existente</string>
+    <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
 
 </resources>

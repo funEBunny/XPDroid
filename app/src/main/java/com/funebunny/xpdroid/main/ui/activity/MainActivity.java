@@ -17,8 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
@@ -417,6 +420,16 @@ public class MainActivity extends XPDroidActivity
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             gastosFavoritos.addAll(servicioGastosBusiness.obtenerGastosFavoritos());
+
+            if (gastosFavoritos.size() == 0){
+                //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados hasta el momento
+                FrameLayout mainLayout = (FrameLayout) rootView.findViewById(R.id.fragment_main_fl_main);
+                TextView noHayFavoritos = new TextView(this.getActivity());
+                noHayFavoritos.setText(R.string.no_hay_favoritos);
+                noHayFavoritos.setGravity(Gravity.CENTER);
+                mainLayout.addView(noHayFavoritos);
+            }
+
             mAdapter = new ButtonAdapterGastoFavorito(getActivity(), R.layout.gasto_favorito_button, gastosFavoritos);
 
             mGridView = (GridView) rootView.findViewById(R.id.fragment_main_gv_favoritos);
