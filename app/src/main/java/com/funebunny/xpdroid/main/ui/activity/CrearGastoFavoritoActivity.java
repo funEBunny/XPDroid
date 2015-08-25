@@ -5,22 +5,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearGastoFavoritoActivity extends XPDroidActivity {
 
     ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private GastoFavorito gastoFavorito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto_favorito);
-        // Botón para volver a actividad anterior
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);   // Botón para volver a actividad anterior
+
+        Bundle bGastoFavorito = getIntent().getExtras();
+        if (bGastoFavorito != null) {
+            gastoFavorito = (GastoFavorito) bGastoFavorito.getSerializable(AppConstants.GASTO_FAVORITO);
+            ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_descripcion)).setText(gastoFavorito.getDescripcion());
+            ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).setText(gastoFavorito.getImporte());
+            Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria);
+            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoFavorito.getCategoria()));
+        }
     }
 
 
@@ -51,7 +63,15 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_descripcion)).getText().toString();
         String importe = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).getText().toString();
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria)).getSelectedItem().toString();
-        servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);
+
+        if (gastoFavorito == null) {
+            servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);
+        } else {
+            gastoFavorito.setDescripcion(descripcion);
+            gastoFavorito.setImporte(importe);
+            gastoFavorito.setCategoria(categoria);
+            servicioGastosBusiness.actualizarGastoFavorito(gastoFavorito);
+        }
         //Mostrar mensaje de favorito guardado
         int gasto_favorito_guardado_mensaje = R.string.gasto_favorito_guardado_mensaje;
         showMessage(gasto_favorito_guardado_mensaje);

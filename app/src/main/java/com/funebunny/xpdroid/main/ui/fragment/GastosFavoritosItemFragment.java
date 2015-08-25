@@ -1,11 +1,15 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -14,12 +18,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.main.ui.activity.CrearGastoFavoritoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
+import com.funebunny.xpdroid.main.ui.activity.TratarGastoActivity;
+import com.funebunny.xpdroid.main.ui.activity.TratarGastoFavoritoActivity;
+import com.funebunny.xpdroid.main.ui.activity.XPDroidActivity;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
@@ -114,14 +123,45 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        // registrar para menu contextual, para mostrar opciones on-long-click
+        registerForContextMenu(mListView);
 
         return view;
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_contextual_gasto, menu);
+    }
 
-    // PRB - Refresh del reporte al volver al fragment
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.menu_contextual_gasto_editar:
+                Bundle bGastoFavorito = new Bundle();
+                bGastoFavorito.putSerializable(AppConstants.GASTO_FAVORITO,gastosFavoritos.get(info.position));
+                Intent i = new Intent(getActivity(), CrearGastoFavoritoActivity.class);
+                i.putExtras(bGastoFavorito);
+                startActivity(i);
+                return true;
+            case R.id.menu_contextual_gasto_borrar:
+                servicioGastos.eliminarGastoFavorito(gastosFavoritos.get(info.position).getId());
+                onResume();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
     @Override
     public void onResume() {
+        // PRB - Refresh del reporte al volver al fragment
         super.onResume();
         this.gastosFavoritos.clear();
         this.gastosFavoritos.addAll(servicioGastos.obtenerGastosFavoritos());

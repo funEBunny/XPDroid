@@ -91,6 +91,7 @@
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
     <string name="title_activity_tratar_gasto_favorito">Tratar Gasto Favorito</string>
     <string name="title_activity_tratar_objetivo">Tratar Objetivo</string>
     <string name="title_activity_tratar_gasto_programable">TratarGastoProgramableActivity</string>
