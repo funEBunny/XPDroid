@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
 /**
  * Created by Adru on 6/20/2015.
  */
-public class ListAdapterGasto extends ArrayAdapter<GastoDAO> {
+public class ListAdapterGasto extends ArrayAdapter<Gasto> {
 
     public ListAdapterGasto(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
 
-    public ListAdapterGasto(Context context, int resource, List<GastoDAO> items) {
+    public ListAdapterGasto(Context context, int resource, List<Gasto> items) {
         super(context, resource, items);
     }
 
@@ -37,9 +37,12 @@ public class ListAdapterGasto extends ArrayAdapter<GastoDAO> {
             view = vi.inflate(R.layout.historial_gastos_list_item, null);
         }
 
-        GastoDAO gasto = getItem(position);
+        Gasto gasto = getItem(position);
 
         if (gasto != null) {
+
+            view.setTag(gasto); //Test PRB - Anclar el objeto
+
             TextView fecha = (TextView) view.findViewById(R.id.historial_gastos_lista_fecha);
             TextView categoria = (TextView) view.findViewById(R.id.historial_gastos_lista_categoria);
             TextView importe = (TextView) view.findViewById(R.id.historial_gastos_lista_importe);
@@ -62,8 +65,6 @@ public class ListAdapterGasto extends ArrayAdapter<GastoDAO> {
                 descripcion.setText(gasto.getDescripcion());
             }
         }
-
-        view.setTag(gasto); //Test PRB - Anclar el objeto GastoDAO a la vista
 
         return view;
 

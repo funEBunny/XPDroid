@@ -10,13 +10,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
 
 public class CrearGastoActivity extends XPDroidActivity {
+
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +84,13 @@ public class CrearGastoActivity extends XPDroidActivity {
     //<Added by PRB
 
     public void guardarGasto(View view) {
-        ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
 
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).getText().toString();
-
         String fecha = ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).getText().toString();
-
         String importe = ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).getText().toString();
-
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria)).getSelectedItem().toString();
 
-        servicioGastos.guardarGasto(descripcion, importe, categoria, fecha);
+        servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);

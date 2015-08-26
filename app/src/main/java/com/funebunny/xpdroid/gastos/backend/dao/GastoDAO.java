@@ -12,21 +12,21 @@ import java.text.SimpleDateFormat;
  * Created by schmidt0 on 3/28/2015.
  */
 @Table(name = "Gasto")
-public class GastoDAO extends Model implements Serializable {
-    public GastoDAO(String descripcion, String importe, String categoria, String fecha) {
-        super();
-        this.descripcion = descripcion;
-        this.importe = importe;
-        this.categoria = categoria;
-        this.fecha = fecha;
-    }
+public class GastoDAO extends Model {
+//    public GastoDAO(String descripcion, String importe, String categoria, String fecha) {
+//        super();
+//        this.descripcion = descripcion;
+//        this.importe = importe;
+//        this.categoria = categoria;
+//        this.fecha = fecha;
+//    }
 
-    public GastoDAO() {
-       super();
-    }
+//    public GastoDAO() {
+//       super();
+//    }
 
-    //PRB - Se agrega atributo gId ya que el mId de la clase Model no es Serializable
-    private Long gId;
+//    //PRB - Se agrega atributo gId ya que el mId de la clase Model no es Serializable
+//    private Long gId;
 
 
     @Column(name = "Descripcion")
@@ -99,11 +99,11 @@ public class GastoDAO extends Model implements Serializable {
                 '}';
     }
 
-    public Long getgId() {
-        return gId;
-    }
-
-    public void setgId(Long gId) {
-        this.gId = gId;
-    }
+//    public Long getgId() {
+//        return gId;
+//    }
+//
+//    public void setgId(Long gId) {
+//        this.gId = gId;
+//    }
 }

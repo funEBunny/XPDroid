@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.gastos.backend.service;
 
 import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 
@@ -13,26 +14,19 @@ public interface IServicioGastosDAO {
 
     // Gastos
 
-    List<GastoDAO> obtenerGastos();
+    List<Gasto> obtenerGastos();
 
-    List<GastoDAO> obtenerGastosPorCategoria(String categoria);
+    List<Gasto> obtenerGastosPorCategoria(String categoria);
 
-    List<GastoDAO> obtenerGastosPorFecha(String mes, String anio);
+    List<Gasto> obtenerGastosPorFecha(String mes, String anio);
 
-    /**
-     *
-     * @param descripcion
-     * @param importe
-     * @param categoria
-     * @param fecha
-     */
-    void guardarGasto(String descripcion, String importe, String categoria, String fecha );
+    Long guardarGasto(Gasto gasto);
 
     void eliminarGasto(Long id);
 
-    void actualizarGasto(GastoDAO gasto);
+    void actualizarGasto(Gasto gasto);
 
-    GastoDAO obtenerGastoPorId(Long id);
+//    GastoDAO obtenerGastoPorId(Long id);
 
     // Gastos Programables
 

@@ -1,15 +1,20 @@
 package com.funebunny.xpdroid.gastos.business.service;
 
 import android.content.Context;
+import android.provider.CalendarContract;
 
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -111,6 +116,11 @@ public class ServicioGastosBusiness {
         return dia;
     }
 
+    public void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable) {
+        notificationsService.actualizarAlarma(applicationContext,gastoProgramable);
+        servicioGastosDAO.actualizarGastoProgramable(gastoProgramable);
+
+    }
     // Gastos Favoritos
     public void guardarGastoFavorito(String descripcion, String importe, String categoria) {
 
@@ -134,14 +144,50 @@ public class ServicioGastosBusiness {
         servicioGastosDAO.actualizarGastoFavorito(gf);
     }
 
-    public void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable) {
-        notificationsService.actualizarAlarma(applicationContext,gastoProgramable);
-        servicioGastosDAO.actualizarGastoProgramable(gastoProgramable);
-
-    }
-
     // Gastos
     public void guardarGasto(String descripcion, String importe, String categoria, String fecha){
-        servicioGastosDAO.guardarGasto(descripcion, importe, categoria, fecha);
+
+        Gasto gasto = new Gasto();
+        gasto.setCategoria(categoria);
+        gasto.setFecha(fecha);
+        gasto.setImporte(importe);
+        gasto.setDescripcion(descripcion);
+        servicioGastosDAO.guardarGasto(gasto);
     }
+    public void actualizarGasto(Gasto gasto) {
+        servicioGastosDAO.actualizarGasto(gasto);
+    }
+
+    public void eliminarGasto(Long id) {
+        servicioGastosDAO.eliminarGasto(id);
+    }
+
+    public List<Gasto> obtenerGastos() {
+        return servicioGastosDAO.obtenerGastos();
+    }
+
+    public List<Gasto> obtenerGastosPorCategoria(String categoria){
+        return servicioGastosDAO.obtenerGastosPorCategoria(categoria);
+    }
+
+    public List<Gasto> obtenerGastosPorFecha(String fecha) {
+
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            date = dateFormat.parse(fecha);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String mes = String.valueOf(cal.get(Calendar.MONTH) + 1);
+        String anio = String.valueOf(cal.get(Calendar.YEAR));
+
+        return servicioGastosDAO.obtenerGastosPorFecha(mes, anio);
+    }
+
 }

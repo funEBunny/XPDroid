@@ -10,15 +10,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
-import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarGastoActivity extends XPDroidActivity {
 
-    private GastoDAO gasto;
-    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
+    private Gasto gasto;
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,8 @@ public class TratarGastoActivity extends XPDroidActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bGasto = getIntent().getExtras();
-        gasto = (GastoDAO) bGasto.getSerializable(AppConstants.GASTO);
-
-        if (gasto != null) {
-
+        if (bGasto != null) {
+            gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
             ((EditText) findViewById(R.id.activity_tratar_gasto_et_descripcion)).setText(gasto.getDescripcion());
             ((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).setText(gasto.getFecha());
             ((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).setText(gasto.getImporte());
@@ -75,7 +73,7 @@ public class TratarGastoActivity extends XPDroidActivity {
             gasto.setImporte(((EditText) findViewById(R.id.activity_tratar_gasto_et_importe)).getText().toString());
             gasto.setFecha(((EditText) findViewById(R.id.activity_tratar_gasto_et_fecha)).getText().toString());
             gasto.setCategoria(((Spinner) findViewById(R.id.activity_tratar_gasto_sp_categoria)).getSelectedItem().toString());
-            servicioGastos.actualizarGasto(gasto);
+            servicioGastosBusiness.actualizarGasto(gasto);
             //Mostrar mensaje de gasto actualizado
             int gasto_actualizado_mensaje = R.string.gasto_actualizado_mensaje;
             showMessage(gasto_actualizado_mensaje);
@@ -85,7 +83,7 @@ public class TratarGastoActivity extends XPDroidActivity {
 
     public void eliminarGasto(View v) {
         if (gasto != null) {
-            servicioGastos.eliminarGasto(gasto.getgId());
+            servicioGastosBusiness.eliminarGasto(gasto.getId());
             //Mostrar mensaje de gasto eliminado
             int gasto_eliminado_mensaje = R.string.gasto_eliminado_mensaje;
             showMessage(gasto_eliminado_mensaje);

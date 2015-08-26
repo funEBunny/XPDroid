@@ -16,14 +16,16 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
-import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +51,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private String mParam2;
 
     private HistorialGastosItemCallbacks mListener;
-    private List<GastoDAO> gastos = new ArrayList<GastoDAO>();
+    private List<Gasto> gastos = new ArrayList<Gasto>();
 
     // The fragment's ListView/GridView
     private AbsListView mListView;
@@ -57,7 +59,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     //The Adapter which will be used to populate the ListView/GridView with Views.
     private ListAdapter mAdapter;
 
-    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {
@@ -86,8 +88,11 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH)+1)),
-                                                                String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = dateFormat.format(date);
+
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(fecha));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
     }
@@ -120,8 +125,12 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onResume() {
         super.onResume();
         this.gastos.clear();
-        this.gastos.addAll(servicioGastos.obtenerGastosPorFecha(String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1)),
-                                                                String.valueOf((Calendar.getInstance().get(Calendar.YEAR)))));
+
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = dateFormat.format(date);
+
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(fecha));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
         View view = getView();
 

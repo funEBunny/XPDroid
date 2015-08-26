@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,13 +18,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.dao.GastoDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
@@ -170,8 +168,7 @@ public class MainActivity extends XPDroidActivity
 
     public void tratarGasto(View view){
 
-        GastoDAO gasto = (GastoDAO) view.findViewById(R.id.historial_gastos_list_item).getTag();
-        gasto.setgId(gasto.getId());   //Setear Id serializable ya que el mId no es serializable
+        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
         Bundle bGasto = new Bundle();
         bGasto.putSerializable(AppConstants.GASTO, gasto);
 
