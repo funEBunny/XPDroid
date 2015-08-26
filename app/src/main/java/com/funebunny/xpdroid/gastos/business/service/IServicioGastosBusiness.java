@@ -5,6 +5,8 @@ import android.content.Context;
 import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -17,6 +19,10 @@ public interface IServicioGastosBusiness {
     public void eliminarGastoProgramable(Context applicationContext, Long id);
 
     public void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable);
+
+    public int getDiaSemana(String diaSemana);
+
+    public String getDiaSemana(int diaSemana);
 
     // Gastos Favoritos
     public void guardarGastoFavorito(String descripcion, String importe, String categoria);

@@ -60,7 +60,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         notificationsService.desactivarAlarma(applicationContext, id);
     }
 
-    private int getDiaSemana(String diaSemana) {
+    public int getDiaSemana(String diaSemana) {
         int dia = 0;
         switch (diaSemana) {
             case "Lunes":
@@ -88,7 +88,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         return dia;
     }
 
-    private String getDiaSemana(int diaSemana) {
+    public String getDiaSemana(int diaSemana) {
         String dia = "";
         switch (diaSemana) {
             case Calendar.MONDAY:
