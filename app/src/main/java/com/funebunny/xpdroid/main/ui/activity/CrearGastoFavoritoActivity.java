@@ -16,7 +16,7 @@ import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearGastoFavoritoActivity extends XPDroidActivity {
 
-    ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private GastoFavorito gastoFavorito;
 
     @Override

@@ -1,11 +1,14 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -18,9 +21,11 @@ import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,8 +110,39 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        // registrar para menu contextual, para mostrar opciones on-long-click
+        registerForContextMenu(mListView);
 
         return view;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_contextual_gasto, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.menu_contextual_gasto_editar:
+                Bundle bGasto = new Bundle();
+                bGasto.putSerializable(AppConstants.GASTO, gastos.get(info.position));
+                Intent i = new Intent(getActivity(), CrearGastoActivity.class);
+                i.putExtras(bGasto);
+                startActivity(i);
+                return true;
+            case R.id.menu_contextual_gasto_borrar:
+                servicioGastosBusiness.eliminarGasto(gastos.get(info.position).getId());
+                onResume();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -157,7 +193,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     }
 
 
-
     /**
      * The default content for this Fragment has a TextView that is shown when
      * the list is empty. If you would like to change the text, call this method
@@ -191,6 +226,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_gasto, menu);
     }

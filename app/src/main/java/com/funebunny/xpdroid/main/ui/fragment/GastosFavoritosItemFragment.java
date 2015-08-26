@@ -144,7 +144,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         switch (item.getItemId()) {
             case R.id.menu_contextual_gasto_editar:
                 Bundle bGastoFavorito = new Bundle();
-                bGastoFavorito.putSerializable(AppConstants.GASTO_FAVORITO,gastosFavoritos.get(info.position));
+                bGastoFavorito.putSerializable(AppConstants.GASTO_FAVORITO, gastosFavoritos.get(info.position));
                 Intent i = new Intent(getActivity(), CrearGastoFavoritoActivity.class);
                 i.putExtras(bGastoFavorito);
                 startActivity(i);
@@ -175,6 +175,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
     }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -230,6 +231,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_gasto_favorito, menu);
     }

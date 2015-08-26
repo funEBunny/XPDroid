@@ -13,8 +13,10 @@ import android.util.Log;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
+import com.funebunny.xpdroid.gastos.business.model.Gasto;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 /**
  * Created by schmidt0 on 7/11/2015.
@@ -54,11 +56,19 @@ public class AlarmChecker extends BroadcastReceiver {
         nBuilder.setAutoCancel(true);
         Intent resultIntent = new Intent(context, CrearGastoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("categoria",gastoProgramable.getCategoria());
-        bundle.putString("descripcion",gastoProgramable.getDescripcion());
-        bundle.putString("importe",gastoProgramable.getImporte());
-        bundle.putString("hora",gastoProgramable.getHora());
-        bundle.putLong("id",gastoProgramable.getId());
+
+        Gasto gasto = new Gasto();
+        gasto.setCategoria(gastoProgramable.getCategoria());
+        gasto.setDescripcion(gastoProgramable.getDescripcion());
+        gasto.setImporte(gastoProgramable.getImporte());
+
+        bundle.putSerializable(AppConstants.GASTO, gasto);
+
+//        bundle.putString("categoria",gastoProgramable.getCategoria());
+//        bundle.putString("descripcion",gastoProgramable.getDescripcion());
+//        bundle.putString("importe",gastoProgramable.getImporte());
+//        bundle.putString("hora",gastoProgramable.getHora());
+//        bundle.putLong("id",gastoProgramable.getId());
         resultIntent.putExtras(bundle);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(CrearGastoActivity.class);

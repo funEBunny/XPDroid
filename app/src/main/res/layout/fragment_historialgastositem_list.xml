@@ -4,7 +4,8 @@
     tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="false">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -49,6 +50,8 @@
     <ListView android:id="@+id/historial_gastos_lista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:longClickable="false" />
 
 </LinearLayout>

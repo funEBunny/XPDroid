@@ -17,7 +17,7 @@
     <ListView android:id="@+id/fragment_gastosfavoritositem_list_lv_lista" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:longClickable="true"
-        android:clickable="false" />
+        android:longClickable="false"
+        android:clickable="true" />
 
 </LinearLayout>
