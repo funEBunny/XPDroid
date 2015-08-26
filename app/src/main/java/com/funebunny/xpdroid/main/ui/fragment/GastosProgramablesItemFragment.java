@@ -1,11 +1,14 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -17,9 +20,12 @@ import android.widget.TextView;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
+import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoProgramable;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +54,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
 
     private GastosProgramablesItemCallbacks mListener;
     private List<GastoProgramable> gastosProgramables = new ArrayList<GastoProgramable>();
-    private ServicioGastosDAO servicioGastos = new ServicioGastosDAO();
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     /**
      * The fragment's ListView/GridView.
      */
@@ -87,7 +93,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        this.gastosProgramables.addAll(servicioGastos.obtenerGastosProgramables());
+        this.gastosProgramables.addAll(servicioGastosBusiness.obtenerGastosProgramables());
         mAdapter = new ListAdapterGastoProgramable(getActivity(), R.layout.gastos_programables_list_item, gastosProgramables);
     }
 
@@ -101,8 +107,39 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        // registrar para menu contextual, para mostrar opciones on-long-click
+        registerForContextMenu(mListView);
 
         return view;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_contextual_gasto, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.menu_contextual_gasto_editar:
+                Bundle bGastoProgramable = new Bundle();
+                bGastoProgramable.putSerializable(AppConstants.GASTO_PROGRAMABLE, gastosProgramables.get(info.position));
+                Intent i = new Intent(getActivity(), CrearGastoProgramableActivity.class);
+                i.putExtras(bGastoProgramable);
+                startActivity(i);
+                return true;
+            case R.id.menu_contextual_gasto_borrar:
+                servicioGastosBusiness.eliminarGastoProgramable(getActivity().getApplicationContext(), gastosProgramables.get(info.position).getId());
+                onResume();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -122,7 +159,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
     public void onResume() {
         super.onResume();
         this.gastosProgramables.clear();
-        this.gastosProgramables.addAll(servicioGastos.obtenerGastosProgramables());
+        this.gastosProgramables.addAll(servicioGastosBusiness.obtenerGastosProgramables());
         mAdapter = new ListAdapterGastoProgramable(getActivity(), R.layout.gastos_programables_list_item, gastosProgramables);
         View view = getView();
 

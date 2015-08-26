@@ -32,6 +32,8 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
             ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).setText(gastoFavorito.getImporte());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoFavorito.getCategoria()));
+
+            setTitle(R.string.title_activity_editar_gasto_favorito);
         }
     }
 

@@ -17,6 +17,7 @@ import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class TratarGastoProgramableActivity extends XPDroidActivity {
+
     private GastoProgramable gastoProgramable;
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
@@ -25,6 +26,7 @@ public class TratarGastoProgramableActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tratar_gasto_programable);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Bundle bgf = getIntent().getExtras();
         gastoProgramable = (GastoProgramable)bgf.getSerializable(AppConstants.GASTO_PROGRAMABLE);
         if (gastoProgramable!=null){

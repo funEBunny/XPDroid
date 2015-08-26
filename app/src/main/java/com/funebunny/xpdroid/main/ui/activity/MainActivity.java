@@ -163,30 +163,29 @@ public class MainActivity extends XPDroidActivity
         Toast toast = Toast.makeText(this, R.string.action_ver_historial, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
-
     }
 
-    public void tratarGasto(View view){
-
-        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
-        Bundle bGasto = new Bundle();
-        bGasto.putSerializable(AppConstants.GASTO, gasto);
-
-        Intent i = new Intent(this, TratarGastoActivity.class);
-        i.putExtras(bGasto);
-        startActivity(i);
-    }
-
-    public void tratarGastoFavorito(View view){
-
-        GastoFavorito gf = (GastoFavorito) view.findViewById(R.id.gastos_favoritos_list_item_ll_main).getTag();
-        Bundle bgf = new Bundle();
-        bgf.putSerializable(AppConstants.GASTO_FAVORITO, gf);
-
-        Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
-        i.putExtras(bgf);
-        startActivity(i);
-    }
+//    public void tratarGasto(View view){
+//
+//        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
+//        Bundle bGasto = new Bundle();
+//        bGasto.putSerializable(AppConstants.GASTO, gasto);
+//
+//        Intent i = new Intent(this, TratarGastoActivity.class);
+//        i.putExtras(bGasto);
+//        startActivity(i);
+//    }
+//
+//    public void tratarGastoFavorito(View view){
+//
+//        GastoFavorito gf = (GastoFavorito) view.findViewById(R.id.gastos_favoritos_list_item_ll_main).getTag();
+//        Bundle bgf = new Bundle();
+//        bgf.putSerializable(AppConstants.GASTO_FAVORITO, gf);
+//
+//        Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
+//        i.putExtras(bgf);
+//        startActivity(i);
+//    }
 
     public void crearGastoPorFavorito(View view){
         // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal

@@ -28,6 +28,11 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
     ServicioGastosDAO servicioGastosDAO = new ServicioGastosDAO();
 
+    @Override
+    public List<GastoProgramable> obtenerGastosProgramables() {
+        return  servicioGastosDAO.obtenerGastosProgramables();
+    }
+
     public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana) {
 
         GastoProgramable gp;

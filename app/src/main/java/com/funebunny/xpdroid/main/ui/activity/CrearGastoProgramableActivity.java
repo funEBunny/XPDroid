@@ -7,43 +7,77 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
+import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
-    private ServicioGastosBusiness gastosService = new ServicioGastosBusiness();
+    private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private GastoProgramable gastoProgramable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto_programable);
-
         getSupportActionBar().setHomeButtonEnabled(true);
-        // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
-        Spinner repeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
 
-        repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                 @Override
-                                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                     if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
-                                                         findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.VISIBLE);
-                                                     } else {
-                                                         findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
+        Bundle bGastoProgramable = getIntent().getExtras();
+        if (bGastoProgramable != null) {
+            gastoProgramable = (GastoProgramable) bGastoProgramable.getSerializable(AppConstants.GASTO_PROGRAMABLE);
+            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).setText(gastoProgramable.getDescripcion());
+            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(gastoProgramable.getImporte());
+            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(String.valueOf(gastoProgramable.getHora()));
+
+            Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
+            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoProgramable.getCategoria()));
+
+            Spinner sRepeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
+            if (gastoProgramable instanceof GastoProgSemanal) {
+                sRepeticion.setSelection(((ArrayAdapter) sRepeticion.getAdapter()).getPosition(GastoProgSemanal.SEMANAL));
+
+                findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.VISIBLE);
+                Spinner sDiaSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
+                String diaSemana = servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana());
+                sDiaSemana.setSelection(((ArrayAdapter) sDiaSemana.getAdapter()).getPosition(diaSemana));
+            } else {
+                sRepeticion.setSelection(((ArrayAdapter) sRepeticion.getAdapter()).getPosition(GastoProgDiario.DIARIO));
+                findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
+            }
+
+            setTitle(R.string.title_activity_editar_gasto_programable);
+
+        } else { //MEJORAR ESTOO!!!!!
+
+            // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
+            Spinner repeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
+
+            repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                     @Override
+                                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                         if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
+                                                             findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.VISIBLE);
+                                                         } else {
+                                                             findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
+                                                         }
+                                                     }
+
+                                                     @Override
+                                                     public void onNothingSelected(AdapterView<?> parent) {
+
                                                      }
                                                  }
-
-                                                 @Override
-                                                 public void onNothingSelected(AdapterView<?> parent) {
-
-                                                 }
-                                             }
-        );
+            );
+        }
     }
 
 
@@ -85,12 +119,20 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
         String diaSemana = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana)).getSelectedItem().toString();
 
-        gastosService.guardarGastoProgramable(getApplicationContext(), descripcion, repeticion, horario, importe, categoria, diaSemana);
-        //Mostrar mensaje de agregar gasto
-        Toast toast = Toast.makeText(this, R.string.gasto_programado_mensaje, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
+        if (gastoProgramable == null) {
+            servicioGastosBusiness.guardarGastoProgramable(getApplicationContext(), descripcion, repeticion, horario, importe, categoria, diaSemana);
+        } else {
 
+            gastoProgramable.setDescripcion(descripcion);
+            gastoProgramable.setCategoria(categoria);
+            gastoProgramable.setImporte(importe);
+            gastoProgramable.setHora(horario);
+            servicioGastosBusiness.actualizarGastoProgramable(getApplicationContext(), gastoProgramable);
+        }
+
+        //Mostrar mensaje de agregar gasto
+        int gasto_guardado_mensaje = R.string.gasto_programado_mensaje;
+        showMessage(gasto_guardado_mensaje);
         this.finish();
     }
 

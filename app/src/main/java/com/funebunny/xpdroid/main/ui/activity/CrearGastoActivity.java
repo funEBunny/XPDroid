@@ -34,6 +34,8 @@ public class CrearGastoActivity extends XPDroidActivity {
             ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(gasto.getImporte());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
+
+            setTitle(R.string.title_activity_editar_gasto);
         }
 
         // Fijar por defecto la fecha del día

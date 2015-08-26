@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface IServicioGastosBusiness {
 
+    public List<GastoProgramable> obtenerGastosProgramables();
+
     public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana);
 
     public void eliminarGastoProgramable(Context applicationContext, Long id);
