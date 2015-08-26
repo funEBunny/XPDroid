@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by schmidt0 on 7/25/2015.
  */
-public class ServicioGastosBusiness {
+public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     private static final String SEMANAL = "Semanal";
     private static final String DIARIO = "Diario";
@@ -60,7 +60,7 @@ public class ServicioGastosBusiness {
         notificationsService.desactivarAlarma(applicationContext, id);
     }
 
-    public int getDiaSemana(String diaSemana) {
+    private int getDiaSemana(String diaSemana) {
         int dia = 0;
         switch (diaSemana) {
             case "Lunes":
@@ -88,7 +88,7 @@ public class ServicioGastosBusiness {
         return dia;
     }
 
-    public String getDiaSemana(int diaSemana) {
+    private String getDiaSemana(int diaSemana) {
         String dia = "";
         switch (diaSemana) {
             case Calendar.MONDAY:
