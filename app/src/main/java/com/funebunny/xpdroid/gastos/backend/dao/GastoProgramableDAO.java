@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
  */
 @Table(name = "GastosProgramables")
 public class GastoProgramableDAO extends Model {
-    public GastoProgramableDAO(Integer diaMes, Integer mes, Integer hora, Integer diaSemana, Integer anio, String descripcion, String importe, String categoria, int repeticion) {
+    public GastoProgramableDAO(Integer diaMes, Integer mes, String hora, Integer diaSemana, Integer anio, String descripcion, String importe, String categoria, int repeticion) {
         super();
         this.diaMes = diaMes;
         this.mes = mes;
@@ -36,7 +36,7 @@ public class GastoProgramableDAO extends Model {
     private Integer mes = null;
 
     @Column(name = "Hora")
-    private Integer hora = null;
+    private String hora = null;
 
     @Column(name = "DiaSemana")
     private Integer diaSemana = null;
@@ -57,10 +57,10 @@ public class GastoProgramableDAO extends Model {
     private int repeticion;
 
     public static final int DIARIO = 1;
+
     public static final int SEMANAL = 2;
     public static final int MENSUAL = 3;
     public static final int ANUAL = 4;
-
     public Integer getDiaMes() {
         return diaMes;
     }
@@ -75,26 +75,6 @@ public class GastoProgramableDAO extends Model {
 
     public void setMes(Integer mes) {
         this.mes = mes;
-    }
-
-    public String getHora() {
-        SimpleDateFormat toUser = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat fromDB = new SimpleDateFormat("HHmm");
-        try {
-            return toUser.format(fromDB.parse(String.valueOf(hora)));
-        } catch (ParseException e) {
-            return null;
-        }
-    }
-
-    public void setHora(String hora) {
-        SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat toDB = new SimpleDateFormat("HHmm");
-        try {
-            this.hora = Integer.valueOf(toDB.format(fromUser.parse(hora)));
-        } catch (ParseException e) {
-            this.hora =0;
-        }
     }
 
     public Integer getDiaSemana() {
@@ -143,6 +123,14 @@ public class GastoProgramableDAO extends Model {
 
     public void setAnio(Integer anio) {
         this.anio = anio;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
 

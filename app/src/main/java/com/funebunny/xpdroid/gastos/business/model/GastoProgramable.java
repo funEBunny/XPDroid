@@ -36,12 +36,13 @@ public abstract class GastoProgramable implements Serializable {
     private String descripcion;
     private String categoria;
     private String importe;
-    private int hora;
 
+    private String hora;
 
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -61,8 +62,7 @@ public abstract class GastoProgramable implements Serializable {
         SimpleDateFormat toUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat fromDB = new SimpleDateFormat("HHmm");
         try {
-            String sHora = String.valueOf(hora);
-            Date from = fromDB.parse(sHora);
+            Date from = fromDB.parse(hora);
             String to = toUser.format(from);
             return to;
         } catch (Exception e) {
@@ -75,9 +75,9 @@ public abstract class GastoProgramable implements Serializable {
         SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm");
         SimpleDateFormat toDB = new SimpleDateFormat("HHmm");
         try {
-            this.hora = Integer.valueOf(toDB.format(fromUser.parse(hora)));
+            this.hora = toDB.format(fromUser.parse(hora));
         } catch (ParseException e) {
-           this.hora =0;
+           this.hora ="";
         }
     }
 

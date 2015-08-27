@@ -175,22 +175,10 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         return servicioGastosDAO.obtenerGastosPorCategoria(categoria);
     }
 
-    public List<Gasto> obtenerGastosPorFecha(String fecha) {
+    public List<Gasto> obtenerGastosPorFecha(Calendar fecha) {
 
-        Date date = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        try {
-            date = dateFormat.parse(fecha);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String mes = String.valueOf(cal.get(Calendar.MONTH) + 1);
-        String anio = String.valueOf(cal.get(Calendar.YEAR));
+          String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
+        String anio = String.valueOf(fecha.get(Calendar.YEAR));
 
         return servicioGastosDAO.obtenerGastosPorFecha(mes, anio);
     }

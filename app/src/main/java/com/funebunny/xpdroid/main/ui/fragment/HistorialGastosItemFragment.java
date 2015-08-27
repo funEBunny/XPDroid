@@ -93,11 +93,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = dateFormat.format(date);
-
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(fecha));
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(Calendar.getInstance()));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
     }
@@ -161,12 +157,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onResume() {
         super.onResume();
         this.gastos.clear();
-
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = dateFormat.format(date);
-
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(fecha));
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(Calendar.getInstance()));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
         View view = getView();
 

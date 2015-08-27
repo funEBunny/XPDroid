@@ -7,6 +7,7 @@ import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,5 +47,5 @@ public interface IServicioGastosBusiness {
 
     public List<Gasto> obtenerGastosPorCategoria(String categoria);
 
-    public List<Gasto> obtenerGastosPorFecha(String fecha);
+    public List<Gasto> obtenerGastosPorFecha(Calendar fecha);
 }
