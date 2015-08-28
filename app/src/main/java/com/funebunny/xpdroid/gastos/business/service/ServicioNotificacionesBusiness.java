@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
 import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
@@ -27,12 +28,14 @@ public class ServicioNotificacionesBusiness {
     public static final long INTERVAL_DAY = AlarmManager.INTERVAL_DAY;
 
     void activarAlarmaDiaria(Context applicationContext, String time, Long id) {
+        Log.d("XPDROID", "Activando alarma diaria");
         Calendar calendar = getCalendar(time, 0);
         activarAlarma(applicationContext, calendar, id, INTERVAL_DAY);
 
     }
 
     void activarAlarmaSemanal(Context applicationContext, int day, String time, Long id) {
+        Log.d("XPDROID", "Activando alarma semanal");
         Calendar calendar = getCalendar(time, day);
         activarAlarma(applicationContext, calendar, id, INTERVAL_WEEK);
 
@@ -46,6 +49,7 @@ public class ServicioNotificacionesBusiness {
     }
 
     public void desactivarAlarma(Context applicationContext,Long id){
+        Log.d("XPDROID", "Desactivando alarma");
         AlarmManager alarm = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         Intent myIntent = new Intent(applicationContext, AlarmChecker.class).putExtra(NOTIF_ID, id);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id.intValue(), myIntent, 0);
@@ -92,6 +96,7 @@ public class ServicioNotificacionesBusiness {
     }
 
     public void actualizarAlarma(Context applicationContext, GastoProgramable gastoProgramable) {
+        Log.d("XPDROID", "Actualizando alarma");
         desactivarAlarma(applicationContext, gastoProgramable.getId());
         if (gastoProgramable instanceof GastoProgSemanal){
             activarAlarmaSemanal(applicationContext, ((GastoProgSemanal) gastoProgramable).getDiaSemana(), gastoProgramable.getHora(), gastoProgramable.getId());

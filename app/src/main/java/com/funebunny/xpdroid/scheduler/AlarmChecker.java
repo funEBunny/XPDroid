@@ -29,7 +29,7 @@ public class AlarmChecker extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("SERVICEBOOT", "Intent received");
+        Log.d("XPDROID", "Alarm Intent received");
         if (servicioGastos==null){
             servicioGastos = new ServicioGastosDAO();
         }
@@ -37,11 +37,11 @@ public class AlarmChecker extends BroadcastReceiver {
         lauchNotification(servicioGastos,context,notifID);
     }
     private void lauchNotification(ServicioGastosDAO servicioGastos,Context context,Long notifID) {
-        Log.d("SERVICEBOOT", "Starting Notification Launcher");
+        Log.d("XPDROID", "Starting Notification Launcher");
         GastoProgramable gastoProgramable = servicioGastos.obtenerGastoProgramablePorID(notifID);
-        Log.d("SERVICEBOOT", "Notoficacion lanzada");
+        Log.d("XPDROID", "Notoficacion lanzada");
         NM = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Log.d("SERVICEBOOT", "NOTIFICATION_ID = " + notifID);
+        Log.d("XPDROID", "NOTIFICATION_ID = " + notifID);
         NM.notify(notifID.intValue(), notificacion(gastoProgramable, context));
 
     }
@@ -77,7 +77,7 @@ public class AlarmChecker extends BroadcastReceiver {
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(gastoProgramable.getId().intValue(), PendingIntent.FLAG_ONE_SHOT);
         nBuilder.setContentIntent(resultPendingIntent);
-        Log.d("SERVICEBOOT", "notificationNumber = "+gastoProgramable.getId());
+        Log.d("XPDROID", "notificationNumber = "+gastoProgramable.getId());
         nBuilder.setNumber(gastoProgramable.getId().intValue());
         return nBuilder.build();
     }
