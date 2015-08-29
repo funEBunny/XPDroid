@@ -71,7 +71,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     }
 
     @Override
-    public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
+    public List<Gasto> obtenerGastosMes(String mes, String anio) {
 
         if (mes.length() == 1) {
             mes = "0" + mes;

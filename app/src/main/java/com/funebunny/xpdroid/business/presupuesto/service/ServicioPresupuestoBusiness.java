@@ -3,7 +3,6 @@ package com.funebunny.xpdroid.business.presupuesto.service;
 import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.backend.presupuesto.service.ServicioPresupuestoDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
-import com.funebunny.xpdroid.business.gasto.service.IServicioGastosBusiness;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.utilities.AppConstants;
@@ -160,12 +159,12 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
         if (isNuevaSemana()) {
             String totalSemana="0";
-            totalesDAO.setTotalSemanal("0");
-            List<Gasto> gastos = servicioGastosBusiness.obtenerGastosMismaSemana(Calendar.getInstance());
+            List<Gasto> gastos = servicioGastosBusiness.obtenerGastosSemana(Calendar.getInstance());
             for (Gasto gasto : gastos) {
                 String importeGasto = gasto.getImporte();
-               totalSemana = sumar(totalSemana, importeGasto);
+                totalSemana = sumar(totalSemana, importeGasto);
             }
+            totalesDAO.setTotalSemanal(totalSemana);
         }
         if (isNuevoMes()){
             totalesDAO.setTotalMensual("0");

@@ -91,7 +91,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(Calendar.getInstance()));
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
     }
@@ -155,7 +155,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onResume() {
         super.onResume();
         this.gastos.clear();
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosPorFecha(Calendar.getInstance()));
+        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
         mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
         View view = getView();
 

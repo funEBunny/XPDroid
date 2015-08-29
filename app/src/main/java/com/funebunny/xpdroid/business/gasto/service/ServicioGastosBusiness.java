@@ -175,15 +175,15 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         return servicioGastosDAO.obtenerGastosPorCategoria(categoria);
     }
 
-    public List<Gasto> obtenerGastosPorFecha(Calendar fecha) {
+    public List<Gasto> obtenerGastosMes(Calendar fecha) {
 
-          String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
+        String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
         String anio = String.valueOf(fecha.get(Calendar.YEAR));
 
-        return servicioGastosDAO.obtenerGastosPorFecha(mes, anio);
+        return servicioGastosDAO.obtenerGastosMes(mes, anio);
     }
 
-    public List<Gasto> obtenerGastosMismaSemana(Calendar fecha) {
+    public List<Gasto> obtenerGastosSemana(Calendar fecha) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.DD_MM_YYYY);
         Date dia = fecha.getTime();
         Calendar calHasta = Calendar.getInstance();
