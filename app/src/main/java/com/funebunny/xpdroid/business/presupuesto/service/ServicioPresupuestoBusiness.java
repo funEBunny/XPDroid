@@ -3,6 +3,8 @@ package com.funebunny.xpdroid.business.presupuesto.service;
 import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.backend.presupuesto.service.ServicioPresupuestoDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
+import com.funebunny.xpdroid.business.gasto.service.IServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness {
 
     ServicioPresupuestoDAO servicioPresupuestoDAO = new ServicioPresupuestoDAO();
+    ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     public void guardarPresupuesto(String periodo, String importe) {
 
@@ -151,6 +154,29 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     @Override
     public void calcularTotales() {
+        TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
+
+        totalesDAO.setTotalDiario("0");
+
+        if (isNuevaSemana()) {
+            String totalSemana="0";
+            totalesDAO.setTotalSemanal("0");
+            List<Gasto> gastos = servicioGastosBusiness.obtenerGastosMismaSemana(Calendar.getInstance());
+            for (Gasto gasto : gastos) {
+                String importeGasto = gasto.getImporte();
+               totalSemana = sumar(totalSemana, importeGasto);
+            }
+        }
+        if (isNuevoMes()){
+            totalesDAO.setTotalMensual("0");
+        }
+
+        if (isNuevoAnio()){
+            totalesDAO.setTotalAnual("0");
+        }
+
+        String totalDiario = totalesDAO.getTotalDiario();
+
 
 
     }
@@ -165,32 +191,32 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         }
 
         if (isMismoDia(obtenerCalendar(gasto.getFecha()))) {
-            BigDecimal bdTotalDiario = sumar(totalesDAO.getTotalDiario(), gasto.getImporte());
-            servicioPresupuestoDAO.guardarTotalDiario(bdTotalDiario.toPlainString());
+            String totalDiario = sumar(totalesDAO.getTotalDiario(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalDiario(totalDiario);
         }
 
         if (isMismaSemana(obtenerCalendar(gasto.getFecha()))) {
-            BigDecimal bdTotalSemanal = sumar(totalesDAO.getTotalSemanal(), gasto.getImporte());
-            servicioPresupuestoDAO.guardarTotalSemanal(bdTotalSemanal.toPlainString());
+            String totalSemanal = sumar(totalesDAO.getTotalSemanal(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalSemanal(totalSemanal);
         }
 
         if (isMismoMes(obtenerCalendar(gasto.getFecha()))) {
-            BigDecimal bdTotalMensual = sumar(totalesDAO.getTotalMensual(), gasto.getImporte());
-            servicioPresupuestoDAO.guardarTotalMensual(bdTotalMensual.toPlainString());
+            String totalMensual = sumar(totalesDAO.getTotalMensual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalMensual(totalMensual);
         }
 
         if (isMismoAnio(obtenerCalendar(gasto.getFecha()))) {
-            BigDecimal bdTotalAnual = sumar(totalesDAO.getTotalAnual(), gasto.getImporte());
-            servicioPresupuestoDAO.guardarTotalAnual(bdTotalAnual.toPlainString());
+            String totalAnual = sumar(totalesDAO.getTotalAnual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalAnual(totalAnual);
         }
 
     }
 
-    private BigDecimal sumar(String total, String importe) {
+    private String sumar(String total, String importe) {
         BigDecimal bdTotalSemanal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
         bdTotalSemanal = bdTotalSemanal.add(bdImporteGasto);
-        return bdTotalSemanal;
+        return bdTotalSemanal.toPlainString();
     }
 
     private Calendar obtenerCalendar(String fecha) {

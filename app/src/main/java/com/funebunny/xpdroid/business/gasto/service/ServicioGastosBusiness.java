@@ -9,8 +9,11 @@ import com.funebunny.xpdroid.business.gasto.model.GastoProgDiario;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgSemanal;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
 import com.funebunny.xpdroid.business.notificacion.service.ServicioNotificacionesBusiness;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -178,6 +181,18 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         String anio = String.valueOf(fecha.get(Calendar.YEAR));
 
         return servicioGastosDAO.obtenerGastosPorFecha(mes, anio);
+    }
+
+    public List<Gasto> obtenerGastosMismaSemana(Calendar fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.DD_MM_YYYY);
+        Date dia = fecha.getTime();
+        Calendar calHasta = Calendar.getInstance();
+        calHasta.setTime(dia);
+        calHasta.add(Calendar.DAY_OF_YEAR, 6);
+        String desde = formatoFecha.format(dia);
+        String hasta = formatoFecha.format(calHasta.getTime());
+        return servicioGastosDAO.obtenerGastosDesdeHasta(desde,hasta);
+
     }
 
 }

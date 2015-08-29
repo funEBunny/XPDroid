@@ -133,4 +133,8 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
         totalesDAO.setTotalAnual("0");
         totalesDAO.save();
     }
+
+    public void guardarTotales(TotalesDAO totales){
+        totales.save();
+    }
 }

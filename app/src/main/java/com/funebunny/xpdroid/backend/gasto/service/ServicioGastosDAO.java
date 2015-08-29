@@ -48,11 +48,6 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         return gastos;
     }
 
-//    @Override
-//    public List<GastoDAO> obtenerGastos() {
-//        return new Select().from(GastoDAO.class).orderBy("Categoria ASC").execute();
-//    }
-
     @Override
     public List<Gasto> obtenerGastosPorCategoria(String categoria) {
 
@@ -74,11 +69,6 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
         return gastos;
     }
-
-//    @Override
-//    public List<GastoDAO> obtenerGastosPorCategoria(String categoria) {
-//        return new Select().from(GastoDAO.class).where("Categoria = ?", categoria).execute();
-//    }
 
     @Override
     public List<Gasto> obtenerGastosPorFecha(String mes, String anio) {
@@ -106,16 +96,22 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         
         return gastos;
     }
-
-
-//    @Override
-//    public List<GastoDAO> obtenerGastosPorFecha(String mes, String anio) {
-//        if (mes.length() == 1) {
-//            mes = "0" + mes;
-//        }
-//        String fecha = "%" + anio + mes + "%";
-//        return new Select().from(GastoDAO.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
-//    }
+    @Override
+    public List<Gasto> obtenerGastosDesdeHasta(String desde, String hasta) {
+        ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha BETWEEN ? AND ?", desde,hasta).orderBy("Categoria ASC").execute();
+        List<Gasto> gastos = new ArrayList<>();
+        for (int i = 0; i < gastosDAO.size(); i++) {
+            GastoDAO gDAO = gastosDAO.get(i);
+            Gasto gasto = new Gasto();
+            gasto.setId(gDAO.getId());
+            gasto.setDescripcion(gDAO.getDescripcion());
+            gasto.setImporte(gDAO.getImporte());
+            gasto.setCategoria(gDAO.getCategoria());
+            gasto.setFecha(gDAO.getFecha());
+            gastos.add(gasto);
+        }
+        return gastos;
+    }
 
     @Override
     public Long guardarGasto(Gasto gasto) {
@@ -128,18 +124,6 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         gDAO.save();
         return gDAO.getId();
     }
-
-//    @Override
-//    public void guardarGasto(String descripcion, String importe, String categoria, String fecha) {
-//        GastoDAO gasto = new GastoDAO();
-//        gasto.setImporte(importe);
-//        gasto.setDescripcion(descripcion);
-//        gasto.setCategoria(categoria);
-//        gasto.setFecha(fecha);
-//
-//        Log.d("XPDROID", "Guardando GastoDAO: " + gasto.toString());
-//        gasto.save();
-//    }
 
     @Override
     public void eliminarGasto(Long id) {
@@ -156,16 +140,6 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         gDAO.setImporte(gasto.getImporte());
         gDAO.save();
     }
-
-//    @Override
-//    public void actualizarGasto(GastoDAO gasto) {
-//        GastoDAO gastoDAO = obtenerGastoPorId(gasto.getgId());
-//        gastoDAO.setDescripcion(gasto.getDescripcion());
-//        gastoDAO.setImporte(gasto.getImporte());
-//        gastoDAO.setCategoria(gasto.getCategoria());
-//        gastoDAO.setFecha(gasto.getFecha());
-//        gastoDAO.save();
-//    }
 
     @Override
     public List<GastoProgramable> obtenerGastosProgramables() {
@@ -352,5 +326,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         ArrayList<GastoFavoritoDAO> gastosFavLista = new Select().from(GastoFavoritoDAO.class).where("Id = ?", id).execute();
         return gastosFavLista.get(0);
     }
+
+
 
 }
