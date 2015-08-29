@@ -1,11 +1,14 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -19,10 +22,12 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.main.ui.activity.CrearObjetivoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterObjetivo;
 import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,10 +113,39 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        // registrar para menu contextual, para mostrar opciones on-long-click
+        registerForContextMenu(mListView);
 
         return view;
     }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_contextual_gasto, menu);
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.menu_contextual_gasto_editar:
+                Bundle bObjetivo = new Bundle();
+                bObjetivo.putSerializable(AppConstants.OBJETIVO, objetivos.get(info.position));
+                Intent i = new Intent(getActivity(), CrearObjetivoActivity.class);
+                i.putExtras(bObjetivo);
+                startActivity(i);
+                return true;
+            case R.id.menu_contextual_gasto_borrar:
+                servicioObjetivosBusiness.eliminarObjetivo(objetivos.get(info.position).getId());
+                onResume();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
     // PRB - Refresh del reporte al volver al fragment
     @Override
     public void onResume() {

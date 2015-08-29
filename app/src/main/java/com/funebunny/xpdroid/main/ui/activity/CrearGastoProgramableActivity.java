@@ -20,6 +20,8 @@ import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.util.Calendar;
+
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();

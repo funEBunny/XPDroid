@@ -5,20 +5,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.gastos.business.model.Objetivo;
 import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearObjetivoActivity extends XPDroidActivity {
 
-    ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
+    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
+    private Objetivo objetivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_objetivo);
+
+        Bundle bObjetivo = getIntent().getExtras();
+        if (bObjetivo != null) {
+            objetivo = (Objetivo) bObjetivo.getSerializable(AppConstants.OBJETIVO);
+            ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).setText(objetivo.getImporte());
+            Spinner sPeriodo = (Spinner) findViewById(R.id.activity_crear_objetivo_sp_periodo);
+            sPeriodo.setSelection(((ArrayAdapter) sPeriodo.getAdapter()).getPosition(objetivo.getPeriodo()));
+            sPeriodo.setEnabled(false);
+            setTitle(R.string.title_activity_editar_objetivo);
+        }
+
     }
 
 
@@ -49,16 +64,24 @@ public class CrearObjetivoActivity extends XPDroidActivity {
     public void guardarObjetivo(View view) {
 
         String periodo = ((Spinner) findViewById(R.id.activity_crear_objetivo_sp_periodo)).getSelectedItem().toString();
+        String importe = ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).getText().toString();
 
-        if (servicioObjetivosBusiness.tipoObjetivoExiste(periodo)){
-            Resources res = getResources();
-            String mensaje = String.format(res.getString(R.string.objetivo_existente), periodo);
-            showMessage(mensaje);
-            return;
+
+
+        if (objetivo == null){
+            if (servicioObjetivosBusiness.tipoObjetivoExiste(periodo)){
+                Resources res = getResources();
+                String mensaje = String.format(res.getString(R.string.objetivo_existente), periodo);
+                showMessage(mensaje);
+                return;
+            }
+            servicioObjetivosBusiness.guardarObjetivo(periodo, importe);
+        }else{
+            objetivo.setImporte(importe);
+            objetivo.setPeriodo(periodo);
+            servicioObjetivosBusiness.actualizarObjetivo(objetivo);
         }
 
-        String importe = ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).getText().toString();
-        servicioObjetivosBusiness.guardarObjetivo(periodo, importe);
         //Mostrar mensaje de objetivo guardado
         int objetivo_guardado_mensaje = R.string.objetivo_guardado_mensaje;
         showMessage(objetivo_guardado_mensaje);
