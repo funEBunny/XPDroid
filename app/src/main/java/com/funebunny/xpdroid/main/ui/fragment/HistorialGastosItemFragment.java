@@ -19,18 +19,16 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.business.model.Gasto;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
+import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.model.Gasto;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 

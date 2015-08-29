@@ -1,7 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearGastoFavoritoActivity extends XPDroidActivity {

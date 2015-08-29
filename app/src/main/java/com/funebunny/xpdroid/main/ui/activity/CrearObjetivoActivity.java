@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.model.Objetivo;
-import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.model.Objetivo;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioObjetivosBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class CrearObjetivoActivity extends XPDroidActivity {
@@ -66,6 +66,10 @@ public class CrearObjetivoActivity extends XPDroidActivity {
         String periodo = ((Spinner) findViewById(R.id.activity_crear_objetivo_sp_periodo)).getSelectedItem().toString();
         String importe = ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).getText().toString();
 
+        if ("".equalsIgnoreCase(importe)){
+            ((EditText) findViewById(R.id.activity_crear_objetivo_et_importe)).setError("Error");
+            return;
+        }
 
 
         if (objetivo == null){

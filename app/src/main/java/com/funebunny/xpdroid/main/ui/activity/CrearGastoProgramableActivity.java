@@ -2,7 +2,6 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,17 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.model.GastoProgDiario;
-import com.funebunny.xpdroid.gastos.business.model.GastoProgSemanal;
-import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.GastoProgDiario;
+import com.funebunny.xpdroid.business.gasto.model.GastoProgSemanal;
+import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
-
-import java.util.Calendar;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 

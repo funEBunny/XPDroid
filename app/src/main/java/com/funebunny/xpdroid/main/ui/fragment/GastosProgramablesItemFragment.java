@@ -18,12 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.backend.service.ServicioGastosDAO;
-import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoProgramable;
+import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGastoProgramable;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,28 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoFavoritoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.activity.TratarGastoActivity;
-import com.funebunny.xpdroid.main.ui.activity.TratarGastoFavoritoActivity;
-import com.funebunny.xpdroid.main.ui.activity.XPDroidActivity;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGasto;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
+import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**

@@ -23,13 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.gastos.business.model.Gasto;
-import com.funebunny.xpdroid.gastos.business.model.GastoFavorito;
-import com.funebunny.xpdroid.gastos.business.model.GastoProgramable;
-import com.funebunny.xpdroid.gastos.business.model.Objetivo;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
-import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ButtonAdapterGastoFavorito;
+import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -165,27 +162,6 @@ public class MainActivity extends XPDroidActivity
         toast.show();
     }
 
-//    public void tratarGasto(View view){
-//
-//        Gasto gasto = (Gasto) view.findViewById(R.id.historial_gastos_list_item).getTag();
-//        Bundle bGasto = new Bundle();
-//        bGasto.putSerializable(AppConstants.GASTO, gasto);
-//
-//        Intent i = new Intent(this, TratarGastoActivity.class);
-//        i.putExtras(bGasto);
-//        startActivity(i);
-//    }
-//
-//    public void tratarGastoFavorito(View view){
-//
-//        GastoFavorito gf = (GastoFavorito) view.findViewById(R.id.gastos_favoritos_list_item_ll_main).getTag();
-//        Bundle bgf = new Bundle();
-//        bgf.putSerializable(AppConstants.GASTO_FAVORITO, gf);
-//
-//        Intent i = new Intent(this, TratarGastoFavoritoActivity.class);
-//        i.putExtras(bgf);
-//        startActivity(i);
-//    }
 
     public void crearGastoPorFavorito(View view){
         // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal
@@ -204,26 +180,6 @@ public class MainActivity extends XPDroidActivity
         showMessage(gasto_guardado_mensaje);
     }
 
-    public void tratarObjetivo(View view){
-
-        Objetivo obj = (Objetivo) view.findViewById(R.id.objetivos_list_item_ll_main).getTag();
-        Bundle bobj = new Bundle();
-        bobj.putSerializable(AppConstants.OBJETIVO, obj);
-        Intent i = new Intent(this, TratarObjetivoActivity.class);
-        i.putExtras(bobj);
-        startActivity(i);
-
-    }
-
-    public void tratarGastoProgramable(View view){
-
-        GastoProgramable gasto = (GastoProgramable) view.findViewById(R.id.gastos_programables_list_item).getTag();
-        Bundle bGasto = new Bundle();
-        bGasto.putSerializable(AppConstants.GASTO_PROGRAMABLE,gasto);
-        Intent i = new Intent(this, TratarGastoProgramableActivity.class);
-        i.putExtras(bGasto);
-        startActivity(i);
-    }
 
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks

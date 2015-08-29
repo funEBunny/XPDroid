@@ -19,13 +19,11 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.gastos.business.model.Objetivo;
-import com.funebunny.xpdroid.gastos.business.service.ServicioGastosBusiness;
-import com.funebunny.xpdroid.gastos.business.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.model.Objetivo;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioObjetivosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearObjetivoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterGastoFavorito;
-import com.funebunny.xpdroid.main.ui.activity.adapter.ListAdapterObjetivo;
+import com.funebunny.xpdroid.main.ui.adapter.ListAdapterObjetivo;
 import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
