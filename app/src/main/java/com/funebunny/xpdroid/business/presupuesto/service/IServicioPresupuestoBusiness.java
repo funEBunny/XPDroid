@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.business.presupuesto.service;
 
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 
 import java.util.List;
@@ -9,16 +10,21 @@ import java.util.List;
  */
 public interface IServicioPresupuestoBusiness {
 
-    public void guardarPresupuesto(String periodo, String importe);
+    void guardarPresupuesto(String periodo, String importe);
 
-    public List<Presupuesto> obtenerPresupuesto();
+    List<Presupuesto> obtenerPresupuesto();
 
-    public void eliminarPresupuesto(Long id);
+    void eliminarPresupuesto(Long id);
 
-    public void actualizarPresupuesto(Presupuesto obj);
+    void actualizarPresupuesto(Presupuesto obj);
 
     boolean isLimitePresupuestoAlcanzado();
 
     boolean tipoPresupuestoExiste(String periodo);
+
+    void validarPresupuesto();
+
+    void calcularTotales();
+    void calcularTotales(Gasto gasto);
 
 }

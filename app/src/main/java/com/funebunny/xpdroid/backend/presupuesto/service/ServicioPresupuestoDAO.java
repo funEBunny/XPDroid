@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.backend.presupuesto.service;
 
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.backend.presupuesto.dao.PresupuestoDAO;
+import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 
 import java.util.ArrayList;
@@ -79,5 +80,49 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
     private PresupuestoDAO obtenerPresupuestoPorId(Long id) {
         ArrayList<PresupuestoDAO> presupuestoLista = new Select().from(PresupuestoDAO.class).where("Id = ?", id).execute();
         return presupuestoLista.get(0);
+    }
+
+    @Override
+    public TotalesDAO obtenerTotales() {
+        ArrayList<TotalesDAO> totales = new Select().from(TotalesDAO.class).execute();
+        return totales.get(0);
+    }
+
+    @Override
+    public void guardarTotalDiario(String total) {
+        TotalesDAO totales = obtenerTotales();
+        totales.setTotalDiario(total);
+        totales.save();
+    }
+
+    @Override
+    public void guardarTotalSemanal(String total) {
+        TotalesDAO totales = obtenerTotales();
+        totales.setTotalSemanal(total);
+        totales.save();
+    }
+
+    @Override
+    public void guardarTotalMensual(String total) {
+        TotalesDAO totales = obtenerTotales();
+        totales.setTotalMensual(total);
+        totales.save();
+    }
+
+    @Override
+    public void guardarTotalAnual(String total) {
+        TotalesDAO totales = obtenerTotales();
+        totales.setTotalAnual(total);
+        totales.save();
+    }
+
+    @Override
+    public void inicializarTotales() {
+        TotalesDAO totalesDAO = new TotalesDAO();
+        totalesDAO.setTotalDiario("0");
+        totalesDAO.setTotalMensual("0");
+        totalesDAO.setTotalSemanal("0");
+        totalesDAO.setTotalAnual("0");
+        totalesDAO.save();
     }
 }

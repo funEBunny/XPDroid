@@ -13,4 +13,8 @@ public class AppConstants {
     public static final String PRESUPUESTO = "presupuesto";
     public static final int CANT_MAX_PRESUPUESTO = 4;
 
+    public static final String PERIODO_DIARIO = "Diario";
+    public static final String PERIODO_SEMANAL = "Semanal";
+    public static final String PERIODO_MENSUAL = "Mensual";
+    public static final String PERIODO_ANUAL = "Anual";
 }
