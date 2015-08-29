@@ -12,21 +12,6 @@ import java.text.SimpleDateFormat;
  */
 @Table(name = "Gasto")
 public class GastoDAO extends Model {
-//    public GastoDAO(String descripcion, String importe, String categoria, String fecha) {
-//        super();
-//        this.descripcion = descripcion;
-//        this.importe = importe;
-//        this.categoria = categoria;
-//        this.fecha = fecha;
-//    }
-
-//    public GastoDAO() {
-//       super();
-//    }
-
-//    //PRB - Se agrega atributo gId ya que el mId de la clase Model no es Serializable
-//    private Long gId;
-
 
     @Column(name = "Descripcion")
     private String descripcion;
