@@ -14,37 +14,37 @@ import java.util.List;
  */
 public interface IServicioGastosBusiness {
 
-    public List<GastoProgramable> obtenerGastosProgramables();
+    List<GastoProgramable> obtenerGastosProgramables();
 
-    public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana);
+    void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana);
 
-    public void eliminarGastoProgramable(Context applicationContext, Long id);
+    void eliminarGastoProgramable(Context applicationContext, Long id);
 
-    public void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable);
+    void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable);
 
-    public int getDiaSemana(String diaSemana);
+    int getDiaSemana(String diaSemana);
 
-    public String getDiaSemana(int diaSemana);
+    String getDiaSemana(int diaSemana);
 
     // Gastos Favoritos
-    public void guardarGastoFavorito(String descripcion, String importe, String categoria);
+    void guardarGastoFavorito(String descripcion, String importe, String categoria);
 
-    public List<GastoFavorito> obtenerGastosFavoritos();
+    List<GastoFavorito> obtenerGastosFavoritos();
 
-    public void eliminarGastoFavorito(Long id);
+    void eliminarGastoFavorito(Long id);
 
-    public void actualizarGastoFavorito(GastoFavorito gf);
+    void actualizarGastoFavorito(GastoFavorito gf);
 
     // Gastos
-    public void guardarGasto(String descripcion, String importe, String categoria, String fecha);
+    Gasto guardarGasto(String descripcion, String importe, String categoria, String fecha);
 
-    public void actualizarGasto(Gasto gasto);
+    void actualizarGasto(Gasto gasto);
 
-    public void eliminarGasto(Long id);
+    void eliminarGasto(Long id);
 
-    public List<Gasto> obtenerGastos();
+    List<Gasto> obtenerGastos();
 
-    public List<Gasto> obtenerGastosPorCategoria(String categoria);
+    List<Gasto> obtenerGastosPorCategoria(String categoria);
 
-    public List<Gasto> obtenerGastosPorFecha(Calendar fecha);
+    List<Gasto> obtenerGastosPorFecha(Calendar fecha);
 }

@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -20,6 +21,7 @@ import java.util.Calendar;
 public class CrearGastoActivity extends XPDroidActivity {
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
     private Gasto gasto;
 
     @Override
@@ -45,25 +47,6 @@ public class CrearGastoActivity extends XPDroidActivity {
 
     }
 
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Bundle extras = getIntent().getExtras();
-//
-//        if (extras != null) {
-//            String categoria = extras.getString("categoria");
-//            String importe = extras.getString("importe");
-//            String descripcion = extras.getString("descripcion");
-//
-//            Spinner spinCategoria = (Spinner)findViewById(R.id.activity_crear_gasto_sp_categoria);
-//            spinCategoria.setSelection(((ArrayAdapter) spinCategoria.getAdapter()).getPosition(categoria));
-//            ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(importe);
-//            ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(descripcion);
-//
-//        }
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -87,13 +70,11 @@ public class CrearGastoActivity extends XPDroidActivity {
 
     }
 
-    //>Added by PRB
     public void mostrarDatePicker(View v) {
         EditText fecha = (EditText) this.findViewById(R.id.activity_crear_gasto_et_fecha);
         DialogFragment newFragment = DatePickerFragment.newInstance(fecha);
         newFragment.show(getFragmentManager(), "datePicker");
     }
-    //<Added by PRB
 
     public void guardarGasto(View view) {
 
@@ -103,7 +84,7 @@ public class CrearGastoActivity extends XPDroidActivity {
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria)).getSelectedItem().toString();
 
         if (gasto == null || gasto.getId()== null){
-            servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
+            gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
         }else{
             gasto.setDescripcion(descripcion);
             gasto.setFecha(fecha);
@@ -111,6 +92,9 @@ public class CrearGastoActivity extends XPDroidActivity {
             gasto.setCategoria(categoria);
             servicioGastosBusiness.actualizarGasto(gasto);
         }
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioPresupuestoBusiness.validarPresupuesto();
+
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);

@@ -83,11 +83,4 @@ public class GastoDAO extends Model {
                 '}';
     }
 
-//    public Long getgId() {
-//        return gId;
-//    }
-//
-//    public void setgId(Long gId) {
-//        this.gId = gId;
-//    }
 }

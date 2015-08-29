@@ -22,9 +22,8 @@ public interface IServicioPresupuestoBusiness {
 
     boolean tipoPresupuestoExiste(String periodo);
 
-    void validarPresupuesto();
-
     void calcularTotales();
+
     void calcularTotales(Gasto gasto);
 
 }
