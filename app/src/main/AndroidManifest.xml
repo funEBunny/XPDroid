@@ -60,8 +60,8 @@
                 android:value=".main.ui.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".main.ui.activity.CrearObjetivoActivity"
-            android:label="@string/title_activity_crear_objetivo"
+            android:name=".main.ui.activity.CrearPresupuestoActivity"
+            android:label="@string/title_activity_crear_presupuesto"
             android:parentActivityName=".main.ui.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

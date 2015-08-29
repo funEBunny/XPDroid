@@ -10,7 +10,7 @@ public class AppConstants {
     public static final String GASTO = "gasto";
     public static final String GASTO_FAVORITO = "gasto favorito";
     public static final String GASTO_PROGRAMABLE = "gasto programable";
-    public static final String OBJETIVO = "objetivo";
-    public static final int CANT_MAX_OBJETIVOS = 4;
+    public static final String PRESUPUESTO = "presupuesto";
+    public static final int CANT_MAX_PRESUPUESTO = 4;
 
 }

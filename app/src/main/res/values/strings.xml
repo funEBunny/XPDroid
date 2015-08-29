@@ -5,7 +5,7 @@
     <string name="action_crear_gasto">Crear Gasto!</string>
     <string name="action_crear_gasto_favorito">Crear Gasto Favorito!</string>
     <string name="action_crear_gasto_programable">Crear Gasto Programable!</string>
-    <string name="action_crear_objetivo">Crear Objetivo de Gastos!</string>
+    <string name="action_crear_presupuesto">Crear Presupuesto de Gastos!</string>
     <string name="action_crear_recordatorio">Crear Recordatorio!</string>
     <string name="action_ver_historial">Buscar mas Gastos!</string>
     <string name="gasto_guardado_mensaje">Gasto guardado exitosamente!</string>
@@ -15,16 +15,16 @@
     <string name="gasto_favorito_guardado_mensaje">Favorito guardado exitosamente!</string>
     <string name="favorito_eliminado_mensaje">Favorito eliminado exitosamente!</string>
     <string name="favorito_actualizado_mensaje">Favorito actualizado exitosamente!</string>
-    <string name="objetivo_actualizado_mensaje">Objetivo actualizado exitosamente!</string>
-    <string name="objetivo_guardado_mensaje">Objetivo guardado exitosamente!</string>
-    <string name="objetivo_eliminado_mensaje">Objetivo eliminado exitosamente!</string>
+    <string name="presupuesto_actualizado_mensaje">Presupuesto actualizado exitosamente!</string>
+    <string name="presupuesto_guardado_mensaje">Presupuesto guardado exitosamente!</string>
+    <string name="presupuesto_eliminado_mensaje">Presupuesto eliminado exitosamente!</string>
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
     <string name="navdrawitem2">Historial Gastos</string>
     <string name="navdrawitem3">Gastos Favoritos</string>
     <string name="navdrawitem4">Gastos Programables</string>
-    <string name="navdrawitem5">Objetivos</string>
+    <string name="navdrawitem5">Presupuesto</string>
     <string name="navdrawitem6">Recordatorios</string>
     <string name="navdrawitem7">Notificaciones</string>
     <string name="navdrawitem8">Ayuda</string>
@@ -45,7 +45,7 @@
     <string name="inicio">Esta es la pagina de Inicio</string>
     <string name="gastos_favoritos">Esta es la pagina de Gastos Favoritos</string>
     <string name="gastos_programables">Esta es la pagina de Gastos Programables</string>
-    <string name="objetivos">Esta es la pagina de Objetivos</string>
+    <string name="presupuesto">Esta es la pagina de Presupuesto</string>
     <string name="recordatorios">Esta es la pagina de Recordatorios</string>
     <string name="ayuda">Esta es la pagina de Ayuda</string>
     <string name="descripcion">Descripción</string>
@@ -58,14 +58,14 @@
     <string name="horario">Horario</string>
     <string name="repeticion">Repetición</string>
     <string name="title_activity_crear_gasto_favorito">Crear Gasto Favorito</string>
-    <string name="title_activity_crear_objetivo">Crear Objetivo</string>
+    <string name="title_activity_crear_presupuesto">Crear Presupuesto</string>
     <string name="duracion">Duración</string>
     <string name="title_activity_crear_recordatorio">Crear Recordatorio</string>
     <string name="title_activity_xpdroid">Actividad Base de XPDroid</string>
     <string name="gastos_mes_titulo">Gastos del Mes Realizados:</string>
     <string name="gastos_favoritos_titulo">Gastos Favoritos:</string>
     <string name="ver_mas_gastos_titulo">Buscar Gastos Realizados</string>
-    <string name="objetivos_titulo">Objetivos de Gastos</string>
+    <string name="presupuesto_titulo">Presupuesto de Gastos</string>
 
     <string name="boton_buscar">Buscar</string>
 
@@ -89,7 +89,7 @@
     <string name="title_activity_historial_gastos_completo">Busqueda de Gastos Realizados</string>
     <string name="title_activity_tratar_gasto">Tratar Gasto</string>
     <string name="title_activity_editar_gasto">Editar Gasto</string>
-    <string name="title_activity_editar_objetivo">Editar Objetivo</string>
+    <string name="title_activity_editar_presupuesto">Editar Presupuesto</string>
     <string name="title_activity_editar_gasto_programable">Editar Gasto Programable</string>
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
@@ -97,13 +97,13 @@
     <string name="editar">Editar</string>
     <string name="title_activity_editar_gasto_favorito">Editar Gasto Favorito</string>
     <string name="title_activity_tratar_gasto_favorito">Tratar Gasto Favorito</string>
-    <string name="title_activity_tratar_objetivo">Tratar Objetivo</string>
+    <string name="title_activity_tratar_presupuesto">Tratar Presupuesto</string>
     <string name="title_activity_tratar_gasto_programable">TratarGastoProgramableActivity</string>
     <string name="programado_actualizado_mensaje">Gasto Programado Actualizado</string>
     <string name="programado_eliminado_mensaje">Gasto Programado Eliminado</string>
 
-    <string name="info_limite_objetivos_alcanzado">Límite de objetivos alcanzado</string>
-    <string name="objetivo_existente">Objetivo %1$s existente</string>
+    <string name="info_limite_presupuesto_alcanzado">Límite de presupuesto alcanzado</string>
+    <string name="presupuesto_existente">Presupuesto %1$s existente</string>
     <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
 
 </resources>

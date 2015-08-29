@@ -1,23 +1,20 @@
-package com.funebunny.xpdroid.business.presupuesto.model;
+package com.funebunny.xpdroid.backend.presupuesto.dao;
 
-import java.io.Serializable;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 /**
  * Created by provirabosch on 19/08/2015.
  */
-public class Objetivo implements Serializable {
+@Table(name = "Presupuesto")
+public class PresupuestoDAO extends Model {
 
-    private Long id;
+    @Column(name = "Periodo")
     private String periodo;
+
+    @Column(name = "Importe")
     private String importe;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPeriodo() {
         return periodo;

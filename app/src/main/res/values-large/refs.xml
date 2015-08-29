@@ -16,6 +16,6 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-    <item name="fragment_objetivositem" type="layout">@layout/fragment_objetivositem_grid</item>
+    <item name="fragment_presupuestoitem" type="layout">@layout/fragment_presupuestoitem_grid</item>
 
 </resources>

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.business.presupuesto.model.Objetivo;
+import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
 /**
  * Created by I823537 on 21/08/2015.
  */
-public class ListAdapterObjetivo extends ArrayAdapter<Objetivo> {
+public class ListAdapterPresupuesto extends ArrayAdapter<Presupuesto> {
 
-    public ListAdapterObjetivo(Context context, int textViewResourceId) {
+    public ListAdapterPresupuesto(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
 
-    public ListAdapterObjetivo(Context context, int resource, List<Objetivo> items) {
+    public ListAdapterPresupuesto(Context context, int resource, List<Presupuesto> items) {
         super(context, resource, items);
     }
 
@@ -34,27 +34,27 @@ public class ListAdapterObjetivo extends ArrayAdapter<Objetivo> {
         if (view == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            view = vi.inflate(R.layout.objetivos_list_item, null);
+            view = vi.inflate(R.layout.presupuesto_list_item, null);
         }
 
-        Objetivo objetivo = getItem(position);
+        Presupuesto presupuesto = getItem(position);
 
-        if (objetivo != null) {
+        if (presupuesto != null) {
 
-            view.setTag(objetivo); //Test PRB - Anclar el objeto a la vista
+            view.setTag(presupuesto); //Test PRB - Anclar el objeto a la vista
 
-            TextView periodo = (TextView) view.findViewById(R.id.objetivos_list_item_tv_periodo);
-            TextView importe = (TextView) view.findViewById(R.id.objetivos_list_item_tv_importe);
+            TextView periodo = (TextView) view.findViewById(R.id.presupuesto_list_item_tv_periodo);
+            TextView importe = (TextView) view.findViewById(R.id.presupuesto_list_item_tv_importe);
 
             if (periodo != null) {
-                periodo.setText(objetivo.getPeriodo());
+                periodo.setText(presupuesto.getPeriodo());
             }
             if (importe != null) {
                 NumberFormat format = NumberFormat.getInstance();
                 format.setMaximumFractionDigits(2);
                 format.setMaximumIntegerDigits(6);
 
-                String importe1 = objetivo.getImporte();
+                String importe1 = presupuesto.getImporte();
                 if (!"".equalsIgnoreCase(importe1)){
                     importe.setText("$" + format.format(Double.valueOf(importe1)));
 

@@ -25,14 +25,14 @@ import android.widget.Toast;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
-import com.funebunny.xpdroid.business.presupuesto.service.ServicioObjetivosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
-import com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.PresupuestoItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.text.SimpleDateFormat;
@@ -47,7 +47,7 @@ public class MainActivity extends XPDroidActivity
         HistorialGastosItemFragment.HistorialGastosItemCallbacks,
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
-        ObjetivosItemFragment.ObjetivosItemCallbacks,
+        PresupuestoItemFragment.PresupuestoItemCallbacks,
         NotificacionesItemFragment.NotificacionesItemCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -59,7 +59,7 @@ public class MainActivity extends XPDroidActivity
     private DrawerLayout drawerLayout;
     private ListView drawerList;
 
-    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
 
     @Override
@@ -116,9 +116,9 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 4: { //Objetivos
+            case 4: { //Presupuesto
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, ObjetivosItemFragment.newInstance(position + 1))
+                        .replace(R.id.container, PresupuestoItemFragment.newInstance(position + 1))
                         .commit();
                 break;
             }
@@ -156,7 +156,7 @@ public class MainActivity extends XPDroidActivity
         Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
         startActivity(intentHistorialGastosCompleto, animation);
 
-        //Mostrar mensaje de crear gasto objetivo
+        //Mostrar mensaje de crear gasto presupuesto
         Toast toast = Toast.makeText(this, R.string.action_ver_historial, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
@@ -201,7 +201,7 @@ public class MainActivity extends XPDroidActivity
     }
 
     @Override
-    public void onObjetivosItemSelected(String id) {
+    public void onPresupuestoItemSelected(String id) {
 
     }
     /*
@@ -299,21 +299,21 @@ public class MainActivity extends XPDroidActivity
                 break;
             }
 
-            case R.id.action_crear_objetivo: {
+            case R.id.action_crear_presupuesto: {
 
-                if (servicioObjetivosBusiness.isLimiteObjetivosAlcanzado()){
-                    //Mostrar mensaje de crear gasto objetivo
-                    Toast toast = Toast.makeText(this, R.string.info_limite_objetivos_alcanzado, Toast.LENGTH_LONG);
+                if (servicioPresupuestoBusiness.isLimitePresupuestoAlcanzado()){
+                    //Mostrar mensaje de crear gasto presupuesto
+                    Toast toast = Toast.makeText(this, R.string.info_limite_presupuesto_alcanzado, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
                     break;
                 }
 
-                Intent intentCrearObjetivo = new Intent(this, CrearObjetivoActivity.class);
-                startActivity(intentCrearObjetivo, animation);
+                Intent intentCrearPresupuesto = new Intent(this, CrearPresupuestoActivity.class);
+                startActivity(intentCrearPresupuesto, animation);
 
-                //Mostrar mensaje de crear gasto objetivo
-                Toast toast = Toast.makeText(this, R.string.action_crear_objetivo, Toast.LENGTH_SHORT);
+                //Mostrar mensaje de crear gasto presupuesto
+                Toast toast = Toast.makeText(this, R.string.action_crear_presupuesto, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 break;

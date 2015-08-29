@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/objetivos_list_item_ll_main"
+    android:id="@+id/presupuesto_list_item_ll_main"
     android:background="@drawable/list_selector"
     android:longClickable="true">
 
@@ -10,12 +10,12 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/objetivos_list_item_ll_datos">
+        android:id="@+id/presupuesto_list_item_ll_datos">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/objetivos_list_item_tv_periodo"
+            android:id="@+id/presupuesto_list_item_tv_periodo"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/objetivos_list_item_tv_importe"
+            android:id="@+id/presupuesto_list_item_tv_importe"
             android:textColor="#ffff8100"
             android:textStyle="bold"
             android:singleLine="true"

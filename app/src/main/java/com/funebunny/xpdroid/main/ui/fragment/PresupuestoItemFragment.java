@@ -19,11 +19,11 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
-import com.funebunny.xpdroid.business.presupuesto.model.Objetivo;
-import com.funebunny.xpdroid.business.presupuesto.service.ServicioObjetivosBusiness;
-import com.funebunny.xpdroid.main.ui.activity.CrearObjetivoActivity;
+import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
+import com.funebunny.xpdroid.main.ui.activity.CrearPresupuestoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.adapter.ListAdapterObjetivo;
+import com.funebunny.xpdroid.main.ui.adapter.ListAdapterPresupuesto;
 import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -36,10 +36,10 @@ import java.util.List;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link com.funebunny.xpdroid.main.ui.fragment.ObjetivosItemFragment.ObjetivosItemCallbacks}
+ * Activities containing this fragment MUST implement the {@link PresupuestoItemFragment.PresupuestoItemCallbacks}
  * interface.
  */
-public class ObjetivosItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class PresupuestoItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,9 +52,9 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     private String mParam1;
     private String mParam2;
 
-    private ObjetivosItemCallbacks mListener;
-    private List<Objetivo> objetivos = new ArrayList<Objetivo>();
-    private ServicioObjetivosBusiness servicioObjetivosBusiness = new ServicioObjetivosBusiness();
+    private PresupuestoItemCallbacks mListener;
+    private List<Presupuesto> presupuesto = new ArrayList<Presupuesto>();
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
     /**
      * The fragment's ListView/GridView.
      */
@@ -67,8 +67,8 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static ObjetivosItemFragment newInstance(int itemSelected) {
-        ObjetivosItemFragment fragment = new ObjetivosItemFragment();
+    public static PresupuestoItemFragment newInstance(int itemSelected) {
+        PresupuestoItemFragment fragment = new PresupuestoItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, "param1");
         args.putString(ARG_PARAM2, "param2");
@@ -81,7 +81,7 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ObjetivosItemFragment() {
+    public PresupuestoItemFragment() {
     }
 
     @Override
@@ -93,20 +93,20 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        objetivos.addAll(servicioObjetivosBusiness.obtenerObjetivos());
+        presupuesto.addAll(servicioPresupuestoBusiness.obtenerPresupuesto());
 
         // TODO: Change Adapter to display your content
 
-        mAdapter = new ListAdapterObjetivo(getActivity(), R.layout.objetivos_list_item, objetivos);
+        mAdapter = new ListAdapterPresupuesto(getActivity(), R.layout.presupuesto_list_item, presupuesto);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_objetivositem, container, false);
+        View view = inflater.inflate(R.layout.fragment_presupuestoitem, container, false);
 
         // Set the adapter
-        mListView = (ListView) view.findViewById(R.id.fragment_objetivositem_list_lv_lista);
+        mListView = (ListView) view.findViewById(R.id.fragment_presupuestoitem_list_lv_lista);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -130,14 +130,14 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
 
         switch (item.getItemId()) {
             case R.id.menu_contextual_gasto_editar:
-                Bundle bObjetivo = new Bundle();
-                bObjetivo.putSerializable(AppConstants.OBJETIVO, objetivos.get(info.position));
-                Intent i = new Intent(getActivity(), CrearObjetivoActivity.class);
-                i.putExtras(bObjetivo);
+                Bundle bPresupuesto = new Bundle();
+                bPresupuesto.putSerializable(AppConstants.PRESUPUESTO, presupuesto.get(info.position));
+                Intent i = new Intent(getActivity(), CrearPresupuestoActivity.class);
+                i.putExtras(bPresupuesto);
                 startActivity(i);
                 return true;
             case R.id.menu_contextual_gasto_borrar:
-                servicioObjetivosBusiness.eliminarObjetivo(objetivos.get(info.position).getId());
+                servicioPresupuestoBusiness.eliminarPresupuesto(presupuesto.get(info.position).getId());
                 onResume();
                 return true;
             default:
@@ -148,13 +148,13 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     @Override
     public void onResume() {
         super.onResume();
-        this.objetivos.clear();
-        this.objetivos.addAll(servicioObjetivosBusiness.obtenerObjetivos());
+        this.presupuesto.clear();
+        this.presupuesto.addAll(servicioPresupuestoBusiness.obtenerPresupuesto());
 
-        mAdapter = new ListAdapterObjetivo(getActivity(), R.layout.objetivos_list_item, objetivos);
+        mAdapter = new ListAdapterPresupuesto(getActivity(), R.layout.presupuesto_list_item, presupuesto);
         View view = getView();
 
-        mListView = (ListView) view.findViewById(R.id.fragment_objetivositem_list_lv_lista);
+        mListView = (ListView) view.findViewById(R.id.fragment_presupuestoitem_list_lv_lista);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -165,10 +165,10 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (ObjetivosItemCallbacks) activity;
+            mListener = (PresupuestoItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement ObjetivosItemCallbacks.onObjetivosItemSelected");
+            throw new ClassCastException(activity.toString() + " must implement PresupuestoItemCallbacks.onPresupuestoItemSelected");
         }
     }
 
@@ -184,7 +184,7 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onObjetivosItemSelected(DummyContent.ITEMS.get(position).id);
+            mListener.onPresupuestoItemSelected(DummyContent.ITEMS.get(position).id);
         }
     }
 
@@ -211,9 +211,9 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface ObjetivosItemCallbacks {
+    public interface PresupuestoItemCallbacks {
         // TODO: Update argument type and name
-        public void onObjetivosItemSelected(String id);
+        public void onPresupuestoItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
@@ -222,6 +222,6 @@ public class ObjetivosItemFragment extends Fragment implements AbsListView.OnIte
         setHasOptionsMenu(true);
     }
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_crear_objetivo, menu);
+        inflater.inflate(R.menu.menu_crear_presupuesto, menu);
     }
 }
