@@ -93,7 +93,6 @@ public class CrearGastoActivity extends XPDroidActivity {
             servicioGastosBusiness.actualizarGasto(gasto);
         }
         servicioPresupuestoBusiness.calcularTotales(gasto);
-        servicioPresupuestoBusiness.validarPresupuesto();
 
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;

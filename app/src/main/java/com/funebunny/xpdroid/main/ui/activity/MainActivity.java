@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
@@ -174,7 +175,9 @@ public class MainActivity extends XPDroidActivity
         Date fecha = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String fechaFormat = dateFormat.format(fecha);
-        servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
+        Gasto gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);
