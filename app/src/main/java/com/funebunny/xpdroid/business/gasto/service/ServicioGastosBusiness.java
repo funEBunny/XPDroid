@@ -146,14 +146,15 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     // Gastos
-    public void guardarGasto(String descripcion, String importe, String categoria, String fecha){
+    public Gasto guardarGasto(String descripcion, String importe, String categoria, String fecha){
 
         Gasto gasto = new Gasto();
         gasto.setCategoria(categoria);
         gasto.setFecha(fecha);
         gasto.setImporte(importe);
         gasto.setDescripcion(descripcion);
-        servicioGastosDAO.guardarGasto(gasto);
+        gasto.setId(servicioGastosDAO.guardarGasto(gasto));
+        return gasto;
     }
     public void actualizarGasto(Gasto gasto) {
         servicioGastosDAO.actualizarGasto(gasto);

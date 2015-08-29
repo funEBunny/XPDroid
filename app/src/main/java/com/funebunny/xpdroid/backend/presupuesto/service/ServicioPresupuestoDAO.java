@@ -84,8 +84,16 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public TotalesDAO obtenerTotales() {
-        ArrayList<TotalesDAO> totales = new Select().from(TotalesDAO.class).execute();
-        return totales.get(0);
+
+        TotalesDAO totales = null;
+
+        ArrayList<TotalesDAO> totalesList = new Select().from(TotalesDAO.class).execute();
+
+        if (!totalesList.isEmpty()) {
+            totales = totalesList.get(0);
+        }
+
+        return totales;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     ServicioPresupuestoDAO servicioPresupuestoDAO = new ServicioPresupuestoDAO();
 
-    public void guardarPresupuesto(String periodo, String importe){
+    public void guardarPresupuesto(String periodo, String importe) {
 
         Presupuesto presupuesto = new Presupuesto();
         presupuesto.setPeriodo(periodo);
@@ -29,31 +29,35 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     }
 
-    public List<Presupuesto> obtenerPresupuesto(){
+    public List<Presupuesto> obtenerPresupuesto() {
         return servicioPresupuestoDAO.obtenerPresupuesto();
     }
-    String obtenerPresupuestoDiario(){
+
+    String obtenerPresupuestoDiario() {
         Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_DIARIO);
-        return presupuesto==null?"":presupuesto.getImporte();
-    }
-    String obtenerPresupuestoSemanal(){
-        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_SEMANAL);
-        return presupuesto==null?"":presupuesto.getImporte();
-    }
-    String obtenerPresupuestoMensual(){
-        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_MENSUAL);
-        return presupuesto==null?"":presupuesto.getImporte();
-    }
-    String obtenerPresupuestoAnual(){
-        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_ANUAL);
-        return presupuesto==null?"":presupuesto.getImporte();
+        return presupuesto == null ? "" : presupuesto.getImporte();
     }
 
-    public void eliminarPresupuesto(Long id){
+    String obtenerPresupuestoSemanal() {
+        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_SEMANAL);
+        return presupuesto == null ? "" : presupuesto.getImporte();
+    }
+
+    String obtenerPresupuestoMensual() {
+        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_MENSUAL);
+        return presupuesto == null ? "" : presupuesto.getImporte();
+    }
+
+    String obtenerPresupuestoAnual() {
+        Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_ANUAL);
+        return presupuesto == null ? "" : presupuesto.getImporte();
+    }
+
+    public void eliminarPresupuesto(Long id) {
         servicioPresupuestoDAO.eliminarPresupuesto(id);
     }
 
-    public void actualizarPresupuesto(Presupuesto obj){
+    public void actualizarPresupuesto(Presupuesto obj) {
         servicioPresupuestoDAO.actualizarPresupuesto(obj);
     }
 
@@ -64,74 +68,66 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     @Override
     public boolean tipoPresupuestoExiste(String periodo) {
-        return servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(periodo) !=null;
+        return servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(periodo) != null;
     }
 
-    @Override
-    public void validarPresupuesto() {
-        if(isPresupuestoDiarioAlcanzado()){
-
-        }
-
-    }
-
-    boolean isNuevaSemana(){
+    boolean isNuevaSemana() {
         Calendar calendar = Calendar.getInstance();
         int semanaActual = calendar.get(Calendar.WEEK_OF_YEAR);
         calendar.add(Calendar.DAY_OF_YEAR, -1);
         int semanaAyer = calendar.get(Calendar.WEEK_OF_YEAR);
-        return semanaActual!=semanaAyer;
+        return semanaActual != semanaAyer;
     }
 
-    boolean isNuevoMes(){
+    boolean isNuevoMes() {
         Calendar calendar = Calendar.getInstance();
         int mesActual = calendar.get(Calendar.MONTH);
         calendar.add(Calendar.MONTH, -1);
         int mesAyer = calendar.get(Calendar.MONTH);
-        return mesActual!=mesActual;
+        return mesActual != mesActual;
     }
 
-    boolean isNuevoAnio(){
+    boolean isNuevoAnio() {
         Calendar calendar = Calendar.getInstance();
         int anioActual = calendar.get(Calendar.YEAR);
         calendar.add(Calendar.YEAR, -1);
         int anioAyer = calendar.get(Calendar.YEAR);
-        return anioActual!=anioAyer;
+        return anioActual != anioAyer;
     }
 
-    boolean isMismaSemana(Calendar fechaGasto){
+    boolean isMismaSemana(Calendar fechaGasto) {
 
         Calendar hoy = Calendar.getInstance();
         int semanaActual = hoy.get(Calendar.WEEK_OF_YEAR);
         int semanaGasto = fechaGasto.get(Calendar.WEEK_OF_YEAR);
-        return semanaActual==semanaGasto;
+        return semanaActual == semanaGasto;
     }
 
-    boolean isMismoDia(Calendar fechaGasto){
+    boolean isMismoDia(Calendar fechaGasto) {
 
         Calendar hoy = Calendar.getInstance();
         int diaHoy = hoy.get(Calendar.DAY_OF_YEAR);
         int diaGasto = fechaGasto.get(Calendar.DAY_OF_YEAR);
-        return diaHoy==diaGasto;
+        return diaHoy == diaGasto;
     }
 
-    boolean isMismoMes(Calendar fechaGasto){
+    boolean isMismoMes(Calendar fechaGasto) {
 
         Calendar hoy = Calendar.getInstance();
         int mesActual = hoy.get(Calendar.MONTH);
         int mesGasto = fechaGasto.get(Calendar.MONTH);
-        return mesActual==mesGasto;
+        return mesActual == mesGasto;
     }
 
-    boolean isMismoAnio(Calendar fechaGasto){
+    boolean isMismoAnio(Calendar fechaGasto) {
 
         Calendar hoy = Calendar.getInstance();
         int anioActual = hoy.get(Calendar.YEAR);
         int anioGasto = fechaGasto.get(Calendar.YEAR);
-        return anioActual==anioGasto;
+        return anioActual == anioGasto;
     }
 
-    boolean isPresupuestoDiarioAlcanzado(){
+    boolean isPresupuestoDiarioAlcanzado() {
         String presupuesto = obtenerPresupuestoDiario();
         boolean alcanzado = false;
         if (!presupuesto.isEmpty()) {
@@ -141,11 +137,12 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
                 alcanzado = isAlcanzado(presupuesto, total);
             }
         }
-        return  alcanzado;
+        return alcanzado;
     }
 
     private boolean isAlcanzado(String presupuesto, String total) {
-        boolean alcanzado;BigDecimal bdTotal = new BigDecimal(total);
+        boolean alcanzado;
+        BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdPresupuesto = new BigDecimal(presupuesto);
         int i = bdTotal.compareTo(bdPresupuesto);
         alcanzado = i != -1;
@@ -156,32 +153,35 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     public void calcularTotales() {
 
 
-
     }
 
     @Override
     public void calcularTotales(Gasto gasto) {
 
-        String fecha = gasto.getFecha();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
 
-        if (totalesDAO==null){
+        if (totalesDAO == null) {
             servicioPresupuestoDAO.inicializarTotales();
         }
 
-        try {
-            Date dia = formatoFecha.parse(fecha);
-            Calendar calendarGasto = Calendar.getInstance();
-            calendarGasto.setTime(dia);
-            boolean mismaSemana = isMismaSemana(calendarGasto);
-            if (mismaSemana){
-                String totalSemanal = totalesDAO.getTotalSemanal();
-                BigDecimal bdTotalSemanal = sumar(totalSemanal, gasto.getImporte());
-                servicioPresupuestoDAO.guardarTotalSemanal(bdTotalSemanal.toPlainString());
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (isMismoDia(obtenerCalendar(gasto.getFecha()))) {
+            BigDecimal bdTotalDiario = sumar(totalesDAO.getTotalDiario(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalDiario(bdTotalDiario.toPlainString());
+        }
+
+        if (isMismaSemana(obtenerCalendar(gasto.getFecha()))) {
+            BigDecimal bdTotalSemanal = sumar(totalesDAO.getTotalSemanal(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalSemanal(bdTotalSemanal.toPlainString());
+        }
+
+        if (isMismoMes(obtenerCalendar(gasto.getFecha()))) {
+            BigDecimal bdTotalMensual = sumar(totalesDAO.getTotalMensual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalMensual(bdTotalMensual.toPlainString());
+        }
+
+        if (isMismoAnio(obtenerCalendar(gasto.getFecha()))) {
+            BigDecimal bdTotalAnual = sumar(totalesDAO.getTotalAnual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalAnual(bdTotalAnual.toPlainString());
         }
 
     }
@@ -191,5 +191,21 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         BigDecimal bdImporteGasto = new BigDecimal(importe);
         bdTotalSemanal = bdTotalSemanal.add(bdImporteGasto);
         return bdTotalSemanal;
+    }
+
+    private Calendar obtenerCalendar(String fecha) {
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date dia = formatoFecha.parse(fecha);
+            calendar.setTime(dia);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return calendar;
     }
 }
