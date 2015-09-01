@@ -206,4 +206,9 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         return  servicioGastosDAO.obtenerGastosFechaLike(anio);
     }
 
+    @Override
+    public List<Gasto> obtenerGastosDia(Calendar instance) {
+        return null;
+    }
+
 }
