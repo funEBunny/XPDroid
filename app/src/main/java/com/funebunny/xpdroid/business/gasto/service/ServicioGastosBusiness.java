@@ -207,8 +207,10 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     @Override
-    public List<Gasto> obtenerGastosDia(Calendar instance) {
-        return null;
+    public List<Gasto> obtenerGastosDia(Calendar fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.DIA);
+        String dia = formatoFecha.format(fecha.getTime());
+        return  servicioGastosDAO.obtenerGastosFechaLike(dia);
     }
 
 }
