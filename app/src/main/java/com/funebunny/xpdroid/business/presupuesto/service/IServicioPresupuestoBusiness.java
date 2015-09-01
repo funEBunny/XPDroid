@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.business.presupuesto.service;
 
+import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 
@@ -22,8 +23,19 @@ public interface IServicioPresupuestoBusiness {
 
     boolean tipoPresupuestoExiste(String periodo);
 
+    boolean isPresupuestoDiarioAlcanzado();
+
+    boolean isPresupuestoSemanalAlcanzado();
+
+    boolean isPresupuestoMensualAlcanzado();
+
+    boolean isPresupuestoAnualAlcanzado();
+
     void calcularTotales();
 
     void calcularTotales(Gasto gasto);
 
+    void descontarTotales(Gasto gasto);
+
+    String obtenerTotalMensual();
 }

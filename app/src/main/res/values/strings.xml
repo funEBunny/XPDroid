@@ -105,5 +105,5 @@
     <string name="info_limite_presupuesto_alcanzado">Límite de presupuesto alcanzado</string>
     <string name="presupuesto_existente">Presupuesto %1$s existente</string>
     <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
-
+    <string name="alerta_presupuesto">Presupuesto alcanzado!</string>
 </resources>

@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
+import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapaterAlertaPresupuesto;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -36,11 +40,14 @@ import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.PresupuestoItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.zip.Inflater;
 
 
 public class MainActivity extends XPDroidActivity
@@ -159,12 +166,12 @@ public class MainActivity extends XPDroidActivity
 
         //Mostrar mensaje de crear gasto presupuesto
         Toast toast = Toast.makeText(this, R.string.action_ver_historial, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
 
 
-    public void crearGastoPorFavorito(View view){
+    public void crearGastoPorFavorito(View view) {
         // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal
         View parentView = (View) view.getParent();
         GastoFavorito gf = (GastoFavorito) parentView.findViewById(R.id.gasto_favorito_button_ll_main).getTag();
@@ -182,7 +189,6 @@ public class MainActivity extends XPDroidActivity
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);
     }
-
 
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
@@ -266,8 +272,10 @@ public class MainActivity extends XPDroidActivity
         //Animacion desde derecha a izquierda
         Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
 
-        switch (id){
-            case R.id.action_settings: { return true; }
+        switch (id) {
+            case R.id.action_settings: {
+                return true;
+            }
 
             case R.id.action_crear_gasto: {
                 Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
@@ -304,7 +312,7 @@ public class MainActivity extends XPDroidActivity
 
             case R.id.action_crear_presupuesto: {
 
-                if (servicioPresupuestoBusiness.isLimitePresupuestoAlcanzado()){
+                if (servicioPresupuestoBusiness.isLimitePresupuestoAlcanzado()) {
                     //Mostrar mensaje de crear gasto presupuesto
                     Toast toast = Toast.makeText(this, R.string.info_limite_presupuesto_alcanzado, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -327,14 +335,6 @@ public class MainActivity extends XPDroidActivity
     }
 
 
-
-
-
-
-
-
-
-
     //TODO: VA A SER UTILIZADO SOLO PARA LA OPCION DE NAV DRAWER "Inicio"
 
     /**
@@ -351,8 +351,9 @@ public class MainActivity extends XPDroidActivity
          */
         private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
         private List<GastoFavorito> gastosFavoritos = new ArrayList<GastoFavorito>();
-        private GridView mGridView;
-        private ButtonAdapterGastoFavorito mAdapter;
+
+
+        private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
 
         public static PlaceholderFragment newInstance(int itemSelected) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -374,25 +375,38 @@ public class MainActivity extends XPDroidActivity
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+            //Mes y total acumulado mensual en pantalla de Inicio
+            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
+            ((TextView) rootView.findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
+            ((TextView) rootView.findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+
+            verificarPresupuestos(rootView);
+
+            //Botonera de Favoritos en pantalla de Inicio
             gastosFavoritos.addAll(servicioGastosBusiness.obtenerGastosFavoritos());
-
-            if (gastosFavoritos.size() == 0){
+            if (gastosFavoritos.size() == 0) {
                 //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados hasta el momento
-                FrameLayout mainLayout = (FrameLayout) rootView.findViewById(R.id.fragment_main_fl_main);
-                TextView noHayFavoritos = new TextView(this.getActivity());
-                noHayFavoritos.setText(R.string.no_hay_favoritos);
-                noHayFavoritos.setGravity(Gravity.CENTER);
-                mainLayout.addView(noHayFavoritos);
+                ((TextView) rootView.findViewById(R.id.fragment_main_tv_favoritos)).setText(R.string.no_hay_favoritos);
+            } else {
+                ButtonAdapterGastoFavorito mAdapter = new ButtonAdapterGastoFavorito(getActivity(), R.layout.gasto_favorito_button, gastosFavoritos);
+                ((GridView) rootView.findViewById(R.id.fragment_main_gv_favoritos)).setAdapter(mAdapter);
             }
-
-            mAdapter = new ButtonAdapterGastoFavorito(getActivity(), R.layout.gasto_favorito_button, gastosFavoritos);
-
-            mGridView = (GridView) rootView.findViewById(R.id.fragment_main_gv_favoritos);
-            mGridView.setAdapter(mAdapter);
 
             return rootView;
         }
 
+        @Override
+        public void onResume() {
+            super.onResume();
+
+            //Mes y total acumulado mensual en pantalla de Inicio
+            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
+            ((TextView) getView().findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
+            ((TextView) getView().findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+            //Verificación de presupuesto alcanzado
+            verificarPresupuestos(getView());
+
+        }
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
@@ -408,6 +422,33 @@ public class MainActivity extends XPDroidActivity
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             inflater.inflate(R.menu.menu_crear_gasto, menu);
         }
+
+        private void verificarPresupuestos(View view){
+
+            ArrayList<String> presupuestosAlcanzados = new ArrayList<String>();
+
+            if (servicioPresupuestoBusiness.isPresupuestoDiarioAlcanzado()) {
+                presupuestosAlcanzados.add(getResources().getString(R.string.diario));
+            }
+            if (servicioPresupuestoBusiness.isPresupuestoSemanalAlcanzado()) {
+                presupuestosAlcanzados.add(getResources().getString(R.string.semanal));
+            }
+            if (servicioPresupuestoBusiness.isPresupuestoMensualAlcanzado()) {
+                presupuestosAlcanzados.add(getResources().getString(R.string.mensual));
+            }
+            if (servicioPresupuestoBusiness.isPresupuestoAnualAlcanzado()) {
+                presupuestosAlcanzados.add(getResources().getString(R.string.anual));
+            }
+
+            if (!presupuestosAlcanzados.isEmpty()){
+                ExpandableListView expandablePresupuesto = (ExpandableListView) view.findViewById(R.id.fragment_main_el_alerta_presupuesto);
+                ExpandableAdapaterAlertaPresupuesto expandablePresupuestoAdapter = new ExpandableAdapaterAlertaPresupuesto(getResources().getString(R.string.alerta_presupuesto), presupuestosAlcanzados);
+                expandablePresupuestoAdapter.setInflater(LayoutInflater.from(view.getContext()), this.getActivity());
+                expandablePresupuesto.setAdapter(expandablePresupuestoAdapter);
+            }
+
+        }
+
     }
 
 }

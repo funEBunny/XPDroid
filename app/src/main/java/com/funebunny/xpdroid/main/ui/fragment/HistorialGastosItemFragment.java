@@ -21,6 +21,7 @@ import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
@@ -63,6 +64,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private ListAdapter mAdapter;
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {
@@ -132,6 +134,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
                 return true;
             case R.id.menu_contextual_gasto_borrar:
                 servicioGastosBusiness.eliminarGasto(gastos.get(info.position).getId());
+                servicioPresupuestoBusiness.descontarTotales(gastos.get(info.position));
                 onResume();
                 return true;
             default:

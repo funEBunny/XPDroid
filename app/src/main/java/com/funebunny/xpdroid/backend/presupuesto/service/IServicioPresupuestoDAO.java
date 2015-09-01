@@ -27,5 +27,4 @@ public interface IServicioPresupuestoDAO {
     void guardarTotalMensual(String total);
     void guardarTotalAnual(String total);
 
-    void inicializarTotales();
 }

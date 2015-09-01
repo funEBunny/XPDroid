@@ -129,13 +129,63 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         return anioActual == anioGasto;
     }
 
-    boolean isPresupuestoDiarioAlcanzado() {
+    @Override
+    public boolean isPresupuestoDiarioAlcanzado() {
         String presupuesto = obtenerPresupuestoDiario();
         boolean alcanzado = false;
+
         if (!presupuesto.isEmpty()) {
             TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
             if (totalesDAO != null) {
                 String total = totalesDAO.getTotalDiario();
+                alcanzado = isAlcanzado(presupuesto, total);
+            }
+        }
+        return alcanzado;
+    }
+
+    @Override
+    public boolean isPresupuestoSemanalAlcanzado() {
+
+        String presupuesto = obtenerPresupuestoSemanal();
+        boolean alcanzado = false;
+
+        if (!presupuesto.isEmpty()) {
+            TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
+            if (totalesDAO != null) {
+                String total = totalesDAO.getTotalSemanal();
+                alcanzado = isAlcanzado(presupuesto, total);
+            }
+        }
+        return alcanzado;
+    }
+
+    @Override
+    public boolean isPresupuestoMensualAlcanzado() {
+
+        String presupuesto = obtenerPresupuestoMensual();
+        boolean alcanzado = false;
+
+        if (!presupuesto.isEmpty()) {
+            TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
+            if (totalesDAO != null) {
+                String total = totalesDAO.getTotalMensual();
+                alcanzado = isAlcanzado(presupuesto, total);
+            }
+        }
+        return alcanzado;
+    }
+
+    @Override
+    public boolean isPresupuestoAnualAlcanzado() {
+
+        String presupuesto = obtenerPresupuestoAnual();
+        boolean alcanzado = false;
+
+        if (!presupuesto.isEmpty()) {
+            TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
+            if (totalesDAO != null) {
+                String total = totalesDAO.getTotalAnual();
                 alcanzado = isAlcanzado(presupuesto, total);
             }
         }
@@ -185,10 +235,6 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
         TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
 
-        if (totalesDAO == null) {
-            servicioPresupuestoDAO.inicializarTotales();
-        }
-
         if (isMismoDia(obtenerCalendar(gasto.getFecha()))) {
             String totalDiario = sumar(totalesDAO.getTotalDiario(), gasto.getImporte());
             servicioPresupuestoDAO.guardarTotalDiario(totalDiario);
@@ -211,11 +257,52 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     }
 
-    private String sumar(String total, String importe) {
-        BigDecimal bdTotalSemanal = new BigDecimal(total);
+    @Override
+    public void descontarTotales(Gasto gasto) {
+
+        TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
+
+        if (isMismoDia(obtenerCalendar(gasto.getFecha()))) {
+            String totalDiario = restar(totalesDAO.getTotalDiario(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalDiario(totalDiario);
+        }
+
+        if (isMismaSemana(obtenerCalendar(gasto.getFecha()))) {
+            String totalSemanal = restar(totalesDAO.getTotalSemanal(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalSemanal(totalSemanal);
+        }
+
+        if (isMismoMes(obtenerCalendar(gasto.getFecha()))) {
+            String totalMensual = restar(totalesDAO.getTotalMensual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalMensual(totalMensual);
+        }
+
+        if (isMismoAnio(obtenerCalendar(gasto.getFecha()))) {
+            String totalAnual = restar(totalesDAO.getTotalAnual(), gasto.getImporte());
+            servicioPresupuestoDAO.guardarTotalAnual(totalAnual);
+        }
+
+    }
+
+    @Override
+    public String obtenerTotalMensual() {
+        return servicioPresupuestoDAO.obtenerTotales().getTotalMensual();
+    }
+
+    private String restar(String total, String importe) {
+
+        BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
-        bdTotalSemanal = bdTotalSemanal.add(bdImporteGasto);
-        return bdTotalSemanal.toPlainString();
+        bdTotal = bdTotal.subtract(bdImporteGasto);
+        return bdTotal.toPlainString();
+        
+    }
+
+    private String sumar(String total, String importe) {
+        BigDecimal bdTotal = new BigDecimal(total);
+        BigDecimal bdImporteGasto = new BigDecimal(importe);
+        bdTotal = bdTotal.add(bdImporteGasto);
+        return bdTotal.toPlainString();
     }
 
     private Calendar obtenerCalendar(String fecha) {

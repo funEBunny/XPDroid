@@ -85,12 +85,14 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
     @Override
     public TotalesDAO obtenerTotales() {
 
-        TotalesDAO totales = null;
+        TotalesDAO totales;
 
         ArrayList<TotalesDAO> totalesList = new Select().from(TotalesDAO.class).execute();
 
         if (!totalesList.isEmpty()) {
             totales = totalesList.get(0);
+        } else {
+            totales = inicializarTotales();
         }
 
         return totales;
@@ -124,17 +126,15 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
         totales.save();
     }
 
-    @Override
-    public void inicializarTotales() {
+    private TotalesDAO inicializarTotales() {
         TotalesDAO totalesDAO = new TotalesDAO();
         totalesDAO.setTotalDiario("0");
         totalesDAO.setTotalMensual("0");
         totalesDAO.setTotalSemanal("0");
         totalesDAO.setTotalAnual("0");
         totalesDAO.save();
+
+        return totalesDAO;
     }
 
-    public void guardarTotales(TotalesDAO totales){
-        totales.save();
-    }
 }

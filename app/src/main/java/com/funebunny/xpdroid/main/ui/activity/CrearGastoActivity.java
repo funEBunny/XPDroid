@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
@@ -86,6 +87,7 @@ public class CrearGastoActivity extends XPDroidActivity {
         if (gasto == null || gasto.getId()== null){
             gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
         }else{
+            servicioPresupuestoBusiness.descontarTotales(gasto);
             gasto.setDescripcion(descripcion);
             gasto.setFecha(fecha);
             gasto.setImporte(importe);
