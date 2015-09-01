@@ -3,6 +3,7 @@ package com.funebunny.xpdroid.backend.gasto.dao;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,8 +51,8 @@ public class GastoDAO extends Model {
     }
 
     public String getFecha() {
-        SimpleDateFormat viewFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat daoFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat viewFormat = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+        SimpleDateFormat daoFormat = new SimpleDateFormat(AppConstants.FECHA_DB);
         try {
             return viewFormat.format(daoFormat.parse(fecha));
         } catch (ParseException e) {
@@ -63,8 +64,8 @@ public class GastoDAO extends Model {
     public void setFecha(String fecha) {
 
         String fechaGasto = "";
-        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat fromUser = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+        SimpleDateFormat myFormat = new SimpleDateFormat(AppConstants.FECHA_DB);
         try {
             fechaGasto = myFormat.format(fromUser.parse(fecha));
         } catch (ParseException e) {

@@ -71,15 +71,11 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     }
 
     @Override
-    public List<Gasto> obtenerGastosMes(String mes, String anio) {
+    public List<Gasto> obtenerGastosFechaLike(String fecha) {
 
-        if (mes.length() == 1) {
-            mes = "0" + mes;
-        }
-        String fecha = "%" + anio + mes + "%";
-
+        String fechaBuscar = "%" + fecha + "%";
         List<Gasto> gastos = new ArrayList<>();
-        ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha LIKE ?", fecha).orderBy("Categoria ASC").execute();
+        ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha LIKE ?", fechaBuscar).execute();
 
         for (int i = 0; i < gastosDAO.size(); i++) {
 
@@ -93,9 +89,9 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gasto.setFecha(gDAO.getFecha());
             gastos.add(gasto);
         }
-        
         return gastos;
     }
+
     @Override
     public List<Gasto> obtenerGastosDesdeHasta(String desde, String hasta) {
         ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha BETWEEN ? AND ?", desde,hasta).orderBy("Categoria ASC").execute();

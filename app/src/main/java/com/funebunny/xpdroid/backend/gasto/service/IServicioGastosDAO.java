@@ -17,7 +17,8 @@ public interface IServicioGastosDAO {
 
     List<Gasto> obtenerGastosPorCategoria(String categoria);
 
-    List<Gasto> obtenerGastosMes(String mes, String anio);
+    List<Gasto> obtenerGastosFechaLike(String fecha);
+
     List<Gasto> obtenerGastosDesdeHasta(String desde, String hasta);
 
     Long guardarGasto(Gasto gasto);

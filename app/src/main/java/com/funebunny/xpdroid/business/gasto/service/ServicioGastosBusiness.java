@@ -177,22 +177,33 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     public List<Gasto> obtenerGastosMes(Calendar fecha) {
 
-        String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
+/*        String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
         String anio = String.valueOf(fecha.get(Calendar.YEAR));
 
-        return servicioGastosDAO.obtenerGastosMes(mes, anio);
+        return servicioGastosDAO.obtenerGastosMes(mes, anio);*/
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.ANIO_MES);
+        String mesanio = formatoFecha.format(fecha.getTime());
+        return  servicioGastosDAO.obtenerGastosFechaLike(mesanio);
+
     }
 
     public List<Gasto> obtenerGastosSemana(Calendar fecha) {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.DD_MM_YYYY);
-        Date dia = fecha.getTime();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.FECHA_DB);
+        Date fechaDesde = fecha.getTime();
         Calendar calHasta = Calendar.getInstance();
-        calHasta.setTime(dia);
+        calHasta.setTime(fechaDesde);
         calHasta.add(Calendar.DAY_OF_YEAR, 6);
-        String desde = formatoFecha.format(dia);
+        String desde = formatoFecha.format(fechaDesde);
         String hasta = formatoFecha.format(calHasta.getTime());
         return servicioGastosDAO.obtenerGastosDesdeHasta(desde,hasta);
 
+    }
+
+    @Override
+    public List<Gasto> obtenerGastosAnio(Calendar fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.ANIO);
+        String anio = formatoFecha.format(fecha.getTime());
+        return  servicioGastosDAO.obtenerGastosFechaLike(anio);
     }
 
 }

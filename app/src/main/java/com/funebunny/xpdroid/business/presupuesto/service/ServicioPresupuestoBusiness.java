@@ -205,11 +205,17 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     public void calcularTotales() {
         TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
 
-        totalesDAO.setTotalDiario("0");
+        String totalDia="0";
+        List<Gasto> gastos = servicioGastosBusiness.obtenerGastosDia(Calendar.getInstance());
+        for (Gasto gasto : gastos) {
+            String importeGasto = gasto.getImporte();
+            totalDia = sumar(totalDia, importeGasto);
+        }
+        totalesDAO.setTotalDiario(totalDia);
 
         if (isNuevaSemana()) {
             String totalSemana="0";
-            List<Gasto> gastos = servicioGastosBusiness.obtenerGastosSemana(Calendar.getInstance());
+            gastos = servicioGastosBusiness.obtenerGastosSemana(Calendar.getInstance());
             for (Gasto gasto : gastos) {
                 String importeGasto = gasto.getImporte();
                 totalSemana = sumar(totalSemana, importeGasto);
@@ -217,15 +223,24 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
             totalesDAO.setTotalSemanal(totalSemana);
         }
         if (isNuevoMes()){
-            totalesDAO.setTotalMensual("0");
+            String totalMes="0";
+            gastos = servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance());
+            for (Gasto gasto : gastos) {
+                String importeGasto = gasto.getImporte();
+                totalMes = sumar(totalMes, importeGasto);
+            }
+            totalesDAO.setTotalMensual(totalMes);
         }
 
         if (isNuevoAnio()){
-            totalesDAO.setTotalAnual("0");
+            String totalAnio="0";
+            gastos = servicioGastosBusiness.obtenerGastosAnio(Calendar.getInstance());
+            for (Gasto gasto : gastos) {
+                String importeGasto = gasto.getImporte();
+                totalAnio = sumar(totalAnio, importeGasto);
+            }
+            totalesDAO.setTotalAnual(totalAnio);
         }
-
-        String totalDiario = totalesDAO.getTotalDiario();
-
 
 
     }

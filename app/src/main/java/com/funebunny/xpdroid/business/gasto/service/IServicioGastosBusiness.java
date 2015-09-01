@@ -47,4 +47,10 @@ public interface IServicioGastosBusiness {
     List<Gasto> obtenerGastosPorCategoria(String categoria);
 
     List<Gasto> obtenerGastosMes(Calendar fecha);
+
+    List<Gasto> obtenerGastosSemana(Calendar fecha);
+
+    List<Gasto> obtenerGastosAnio(Calendar instance);
+
+    List<Gasto> obtenerGastosDia(Calendar instance);
 }

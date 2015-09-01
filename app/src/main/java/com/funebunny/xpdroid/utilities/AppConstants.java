@@ -17,5 +17,8 @@ public class AppConstants {
     public static final String PERIODO_SEMANAL = "Semanal";
     public static final String PERIODO_MENSUAL = "Mensual";
     public static final String PERIODO_ANUAL = "Anual";
-    public static final String DD_MM_YYYY = "dd/MM/yyyy";
+    public static final String FECHA_VISTA = "dd/MM/yyyy";
+    public static final String FECHA_DB = "yyyyMMdd";
+    public static final String ANIO = "yyyy";
+    public static final String ANIO_MES = "yyyyMM";
 }
