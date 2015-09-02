@@ -10,11 +10,9 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class InicioActivity extends ActionBarActivity {
-
-    // Splash screen timer
-    private static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class InicioActivity extends ActionBarActivity {
                 // close this activity
                 finish();
             }
-        }, SPLASH_TIME_OUT);
+        }, AppConstants.SPLASH_TIME_OUT);
     }
 
 

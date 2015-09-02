@@ -187,6 +187,11 @@ public class MainActivity extends XPDroidActivity
         Gasto gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
         servicioPresupuestoBusiness.calcularTotales(gasto);
 
+        // Resfresh del fragment principal
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(1))
+                .commit();
+
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);
@@ -419,6 +424,7 @@ public class MainActivity extends XPDroidActivity
                     rl.addView(tv);
                 }
             }
+            //Verificación de presupuesto alcanzado
             verificarPresupuestos(rootView);
 
             //Botonera de Favoritos en pantalla de Inicio
@@ -446,6 +452,7 @@ public class MainActivity extends XPDroidActivity
             verificarPresupuestos(getView());
 
         }
+
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
@@ -462,7 +469,7 @@ public class MainActivity extends XPDroidActivity
             inflater.inflate(R.menu.menu_crear_gasto, menu);
         }
 
-        private void verificarPresupuestos(View view){
+        private void verificarPresupuestos(View view) {
 
             ArrayList<String> presupuestosAlcanzados = new ArrayList<String>();
 
@@ -479,7 +486,7 @@ public class MainActivity extends XPDroidActivity
                 presupuestosAlcanzados.add(getResources().getString(R.string.anual));
             }
 
-            if (!presupuestosAlcanzados.isEmpty()){
+            if (!presupuestosAlcanzados.isEmpty()) {
                 ExpandableListView expandablePresupuesto = (ExpandableListView) view.findViewById(R.id.fragment_main_el_alerta_presupuesto);
                 ExpandableAdapaterAlertaPresupuesto expandablePresupuestoAdapter = new ExpandableAdapaterAlertaPresupuesto(getResources().getString(R.string.alerta_presupuesto), presupuestosAlcanzados);
                 expandablePresupuestoAdapter.setInflater(LayoutInflater.from(view.getContext()), this.getActivity());

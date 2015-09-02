@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="XPDroidEditText" >
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:inputType">textCapSentences</item>
+    </style>
+
 </resources>

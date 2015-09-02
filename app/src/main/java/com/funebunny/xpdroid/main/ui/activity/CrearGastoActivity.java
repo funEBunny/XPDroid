@@ -81,8 +81,15 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).getText().toString();
         String fecha = ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).getText().toString();
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria)).getSelectedItem().toString();
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
+        String importe = etImporte.getText().toString();
+
+        //Validar importe obligatorio
+        if (importe.equals("")){
+            etImporte.setError(getResources().getString(R.string.campo_obligatorio));
+            return;
+        }
 
         if (gasto == null || gasto.getId()== null){
             gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);

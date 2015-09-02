@@ -21,9 +21,9 @@
     <string name="action_settings">Settings</string>
 
     <string name="navdrawitem1">Inicio</string>
-    <string name="navdrawitem2">Historial Gastos</string>
-    <string name="navdrawitem3">Gastos Favoritos</string>
-    <string name="navdrawitem4">Gastos Programables</string>
+    <string name="navdrawitem2">Historial</string>
+    <string name="navdrawitem3">Favoritos</string>
+    <string name="navdrawitem4">Programables</string>
     <string name="navdrawitem5">Presupuesto</string>
     <string name="navdrawitem6">Recordatorios</string>
     <string name="navdrawitem7">Notificaciones</string>
@@ -41,7 +41,7 @@
     <!--<string name="anio">Año</string>-->
     <!--<string name="mes_anio_historial">Mes y Año</string>-->
 
-
+    <string name="campo_obligatorio">Campo obligatorio!</string>
     <string name="inicio">Esta es la pagina de Inicio</string>
     <string name="gastos_favoritos">Esta es la pagina de Gastos Favoritos</string>
     <string name="gastos_programables">Esta es la pagina de Gastos Programables</string>
@@ -105,5 +105,5 @@
     <string name="info_limite_presupuesto_alcanzado">Límite de presupuesto alcanzado</string>
     <string name="presupuesto_existente">Presupuesto %1$s existente</string>
     <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
-    <string name="alerta_presupuesto">Presupuesto alcanzado!</string>
+    <string name="alerta_presupuesto">Presupuesto excedido!</string>
 </resources>
