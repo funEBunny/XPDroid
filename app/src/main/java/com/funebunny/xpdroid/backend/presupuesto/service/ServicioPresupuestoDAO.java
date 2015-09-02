@@ -1,5 +1,7 @@
 package com.funebunny.xpdroid.backend.presupuesto.service;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.backend.presupuesto.dao.PresupuestoDAO;
 import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
@@ -100,6 +102,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void guardarTotalDiario(String total) {
+        Log.d("XPDROID", "Guardanto Total Diario: " + total);
         TotalesDAO totales = obtenerTotales();
         totales.setTotalDiario(total);
         totales.save();
@@ -107,6 +110,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void guardarTotalSemanal(String total) {
+        Log.d("XPDROID", "Guardanto Total Semanal: " + total);
         TotalesDAO totales = obtenerTotales();
         totales.setTotalSemanal(total);
         totales.save();
@@ -114,6 +118,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void guardarTotalMensual(String total) {
+        Log.d("XPDROID", "Guardanto Total Mensual: " + total);
         TotalesDAO totales = obtenerTotales();
         totales.setTotalMensual(total);
         totales.save();

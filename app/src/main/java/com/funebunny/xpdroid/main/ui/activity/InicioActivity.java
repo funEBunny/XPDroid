@@ -14,7 +14,7 @@ import com.funebunny.xpdroid.R;
 public class InicioActivity extends ActionBarActivity {
 
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 2000;
+    private static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

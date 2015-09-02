@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.funebunny.xpdroid.business.alarma.AlarmChecker;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgSemanal;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
-import com.funebunny.xpdroid.business.alarma.AlarmChecker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * Created by schmidt0 on 7/25/2015.
  */
-public class ServicioNotificacionesBusiness {
+public class ServicioNotificacionesBusiness implements IServicioNotificacionesBusiness {
 
     public static final int ZERO_SEGUNDOS = 0;
     public static final int HORA = 0;

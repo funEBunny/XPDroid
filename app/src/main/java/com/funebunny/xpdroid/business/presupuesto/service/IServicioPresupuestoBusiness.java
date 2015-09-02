@@ -37,5 +37,11 @@ public interface IServicioPresupuestoBusiness {
 
     void descontarTotales(Gasto gasto);
 
+    String obtenerTotalDiario();
+
+    String obtenerTotalAnual();
+
     String obtenerTotalMensual();
+
+    String obtenerTotalSemanal();
 }

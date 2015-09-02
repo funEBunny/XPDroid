@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapaterAlertaPresupuesto;
@@ -379,7 +381,44 @@ public class MainActivity extends XPDroidActivity
             String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
             ((TextView) rootView.findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
             ((TextView) rootView.findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+            List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
+            RelativeLayout rl = (RelativeLayout) rootView.findViewById(R.id.fragment_totales_rl);
 
+            int id =0;
+            for (Presupuesto presupuesto:presupuestos) {
+                String periodo = presupuesto.getPeriodo();
+                id++;
+                if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)){
+                    TextView tv = new TextView(this.getActivity().getApplicationContext());
+                    tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
+                    tv.setId(id);
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    tv.setLayoutParams(lp);
+                    rl.addView(tv);
+                }
+                if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)){
+                    TextView tv = new TextView(this.getActivity().getApplicationContext());
+                    tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
+                    tv.setId(id);
+                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id>1){
+                        lp2.addRule(RelativeLayout.BELOW, id - 1);
+                    }
+                    tv.setLayoutParams(lp2);
+                    rl.addView(tv);
+                }
+                if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)){
+                    TextView tv = new TextView(this.getActivity().getApplicationContext());
+                    tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
+                    tv.setId(id);
+                    RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id>1){
+                        lp3.addRule(RelativeLayout.BELOW, id - 1);
+                    }
+                    tv.setLayoutParams(lp3);
+                    rl.addView(tv);
+                }
+            }
             verificarPresupuestos(rootView);
 
             //Botonera de Favoritos en pantalla de Inicio

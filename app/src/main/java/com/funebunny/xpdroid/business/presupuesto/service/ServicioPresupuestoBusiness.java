@@ -86,7 +86,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         int mesActual = calendar.get(Calendar.MONTH);
         calendar.add(Calendar.MONTH, -1);
         int mesAyer = calendar.get(Calendar.MONTH);
-        return mesActual != mesActual;
+        return mesActual != mesAyer;
     }
 
     boolean isNuevoAnio() {
@@ -203,15 +203,13 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     @Override
     public void calcularTotales() {
-        TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
-
         String totalDia="0";
         List<Gasto> gastos = servicioGastosBusiness.obtenerGastosDia(Calendar.getInstance());
         for (Gasto gasto : gastos) {
             String importeGasto = gasto.getImporte();
             totalDia = sumar(totalDia, importeGasto);
         }
-        totalesDAO.setTotalDiario(totalDia);
+        servicioPresupuestoDAO.guardarTotalDiario(totalDia);
 
         if (isNuevaSemana()) {
             String totalSemana="0";
@@ -220,8 +218,9 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
                 String importeGasto = gasto.getImporte();
                 totalSemana = sumar(totalSemana, importeGasto);
             }
-            totalesDAO.setTotalSemanal(totalSemana);
+            servicioPresupuestoDAO.guardarTotalSemanal(totalSemana);
         }
+
         if (isNuevoMes()){
             String totalMes="0";
             gastos = servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance());
@@ -229,7 +228,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
                 String importeGasto = gasto.getImporte();
                 totalMes = sumar(totalMes, importeGasto);
             }
-            totalesDAO.setTotalMensual(totalMes);
+            servicioPresupuestoDAO.guardarTotalMensual(totalMes);
         }
 
         if (isNuevoAnio()){
@@ -239,7 +238,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
                 String importeGasto = gasto.getImporte();
                 totalAnio = sumar(totalAnio, importeGasto);
             }
-            totalesDAO.setTotalAnual(totalAnio);
+            servicioPresupuestoDAO.guardarTotalAnual(totalAnio);
         }
 
 
@@ -297,6 +296,21 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
             servicioPresupuestoDAO.guardarTotalAnual(totalAnual);
         }
 
+    }
+
+    @Override
+    public String obtenerTotalDiario() {
+        return servicioPresupuestoDAO.obtenerTotales().getTotalDiario();
+    }
+
+    @Override
+    public String obtenerTotalSemanal() {
+        return servicioPresupuestoDAO.obtenerTotales().getTotalSemanal();
+    }
+
+    @Override
+    public String obtenerTotalAnual() {
+        return servicioPresupuestoDAO.obtenerTotales().getTotalAnual();
     }
 
     @Override

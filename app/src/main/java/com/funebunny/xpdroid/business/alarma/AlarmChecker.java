@@ -15,6 +15,7 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.backend.gasto.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -26,6 +27,7 @@ public class AlarmChecker extends BroadcastReceiver {
     public Long NOTIFICATION_ID = 0L;
     private static NotificationManager NM;
     private static ServicioGastosDAO servicioGastos;
+    private static ServicioPresupuestoBusiness servicioPresupuesto;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -34,7 +36,15 @@ public class AlarmChecker extends BroadcastReceiver {
             servicioGastos = new ServicioGastosDAO();
         }
         Long notifID = intent.getLongExtra("notifID", NOTIFICATION_ID);
-        lauchNotification(servicioGastos,context,notifID);
+        if (notifID==NOTIFICATION_ID){
+            Log.d("XPDROID", "Alarma diaria para totales");
+            if (servicioPresupuesto==null){
+                servicioPresupuesto = new ServicioPresupuestoBusiness();
+            }
+            servicioPresupuesto.calcularTotales();
+        }else{
+            lauchNotification(servicioGastos,context,notifID);
+        }
     }
     private void lauchNotification(ServicioGastosDAO servicioGastos,Context context,Long notifID) {
         Log.d("XPDROID", "Starting Notification Launcher");
@@ -63,12 +73,6 @@ public class AlarmChecker extends BroadcastReceiver {
         gasto.setImporte(gastoProgramable.getImporte());
 
         bundle.putSerializable(AppConstants.GASTO, gasto);
-
-//        bundle.putString("categoria",gastoProgramable.getCategoria());
-//        bundle.putString("descripcion",gastoProgramable.getDescripcion());
-//        bundle.putString("importe",gastoProgramable.getImporte());
-//        bundle.putString("hora",gastoProgramable.getHora());
-//        bundle.putLong("id",gastoProgramable.getId());
         resultIntent.putExtras(bundle);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(CrearGastoActivity.class);
