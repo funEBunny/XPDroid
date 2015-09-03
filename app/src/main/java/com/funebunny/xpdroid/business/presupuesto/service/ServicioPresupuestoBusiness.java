@@ -102,7 +102,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         Calendar hoy = Calendar.getInstance();
         int semanaActual = hoy.get(Calendar.WEEK_OF_YEAR);
         int semanaGasto = fechaGasto.get(Calendar.WEEK_OF_YEAR);
-        return semanaActual == semanaGasto;
+        return (semanaActual == semanaGasto) && isMismoAnio(fechaGasto);
     }
 
     boolean isMismoDia(Calendar fechaGasto) {
@@ -110,7 +110,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         Calendar hoy = Calendar.getInstance();
         int diaHoy = hoy.get(Calendar.DAY_OF_YEAR);
         int diaGasto = fechaGasto.get(Calendar.DAY_OF_YEAR);
-        return diaHoy == diaGasto;
+        return (diaHoy == diaGasto) && isMismoAnio(fechaGasto);
     }
 
     boolean isMismoMes(Calendar fechaGasto) {
@@ -118,7 +118,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         Calendar hoy = Calendar.getInstance();
         int mesActual = hoy.get(Calendar.MONTH);
         int mesGasto = fechaGasto.get(Calendar.MONTH);
-        return mesActual == mesGasto;
+        return (mesActual == mesGasto) && isMismoAnio(fechaGasto);
     }
 
     boolean isMismoAnio(Calendar fechaGasto) {

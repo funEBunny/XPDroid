@@ -43,53 +43,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/activity_crear_gasto_rl_fecha"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/fecha_sep1"
-            android:layout_weight="1"></RelativeLayout>
-
-        <EditText
-            android:id="@+id/activity_crear_gasto_et_fecha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="@string/fecha"
-            android:inputType="date"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:enabled="false"
-            android:editable="false"
-            android:clickable="false" />
-
-        <ImageButton
-            android:id="@+id/activity_crear_gasto_ib_date_picker"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/activity_crear_gasto_et_fecha"
-            android:layout_toEndOf="@+id/activity_crear_gasto_et_fecha"
-            android:layout_toRightOf="@+id/activity_crear_gasto_et_fecha"
-            android:src="@drawable/ic_calendar"
-            android:onClick="mostrarDatePicker"
-            android:layout_weight=".5"
-            android:layout_gravity="center" />
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:id="@+id/fecha_sep2"></RelativeLayout>
-        />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/activity_crear_gasto_rl_categoria"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -117,6 +70,54 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/categoria_sep2"></RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_crear_gasto_rl_fecha"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/fecha_sep1"
+            android:layout_weight="1"></RelativeLayout>
+
+        <EditText
+            android:id="@+id/activity_crear_gasto_et_fecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:hint="@string/fecha"
+            android:inputType="date"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:editable="false"
+            android:clickable="false"
+            android:onClick="mostrarDatePicker" />
+
+        <ImageButton
+            android:id="@+id/activity_crear_gasto_ib_date_picker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/activity_crear_gasto_et_fecha"
+            android:layout_toEndOf="@+id/activity_crear_gasto_et_fecha"
+            android:layout_toRightOf="@+id/activity_crear_gasto_et_fecha"
+            android:src="@drawable/ic_calendar"
+            android:onClick="mostrarDatePicker"
+            android:layout_weight=".5"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:id="@+id/fecha_sep2"></RelativeLayout>
+        />
     </LinearLayout>
 
     <LinearLayout
