@@ -1,5 +1,9 @@
 package com.funebunny.xpdroid.business.historial.model;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.Locale;
+
 /**
  * Created by I823537 on 05/09/2015.
  */
@@ -10,16 +14,16 @@ public class Historial {
     private int anio;
     private String total;
 
-    public int getMes() {
-        return mes;
+    public String getMes() {
+        return new DateFormatSymbols(new Locale("es", "ES")).getMonths()[this.mes+1];
     }
 
     public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public int getAnio() {
-        return anio;
+    public String getAnio() {
+        return String.valueOf(this.anio);
     }
 
     public void setAnio(int anio) {

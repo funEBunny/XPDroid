@@ -17,7 +17,7 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
     public List<Historial> obtenerListaHistorial() {
 
         List<Historial> listaHistorial = new ArrayList<>();
-        ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).execute();
+        ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).orderBy("Anio DESC").orderBy("Mes DESC").execute();
 
         for (int i = 0; i < listaHistorialDAO.size(); i++) {
 
