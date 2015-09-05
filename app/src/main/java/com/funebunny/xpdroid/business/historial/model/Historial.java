@@ -5,6 +5,7 @@ package com.funebunny.xpdroid.business.historial.model;
  */
 public class Historial {
 
+    private Long id;
     private String mes;
     private String anio;
     private String total;
@@ -33,5 +34,12 @@ public class Historial {
         this.total = total;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }
