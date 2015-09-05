@@ -47,12 +47,14 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
 
     @Override
     public void eliminarHistorial(Long id) {
-
+        obtenerHistorialPorId(id).delete();
     }
 
     @Override
     public void actualizarHistorial(Historial historial) {
-
+        HistorialDAO historialDAO = obtenerHistorialPorId(historial.getId());
+        historialDAO.setTotal(historial.getTotal());
+        historialDAO.save();
     }
 
     public Historial obtenerHistorial(String mes, String anio) {
@@ -72,5 +74,11 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
         }
 
         return historial;
+    }
+
+    private HistorialDAO obtenerHistorialPorId(Long id) {
+
+        ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).where("Id = ?", id).execute();
+        return listaHistorialDAO.get(0);
     }
 }
