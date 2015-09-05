@@ -160,18 +160,6 @@ public class MainActivity extends XPDroidActivity
 
     }
 
-    public void verHistorial(View view) {
-        Intent intentHistorialGastosCompleto = new Intent(this, HistorialGastosCompletoActivity.class);
-        //Animacion desde derecha a izquierda
-        Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
-        startActivity(intentHistorialGastosCompleto, animation);
-
-        //Mostrar mensaje de crear gasto presupuesto
-        Toast toast = Toast.makeText(this, R.string.action_ver_historial, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
-    }
-
 
     public void crearGastoPorFavorito(View view) {
         // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal

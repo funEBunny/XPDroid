@@ -1,6 +1,5 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,8 +7,6 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.main.ui.activity.HistorialGastosCompletoActivity;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.Calendar;
