@@ -12,27 +12,27 @@ public class HistorialDAO extends Model {
 
 
     @Column(name = "Mes")
-    private String mes;
+    private int mes;
 
     @Column(name = "Anio")
-    private String anio;
+    private int anio;
 
     @Column(name = "Total")
     private String total;
 
-    public String getMes() {
+    public int getMes() {
         return mes;
     }
 
-    public void setMes(String mes) {
+    public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public String getAnio() {
+    public int getAnio() {
         return anio;
     }
 
-    public void setAnio(String anio) {
+    public void setAnio(int anio) {
         this.anio = anio;
     }
 

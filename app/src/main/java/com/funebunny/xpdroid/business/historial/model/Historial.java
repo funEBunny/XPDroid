@@ -6,23 +6,23 @@ package com.funebunny.xpdroid.business.historial.model;
 public class Historial {
 
     private Long id;
-    private String mes;
-    private String anio;
+    private int mes;
+    private int anio;
     private String total;
 
-    public String getMes() {
+    public int getMes() {
         return mes;
     }
 
-    public void setMes(String mes) {
+    public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public String getAnio() {
+    public int getAnio() {
         return anio;
     }
 
-    public void setAnio(String anio) {
+    public void setAnio(int anio) {
         this.anio = anio;
     }
 
