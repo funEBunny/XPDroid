@@ -1,15 +1,19 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.support.v7.app.ActionBar;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.business.notificacion.service.ServicioNotificacionesBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 public class InicioActivity extends ActionBarActivity {
@@ -18,6 +22,23 @@ public class InicioActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+        if (isFirstRun)
+        {
+            // Code to run once
+            Log.d("XPDROID", " Activando notificacion diara para totales");
+            ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
+            notificationsService.activarAlarmaDiaria(this.getApplicationContext(), AppConstants.CERO_HORAS, AppConstants.ID_ALARMA_TOTALES);
+
+            SharedPreferences.Editor editor = wmbPreference.edit();
+            editor.putBoolean("FIRSTRUN", false);
+            editor.apply();
+
+
+        }
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

@@ -14,7 +14,8 @@ public class AppConstants {
     public static final String GASTO_PROGRAMABLE = "gasto programable";
     public static final String PRESUPUESTO = "presupuesto";
     public static final int CANT_MAX_PRESUPUESTO = 4;
-
+    public static final String CERO_HORAS = "00:00";
+    public static final long ID_ALARMA_TOTALES = 0L;
     public static final String PERIODO_DIARIO = "Diario";
     public static final String PERIODO_SEMANAL = "Semanal";
     public static final String PERIODO_MENSUAL = "Mensual";
