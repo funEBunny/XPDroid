@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,8 +22,11 @@ import com.funebunny.xpdroid.R;
 
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.historial.model.Historial;
+import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
+import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapterHistorialGastos;
 import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
@@ -55,7 +59,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     private String mParam2;
 
     private HistorialGastosItemCallbacks mListener;
-    private List<Gasto> gastos = new ArrayList<Gasto>();
+
 
     // The fragment's ListView/GridView
     private AbsListView mListView;
@@ -65,6 +69,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
+    private ServicioHistorialBusiness servicioHistorialBusiness = new ServicioHistorialBusiness();
 
     // TODO: Rename and change types of parameters
     public static HistorialGastosItemFragment newInstance(int itemSelected) {
@@ -93,21 +98,28 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
-        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
+//        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
+//        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
-        mListView = (ListView) view.findViewById(R.id.historial_gastos_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        ExpandableListView expandableHistorial = (ExpandableListView) view.findViewById(R.id.fragment_historialgastos_el_gastos);
+        ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
+        ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(view.getContext(), listaHistorial);
+        expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
+
+        //expandableHistorial.setOnChildClickListener();
+
+        registerForContextMenu(expandableHistorial);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+//        mListView.setOnItemClickListener(this);
         // registrar para menu contextual, para mostrar opciones on-long-click
-        registerForContextMenu(mListView);
+//        registerForContextMenu(mListView);
 
         return view;
     }
@@ -127,14 +139,14 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         switch (item.getItemId()) {
             case R.id.menu_contextual_gasto_editar:
                 Bundle bGasto = new Bundle();
-                bGasto.putSerializable(AppConstants.GASTO, gastos.get(info.position));
+//                bGasto.putSerializable(AppConstants.GASTO, gastos.get(info.position));
                 Intent i = new Intent(getActivity(), CrearGastoActivity.class);
                 i.putExtras(bGasto);
                 startActivity(i);
                 return true;
             case R.id.menu_contextual_gasto_borrar:
-                servicioGastosBusiness.eliminarGasto(gastos.get(info.position).getId());
-                servicioPresupuestoBusiness.descontarTotales(gastos.get(info.position));
+//                servicioGastosBusiness.eliminarGasto(gastos.get(info.position).getId());
+//                servicioPresupuestoBusiness.descontarTotales(gastos.get(info.position));
                 onResume();
                 return true;
             default:
@@ -157,16 +169,14 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     @Override
     public void onResume() {
         super.onResume();
-        this.gastos.clear();
-        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
-        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
-        View view = getView();
 
-        mListView = (ListView) view.findViewById(R.id.historial_gastos_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        ExpandableListView expandableHistorial = (ExpandableListView) getView().findViewById(R.id.fragment_historialgastos_el_gastos);
+        ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
+        ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(getView().getContext(), listaHistorial);
+        expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+//        mListView.setOnItemClickListener(this);
     }
 
     @Override

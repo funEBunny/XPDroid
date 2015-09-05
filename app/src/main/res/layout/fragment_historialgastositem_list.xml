@@ -5,7 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:clickable="false">
+    android:clickable="false"
+    android:id="@+id/fragment_historialgastos_ll_main">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,11 +19,9 @@
         android:layout_gravity="center_vertical"
         android:text="@string/gastos_mes_titulo" />
 
-    <ListView android:id="@+id/historial_gastos_lista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:clickable="true"
-        android:longClickable="false" />
+    <ExpandableListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_historialgastos_el_gastos" />
 
 </LinearLayout>

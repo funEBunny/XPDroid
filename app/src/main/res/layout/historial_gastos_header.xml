@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/historial_gastos_header_ll_main">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/historial_gastos_header_tv_mes"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/historial_gastos_header_tv_anio"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/historial_gastos_header_tv_total"
+        android:layout_weight="1" />
+</LinearLayout>

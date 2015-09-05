@@ -1,7 +1,6 @@
 package com.funebunny.xpdroid.main.ui.adapter;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.funebunny.xpdroid.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by I823537 on 01/09/2015.

@@ -11,8 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.backend.historial.service.ServicioHistorialDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.historial.model.Historial;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
@@ -107,6 +109,16 @@ public class CrearGastoActivity extends XPDroidActivity {
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);
         this.finish();
+
+        //Solo para Test - BORRAR
+//        ServicioHistorialDAO servicioHistorialDAO = new ServicioHistorialDAO();
+//        Historial historial = new Historial();
+//        historial.setMes(9);
+//        historial.setAnio(2015);
+//        historial.setTotal("999999");
+//        servicioHistorialDAO.guardarHistorial(historial);
+
+
     }
 
 }
