@@ -106,4 +106,5 @@
     <string name="presupuesto_existente">Presupuesto %1$s existente</string>
     <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
     <string name="alerta_presupuesto">Presupuesto excedido!</string>
+    <string name="gastos_programados_titulo">Gastos Programados:</string>
 </resources>

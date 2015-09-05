@@ -15,7 +15,7 @@ import java.util.List;
  * Created by schmidt0 on 8/28/2015.
  */
 public class DeviceBootReceiver  extends BroadcastReceiver {
-    public static final String CERO_HORAS = "14:45";
+    public static final String CERO_HORAS = "00:00";
     public static final long ID_ALARMA_TOTALES = 0L;
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
