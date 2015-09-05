@@ -14,16 +14,18 @@ public class Historial {
     private int anio;
     private String total;
 
-    public String getMes() {
+    public String getTextoMes() {
         return new DateFormatSymbols(new Locale("es", "ES")).getMonths()[this.mes+1];
     }
-
+    public int getMes() {
+        return this.mes;
+    }
     public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public String getAnio() {
-        return String.valueOf(this.anio);
+    public int getAnio() {
+        return this.anio;
     }
 
     public void setAnio(int anio) {
