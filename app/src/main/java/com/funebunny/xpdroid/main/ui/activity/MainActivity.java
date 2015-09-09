@@ -30,6 +30,7 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
@@ -71,6 +72,7 @@ public class MainActivity extends XPDroidActivity
 
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioHistorialBusiness servicioHistorialBusiness = new ServicioHistorialBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +176,7 @@ public class MainActivity extends XPDroidActivity
         String fechaFormat = dateFormat.format(fecha);
         Gasto gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
         servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioHistorialBusiness.guardarHistorial(gasto);
 
         // Resfresh del fragment principal
         getSupportFragmentManager().beginTransaction()
