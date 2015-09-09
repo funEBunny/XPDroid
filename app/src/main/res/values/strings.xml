@@ -62,7 +62,7 @@
     <string name="duracion">Duración</string>
     <string name="title_activity_crear_recordatorio">Crear Recordatorio</string>
     <string name="title_activity_xpdroid">Actividad Base de XPDroid</string>
-    <string name="gastos_mes_titulo">Gastos del Mes Realizados:</string>
+    <string name="historial_gastos_titulo">Historial de Gastos</string>
     <string name="gastos_favoritos_titulo">Gastos Favoritos:</string>
     <string name="ver_mas_gastos_titulo">Buscar Gastos Realizados</string>
     <string name="presupuesto_titulo">Presupuesto de Gastos</string>

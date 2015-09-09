@@ -118,7 +118,7 @@ public class CrearGastoActivity extends XPDroidActivity {
         //Solo para Test - BORRAR
 //        ServicioHistorialDAO servicioHistorialDAO = new ServicioHistorialDAO();
 //        Historial historial = new Historial();
-//        historial.setMes(9);
+//        historial.setMes(8);
 //        historial.setAnio(2015);
 //        historial.setTotal("999999");
 //        servicioHistorialDAO.guardarHistorial(historial);

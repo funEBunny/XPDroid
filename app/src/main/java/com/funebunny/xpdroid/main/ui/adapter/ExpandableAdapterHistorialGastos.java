@@ -81,8 +81,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
             convertView = inflater.inflate(R.layout.historial_gastos_header, null);
         }
 
-        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(groups.get(groupPosition).getTextoMes());
-        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_anio)).setText(String.valueOf(groups.get(groupPosition).getAnio()));
+        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(groups.get(groupPosition).getTextoMes().toUpperCase() + " " + String.valueOf(groups.get(groupPosition).getAnio()));
         ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_total)).setText("$" + groups.get(groupPosition).getTotal());
 
         return convertView;
@@ -95,9 +94,11 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
             convertView = inflater.inflate(R.layout.historial_gastos_list_item, null);
         }
 
+        convertView.setTag(items.get(childPosition));   //Anclar gasto a la vista
+
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_categoria)).setText(items.get(childPosition).getCategoria());
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_descripcion)).setText(items.get(childPosition).getDescripcion());
-        ((TextView) convertView.findViewById(R.id.historial_gastos_lista_importe)).setText(items.get(childPosition).getImporte());
+        ((TextView) convertView.findViewById(R.id.historial_gastos_lista_importe)).setText("$" + items.get(childPosition).getImporte());
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_fecha)).setText(items.get(childPosition).getFecha());
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +114,6 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }

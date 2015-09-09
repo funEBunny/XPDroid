@@ -127,26 +127,37 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
+
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_contextual_gasto, menu);
+
+        ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+
+        if (ExpandableListView.getPackedPositionType(info.packedPosition) != ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+            return; // Menú contextual sólo para child (gastos)
+        }
+        getActivity().getMenuInflater().inflate(R.menu.menu_contextual_gasto, menu);
+
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+
+        Gasto gasto = (Gasto) info.targetView.getTag();
 
         switch (item.getItemId()) {
             case R.id.menu_contextual_gasto_editar:
                 Bundle bGasto = new Bundle();
-//                bGasto.putSerializable(AppConstants.GASTO, gastos.get(info.position));
+                bGasto.putSerializable(AppConstants.GASTO, gasto);
                 Intent i = new Intent(getActivity(), CrearGastoActivity.class);
                 i.putExtras(bGasto);
                 startActivity(i);
                 return true;
             case R.id.menu_contextual_gasto_borrar:
-//                servicioGastosBusiness.eliminarGasto(gastos.get(info.position).getId());
-//                servicioPresupuestoBusiness.descontarTotales(gastos.get(info.position));
+                servicioGastosBusiness.eliminarGasto(gasto.getId());
+                servicioPresupuestoBusiness.descontarTotales(gasto);
                 onResume();
                 return true;
             default:
