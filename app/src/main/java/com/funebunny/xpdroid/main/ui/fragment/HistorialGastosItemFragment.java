@@ -158,6 +158,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
             case R.id.menu_contextual_gasto_borrar:
                 servicioGastosBusiness.eliminarGasto(gasto.getId());
                 servicioPresupuestoBusiness.descontarTotales(gasto);
+                servicioHistorialBusiness.eliminarHistorial(gasto);
                 onResume();
                 return true;
             default:
