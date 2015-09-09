@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.business.historial.service;
 
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.historial.model.Historial;
 
 import java.util.List;
@@ -11,9 +12,7 @@ public interface IServicioHistorialBusiness {
 
     List<Historial> obtenerListaHistorial();
 
-    void guardarHistorial(Historial historial);
+    void eliminarHistorial(Gasto gasto);
 
-    void eliminarHistorial(Long id);
-
-    void actualizarHistorial(Historial historial);
+    void guardarHistorial(Gasto gasto);
 }

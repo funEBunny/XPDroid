@@ -15,7 +15,7 @@ public class Historial {
     private String total;
 
     public String getTextoMes() {
-        return new DateFormatSymbols(new Locale("es", "ES")).getMonths()[this.mes+1];
+        return new DateFormatSymbols(new Locale("es", "ES")).getMonths()[this.mes];
     }
     public int getMes() {
         return this.mes;

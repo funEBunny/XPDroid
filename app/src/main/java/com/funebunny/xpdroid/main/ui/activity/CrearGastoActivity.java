@@ -15,6 +15,7 @@ import com.funebunny.xpdroid.backend.historial.service.ServicioHistorialDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.historial.model.Historial;
+import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
@@ -25,6 +26,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
+    private ServicioHistorialBusiness servicioHistorialBusiness = new ServicioHistorialBusiness();
     private Gasto gasto;
 
     @Override
@@ -97,6 +99,7 @@ public class CrearGastoActivity extends XPDroidActivity {
             gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
         }else{
             servicioPresupuestoBusiness.descontarTotales(gasto);
+            servicioHistorialBusiness.eliminarHistorial(gasto);
             gasto.setDescripcion(descripcion);
             gasto.setFecha(fecha);
             gasto.setImporte(importe);
@@ -104,6 +107,8 @@ public class CrearGastoActivity extends XPDroidActivity {
             servicioGastosBusiness.actualizarGasto(gasto);
         }
         servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioHistorialBusiness.guardarHistorial(gasto);
+
 
         //Mostrar mensaje de agregar gasto
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
