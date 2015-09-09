@@ -53,17 +53,21 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
     @Override
     public void actualizarHistorial(Historial historial) {
         HistorialDAO historialDAO = obtenerHistorialPorId(historial.getId());
-        historialDAO.setTotal(historial.getTotal());
-        historialDAO.save();
+        if (historialDAO == null) {
+            guardarHistorial(historial);
+        } else {
+            historialDAO.setTotal(historial.getTotal());
+            historialDAO.save();
+        }
     }
 
-    public Historial obtenerHistorial(String mes, String anio) {
+    public Historial obtenerHistorial(int mes, int anio) {
 
         ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).where("Mes = ? AND Anio = ?", mes, anio).execute();
 
         Historial historial = null;
 
-        if (listaHistorialDAO != null&&!listaHistorialDAO.isEmpty()) {
+        if (listaHistorialDAO != null && !listaHistorialDAO.isEmpty()) {
 
             historial = new Historial();
             historial.setId(listaHistorialDAO.get(0).getId());
@@ -79,6 +83,9 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
     private HistorialDAO obtenerHistorialPorId(Long id) {
 
         ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).where("Id = ?", id).execute();
-        return listaHistorialDAO.get(0);
+        if (listaHistorialDAO!=null&&!listaHistorialDAO.isEmpty()){
+            return listaHistorialDAO.get(0);
+        }
+        return null;
     }
 }

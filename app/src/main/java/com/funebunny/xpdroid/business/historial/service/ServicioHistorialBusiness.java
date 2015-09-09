@@ -34,13 +34,11 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
             instance.setTime(dia);
             int anioGasto = instance.get(Calendar.YEAR);
             int mesGasto = instance.get(Calendar.MONTH);
-            Historial historial = servicioHistorialDAO.obtenerHistorial(String.valueOf(mesGasto), String.valueOf(anioGasto));
+            Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
             String totalHisorial = historial.getTotal();
-            BigDecimal bdTotal = new BigDecimal(totalHisorial);
-            BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
-            bdTotal= bdTotal.subtract(bdImporteGasto);
-            historial.setTotal(bdTotal.toPlainString());
-            servicioHistorialDAO.guardarHistorial(historial);
+            String importeGasto = gasto.getImporte();
+            historial.setTotal(restar(totalHisorial, importeGasto));
+            servicioHistorialDAO.actualizarHistorial(historial);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -57,22 +55,37 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
             instance.setTime(dia);
             int anioGasto = instance.get(Calendar.YEAR);
             int mesGasto = instance.get(Calendar.MONTH);
-            Historial historial = servicioHistorialDAO.obtenerHistorial(String.valueOf(mesGasto), String.valueOf(anioGasto));
-            String totalHisorial = "0";
+            Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
+            String importeGasto = gasto.getImporte();
             if (historial != null) {
-                totalHisorial = historial.getTotal();
+                String totalHisorial = historial.getTotal();
+                historial.setTotal(sumar(totalHisorial, importeGasto));
+                servicioHistorialDAO.actualizarHistorial(historial);
             } else {
                 historial = new Historial();
                 historial.setAnio(Integer.valueOf(anioGasto));
                 historial.setMes(Integer.valueOf(mesGasto));
+                historial.setTotal(importeGasto);
+                servicioHistorialDAO.guardarHistorial(historial);
             }
-            BigDecimal bdTotal = new BigDecimal(totalHisorial);
-            BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
-            bdTotal = bdTotal.add(bdImporteGasto);
-            historial.setTotal(bdTotal.toPlainString());
-            servicioHistorialDAO.guardarHistorial(historial);
+
         }catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+    private String restar(String total, String importe) {
+
+        BigDecimal bdTotal = new BigDecimal(total);
+        BigDecimal bdImporteGasto = new BigDecimal(importe);
+        bdTotal = bdTotal.subtract(bdImporteGasto);
+        return bdTotal.toPlainString();
+
+    }
+
+    private String sumar(String total, String importe) {
+        BigDecimal bdTotal = new BigDecimal(total);
+        BigDecimal bdImporteGasto = new BigDecimal(importe);
+        bdTotal = bdTotal.add(bdImporteGasto);
+        return bdTotal.toPlainString();
     }
 }

@@ -18,6 +18,6 @@ public interface IServicioHistorialDAO {
 
     void actualizarHistorial(Historial historial);
 
-    Historial obtenerHistorial(String mes, String anio);
+    Historial obtenerHistorial(int mes, int anio);
 
 }
