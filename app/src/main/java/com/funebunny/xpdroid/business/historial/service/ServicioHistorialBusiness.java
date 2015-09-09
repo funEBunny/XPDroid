@@ -24,37 +24,55 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
         return servicioHistorialDAO.obtenerListaHistorial();
     }
 
-    private void guardarHistorial(Historial historial) {
-
-        servicioHistorialDAO.guardarHistorial(historial);
-    }
-
     @Override
     public void eliminarHistorial(Gasto gasto) {
         String fechaGasto = gasto.getFecha();
-        String anioGasto = fechaGasto.substring(0,4);
-        String mesGasto = fechaGasto.substring(4,6);
-        Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
-        String totalHisorial = historial.getTotal();
-        BigDecimal bdTotal = new BigDecimal(totalHisorial);
-        BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
-        bdTotal= bdTotal.subtract(bdImporteGasto);
-        historial.setTotal(bdTotal.toPlainString());
-        servicioHistorialDAO.guardarHistorial(historial);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+        try {
+            Date dia = dateFormat.parse(fechaGasto);
+            Calendar instance = Calendar.getInstance();
+            instance.setTime(dia);
+            int anioGasto = instance.get(Calendar.YEAR);
+            int mesGasto = instance.get(Calendar.MONTH);
+            Historial historial = servicioHistorialDAO.obtenerHistorial(String.valueOf(mesGasto), String.valueOf(anioGasto));
+            String totalHisorial = historial.getTotal();
+            BigDecimal bdTotal = new BigDecimal(totalHisorial);
+            BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
+            bdTotal= bdTotal.subtract(bdImporteGasto);
+            historial.setTotal(bdTotal.toPlainString());
+            servicioHistorialDAO.guardarHistorial(historial);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void guardarHistorial(Gasto gasto) {
         String fechaGasto = gasto.getFecha();
-        String anioGasto = fechaGasto.substring(0,4);
-        String mesGasto = fechaGasto.substring(4,6);
-        Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
-        String totalHisorial = historial.getTotal();
-        BigDecimal bdTotal = new BigDecimal(totalHisorial);
-        BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
-        bdTotal= bdTotal.add(bdImporteGasto);
-        historial.setTotal(bdTotal.toPlainString());
-        servicioHistorialDAO.guardarHistorial(historial);
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+        try {
+            Date dia = dateFormat.parse(fechaGasto);
+            Calendar instance = Calendar.getInstance();
+            instance.setTime(dia);
+            int anioGasto = instance.get(Calendar.YEAR);
+            int mesGasto = instance.get(Calendar.MONTH);
+            Historial historial = servicioHistorialDAO.obtenerHistorial(String.valueOf(mesGasto), String.valueOf(anioGasto));
+            String totalHisorial = "0";
+            if (historial != null) {
+                totalHisorial = historial.getTotal();
+            } else {
+                historial = new Historial();
+                historial.setAnio(Integer.valueOf(anioGasto));
+                historial.setMes(Integer.valueOf(mesGasto));
+            }
+            BigDecimal bdTotal = new BigDecimal(totalHisorial);
+            BigDecimal bdImporteGasto = new BigDecimal(gasto.getImporte());
+            bdTotal = bdTotal.add(bdImporteGasto);
+            historial.setTotal(bdTotal.toPlainString());
+            servicioHistorialDAO.guardarHistorial(historial);
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

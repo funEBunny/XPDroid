@@ -63,7 +63,7 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
 
         Historial historial = null;
 
-        if (listaHistorialDAO != null) {
+        if (listaHistorialDAO != null&&!listaHistorialDAO.isEmpty()) {
 
             historial = new Historial();
             historial.setId(listaHistorialDAO.get(0).getId());

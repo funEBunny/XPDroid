@@ -7,7 +7,7 @@ public class AppConstants {
 
     public static final int SPLASH_TIME_OUT = 1000;
 
-    public static final char SEPARADOR_FECHA = '/';
+    public static final String SEPARADOR_FECHA = "/";
     public static final String ARG_DRAWER_ITEM_POSITION = "section_number";
     public static final String GASTO = "gasto";
     public static final String GASTO_FAVORITO = "gasto favorito";
