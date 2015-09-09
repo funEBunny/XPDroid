@@ -14,6 +14,8 @@ import com.funebunny.xpdroid.business.historial.model.Historial;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by I823537 on 05/09/2015.
@@ -21,7 +23,7 @@ import java.util.Calendar;
 public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter {
 
     private ArrayList<Historial> groups;
-    private ArrayList<Gasto> items;
+    private Map<Integer,ArrayList<Gasto>> itemsMap = new HashMap<>();
     private LayoutInflater inflater;
     private ServicioGastosBusiness servicioGastosBusiness;
 
@@ -43,9 +45,13 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
         Calendar fechaMesAnio = Calendar.getInstance();
         fechaMesAnio.set(Calendar.MONTH, historial.getMes());
         fechaMesAnio.set(Calendar.YEAR, historial.getAnio());
-
-        items = (ArrayList<Gasto>) servicioGastosBusiness.obtenerGastosMes(fechaMesAnio);
-        return items.size();
+        ArrayList<Gasto> gastos;
+        gastos = itemsMap.get(groupPosition);
+        if (gastos==null){
+            gastos = (ArrayList<Gasto>)servicioGastosBusiness.obtenerGastosMes(fechaMesAnio);
+            itemsMap.put(groupPosition,gastos);
+        }
+        return itemsMap.get(groupPosition).size();
 
     }
 
@@ -94,6 +100,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
             convertView = inflater.inflate(R.layout.historial_gastos_list_item, null);
         }
 
+        ArrayList<Gasto> items = itemsMap.get(groupPosition);
         convertView.setTag(items.get(childPosition));   //Anclar gasto a la vista
 
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_categoria)).setText(items.get(childPosition).getCategoria());
