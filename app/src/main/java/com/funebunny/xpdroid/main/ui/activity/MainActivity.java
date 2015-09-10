@@ -172,7 +172,7 @@ public class MainActivity extends XPDroidActivity
         String importe = gf.getImporte();
         String categoria = gf.getCategoria();
         Date fecha = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(AppConstants.FECHA_VISTA);
         String fechaFormat = dateFormat.format(fecha);
         Gasto gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fechaFormat);
         servicioPresupuestoBusiness.calcularTotales(gasto);
@@ -389,6 +389,9 @@ public class MainActivity extends XPDroidActivity
                     tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
                     tv.setId(id);
                     RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id>1){
+                        lp.addRule(RelativeLayout.BELOW, id - 1);
+                    }
                     tv.setLayoutParams(lp);
                     rl.addView(tv);
                 }
