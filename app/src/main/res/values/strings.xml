@@ -42,6 +42,7 @@
     <!--<string name="mes_anio_historial">Mes y Año</string>-->
 
     <string name="campo_obligatorio">Campo obligatorio!</string>
+    <string name="importe_incorrecto">Ingrese un importe válido</string>
     <string name="inicio">Esta es la pagina de Inicio</string>
     <string name="gastos_favoritos">Esta es la pagina de Gastos Favoritos</string>
     <string name="gastos_programables">Esta es la pagina de Gastos Programables</string>

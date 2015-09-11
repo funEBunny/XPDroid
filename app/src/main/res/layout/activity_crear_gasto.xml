@@ -28,11 +28,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:ems="10"
             android:hint="@string/importe"
             android:inputType="numberDecimal"
             android:layout_weight="2"
             android:layout_gravity="center"
+            android:nextFocusDown="@+id/activity_crear_gasto_et_descripcion"
             style="@style/XPDroidEditText"/>
 
         <RelativeLayout

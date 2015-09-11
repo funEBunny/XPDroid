@@ -110,7 +110,8 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         Calendar hoy = Calendar.getInstance();
         int diaHoy = hoy.get(Calendar.DAY_OF_YEAR);
         int diaGasto = fechaGasto.get(Calendar.DAY_OF_YEAR);
-        return (diaHoy == diaGasto) && isMismoAnio(fechaGasto);
+        return (diaHoy == diaGasto) &&
+                isMismoAnio(fechaGasto);
     }
 
     boolean isMismoMes(Calendar fechaGasto) {

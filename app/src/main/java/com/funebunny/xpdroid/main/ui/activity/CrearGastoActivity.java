@@ -36,20 +36,23 @@ public class CrearGastoActivity extends XPDroidActivity {
 
         Bundle bGasto = getIntent().getExtras();
         if (bGasto != null) {
+
             gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
             ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(gasto.getDescripcion());
             ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(gasto.getImporte());
+            ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(gasto.getFecha());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
-
             setTitle(R.string.title_activity_editar_gasto);
+
+        } else {
+
+            // Fijar por defecto la fecha del día cuando se trata de un gasto nuevo
+            final Calendar c = Calendar.getInstance();
+            EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
+            fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
+
         }
-
-        // Fijar por defecto la fecha del día
-        final Calendar c = Calendar.getInstance();
-        EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
-        fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
-
     }
 
     @Override
@@ -87,17 +90,23 @@ public class CrearGastoActivity extends XPDroidActivity {
         String fecha = ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).getText().toString();
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria)).getSelectedItem().toString();
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
-        String importe = etImporte.getText().toString();
+        String importe = String.valueOf(etImporte.getText());
 
         //Validar importe obligatorio
-        if (importe.equals("")){
+        if (importe.equals("")) {
             etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
+        //Validar primer dígito del Importe
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+            etImporte.setError(getResources().getString(R.string.importe_incorrecto));
+            return;
+        }
 
-        if (gasto == null || gasto.getId()== null){
+
+        if (gasto == null || gasto.getId() == null) {
             gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);
-        }else{
+        } else {
             servicioPresupuestoBusiness.descontarTotales(gasto);
             servicioHistorialBusiness.eliminarHistorial(gasto);
             gasto.setDescripcion(descripcion);
@@ -114,15 +123,6 @@ public class CrearGastoActivity extends XPDroidActivity {
         int gasto_guardado_mensaje = R.string.gasto_guardado_mensaje;
         showMessage(gasto_guardado_mensaje);
         this.finish();
-
-        //Solo para Test - BORRAR
-//        ServicioHistorialDAO servicioHistorialDAO = new ServicioHistorialDAO();
-//        Historial historial = new Historial();
-//        historial.setMes(8);
-//        historial.setAnio(2015);
-//        historial.setTotal("999999");
-//        servicioHistorialDAO.guardarHistorial(historial);
-
 
     }
 
