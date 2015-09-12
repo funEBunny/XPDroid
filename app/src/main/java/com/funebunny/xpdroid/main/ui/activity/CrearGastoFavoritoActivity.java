@@ -62,8 +62,15 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
     public void guardarGastoFavorito(View view) {
 
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_descripcion)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).getText().toString();
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria)).getSelectedItem().toString();
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe);
+        String importe = String.valueOf(etImporte.getText());
+
+        //Validar importe obligatorio
+        if (importe.equals("")) {
+            etImporte.setError(getResources().getString(R.string.campo_obligatorio));
+            return;
+        }
 
         if (gastoFavorito == null) {
             servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);
