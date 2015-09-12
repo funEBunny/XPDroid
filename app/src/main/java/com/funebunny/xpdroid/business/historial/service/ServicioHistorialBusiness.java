@@ -37,8 +37,13 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
             Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
             String totalHisorial = historial.getTotal();
             String importeGasto = gasto.getImporte();
-            historial.setTotal(restar(totalHisorial, importeGasto));
-            servicioHistorialDAO.actualizarHistorial(historial);
+            String total = restar(totalHisorial, importeGasto);
+            if (AppConstants.CERO.equalsIgnoreCase(total)){
+                servicioHistorialDAO.eliminarHistorial(historial.getId());
+            }else{
+                historial.setTotal(total);
+                servicioHistorialDAO.actualizarHistorial(historial);
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();
