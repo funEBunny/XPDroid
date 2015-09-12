@@ -19,6 +19,16 @@ public class TotalesDAO extends Model {
     @Column(name = "Anual")
     private String totalAnual;
 
+    @Column(name = "Predeterminado")
+    private String predeterminado;
+
+    public String getPredeterminado() {
+        return predeterminado;
+    }
+
+    public void setPredeterminado(String predeterminado) {
+        this.predeterminado = predeterminado;
+    }
 
     public String getTotalDiario() {
         return totalDiario;
@@ -51,7 +61,6 @@ public class TotalesDAO extends Model {
     public void setTotalAnual(String totalAnual) {
         this.totalAnual = totalAnual;
     }
-
 
 
 }

@@ -10,35 +10,62 @@
     android:id="@+id/activity_crear_presupuesto_ll_main"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:id="@+id/activity_crear_presupuesto_rl_periodo">
+        android:id="@+id/activity_crear_presupuesto_rl_importe"
+        android:orientation="horizontal">
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_crear_presupuesto_sp_periodo"
-            android:layout_centerInParent="true"
-            android:entries="@array/periodo" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/activity_crear_presupuesto_rl_importe">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/activity_crear_presupuesto_et_importe"
             android:layout_centerInParent="true"
-            android:hint="@string/importe" />
-    </RelativeLayout>
+            android:hint="@string/importe"
+            style="@style/XPDroidEditText"
+            android:layout_weight="2"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/activity_crear_presupuesto_rl_periodo"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_crear_presupuesto_sp_periodo"
+            android:layout_centerInParent="true"
+            android:entries="@array/periodo"
+            android:layout_weight="2"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"

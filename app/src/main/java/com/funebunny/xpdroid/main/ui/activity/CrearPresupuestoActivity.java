@@ -59,18 +59,23 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
         }
     }
 
-// Custom methods - PRB
 
     public void guardarPresupuesto(View view) {
 
         String periodo = ((Spinner) findViewById(R.id.activity_crear_presupuesto_sp_periodo)).getSelectedItem().toString();
-        String importe = ((EditText) findViewById(R.id.activity_crear_presupuesto_et_importe)).getText().toString();
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_presupuesto_et_importe);
+        String importe = String.valueOf(etImporte.getText());
 
-        if ("".equalsIgnoreCase(importe)){
-            ((EditText) findViewById(R.id.activity_crear_presupuesto_et_importe)).setError("Error");
+        //Validar importe obligatorio
+        if (importe.equals("")) {
+            etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
-
+        //Validar primer dígito del Importe
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+            etImporte.setError(getResources().getString(R.string.importe_incorrecto));
+            return;
+        }
 
         if (presupuesto == null){
             if (servicioPresupuestoBusiness.tipoPresupuestoExiste(periodo)){

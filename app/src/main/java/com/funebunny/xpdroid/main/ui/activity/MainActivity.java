@@ -2,7 +2,6 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,9 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,7 +37,7 @@ import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
-import com.funebunny.xpdroid.main.ui.fragment.NotificacionesItemFragment;
+import com.funebunny.xpdroid.main.ui.fragment.TotalesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.PresupuestoItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -51,7 +48,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
 
 public class MainActivity extends XPDroidActivity
@@ -60,7 +56,7 @@ public class MainActivity extends XPDroidActivity
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
         PresupuestoItemFragment.PresupuestoItemCallbacks,
-        NotificacionesItemFragment.NotificacionesItemCallbacks {
+        TotalesItemFragment.NotificacionesItemCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -135,17 +131,17 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 5: { //Recordatorios
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
-            }
-            case 6: { //Notificaciones
+            case 5: { //Totales
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, NotificacionesItemFragment.newInstance(position + 1))
+                        .replace(R.id.container, TotalesItemFragment.newInstance(position + 1))
                         .commit();
                 break;
+            }
+            case 6: { //Notificaciones
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, TotalesItemFragment.newInstance(position + 1))
+//                        .commit();
+//                break;
             }
             case 7: { //Ayuda
 //                fragmentManager.beginTransaction()
@@ -161,7 +157,7 @@ public class MainActivity extends XPDroidActivity
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if(fragmentManager.findFragmentById(R.id.container) instanceof PlaceholderFragment) {
+        if (fragmentManager.findFragmentById(R.id.container) instanceof PlaceholderFragment) {
             super.onBackPressed();
             return;
         } else {
@@ -261,6 +257,29 @@ public class MainActivity extends XPDroidActivity
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void actualizarTotalPredeterminado(View view) {
+
+        switch (view.getId()) {
+            case R.id.fragment_totalesitem_list_rb_diario: {
+                servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_DIARIO);
+                break;
+            }
+            case R.id.fragment_totalesitem_list_rb_semanal: {
+                servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_SEMANAL);
+                break;
+            }
+            case R.id.fragment_totalesitem_list_rb_mensual: {
+                servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_MENSUAL);
+                break;
+            }
+            case R.id.fragment_totalesitem_list_rb_anual: {
+                servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_ANUAL);
+                break;
+            }
+        }
+
     }
 
     @Override
@@ -389,47 +408,45 @@ public class MainActivity extends XPDroidActivity
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-            //Mes y total acumulado mensual en pantalla de Inicio
-            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
-            ((TextView) rootView.findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
-            ((TextView) rootView.findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+            mostrarTotal(rootView);
+
             List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
             RelativeLayout rl = (RelativeLayout) rootView.findViewById(R.id.fragment_totales_rl);
 
-            int id =0;
-            for (Presupuesto presupuesto:presupuestos) {
+            int id = 0;
+            for (Presupuesto presupuesto : presupuestos) {
                 String periodo = presupuesto.getPeriodo();
-                if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)){
+                if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
                     id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
                     tv.setId(id);
-                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id>1){
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id > 1) {
                         lp.addRule(RelativeLayout.BELOW, id - 1);
                     }
                     tv.setLayoutParams(lp);
                     rl.addView(tv);
                 }
-                if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)){
+                if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)) {
                     id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
                     tv.setId(id);
-                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id>1){
+                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id > 1) {
                         lp2.addRule(RelativeLayout.BELOW, id - 1);
                     }
                     tv.setLayoutParams(lp2);
                     rl.addView(tv);
                 }
-                if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)){
+                if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)) {
                     id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
                     tv.setId(id);
-                    RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id>1){
+                    RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if (id > 1) {
                         lp3.addRule(RelativeLayout.BELOW, id - 1);
                     }
                     tv.setLayoutParams(lp3);
@@ -456,13 +473,13 @@ public class MainActivity extends XPDroidActivity
         public void onResume() {
             super.onResume();
 
-            //Mes y total acumulado mensual en pantalla de Inicio
-            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
-            ((TextView) getView().findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
-            ((TextView) getView().findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+//            //Mes y total acumulado mensual en pantalla de Inicio
+//            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
+//            ((TextView) getView().findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
+//            ((TextView) getView().findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
             //Verificación de presupuesto alcanzado
+            mostrarTotal(getView());
             verificarPresupuestos(getView());
-
         }
 
         @Override
@@ -470,6 +487,7 @@ public class MainActivity extends XPDroidActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         }
+
 
         // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
         public void onActivityCreated(Bundle savedInstanceState) {
@@ -507,6 +525,31 @@ public class MainActivity extends XPDroidActivity
 
         }
 
+        private void mostrarTotal(View view) {
+
+            //Total acumulado en pantalla de Inicio
+            switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
+
+                case AppConstants.PERIODO_DIARIO: {
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalDiario());
+                    break;
+                }
+                case AppConstants.PERIODO_SEMANAL: {
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalSemanal());
+                    break;
+                }
+                case AppConstants.PERIODO_MENSUAL: {
+                    String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(mes.toUpperCase());
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+                    break;
+                }
+                case AppConstants.PERIODO_ANUAL: {
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalAnual());
+                    break;
+                }
+            }
+        }
     }
 
 }

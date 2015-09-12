@@ -7,7 +7,7 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-    <item name="notificaciones" type="layout">@layout/notificaciones_list_item</item>
+    <!--<item name="notificaciones" type="layout">@layout/totales_list_item</item>-->
 
     <!--
     Layout alias to replace the single-pane version of the layout with a

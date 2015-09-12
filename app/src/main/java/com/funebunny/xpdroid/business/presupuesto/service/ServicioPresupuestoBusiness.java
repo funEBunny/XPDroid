@@ -310,6 +310,16 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     }
 
     @Override
+    public String obtenerTotalPredeterminado() {
+        return servicioPresupuestoDAO.obtenerTotales().getPredeterminado();
+    }
+
+    @Override
+    public void actualizarTotalPredeterminado(String predeterminado) {
+        servicioPresupuestoDAO.guardarTotalPredeterminado(predeterminado);
+    }
+
+    @Override
     public String obtenerTotalAnual() {
         return servicioPresupuestoDAO.obtenerTotales().getTotalAnual();
     }

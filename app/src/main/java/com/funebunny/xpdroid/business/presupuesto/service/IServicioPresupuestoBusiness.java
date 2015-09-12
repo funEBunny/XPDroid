@@ -44,4 +44,8 @@ public interface IServicioPresupuestoBusiness {
     String obtenerTotalMensual();
 
     String obtenerTotalSemanal();
+
+    String obtenerTotalPredeterminado();
+
+    void actualizarTotalPredeterminado(String predeterminado);
 }

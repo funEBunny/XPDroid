@@ -6,6 +6,7 @@ import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.backend.presupuesto.dao.PresupuestoDAO;
 import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,12 +132,20 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
         totales.save();
     }
 
+    @Override
+    public void guardarTotalPredeterminado(String predeterminado) {
+        TotalesDAO totales = obtenerTotales();
+        totales.setPredeterminado(predeterminado);
+        totales.save();
+    }
+
     private TotalesDAO inicializarTotales() {
         TotalesDAO totalesDAO = new TotalesDAO();
         totalesDAO.setTotalDiario("0");
         totalesDAO.setTotalMensual("0");
         totalesDAO.setTotalSemanal("0");
         totalesDAO.setTotalAnual("0");
+        totalesDAO.setPredeterminado(AppConstants.PERIODO_MENSUAL);
         totalesDAO.save();
 
         return totalesDAO;

@@ -10,10 +10,12 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
@@ -27,7 +29,9 @@ import com.funebunny.xpdroid.utilities.AppConstants;
  * Activities containing this fragment MUST implement the {@link NotificacionesItemCallbacks}
  * interface.
  */
-public class NotificacionesItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class TotalesItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,8 +56,8 @@ public class NotificacionesItemFragment extends Fragment implements AbsListView.
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static NotificacionesItemFragment newInstance(int itemSelected) {
-        NotificacionesItemFragment fragment = new NotificacionesItemFragment();
+    public static TotalesItemFragment newInstance(int itemSelected) {
+        TotalesItemFragment fragment = new TotalesItemFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, "param1");
 //        args.putString(ARG_PARAM2, "param2");
@@ -66,7 +70,7 @@ public class NotificacionesItemFragment extends Fragment implements AbsListView.
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public NotificacionesItemFragment() {
+    public TotalesItemFragment() {
     }
 
     @Override
@@ -86,14 +90,46 @@ public class NotificacionesItemFragment extends Fragment implements AbsListView.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notificacionesitem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_totalesitem_list, container, false);
 
-        // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+//        // Set the adapter
+//        mListView = (AbsListView) view.findViewById(android.R.id.list);
+//        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+//
+//        // Set OnItemClickListener so we can be notified on item clicks
+//        mListView.setOnItemClickListener(this);
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_diario)).setText(R.string.diario);
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_diario)).setText(servicioPresupuestoBusiness.obtenerTotalDiario());
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_semanal)).setText(R.string.semanal);
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_semanal)).setText(servicioPresupuestoBusiness.obtenerTotalSemanal());
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_mensual)).setText(R.string.mensual);
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_mensual)).setText(servicioPresupuestoBusiness.obtenerTotalMensual());
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_anual)).setText(R.string.anual);
+//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_anual)).setText(servicioPresupuestoBusiness.obtenerTotalAnual());
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setText(servicioPresupuestoBusiness.obtenerTotalDiario());
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setText(servicioPresupuestoBusiness.obtenerTotalSemanal());
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setText(servicioPresupuestoBusiness.obtenerTotalMensual());
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setText(servicioPresupuestoBusiness.obtenerTotalAnual());
 
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
+
+            case AppConstants.PERIODO_DIARIO: {
+                ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setChecked(true);
+                break;
+            }
+            case AppConstants.PERIODO_SEMANAL: {
+                ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setChecked(true);
+                break;
+            }
+            case AppConstants.PERIODO_MENSUAL: {
+                ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setChecked(true);
+                break;
+            }
+            case AppConstants.PERIODO_ANUAL: {
+                ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setChecked(true);
+                break;
+            }
+        }
 
         return view;
     }
@@ -152,5 +188,7 @@ public class NotificacionesItemFragment extends Fragment implements AbsListView.
         // TODO: Update argument type and name
         public void onNotificacionesItemSelected(String id);
     }
+
+
 
 }
