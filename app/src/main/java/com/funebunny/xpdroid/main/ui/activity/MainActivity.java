@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Gravity;
@@ -152,6 +153,21 @@ public class MainActivity extends XPDroidActivity
 //                        .commit();
 //                break;
             }
+        }
+    }
+
+    // Este codigo toma el boton back para que vuelva siempre al Inicio, salvo cuando se esta en Inicio que sale de la app
+    // Issue #16
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(fragmentManager.findFragmentById(R.id.container) instanceof PlaceholderFragment) {
+            super.onBackPressed();
+            return;
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(1))
+                    .commit();
         }
     }
 
