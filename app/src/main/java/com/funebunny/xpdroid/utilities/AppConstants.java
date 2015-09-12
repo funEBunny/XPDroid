@@ -25,4 +25,5 @@ public class AppConstants {
     public static final String ANIO = "yyyy";
     public static final String ANIO_MES = "yyyyMM";
     public static final String DIA = "dd";
+    public static final String CERO = "0";
 }
