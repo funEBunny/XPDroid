@@ -399,8 +399,8 @@ public class MainActivity extends XPDroidActivity
             int id =0;
             for (Presupuesto presupuesto:presupuestos) {
                 String periodo = presupuesto.getPeriodo();
-                id++;
                 if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)){
+                    id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
                     tv.setId(id);
@@ -412,6 +412,7 @@ public class MainActivity extends XPDroidActivity
                     rl.addView(tv);
                 }
                 if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)){
+                    id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
                     tv.setId(id);
@@ -423,6 +424,7 @@ public class MainActivity extends XPDroidActivity
                     rl.addView(tv);
                 }
                 if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)){
+                    id++;
                     TextView tv = new TextView(this.getActivity().getApplicationContext());
                     tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
                     tv.setId(id);
