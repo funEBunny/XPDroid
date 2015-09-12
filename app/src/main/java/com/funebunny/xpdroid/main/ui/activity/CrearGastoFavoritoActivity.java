@@ -71,6 +71,12 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
             etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
+        //Validar primer dígito del Importe
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+            etImporte.setError(getResources().getString(R.string.importe_incorrecto));
+            return;
+        }
+
 
         if (gastoFavorito == null) {
             servicioGastosBusiness.guardarGastoFavorito(descripcion, importe, categoria);

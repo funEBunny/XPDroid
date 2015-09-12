@@ -1,5 +1,6 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
+import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
@@ -63,9 +65,15 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
                                                      @Override
                                                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                          if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
-                                                             findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.VISIBLE);
+                                                             Spinner spDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
+                                                             spDiasSemana.setVisibility(View.VISIBLE);
+
+                                                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                                                             layoutParams.weight = 1;
+                                                             spDiasSemana.setLayoutParams(layoutParams);
                                                          } else {
                                                              findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
+
                                                          }
                                                      }
 
@@ -113,9 +121,22 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         String descripcion = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).getText().toString();
         String repeticion = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString();
         String horario = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).getText().toString();
-        String importe = ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).getText().toString();
         String categoria = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria)).getSelectedItem().toString();
         String diaSemana = ((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana)).getSelectedItem().toString();
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe);
+        String importe = String.valueOf(etImporte.getText());
+
+        //Validar importe obligatorio
+        if (importe.equals("")) {
+            etImporte.setError(getResources().getString(R.string.campo_obligatorio));
+            return;
+        }
+        //Validar primer dígito del Importe
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+            etImporte.setError(getResources().getString(R.string.importe_incorrecto));
+            return;
+        }
+
 
         if (gastoProgramable == null) {
             servicioGastosBusiness.guardarGastoProgramable(getApplicationContext(), descripcion, repeticion, horario, importe, categoria, diaSemana);

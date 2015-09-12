@@ -8,7 +8,105 @@
     android:id="@+id/activity_crear_gasto_programable_ll_main"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_crear_gasto_programable_rl_importe"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/activity_crear_gasto_programable_et_importe"
+            android:hint="@string/importe"
+            android:layout_centerInParent="true"
+            android:layout_weight="2"
+            style="@style/XPDroidEditText"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_crear_gasto_programable_rl_categoria"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_crear_gasto_programable_sp_categoria"
+            android:entries="@array/categorias"
+            android:layout_centerInParent="true"
+            android:layout_weight="2"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_crear_gasto_programable_rl_horario"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/activity_crear_gasto_programable_et_horario"
+            android:hint="@string/horario"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_weight="2" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_crear_gasto_programable_ib_time_picker"
+            android:src="@drawable/ic_time"
+            android:layout_alignBottom="@+id/activity_crear_gasto_programable_et_horario"
+            android:layout_toRightOf="@+id/activity_crear_gasto_programable_et_horario"
+            android:layout_toEndOf="@+id/activity_crear_gasto_programable_et_horario"
+            android:onClick="mostrarTimePicker"
+            android:layout_gravity="center"
+            android:layout_weight=".5" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"></RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/activity_crear_gasto_programable_rl_repeticion"
@@ -16,97 +114,51 @@
         android:orientation="horizontal">
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_programable_sp_repeticion"
             android:entries="@array/repeticion"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/activity_crear_gasto_programable_rl_descripcion"
-        android:layout_weight="1">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_crear_gasto_programable_et_descripcion"
-            android:hint="@string/descripcion"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/activity_crear_gasto_programable_rl_categoria"
-        android:layout_weight="1">
+            android:layout_gravity="center"
+            android:layout_weight="1" />
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_crear_gasto_programable_sp_categoria"
-            android:entries="@array/categorias"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/activity_crear_gasto_programable_rl_importe"
-        android:layout_weight="1">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/activity_crear_gasto_programable_et_importe"
-            android:hint="@string/importe"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/activity_crear_gasto_programable_rl_horario"
-        android:layout_weight="1">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/activity_crear_gasto_programable_et_horario"
-            android:hint="@string/horario"
-            android:layout_centerInParent="true" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_crear_gasto_programable_ib_time_picker"
-            android:src="@drawable/ic_time"
-            android:layout_alignBottom="@+id/activity_crear_gasto_programable_et_horario"
-            android:layout_toRightOf="@+id/activity_crear_gasto_programable_et_horario"
-            android:layout_toEndOf="@+id/activity_crear_gasto_programable_et_horario"
-            android:onClick="mostrarTimePicker" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/activity_crear_gasto_programable_rl_dias_semana"
-        android:layout_weight="1">
-
-        <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_programable_sp_dias_semana"
             android:entries="@array/dias_semana"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_crear_gasto_programable_rl_descripcion"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/XPDroidEditText"
+            android:id="@+id/activity_crear_gasto_programable_et_descripcion"
+            android:hint="@string/descripcion"
+            android:layout_centerInParent="true"
+            android:layout_weight="2"
+            android:layout_gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
