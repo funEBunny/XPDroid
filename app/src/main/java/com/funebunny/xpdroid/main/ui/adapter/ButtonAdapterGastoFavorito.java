@@ -37,7 +37,7 @@ public class ButtonAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
 
         if (gastoFavorito != null) {
 
-            view.setTag(gastoFavorito); //Test PRB - Anclar el objeto
+            view.setTag(gastoFavorito); //Anclar objeto a la vista
 
             Button bGastoFavorito = (Button) view.findViewById(R.id.gasto_favorito_button_bt_gasto);
 

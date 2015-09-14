@@ -43,7 +43,10 @@ public class CrearGastoActivity extends XPDroidActivity {
             ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(gasto.getFecha());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
-            setTitle(R.string.title_activity_editar_gasto);
+
+            if (gasto.getId() != null) {
+                setTitle(R.string.title_activity_editar_gasto);
+            }
 
         } else {
 
@@ -98,7 +101,7 @@ public class CrearGastoActivity extends XPDroidActivity {
             return;
         }
         //Validar primer dígito del Importe
-        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))) {
             etImporte.setError(getResources().getString(R.string.importe_incorrecto));
             return;
         }

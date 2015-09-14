@@ -3,6 +3,8 @@ package com.funebunny.xpdroid.main.ui.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,24 +94,10 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_totalesitem_list, container, false);
 
-//        // Set the adapter
-//        mListView = (AbsListView) view.findViewById(android.R.id.list);
-//        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-//
-//        // Set OnItemClickListener so we can be notified on item clicks
-//        mListView.setOnItemClickListener(this);
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_diario)).setText(R.string.diario);
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_diario)).setText(servicioPresupuestoBusiness.obtenerTotalDiario());
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_semanal)).setText(R.string.semanal);
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_semanal)).setText(servicioPresupuestoBusiness.obtenerTotalSemanal());
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_mensual)).setText(R.string.mensual);
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_mensual)).setText(servicioPresupuestoBusiness.obtenerTotalMensual());
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_texto_anual)).setText(R.string.anual);
-//        ((TextView) view.findViewById(R.id.fragment_totalesitem_list_tv_total_anual)).setText(servicioPresupuestoBusiness.obtenerTotalAnual());
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setText(servicioPresupuestoBusiness.obtenerTotalDiario());
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setText(servicioPresupuestoBusiness.obtenerTotalSemanal());
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setText(servicioPresupuestoBusiness.obtenerTotalMensual());
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setText(servicioPresupuestoBusiness.obtenerTotalAnual());
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setText(formatTextoTotal(getResources().getString(R.string.diario), servicioPresupuestoBusiness.obtenerTotalDiario()));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setText(formatTextoTotal(getResources().getString(R.string.semanal), servicioPresupuestoBusiness.obtenerTotalSemanal()));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setText(formatTextoTotal(getResources().getString(R.string.mensual), servicioPresupuestoBusiness.obtenerTotalMensual()));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setText(formatTextoTotal(getResources().getString(R.string.anual), servicioPresupuestoBusiness.obtenerTotalAnual()));
 
         switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
 
@@ -189,6 +177,8 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
         public void onNotificacionesItemSelected(String id);
     }
 
-
+    private Spanned formatTextoTotal(String texto, String importe) {
+        return (Html.fromHtml("<big>" + texto + ":" + "&nbsp;&nbsp;$" + "<b>" + importe + "</b>" + "</big>"));
+    }
 
 }

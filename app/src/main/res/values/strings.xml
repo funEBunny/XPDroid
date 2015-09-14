@@ -37,9 +37,10 @@
     <!--<string name="spinner_mes">Mes</string>-->
     <string name="boton_mostrar_mas_gastos">Mostrar mas Gastos</string>
     <!--<string name="seleccionar_periodo">Seleccione el periodo: </string>-->
-    <!--<string name="anio">Año</string>-->
+    <string name="anio">Año</string>
     <!--<string name="mes_anio_historial">Mes y Año</string>-->
 
+    <string name="esta_semana">Esta semana</string>
     <string name="campo_obligatorio">Campo obligatorio!</string>
     <string name="importe_incorrecto">Ingrese un importe válido</string>
     <string name="inicio">Esta es la pagina de Inicio</string>
@@ -107,4 +108,5 @@
     <string name="no_hay_favoritos">No hay Gastos Favoritos cargados</string>
     <string name="alerta_presupuesto">Presupuesto excedido!</string>
     <string name="gastos_programados_titulo">Gastos Programados:</string>
+    <string name="seleccione_total_predeterminado">Seleccione la opción predeterminada para ver en Inicio</string>
 </resources>
