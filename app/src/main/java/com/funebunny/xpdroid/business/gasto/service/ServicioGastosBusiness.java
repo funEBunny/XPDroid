@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.business.gasto.service;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.funebunny.xpdroid.backend.gasto.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
@@ -29,11 +30,12 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     @Override
     public List<GastoProgramable> obtenerGastosProgramables() {
+        Log.d("XPDROID", "Obteniendo Gastos Programables");
         return  servicioGastosDAO.obtenerGastosProgramables();
     }
 
     public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana) {
-
+        Log.d("XPDROID", "Guardando Gastos Programables");
         GastoProgramable gp;
 
         if (SEMANAL.equalsIgnoreCase(repeticion)) {
@@ -59,12 +61,13 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     public void eliminarGastoProgramable(Context applicationContext, Long id) {
-
+        Log.d("XPDROID", "Eliminando Gastos Programables");
         servicioGastosDAO.eliminarGastoProgramable(id);
         notificationsService.desactivarAlarma(applicationContext, id);
     }
 
     public int getDiaSemana(String diaSemana) {
+        Log.d("XPDROID", "Obtener dia semana: "+diaSemana);
         int dia = 0;
         switch (diaSemana) {
             case "Lunes":
@@ -93,6 +96,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     public String getDiaSemana(int diaSemana) {
+        Log.d("XPDROID", "Obtener dia semana: "+diaSemana);
         String dia = "";
         switch (diaSemana) {
             case Calendar.MONDAY:
@@ -121,13 +125,14 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     public void actualizarGastoProgramable(Context applicationContext, GastoProgramable gastoProgramable) {
+        Log.d("XPDROID", "Actualizando Gasto Programabl: "+gastoProgramable);
         notificationsService.actualizarAlarma(applicationContext,gastoProgramable);
         servicioGastosDAO.actualizarGastoProgramable(gastoProgramable);
 
     }
     // Gastos Favoritos
     public void guardarGastoFavorito(String descripcion, String importe, String categoria) {
-
+        Log.d("XPDROID", "Guardar Gasto Favorito");
         GastoFavorito gastoFavorito = new GastoFavorito();
         gastoFavorito.setDescripcion(descripcion);
         gastoFavorito.setImporte(importe);
@@ -176,11 +181,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     public List<Gasto> obtenerGastosMes(Calendar fecha) {
-
-/*        String mes = String.valueOf(fecha.get(Calendar.MONTH) + 1);
-        String anio = String.valueOf(fecha.get(Calendar.YEAR));
-
-        return servicioGastosDAO.obtenerGastosMes(mes, anio);*/
+        Log.d("XPDROID", "Obtener Gasto Mes:"+ fecha.getTime().toString());
         SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.ANIO_MES);
         String mesanio = formatoFecha.format(fecha.getTime());
         return  servicioGastosDAO.obtenerGastosFechaLike(mesanio);
@@ -188,6 +189,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
     }
 
     public List<Gasto> obtenerGastosSemana(Calendar fecha) {
+        Log.d("XPDROID", "Obtener Gasto Semana:"+ fecha.getTime().toString());
         SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.FECHA_DB);
         Date fechaDesde = fecha.getTime();
         Calendar calHasta = Calendar.getInstance();
@@ -201,6 +203,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     @Override
     public List<Gasto> obtenerGastosAnio(Calendar fecha) {
+        Log.d("XPDROID", "Obtener Gasto Anio:"+ fecha.getTime().toString());
         SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.ANIO);
         String anio = formatoFecha.format(fecha.getTime());
         return  servicioGastosDAO.obtenerGastosFechaLike(anio);
@@ -208,7 +211,8 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     @Override
     public List<Gasto> obtenerGastosDia(Calendar fecha) {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.DIA);
+        Log.d("XPDROID", "Obtener Gasto Dia:"+ fecha.getTime().toString());
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(AppConstants.FECHA_DB);
         String dia = formatoFecha.format(fecha.getTime());
         return  servicioGastosDAO.obtenerGastosFechaLike(dia);
     }
