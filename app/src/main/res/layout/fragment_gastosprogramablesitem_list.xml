@@ -7,20 +7,8 @@
     android:orientation="vertical"
     android:clickable="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="none"
-        android:text="@string/gastos_programados_titulo"
-        android:textColor="#ff0000ff"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:textStyle="bold|italic"
-        android:layout_margin="10dp"
-        android:layout_gravity="center_vertical" />
-
     <ListView android:id="@+id/lista_gastos_programables_lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

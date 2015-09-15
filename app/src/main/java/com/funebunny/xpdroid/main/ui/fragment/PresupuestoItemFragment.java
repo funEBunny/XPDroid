@@ -103,7 +103,7 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_presupuestoitem, container, false);
+        View view = inflater.inflate(R.layout.fragment_presupuestoitem_list, container, false);
 
         // Set the adapter
         mListView = (ListView) view.findViewById(R.id.fragment_presupuestoitem_list_lv_lista);

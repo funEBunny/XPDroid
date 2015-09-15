@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
+    android:orientation="horizontal" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/presupuesto_list_item_ll_main"
     android:background="@drawable/list_selector"
     android:longClickable="true">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/presupuesto_list_item_ll_datos">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/presupuesto_list_item_tv_periodo"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:ellipsize="end"
+        android:minWidth="180dp"
+        android:singleLine="true"
+        android:textColor="#ff000000"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:gravity="left|center_vertical" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/presupuesto_list_item_tv_periodo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:ellipsize="end"
-            android:minWidth="180dp"
-            android:singleLine="true"
-            android:textColor="#ff000000"
-            android:textStyle="bold"
-            android:textSize="@dimen/abc_text_size_medium_material" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/presupuesto_list_item_tv_importe"
-            android:textColor="#ffff8100"
-            android:textStyle="bold"
-            android:singleLine="true"
-            android:gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="@dimen/abc_text_size_medium_material" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/presupuesto_list_item_tv_importe"
+        style="@style/XPDroidTextViewImporte"
+        android:gravity="center_vertical|right"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1" />
 </LinearLayout>

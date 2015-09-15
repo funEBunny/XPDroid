@@ -8,17 +8,17 @@
     android:clickable="false"
     android:id="@+id/fragment_historialgastos_ll_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="none"
-        android:textColor="#ff0000ff"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:textStyle="bold|italic"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:text="@string/historial_gastos_titulo"
-        android:id="@+id/fragment_historialgastos_tv_titulo" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="none"-->
+        <!--android:textColor="#ff0000ff"-->
+        <!--android:textSize="@dimen/abc_text_size_medium_material"-->
+        <!--android:textStyle="bold|italic"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="@string/historial_gastos_titulo"-->
+        <!--android:id="@+id/fragment_historialgastos_tv_titulo" />-->
 
     <ExpandableListView
         android:layout_width="match_parent"

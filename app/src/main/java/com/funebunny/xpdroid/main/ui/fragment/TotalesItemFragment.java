@@ -178,7 +178,7 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     }
 
     private Spanned formatTextoTotal(String texto, String importe) {
-        return (Html.fromHtml("<big>" + texto + ":" + "&nbsp;&nbsp;$" + "<b>" + importe + "</b>" + "</big>"));
+        return (Html.fromHtml("<big>" + texto + ":" + "&nbsp;&nbsp;" + "<b>" + "<font color = #006fff>" + "$" + importe + "</font>" + "</b>" + "</big>"));
     }
 
 }

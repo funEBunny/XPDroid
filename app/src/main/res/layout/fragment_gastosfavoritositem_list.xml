@@ -6,17 +6,8 @@
     android:orientation="vertical"
     android:id="@+id/fragment_gastosfavoritositem_list_ll_main">
 
-    <TextView android:id="@+id/fragment_gastosfavoritositem_list_tv_titulo" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:gravity="center"
-        android:textColor="#ff0000ff"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:textStyle="bold|italic"
-        android:text="@string/gastos_favoritos_titulo"
-        android:layout_margin="10dp" />
-
     <ListView android:id="@+id/fragment_gastosfavoritositem_list_lv_lista" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
         android:longClickable="false"
         android:clickable="true" />
 

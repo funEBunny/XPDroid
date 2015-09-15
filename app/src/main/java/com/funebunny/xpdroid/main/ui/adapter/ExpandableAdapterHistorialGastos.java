@@ -23,7 +23,7 @@ import java.util.Map;
 public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter {
 
     private ArrayList<Historial> groups;
-    private Map<Integer,ArrayList<Gasto>> itemsMap = new HashMap<>();
+    private Map<Integer, ArrayList<Gasto>> itemsMap = new HashMap<>();
     private LayoutInflater inflater;
     private ServicioGastosBusiness servicioGastosBusiness;
 
@@ -47,9 +47,9 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
         fechaMesAnio.set(Calendar.YEAR, historial.getAnio());
         ArrayList<Gasto> gastos;
         gastos = itemsMap.get(groupPosition);
-        if (gastos==null){
-            gastos = (ArrayList<Gasto>)servicioGastosBusiness.obtenerGastosMes(fechaMesAnio);
-            itemsMap.put(groupPosition,gastos);
+        if (gastos == null) {
+            gastos = (ArrayList<Gasto>) servicioGastosBusiness.obtenerGastosMes(fechaMesAnio);
+            itemsMap.put(groupPosition, gastos);
         }
         return itemsMap.get(groupPosition).size();
 
@@ -87,7 +87,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
             convertView = inflater.inflate(R.layout.historial_gastos_header, null);
         }
 
-        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(groups.get(groupPosition).getTextoMes().toUpperCase() + " " + String.valueOf(groups.get(groupPosition).getAnio()));
+        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(Character.toUpperCase(groups.get(groupPosition).getTextoMes().charAt(0)) + groups.get(groupPosition).getTextoMes().substring(1) + " " + String.valueOf(groups.get(groupPosition).getAnio()));
         ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_total)).setText("$" + groups.get(groupPosition).getTotal());
 
         return convertView;

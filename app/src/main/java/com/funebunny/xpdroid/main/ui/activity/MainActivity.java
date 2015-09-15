@@ -33,6 +33,7 @@ import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapaterAlertaPresupuesto;
+import com.funebunny.xpdroid.main.ui.fragment.AcercaDeFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -138,10 +139,10 @@ public class MainActivity extends XPDroidActivity
                 break;
             }
             case 6: { //Acerca de
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, AcercaDeFragment.newInstance(position + 1))
+                        .commit();
+                break;
             }
         }
     }

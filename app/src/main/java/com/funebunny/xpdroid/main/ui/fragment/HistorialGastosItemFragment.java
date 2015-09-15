@@ -92,15 +92,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
-//        this.gastos.addAll(servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance()));
-//        mAdapter = new ListAdapterGasto(getActivity(), R.layout.historial_gastos_list_item, gastos);
-
     }
 
     @Override
@@ -111,15 +102,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
         ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(view.getContext(), listaHistorial);
         expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
-
-        //expandableHistorial.setOnChildClickListener();
-
         registerForContextMenu(expandableHistorial);
-
-        // Set OnItemClickListener so we can be notified on item clicks
-//        mListView.setOnItemClickListener(this);
-        // registrar para menu contextual, para mostrar opciones on-long-click
-//        registerForContextMenu(mListView);
 
         return view;
     }
