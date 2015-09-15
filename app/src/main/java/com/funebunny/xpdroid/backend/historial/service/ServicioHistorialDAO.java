@@ -1,5 +1,7 @@
 package com.funebunny.xpdroid.backend.historial.service;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 import com.funebunny.xpdroid.backend.historial.dao.HistorialDAO;
 import com.funebunny.xpdroid.business.historial.model.Historial;
@@ -15,7 +17,7 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
 
     @Override
     public List<Historial> obtenerListaHistorial() {
-
+        Log.d("XPDROID", "Obtener Historial");
         List<Historial> listaHistorial = new ArrayList<>();
         ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).orderBy("Anio DESC").orderBy("Mes DESC").execute();
 
@@ -30,13 +32,13 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
             historial.setTotal(historialDAO.getTotal());
             listaHistorial.add(historial);
         }
-
+        Log.d("XPDROID", "Historial: "+listaHistorial);
         return listaHistorial;
     }
 
     @Override
     public Long guardarHistorial(Historial historial) {
-
+        Log.d("XPDROID", "Guardar Historial: "+historial);
         HistorialDAO historialDAO = new HistorialDAO();
         historialDAO.setTotal(historial.getTotal());
         historialDAO.setMes(historial.getMes());
@@ -47,11 +49,13 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
 
     @Override
     public void eliminarHistorial(Long id) {
+        Log.d("XPDROID", "Eliminar Historial pór id "+id);
         obtenerHistorialPorId(id).delete();
     }
 
     @Override
     public void actualizarHistorial(Historial historial) {
+        Log.d("XPDROID", "Actualizar Historial: "+historial);
         HistorialDAO historialDAO = obtenerHistorialPorId(historial.getId());
         if (historialDAO == null) {
             guardarHistorial(historial);
@@ -62,6 +66,7 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
     }
 
     public Historial obtenerHistorial(int mes, int anio) {
+        Log.d("XPDROID", "Obtener Historial por mes "+mes+ "y anio "+anio);
 
         ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).where("Mes = ? AND Anio = ?", mes, anio).execute();
 
@@ -76,16 +81,20 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
             historial.setTotal(listaHistorialDAO.get(0).getTotal());
 
         }
-
+        Log.d("XPDROID", historial.toString());
         return historial;
     }
 
     private HistorialDAO obtenerHistorialPorId(Long id) {
+        Log.d("XPDROID", "Obtener Historial por id "+id);
 
         ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).where("Id = ?", id).execute();
         if (listaHistorialDAO!=null&&!listaHistorialDAO.isEmpty()){
-            return listaHistorialDAO.get(0);
+            HistorialDAO historialDAO = listaHistorialDAO.get(0);
+            Log.d("XPDROID", historialDAO.toString());
+            return historialDAO;
         }
+        Log.d("XPDROID", "Historial no encontrado");
         return null;
     }
 }

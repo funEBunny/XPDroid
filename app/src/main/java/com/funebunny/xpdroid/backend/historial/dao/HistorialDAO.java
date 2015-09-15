@@ -43,4 +43,13 @@ public class HistorialDAO extends Model {
     public void setTotal(String total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return "HistorialDAO{" +
+                "mes=" + mes +
+                ", anio=" + anio +
+                ", total='" + total + '\'' +
+                "} " + super.toString();
+    }
 }

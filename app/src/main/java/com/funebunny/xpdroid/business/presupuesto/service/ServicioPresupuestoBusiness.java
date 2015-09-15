@@ -1,5 +1,7 @@
 package com.funebunny.xpdroid.business.presupuesto.service;
 
+import android.util.Log;
+
 import com.funebunny.xpdroid.backend.presupuesto.dao.TotalesDAO;
 import com.funebunny.xpdroid.backend.presupuesto.service.ServicioPresupuestoDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
@@ -274,7 +276,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     @Override
     public void descontarTotales(Gasto gasto) {
-
+        Log.d("XPDROID", "Descontar Totales");
         TotalesDAO totalesDAO = servicioPresupuestoDAO.obtenerTotales();
 
         if (isMismoDia(obtenerCalendar(gasto.getFecha()))) {
@@ -330,10 +332,11 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     }
 
     private String restar(String total, String importe) {
-
         BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
+        Log.d("XPDROID", "Restando: "+bdTotal+" - "+bdImporteGasto);
         bdTotal = bdTotal.subtract(bdImporteGasto);
+        Log.d("XPDROID", "Resultado: "+bdTotal);
         return bdTotal.toPlainString();
         
     }
@@ -341,7 +344,9 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     private String sumar(String total, String importe) {
         BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
+        Log.d("XPDROID", "Sumar: "+bdTotal+" - "+bdImporteGasto);
         bdTotal = bdTotal.add(bdImporteGasto);
+        Log.d("XPDROID", "Resultado: "+bdTotal);
         return bdTotal.toPlainString();
     }
 

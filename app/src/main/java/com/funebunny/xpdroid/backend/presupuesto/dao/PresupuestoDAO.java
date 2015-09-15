@@ -32,4 +32,11 @@ public class PresupuestoDAO extends Model {
         this.importe = importe;
     }
 
+    @Override
+    public String toString() {
+        return "PresupuestoDAO{" +
+                "periodo='" + periodo + '\'' +
+                ", importe='" + importe + '\'' +
+                "} " + super.toString();
+    }
 }

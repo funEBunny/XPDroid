@@ -9,6 +9,12 @@ import com.activeandroid.annotation.Table;
  */
 @Table(name = "GastosProgramables")
 public class GastoProgramableDAO extends Model {
+    public static final int DIARIO = 1;
+
+    public static final int SEMANAL = 2;
+    public static final int MENSUAL = 3;
+    public static final int ANUAL = 4;
+
     public GastoProgramableDAO(Integer diaMes, Integer mes, String hora, Integer diaSemana, Integer anio, String descripcion, String importe, String categoria, int repeticion) {
         super();
         this.diaMes = diaMes;
@@ -53,11 +59,6 @@ public class GastoProgramableDAO extends Model {
     @Column(name = "Repeticion")
     private int repeticion;
 
-    public static final int DIARIO = 1;
-
-    public static final int SEMANAL = 2;
-    public static final int MENSUAL = 3;
-    public static final int ANUAL = 4;
     public Integer getDiaMes() {
         return diaMes;
     }
@@ -130,5 +131,18 @@ public class GastoProgramableDAO extends Model {
         this.hora = hora;
     }
 
-
+    @Override
+    public String toString() {
+        return "GastoProgramableDAO{" +
+                "diaMes=" + diaMes +
+                ", mes=" + mes +
+                ", hora='" + hora + '\'' +
+                ", diaSemana=" + diaSemana +
+                ", anio=" + anio +
+                ", descripcion='" + descripcion + '\'' +
+                ", importe='" + importe + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", repeticion=" + repeticion +
+                "} " + super.toString();
+    }
 }

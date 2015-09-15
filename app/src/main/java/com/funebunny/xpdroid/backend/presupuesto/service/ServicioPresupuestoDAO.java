@@ -18,7 +18,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public Long guardarPresupuesto(Presupuesto obj) {
-
+        Log.d("XPDROID", "Guardando Presupuesto: "+obj);
         PresupuestoDAO objDAO = new PresupuestoDAO();
         objDAO.setPeriodo(obj.getPeriodo());
         objDAO.setImporte(obj.getImporte());
@@ -28,12 +28,13 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void eliminarPresupuesto(Long id) {
+        Log.d("XPDROID", "Eliminando Presupuesto: "+id);
         obtenerPresupuestoPorId(id).delete();
     }
 
     @Override
     public void actualizarPresupuesto(Presupuesto obj) {
-
+        Log.d("XPDROID", "Actualizando Presupuesto: "+obj);
         PresupuestoDAO objDAO = obtenerPresupuestoPorId(obj.getId());
         objDAO.setPeriodo(obj.getPeriodo());
         objDAO.setImporte(obj.getImporte());
@@ -57,7 +58,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
             presupuesto.add(obj);
         }
-
+        Log.d("XPDROID", "Obteniendo Presupuestos: "+presupuesto);
         return presupuesto;
     }
 
@@ -77,12 +78,15 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
             presupuesto.setImporte(objDAO.getImporte());
 
         }
+        Log.d("XPDROID", "Obteniendo Presupuesto por periodo "+periodo+" : " + presupuesto);
         return presupuesto;
     }
 
     private PresupuestoDAO obtenerPresupuestoPorId(Long id) {
         ArrayList<PresupuestoDAO> presupuestoLista = new Select().from(PresupuestoDAO.class).where("Id = ?", id).execute();
-        return presupuestoLista.get(0);
+        PresupuestoDAO presup = presupuestoLista.get(0);
+        Log.d("XPDROID", "Obteniendo Presupuesto por ID "+id+" : " + presup);
+        return presup;
     }
 
     @Override
@@ -97,7 +101,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
         } else {
             totales = inicializarTotales();
         }
-
+        Log.d("XPDROID", "Totales: " + totales);
         return totales;
     }
 
@@ -127,6 +131,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void guardarTotalAnual(String total) {
+        Log.d("XPDROID", "Guardanto Total Anual: " + total);
         TotalesDAO totales = obtenerTotales();
         totales.setTotalAnual(total);
         totales.save();
@@ -134,12 +139,14 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
 
     @Override
     public void guardarTotalPredeterminado(String predeterminado) {
+        Log.d("XPDROID", "Guardanto Predeterminado: " + predeterminado);
         TotalesDAO totales = obtenerTotales();
         totales.setPredeterminado(predeterminado);
         totales.save();
     }
 
     private TotalesDAO inicializarTotales() {
+        Log.d("XPDROID", "Inicializando Totales");
         TotalesDAO totalesDAO = new TotalesDAO();
         totalesDAO.setTotalDiario("0");
         totalesDAO.setTotalMensual("0");
@@ -147,7 +154,7 @@ public class ServicioPresupuestoDAO implements IServicioPresupuestoDAO {
         totalesDAO.setTotalAnual("0");
         totalesDAO.setPredeterminado(AppConstants.PERIODO_MENSUAL);
         totalesDAO.save();
-
+        Log.d("XPDROID", "Totales inicializados" +totalesDAO);
         return totalesDAO;
     }
 

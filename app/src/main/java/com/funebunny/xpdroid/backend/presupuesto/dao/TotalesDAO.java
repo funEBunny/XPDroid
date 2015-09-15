@@ -62,5 +62,16 @@ public class TotalesDAO extends Model {
         this.totalAnual = totalAnual;
     }
 
+    @Override
+    public String toString() {
+        return "TotalesDAO{" +
+                "totalDiario='" + totalDiario + '\'' +
+                ", totalSemanal='" + totalSemanal + '\'' +
+                ", totalMensual='" + totalMensual + '\'' +
+                ", totalAnual='" + totalAnual + '\'' +
+                ", predeterminado='" + predeterminado + '\'' +
+                "} " + super.toString();
+    }
+
 
 }

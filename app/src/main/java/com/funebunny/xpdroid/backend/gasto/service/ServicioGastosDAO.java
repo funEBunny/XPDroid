@@ -45,12 +45,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gasto.setFecha(gDAO.getFecha());
             gastos.add(gasto);
         }
+        Log.d("XPDROID", "Obteniendo Gastos: "+gastos);
         return gastos;
     }
 
     @Override
     public List<Gasto> obtenerGastosPorCategoria(String categoria) {
-
+        Log.d("XPDROID", "Obteniendo Gastos por categoria: "+categoria);
         List<Gasto> gastos = new ArrayList<>();
         ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Categoria = ?", categoria).execute();
 
@@ -66,13 +67,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gasto.setFecha(gDAO.getFecha());
             gastos.add(gasto);
         }
-
+        Log.d("XPDROID", "Obteniendo Gastos por categoria: "+categoria+", Gastos: " +gastos);
         return gastos;
     }
 
     @Override
     public List<Gasto> obtenerGastosFechaLike(String fecha) {
-
+        Log.d("XPDROID", "Obteniendo Gastos por fecha: "+fecha);
         String fechaBuscar = "%" + fecha + "%";
         List<Gasto> gastos = new ArrayList<>();
         ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha LIKE ?", fechaBuscar).execute();
@@ -89,11 +90,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gasto.setFecha(gDAO.getFecha());
             gastos.add(gasto);
         }
+        Log.d("XPDROID", "Obteniendo Gastos por fecha: "+fecha+" Gastos: "+gastos);
         return gastos;
     }
 
     @Override
     public List<Gasto> obtenerGastosDesdeHasta(String desde, String hasta) {
+        Log.d("XPDROID", "Obteniendo Gastos desde "+desde+" hasta "+hasta);
         ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha BETWEEN ? AND ?", desde,hasta).orderBy("Categoria ASC").execute();
         List<Gasto> gastos = new ArrayList<>();
         for (int i = 0; i < gastosDAO.size(); i++) {
@@ -106,12 +109,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gasto.setFecha(gDAO.getFecha());
             gastos.add(gasto);
         }
+        Log.d("XPDROID", "Obteniendo Gastos desde "+desde+" hasta "+hasta+": Gastos:" +gastos);
         return gastos;
     }
 
     @Override
     public Long guardarGasto(Gasto gasto) {
-
+        Log.d("XPDROID", "Guardando gasto: "+gasto);
         GastoDAO gDAO = new GastoDAO();
         gDAO.setDescripcion(gasto.getDescripcion());
         gDAO.setImporte(gasto.getImporte());
@@ -123,12 +127,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public void eliminarGasto(Long id) {
+        Log.d("XPDROID", "Obteniendo Gastos id "+id);
         obtenerGastoPorId(id).delete();
     }
 
     @Override
     public void actualizarGasto(Gasto gasto) {
-
+        Log.d("XPDROID", "Actualizando Gasto: "+gasto);
         GastoDAO gDAO = obtenerGastoPorId(gasto.getId());
         gDAO.setDescripcion(gasto.getDescripcion());
         gDAO.setFecha(gasto.getFecha());
@@ -140,10 +145,10 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
     @Override
     public List<GastoProgramable> obtenerGastosProgramables() {
 
-
+        Log.d("XPDROID", "Obteniendo Gastos programables");
         List<GastoProgramable> gastos = new ArrayList<>();
         ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).execute();
-
+        Log.d("XPDROID", "Gastos programables DAO: "+gastosProgLista);
         for (int i = 0; i < gastosProgLista.size(); i++) {
             GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(i);
             GastoProgramable gastoProgramable;
@@ -180,16 +185,16 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gastoProgramable.setDescripcion(descripcion);
             gastoProgramable.setHora(hora);
             gastoProgramable.setId(id);
-            Log.d("XPDROID", "Obteniendo GastoDAO: " + gastoProgramable.toString());
             gastos.add(gastoProgramable);
         }
+        Log.d("XPDROID", "Gastos Programables BL: " + gastos);
         return gastos;
     }
 
     @Override
     public GastoProgramable obtenerGastoProgramablePorID(Long id) {
 
-
+        Log.d("XPDROID", "Obteniendo Gastos Programables por ID "+id);
         ArrayList<GastoProgramableDAO> gastosProgLista = new Select().from(GastoProgramableDAO.class).where("Id = ?", id).execute();
 
         GastoProgramableDAO gastoProgramableDAO = gastosProgLista.get(0);
@@ -256,6 +261,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public void actualizarGastoProgramable(GastoProgramable gastoProgramable) {
+        Log.d("XPDROID", "Actualizando Gasto Programable: " + gastoProgramable);
         GastoProgramableDAO gastoDb = GastoProgramableDAO.load(GastoProgramableDAO.class, gastoProgramable.getId());
         gastoDb.setDescripcion(gastoProgramable.getDescripcion());
         gastoDb.setImporte(gastoProgramable.getImporte());
@@ -266,7 +272,9 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     private GastoDAO obtenerGastoPorId(Long id) {
         ArrayList<GastoDAO> gastosLista = new Select().from(GastoDAO.class).where("Id = ?", id).execute();
-        return gastosLista.get(0);
+        GastoDAO gastoDAO = gastosLista.get(0);
+        Log.d("XPDROID", "Obteniendo Gasto Programable por ID "+id+ "Gasto: "+ gastoDAO);
+        return gastoDAO;
     }
 
 
@@ -274,7 +282,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public Long guardarGastoFavorito(GastoFavorito gf) {
-
+        Log.d("XPDROID", "Guardando Gasto Favorito: " + gf);
         GastoFavoritoDAO gfd = new GastoFavoritoDAO();
         gfd.setDescripcion(gf.getDescripcion());
         gfd.setImporte(gf.getImporte());
@@ -285,12 +293,13 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public void eliminarGastoFavorito(Long id) {
+        Log.d("XPDROID", "Eliminando Gasto Favorito: " + id);
         obtenerGastoFavoritoPorId(id).delete();
     }
 
     @Override
     public void actualizarGastoFavorito(GastoFavorito gf) {
-
+        Log.d("XPDROID", "Actualizando Gasto Favorito: " + gf);
         GastoFavoritoDAO gfd = obtenerGastoFavoritoPorId(gf.getId());
         gfd.setDescripcion(gf.getDescripcion());
         gfd.setCategoria(gf.getCategoria());
@@ -300,7 +309,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
 
     @Override
     public List<GastoFavorito> obtenerGastosFavoritos() {
-
+        Log.d("XPDROID", "Obtener Gastos Favoritos");
         List<GastoFavorito> gastosFav = new ArrayList<>();
         ArrayList<GastoFavoritoDAO> gastosFavDAO = new Select().from(GastoFavoritoDAO.class).execute();
 
@@ -315,10 +324,12 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
             gf.setCategoria(gfd.getCategoria());
             gastosFav.add(gf);
         }
+        Log.d("XPDROID", "Gastos Favoritos: "+gastosFav);
         return gastosFav;
     }
 
     private GastoFavoritoDAO obtenerGastoFavoritoPorId(Long id) {
+        Log.d("XPDROID", "Obtener Gastos Favoritos por id "+id);
         ArrayList<GastoFavoritoDAO> gastosFavLista = new Select().from(GastoFavoritoDAO.class).where("Id = ?", id).execute();
         return gastosFavLista.get(0);
     }

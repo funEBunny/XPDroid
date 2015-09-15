@@ -35,4 +35,12 @@ public class Presupuesto implements Serializable {
         this.importe = importe;
     }
 
+    @Override
+    public String toString() {
+        return "Presupuesto{" +
+                "id=" + id +
+                ", periodo='" + periodo + '\'' +
+                ", importe='" + importe + '\'' +
+                '}';
+    }
 }

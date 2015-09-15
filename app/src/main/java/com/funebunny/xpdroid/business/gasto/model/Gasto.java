@@ -53,4 +53,14 @@ public class Gasto implements Serializable{
         this.fecha = fecha;
     }
 
+    @Override
+    public String toString() {
+        return "Gasto{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", importe='" + importe + '\'' +
+                ", fecha='" + fecha + '\'' +
+                '}';
+    }
 }

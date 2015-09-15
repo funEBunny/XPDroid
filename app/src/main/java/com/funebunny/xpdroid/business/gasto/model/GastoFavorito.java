@@ -44,4 +44,13 @@ public class GastoFavorito implements Serializable {
         this.importe = importe;
     }
 
+    @Override
+    public String toString() {
+        return "GastoFavorito{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", importe='" + importe + '\'' +
+                '}';
+    }
 }

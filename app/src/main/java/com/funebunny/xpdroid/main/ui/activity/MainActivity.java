@@ -410,49 +410,7 @@ public class MainActivity extends XPDroidActivity
 
             mostrarTotal(rootView);
 
-            List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
-            RelativeLayout rl = (RelativeLayout) rootView.findViewById(R.id.fragment_totales_rl);
 
-            int id = 0;
-            for (Presupuesto presupuesto : presupuestos) {
-                String periodo = presupuesto.getPeriodo();
-                if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
-                    id++;
-                    TextView tv = new TextView(this.getActivity().getApplicationContext());
-                    tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
-                    tv.setId(id);
-                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id > 1) {
-                        lp.addRule(RelativeLayout.BELOW, id - 1);
-                    }
-                    tv.setLayoutParams(lp);
-                    rl.addView(tv);
-                }
-                if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)) {
-                    id++;
-                    TextView tv = new TextView(this.getActivity().getApplicationContext());
-                    tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
-                    tv.setId(id);
-                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id > 1) {
-                        lp2.addRule(RelativeLayout.BELOW, id - 1);
-                    }
-                    tv.setLayoutParams(lp2);
-                    rl.addView(tv);
-                }
-                if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)) {
-                    id++;
-                    TextView tv = new TextView(this.getActivity().getApplicationContext());
-                    tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
-                    tv.setId(id);
-                    RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    if (id > 1) {
-                        lp3.addRule(RelativeLayout.BELOW, id - 1);
-                    }
-                    tv.setLayoutParams(lp3);
-                    rl.addView(tv);
-                }
-            }
             //Verificación de presupuesto alcanzado
             verificarPresupuestos(rootView);
 
@@ -547,6 +505,66 @@ public class MainActivity extends XPDroidActivity
                 case AppConstants.PERIODO_ANUAL: {
                     ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalAnual());
                     break;
+                }
+            }
+
+            List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
+            RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.fragment_totales_rl);
+
+            int id = 0;
+            for (Presupuesto presupuesto : presupuestos) {
+                String periodo = presupuesto.getPeriodo();
+                String predeterminado = servicioPresupuestoBusiness.obtenerTotalPredeterminado();
+                if (!predeterminado.equalsIgnoreCase(periodo)){
+                    if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
+                        id++;
+                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+                        tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
+                        tv.setId(id);
+                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        if (id > 1) {
+                            lp.addRule(RelativeLayout.BELOW, id - 1);
+                        }
+                        tv.setLayoutParams(lp);
+                        rl.addView(tv);
+                    }
+                    if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)) {
+                        id++;
+                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+                        tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
+                        tv.setId(id);
+                        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        if (id > 1) {
+                            lp2.addRule(RelativeLayout.BELOW, id - 1);
+                        }
+                        tv.setLayoutParams(lp2);
+                        rl.addView(tv);
+                    }
+                    if (AppConstants.PERIODO_MENSUAL.equalsIgnoreCase(periodo)) {
+                        id++;
+                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+                        tv.setText("Total Mensual = $" + servicioPresupuestoBusiness.obtenerTotalMensual());
+                        tv.setId(id);
+                        RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        if (id > 1) {
+                            lp3.addRule(RelativeLayout.BELOW, id - 1);
+                        }
+                        tv.setLayoutParams(lp3);
+                        rl.addView(tv);
+                    }
+                    if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)) {
+                        id++;
+                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+                        tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
+                        tv.setId(id);
+                        RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        if (id > 1) {
+                            lp4.addRule(RelativeLayout.BELOW, id - 1);
+                        }
+                        tv.setLayoutParams(lp4);
+                        rl.addView(tv);
+                    }
+
                 }
             }
         }

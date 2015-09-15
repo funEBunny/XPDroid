@@ -15,4 +15,12 @@ public class GastoProgAnual extends GastoProgramable {
     public void setDiaMes(int diaMes) {
         this.diaMes = diaMes;
     }
+
+    @Override
+    public String toString() {
+        return "GastoProgAnual{" +
+                "diaMes=" + diaMes +
+                ", mes=" + mes +
+                "} " + super.toString();
+    }
 }

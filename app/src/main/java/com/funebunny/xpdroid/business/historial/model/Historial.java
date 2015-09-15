@@ -48,4 +48,13 @@ public class Historial {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Historial{" +
+                "id=" + id +
+                ", mes=" + mes +
+                ", anio=" + anio +
+                ", total='" + total + '\'' +
+                '}';
+    }
 }
