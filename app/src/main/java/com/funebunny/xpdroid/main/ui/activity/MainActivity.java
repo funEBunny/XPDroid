@@ -506,7 +506,7 @@ public class MainActivity extends XPDroidActivity
 
             List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
             RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.fragment_totales_rl);
-
+            rl.removeAllViews();
             int id = 0;
             for (Presupuesto presupuesto : presupuestos) {
                 String periodo = presupuesto.getPeriodo();
