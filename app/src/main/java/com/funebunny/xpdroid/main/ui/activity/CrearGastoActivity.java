@@ -8,19 +8,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+
 
 import com.funebunny.xpdroid.R;
-import com.funebunny.xpdroid.backend.historial.service.ServicioHistorialDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
-import com.funebunny.xpdroid.business.historial.model.Historial;
 import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
-import java.util.Calendar;
 
 public class CrearGastoActivity extends XPDroidActivity {
 
@@ -40,18 +37,18 @@ public class CrearGastoActivity extends XPDroidActivity {
             gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
             ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(gasto.getDescripcion());
             ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(gasto.getImporte());
-            ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(gasto.getFecha());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
-            setTitle(R.string.title_activity_editar_gasto);
+
+            if (gasto.getId() != null) {    //Se está editando un gasto, entonces tomo la fecha del gasto
+                ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(gasto.getFecha());
+            } else {    //Se trata de un gasto programable, entonces uso fecha del día
+                ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(getFechaActual());
+            }
 
         } else {
-
             // Fijar por defecto la fecha del día cuando se trata de un gasto nuevo
-            final Calendar c = Calendar.getInstance();
-            EditText fecha = (EditText) findViewById(R.id.activity_crear_gasto_et_fecha);
-            fecha.setText(new StringBuilder().append(c.get(Calendar.DAY_OF_MONTH)).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.MONTH) + 1).append(AppConstants.SEPARADOR_FECHA).append(c.get(Calendar.YEAR)));
-
+            ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(getFechaActual());
         }
     }
 
@@ -98,7 +95,7 @@ public class CrearGastoActivity extends XPDroidActivity {
             return;
         }
         //Validar primer dígito del Importe
-        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))) {
             etImporte.setError(getResources().getString(R.string.importe_incorrecto));
             return;
         }

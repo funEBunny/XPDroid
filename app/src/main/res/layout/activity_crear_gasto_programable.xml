@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_importe"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_categoria"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -67,7 +67,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_horario"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -84,6 +84,7 @@
             android:ems="10"
             android:id="@+id/activity_crear_gasto_programable_et_horario"
             android:hint="@string/horario"
+            android:enabled="false"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_weight="2" />
@@ -108,33 +109,72 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_repeticion"
         android:layout_weight="1"
         android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_crear_gasto_programable_repeticion_sep1"
+            android:layout_weight=".5"></RelativeLayout>
 
         <Spinner
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_programable_sp_repeticion"
             android:entries="@array/repeticion"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center" />
 
         <Spinner
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_programable_sp_dias_semana"
             android:entries="@array/dias_semana"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:visibility="invisible" />
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_crear_gasto_programable_repeticion_sep2"
+            android:layout_weight=".5"></RelativeLayout>
 
     </LinearLayout>
 
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:id="@+id/activity_crear_gasto_programable_rl_repeticion"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Spinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/activity_crear_gasto_programable_sp_repeticion"-->
+            <!--android:entries="@array/repeticion"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_alignParentLeft="false"-->
+            <!--android:layout_centerInParent="true" />-->
+
+        <!--<Spinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/activity_crear_gasto_programable_sp_dias_semana"-->
+            <!--android:entries="@array/dias_semana"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_toEndOf="@id/activity_crear_gasto_programable_sp_repeticion" />-->
+
+    <!--</RelativeLayout>-->
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_descripcion"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -162,7 +202,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:id="@+id/activity_crear_gasto_programable_rl_guardar"
         android:layout_weight="1">
 

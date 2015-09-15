@@ -137,13 +137,7 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 6: { //Notificaciones
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, TotalesItemFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
-            }
-            case 7: { //Ayuda
+            case 6: { //Acerca de
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
 //                        .commit();
@@ -430,12 +424,6 @@ public class MainActivity extends XPDroidActivity
         @Override
         public void onResume() {
             super.onResume();
-
-//            //Mes y total acumulado mensual en pantalla de Inicio
-//            String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
-//            ((TextView) getView().findViewById(R.id.fragment_main_tv_mes)).setText(mes.toUpperCase());
-//            ((TextView) getView().findViewById(R.id.fragment_main_tv_total_mensual)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
-            //Verificación de presupuesto alcanzado
             mostrarTotal(getView());
             verificarPresupuestos(getView());
         }
@@ -489,20 +477,28 @@ public class MainActivity extends XPDroidActivity
             switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
 
                 case AppConstants.PERIODO_DIARIO: {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd", new Locale("es", "ES"));
+                    String dia = dateFormat.format(Calendar.getInstance().getTime());
+                    dia = Character.toUpperCase(dia.charAt(0)) + dia.substring(1);
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(dia);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalDiario());
                     break;
                 }
                 case AppConstants.PERIODO_SEMANAL: {
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(getResources().getString(R.string.esta_semana));
                     ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalSemanal());
                     break;
                 }
                 case AppConstants.PERIODO_MENSUAL: {
                     String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
-                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(mes.toUpperCase());
+                    mes = Character.toUpperCase(mes.charAt(0)) + mes.substring(1);
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(mes);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
                     break;
                 }
                 case AppConstants.PERIODO_ANUAL: {
+                    String anio = getResources().getString(R.string.anio) + " " + String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(anio);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalAnual());
                     break;
                 }

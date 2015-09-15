@@ -112,8 +112,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         Calendar hoy = Calendar.getInstance();
         int diaHoy = hoy.get(Calendar.DAY_OF_YEAR);
         int diaGasto = fechaGasto.get(Calendar.DAY_OF_YEAR);
-        return (diaHoy == diaGasto) &&
-                isMismoAnio(fechaGasto);
+        return (diaHoy == diaGasto) && isMismoAnio(fechaGasto);
     }
 
     boolean isMismoMes(Calendar fechaGasto) {
@@ -206,7 +205,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
 
     @Override
     public void calcularTotales() {
-        String totalDia="0";
+        String totalDia = "0";
         List<Gasto> gastos = servicioGastosBusiness.obtenerGastosDia(Calendar.getInstance());
         for (Gasto gasto : gastos) {
             String importeGasto = gasto.getImporte();
@@ -215,7 +214,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         servicioPresupuestoDAO.guardarTotalDiario(totalDia);
 
         if (isNuevaSemana()) {
-            String totalSemana="0";
+            String totalSemana = "0";
             gastos = servicioGastosBusiness.obtenerGastosSemana(Calendar.getInstance());
             for (Gasto gasto : gastos) {
                 String importeGasto = gasto.getImporte();
@@ -224,8 +223,8 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
             servicioPresupuestoDAO.guardarTotalSemanal(totalSemana);
         }
 
-        if (isNuevoMes()){
-            String totalMes="0";
+        if (isNuevoMes()) {
+            String totalMes = "0";
             gastos = servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance());
             for (Gasto gasto : gastos) {
                 String importeGasto = gasto.getImporte();
@@ -234,8 +233,8 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
             servicioPresupuestoDAO.guardarTotalMensual(totalMes);
         }
 
-        if (isNuevoAnio()){
-            String totalAnio="0";
+        if (isNuevoAnio()) {
+            String totalAnio = "0";
             gastos = servicioGastosBusiness.obtenerGastosAnio(Calendar.getInstance());
             for (Gasto gasto : gastos) {
                 String importeGasto = gasto.getImporte();
@@ -338,7 +337,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         bdTotal = bdTotal.subtract(bdImporteGasto);
         Log.d("XPDROID", "Resultado: "+bdTotal);
         return bdTotal.toPlainString();
-        
+
     }
 
     private String sumar(String total, String importe) {
