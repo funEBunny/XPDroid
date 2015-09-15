@@ -79,9 +79,9 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
             historial.setAnio(listaHistorialDAO.get(0).getAnio());
             historial.setMes(listaHistorialDAO.get(0).getMes());
             historial.setTotal(listaHistorialDAO.get(0).getTotal());
+            Log.d("XPDROID", historial.toString());
 
         }
-        Log.d("XPDROID", historial.toString());
         return historial;
     }
 
