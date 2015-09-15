@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static com.funebunny.xpdroid.utilities.AppUtilities.hideSoftKeyboard;
 
 public class XPDroidActivity extends ActionBarActivity {
@@ -21,8 +24,6 @@ public class XPDroidActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xpdroid);
-        // Botón para volver a actividad anterior
-//        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 
@@ -48,13 +49,28 @@ public class XPDroidActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    protected String getFechaActual() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yyyy");
+        return dateFormat.format(Calendar.getInstance().getTime());
+
+    }
+
+    protected String getHoraActual() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("k:mm");
+        return dateFormat.format(Calendar.getInstance().getTime());
+
+    }
+
     protected void showMessage(int message) {
-        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
+
     protected void showMessage(String message) {
-        Toast toast = Toast.makeText(this,message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
@@ -63,7 +79,7 @@ public class XPDroidActivity extends ActionBarActivity {
     protected void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
-        if(!(view instanceof EditText)) {
+        if (!(view instanceof EditText)) {
 
             view.setOnTouchListener(new View.OnTouchListener() {
 

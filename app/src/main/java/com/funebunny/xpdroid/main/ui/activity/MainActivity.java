@@ -137,7 +137,7 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 6: { //Ayuda
+            case 6: { //Acerca de
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.container, GastosFavoritosItemFragment.newInstance(position + 1))
 //                        .commit();

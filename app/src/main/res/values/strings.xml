@@ -26,7 +26,7 @@
     <string name="navdrawitem4">Programables</string>
     <string name="navdrawitem5">Presupuesto</string>
     <string name="navdrawitem6">Totales</string>
-    <string name="navdrawitem7">Ayuda</string>
+    <string name="navdrawitem7">Acerca de</string>
 
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
