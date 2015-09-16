@@ -6,6 +6,10 @@
         <item>@string/categoria3</item>
         <item>@string/categoria4</item>
         <item>@string/categoria5</item>
+        <item>@string/categoria6</item>
+        <item>@string/categoria7</item>
+        <item>@string/categoria8</item>
+        <item>@string/categoria9</item>
     </string-array>
 
     <string-array name="categorias_busqueda" >
@@ -15,6 +19,10 @@
         <item>@string/categoria3</item>
         <item>@string/categoria4</item>
         <item>@string/categoria5</item>
+        <item>@string/categoria6</item>
+        <item>@string/categoria7</item>
+        <item>@string/categoria8</item>
+        <item>@string/categoria9</item>
     </string-array>
 
     <string-array name="nav_drawer_items">
@@ -61,20 +69,5 @@
         <item>@string/mensual</item>
         <item>@string/anual</item>
     </string-array>
-
-    <!--<string-array name="spinner_meses">-->
-        <!--<item><string>Enero</string></item>-->
-        <!--<item><string>Febrero</string></item>-->
-        <!--<item><string>Marzo</string></item>-->
-        <!--<item><string>Abril</string></item>-->
-        <!--<item><string>Mayo</string></item>-->
-        <!--<item><string>Junio</string></item>-->
-        <!--<item><string>Julio</string></item>-->
-        <!--<item><string>Agosto</string></item>-->
-        <!--<item><string>Septiembre</string></item>-->
-        <!--<item><string>Octubre</string></item>-->
-        <!--<item><string>Noviembre</string></item>-->
-        <!--<item><string>Diciembre</string></item>-->
-    <!--</string-array>-->
 
 </resources>
