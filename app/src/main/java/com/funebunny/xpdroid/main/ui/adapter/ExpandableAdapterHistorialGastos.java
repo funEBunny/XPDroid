@@ -87,7 +87,8 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
             convertView = inflater.inflate(R.layout.historial_gastos_header, null);
         }
 
-        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(Character.toUpperCase(groups.get(groupPosition).getTextoMes().charAt(0)) + groups.get(groupPosition).getTextoMes().substring(1) + " " + String.valueOf(groups.get(groupPosition).getAnio()));
+        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(Character.toUpperCase(groups.get(groupPosition).getTextoMes().charAt(0)) + groups.get(groupPosition).getTextoMes().substring(1));
+        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_anio)).setText(String.valueOf(groups.get(groupPosition).getAnio()));
         ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_total)).setText("$" + groups.get(groupPosition).getTotal());
 
         return convertView;
