@@ -57,14 +57,15 @@
         android:id="@+id/fragment_main_el_alerta_presupuesto"
         android:layout_weight="2" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/fragment_main_tv_alerta_presupuesto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/fragment_main_rl_favoritos"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +73,8 @@
             android:id="@+id/fragment_main_tv_favoritos"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
 
         <GridView
             android:id="@+id/fragment_main_gv_favoritos"
@@ -85,6 +87,6 @@
             android:layout_alignParentTop="false"
             android:layout_marginTop="0dp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

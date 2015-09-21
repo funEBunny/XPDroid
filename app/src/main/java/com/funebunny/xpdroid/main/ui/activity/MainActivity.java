@@ -415,6 +415,7 @@ public class MainActivity extends XPDroidActivity
                 //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados hasta el momento
                 ((TextView) rootView.findViewById(R.id.fragment_main_tv_favoritos)).setText(R.string.no_hay_favoritos);
             } else {
+                ((TextView) rootView.findViewById(R.id.fragment_main_tv_favoritos)).setText(R.string.mis_favoritos);
                 ButtonAdapterGastoFavorito mAdapter = new ButtonAdapterGastoFavorito(getActivity(), R.layout.gasto_favorito_button, gastosFavoritos);
                 ((GridView) rootView.findViewById(R.id.fragment_main_gv_favoritos)).setAdapter(mAdapter);
             }

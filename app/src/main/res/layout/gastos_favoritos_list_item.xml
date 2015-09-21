@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/gastos_favoritos_list_item_ll_main"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
     android:background="@drawable/list_selector"
     android:clickable="false"
@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:id="@+id/gastos_favoritos_list_item_ll_datos1"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:id="@+id/gastos_favoritos_list_item_ll_datos2"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
