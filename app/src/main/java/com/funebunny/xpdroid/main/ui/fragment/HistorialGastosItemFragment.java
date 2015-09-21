@@ -62,10 +62,11 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
 
     // The fragment's ListView/GridView
-    private AbsListView mListView;
-
+    ExpandableListView expandableHistorial;
     //The Adapter which will be used to populate the ListView/GridView with Views.
-    private ListAdapter mAdapter;
+    ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos;
+
+    boolean[] groupExpandedArray;
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
@@ -97,13 +98,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historialgastositem_list, container, false);
-
-        ExpandableListView expandableHistorial = (ExpandableListView) view.findViewById(R.id.fragment_historialgastos_el_gastos);
-        ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
-        ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(view.getContext(), listaHistorial);
-        expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
-        registerForContextMenu(expandableHistorial);
-
         return view;
     }
 
@@ -142,6 +136,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
                 servicioGastosBusiness.eliminarGasto(gasto.getId());
                 servicioPresupuestoBusiness.descontarTotales(gasto);
                 servicioHistorialBusiness.eliminarHistorial(gasto);
+                verificarGruposExpandidos();
                 onResume();
                 return true;
             default:
@@ -165,13 +160,24 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     public void onResume() {
         super.onResume();
 
-        ExpandableListView expandableHistorial = (ExpandableListView) getView().findViewById(R.id.fragment_historialgastos_el_gastos);
+        expandableHistorial = (ExpandableListView) getView().findViewById(R.id.fragment_historialgastos_el_gastos);
         ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
-        ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(getView().getContext(), listaHistorial);
+        expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(getView().getContext(), listaHistorial);
         expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
+        registerForContextMenu(expandableHistorial);
 
-        // Set OnItemClickListener so we can be notified on item clicks
-//        mListView.setOnItemClickListener(this);
+        if (groupExpandedArray != null) {
+            for (int i = 0; i < groupExpandedArray.length; i++) {
+                if (groupExpandedArray[i] == true)
+                    expandableHistorial.expandGroup(i);
+            }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        verificarGruposExpandidos();
     }
 
     @Override
@@ -196,7 +202,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
      * to supply the text it should use.
      */
     public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
+        View emptyView = expandableHistorial.getEmptyView();
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
@@ -228,5 +234,12 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         inflater.inflate(R.menu.menu_crear_gasto, menu);
     }
 
+    private void verificarGruposExpandidos(){
+        int numberOfGroups = expandableAdapterHistorialGastos.getGroupCount();
+        groupExpandedArray = new boolean[numberOfGroups];
+        for (int i = 0; i < numberOfGroups; i++) {
+            groupExpandedArray[i] = expandableHistorial.isGroupExpanded(i);
+        }
+    }
 
 }
