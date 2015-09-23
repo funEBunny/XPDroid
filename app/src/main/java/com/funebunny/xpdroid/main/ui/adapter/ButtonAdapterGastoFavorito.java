@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class ButtonAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
             if (bGastoFavorito != null) {
 
                 bGastoFavorito.setText(Html.fromHtml("<b><big>" + gastoFavorito.getDescripcion() +
-                        "&nbsp;&nbsp;$" + gastoFavorito.getImporte() + "</big></b>" + "<br />" +
+                        "&nbsp;&nbsp;$" + AppUtilities.formatearImporte(gastoFavorito.getImporte()) + "</big></b>" + "<br />" +
                         "<small>" + gastoFavorito.getCategoria() + "</small>"));
 
             }

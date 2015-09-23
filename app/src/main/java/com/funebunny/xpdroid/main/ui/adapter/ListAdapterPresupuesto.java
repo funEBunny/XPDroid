@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -50,13 +51,10 @@ public class ListAdapterPresupuesto extends ArrayAdapter<Presupuesto> {
                 periodo.setText(presupuesto.getPeriodo());
             }
             if (importe != null) {
-                NumberFormat format = NumberFormat.getInstance();
-                format.setMaximumFractionDigits(2);
-                format.setMaximumIntegerDigits(6);
 
                 String importe1 = presupuesto.getImporte();
                 if (!"".equalsIgnoreCase(importe1)){
-                    importe.setText("$" + format.format(Double.valueOf(importe1)));
+                    importe.setText("$" + AppUtilities.formatearImporte(importe1));
 
                 }else{
                     importe.setText("");

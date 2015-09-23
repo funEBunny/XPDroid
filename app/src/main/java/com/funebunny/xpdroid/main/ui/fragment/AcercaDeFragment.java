@@ -1,20 +1,26 @@
 package com.funebunny.xpdroid.main.ui.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.main.ui.activity.MainActivity;
+import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
 
 /**
  * Created by I823537 on 15/09/2015.
  */
-public class AcercaDeFragment extends Fragment {
+public class AcercaDeFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     private static final String ARG_DRAWER_ITEM_POSITION = "section_number";
+    private AcercaDeCallbacks mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,4 +38,35 @@ public class AcercaDeFragment extends Fragment {
         return acercaDeFragment;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (AcercaDeCallbacks) activity;
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_DRAWER_ITEM_POSITION));
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement AcercaDeCallbacks.onAcercaDeSelected");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (null != mListener) {
+            // Notify the active callbacks interface (the activity, if the
+            // fragment is attached to one) that an item has been selected.
+            mListener.onAcercaDeSelected(DummyContent.ITEMS.get(position).id);
+        }
+    }
+
+    public interface AcercaDeCallbacks {
+        // TODO: Update argument type and name
+        public void onAcercaDeSelected(String id);
+    }
 }

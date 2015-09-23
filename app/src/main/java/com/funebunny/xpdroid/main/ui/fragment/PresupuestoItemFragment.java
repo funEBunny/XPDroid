@@ -88,11 +88,6 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
         presupuesto.addAll(servicioPresupuestoBusiness.obtenerPresupuesto());
 
         // TODO: Change Adapter to display your content

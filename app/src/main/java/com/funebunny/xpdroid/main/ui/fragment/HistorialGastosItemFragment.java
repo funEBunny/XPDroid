@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
@@ -27,14 +25,11 @@ import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusines
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
 import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapterHistorialGastos;
-import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGasto;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.

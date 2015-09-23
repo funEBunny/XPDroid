@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.business.gasto.model;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 /**
  * Created by provirabosch on 26/08/2015.
@@ -42,6 +43,10 @@ public class Gasto implements Serializable{
     }
 
     public void setImporte(String importe) {
+
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(2);
+        Double.valueOf(importe);
         this.importe = importe;
     }
 

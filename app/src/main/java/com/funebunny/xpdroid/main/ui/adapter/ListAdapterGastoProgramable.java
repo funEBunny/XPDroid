@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ListAdapterGastoProgramable extends ArrayAdapter<GastoProgramable> 
                 format.setMaximumFractionDigits(2);
                 format.setMaximumIntegerDigits(6);
 
-                importe.setText("$" + format.format(Double.valueOf(gastoProgramable.getImporte())));
+                importe.setText("$" + AppUtilities.formatearImporte(gastoProgramable.getImporte()));
             }
             if (descripcion != null) {
                 descripcion.setText(gastoProgramable.getDescripcion());

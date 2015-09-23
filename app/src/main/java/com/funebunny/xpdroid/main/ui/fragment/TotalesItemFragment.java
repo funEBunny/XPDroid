@@ -21,6 +21,7 @@ import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBus
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 /**
  * A fragment representing a list of Items.
@@ -28,7 +29,7 @@ import com.funebunny.xpdroid.utilities.AppConstants;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link NotificacionesItemCallbacks}
+ * Activities containing this fragment MUST implement the {@link TotalesItemCallbacks}
  * interface.
  */
 public class TotalesItemFragment extends Fragment implements AbsListView.OnItemClickListener {
@@ -44,7 +45,7 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     private String mParam1;
     private String mParam2;
 
-    private NotificacionesItemCallbacks mListener;
+    private TotalesItemCallbacks mListener;
 
     /**
      * The fragment's ListView/GridView.
@@ -94,10 +95,10 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_totalesitem_list, container, false);
 
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setText(formatTextoTotal(getResources().getString(R.string.diario), servicioPresupuestoBusiness.obtenerTotalDiario()));
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setText(formatTextoTotal(getResources().getString(R.string.semanal), servicioPresupuestoBusiness.obtenerTotalSemanal()));
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setText(formatTextoTotal(getResources().getString(R.string.mensual), servicioPresupuestoBusiness.obtenerTotalMensual()));
-        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setText(formatTextoTotal(getResources().getString(R.string.anual), servicioPresupuestoBusiness.obtenerTotalAnual()));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_diario)).setText(formatTextoTotal(getResources().getString(R.string.diario), AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalDiario())));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_semanal)).setText(formatTextoTotal(getResources().getString(R.string.semanal), AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalSemanal())));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_mensual)).setText(formatTextoTotal(getResources().getString(R.string.mensual), AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalMensual())));
+        ((RadioButton) view.findViewById(R.id.fragment_totalesitem_list_rb_anual)).setText(formatTextoTotal(getResources().getString(R.string.anual), AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalAnual())));
 
         switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
 
@@ -126,7 +127,7 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (NotificacionesItemCallbacks) activity;
+            mListener = (TotalesItemCallbacks) activity;
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement NotificacionesItemCallbacks.onNotificacionesItemSelected");
@@ -145,7 +146,7 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onNotificacionesItemSelected(DummyContent.ITEMS.get(position).id);
+            mListener.onTotalesItemSelected(DummyContent.ITEMS.get(position).id);
         }
     }
 
@@ -172,9 +173,9 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface NotificacionesItemCallbacks {
+    public interface TotalesItemCallbacks {
         // TODO: Update argument type and name
-        public void onNotificacionesItemSelected(String id);
+        public void onTotalesItemSelected(String id);
     }
 
     private Spanned formatTextoTotal(String texto, String importe) {

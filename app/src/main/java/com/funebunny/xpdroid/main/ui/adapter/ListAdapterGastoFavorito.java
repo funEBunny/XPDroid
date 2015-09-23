@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -51,11 +52,7 @@ public class ListAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
                 categoria.setText(gastoFavorito.getCategoria());
             }
             if (importe != null) {
-                NumberFormat format = NumberFormat.getInstance();
-                format.setMaximumFractionDigits(2);
-                format.setMaximumIntegerDigits(6);
-
-                importe.setText("$" + format.format(Double.valueOf(gastoFavorito.getImporte())));
+                importe.setText(AppUtilities.formatearImporte(gastoFavorito.getImporte()));
             }
             if (descripcion != null) {
                 descripcion.setText(gastoFavorito.getDescripcion());

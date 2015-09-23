@@ -11,6 +11,7 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.historial.model.Historial;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -89,7 +90,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
 
         ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_mes)).setText(Character.toUpperCase(groups.get(groupPosition).getTextoMes().charAt(0)) + groups.get(groupPosition).getTextoMes().substring(1));
         ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_anio)).setText(String.valueOf(groups.get(groupPosition).getAnio()));
-        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_total)).setText("$" + groups.get(groupPosition).getTotal());
+        ((TextView) convertView.findViewById(R.id.historial_gastos_header_tv_total)).setText("$" + AppUtilities.formatearImporte(groups.get(groupPosition).getTotal()));
 
         return convertView;
     }
@@ -106,7 +107,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
 
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_categoria)).setText(items.get(childPosition).getCategoria());
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_descripcion)).setText(items.get(childPosition).getDescripcion());
-        ((TextView) convertView.findViewById(R.id.historial_gastos_lista_importe)).setText("$" + items.get(childPosition).getImporte());
+        ((TextView) convertView.findViewById(R.id.historial_gastos_lista_importe)).setText("$" + AppUtilities.formatearImporte(items.get(childPosition).getImporte()));
         ((TextView) convertView.findViewById(R.id.historial_gastos_lista_fecha)).setText(items.get(childPosition).getFecha());
 
         convertView.setOnClickListener(new View.OnClickListener() {

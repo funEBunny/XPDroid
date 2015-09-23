@@ -41,6 +41,7 @@ import com.funebunny.xpdroid.main.ui.fragment.NavigationDrawerFragment;
 import com.funebunny.xpdroid.main.ui.fragment.TotalesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.PresupuestoItemFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
+import com.funebunny.xpdroid.utilities.AppUtilities;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -57,7 +58,8 @@ public class MainActivity extends XPDroidActivity
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
         PresupuestoItemFragment.PresupuestoItemCallbacks,
-        TotalesItemFragment.NotificacionesItemCallbacks {
+        TotalesItemFragment.TotalesItemCallbacks,
+        AcercaDeFragment.AcercaDeCallbacks {
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -162,13 +164,6 @@ public class MainActivity extends XPDroidActivity
         }
     }
 
-    @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
-    public void onHistorialGastosItemSelected(String id) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-
-    }
-
 
     public void crearGastoPorFavorito(View view) {
         // Este método es llamado cuando se presiona un botón de gasto favorito en la pantalla principal
@@ -195,22 +190,24 @@ public class MainActivity extends XPDroidActivity
         showMessage(gasto_guardado_mensaje);
     }
 
+    @Override //Implementing method from HistorialGastosItemFragment.HistorialGastosItemCallbacks
+    public void onHistorialGastosItemSelected(String id) {
+
+    }
 
     @Override //Implementing method from GastosFavoritosItemFragment.GastosFavoritosItemCallbacks
     public void onGastosFavoritosItemSelected(String id) {
-        //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
 
     @Override
     //Implementing method from GastosProgramablesItemFragment.GastosProgramablesItemCallbacks
     public void onGastosProgramablesItemSelected(String id) {
-        //FragmentManager fragmentManager = getSupportFragmentManager();
 
     }
 
     @Override
-    public void onNotificacionesItemSelected(String id) {
+    public void onTotalesItemSelected(String id) {
 
     }
 
@@ -218,14 +215,11 @@ public class MainActivity extends XPDroidActivity
     public void onPresupuestoItemSelected(String id) {
 
     }
-    /*
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+
+    @Override
+    public void onAcercaDeSelected(String id) {
+
     }
-    */
 
     public void onSectionAttached(int number) {
         String[] navigationDrawerItems = getResources().getStringArray(R.array.nav_drawer_items);
@@ -483,25 +477,25 @@ public class MainActivity extends XPDroidActivity
                     String dia = dateFormat.format(Calendar.getInstance().getTime());
                     dia = Character.toUpperCase(dia.charAt(0)) + dia.substring(1);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(dia);
-                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalDiario());
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalDiario()));
                     break;
                 }
                 case AppConstants.PERIODO_SEMANAL: {
                     ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(getResources().getString(R.string.esta_semana));
-                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalSemanal());
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalSemanal()));
                     break;
                 }
                 case AppConstants.PERIODO_MENSUAL: {
                     String mes = new DateFormatSymbols(new Locale("es", "ES")).getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
                     mes = Character.toUpperCase(mes.charAt(0)) + mes.substring(1);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(mes);
-                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalMensual());
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalMensual()));
                     break;
                 }
                 case AppConstants.PERIODO_ANUAL: {
                     String anio = getResources().getString(R.string.anio) + " " + String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
                     ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(anio);
-                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + servicioPresupuestoBusiness.obtenerTotalAnual());
+                    ((TextView) view.findViewById(R.id.fragment_main_tv_total)).setText("$" + AppUtilities.formatearImporte(servicioPresupuestoBusiness.obtenerTotalAnual()));
                     break;
                 }
             }
@@ -513,7 +507,7 @@ public class MainActivity extends XPDroidActivity
             for (Presupuesto presupuesto : presupuestos) {
                 String periodo = presupuesto.getPeriodo();
                 String predeterminado = servicioPresupuestoBusiness.obtenerTotalPredeterminado();
-                if (!predeterminado.equalsIgnoreCase(periodo)){
+                if (!predeterminado.equalsIgnoreCase(periodo)) {
                     if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
                         id++;
                         TextView tv = new TextView(this.getActivity().getApplicationContext());
