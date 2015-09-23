@@ -3,6 +3,7 @@ package com.funebunny.xpdroid.utilities;
         import android.app.Activity;
         import android.view.inputmethod.InputMethodManager;
 
+        import java.text.DecimalFormat;
         import java.text.NumberFormat;
 
 /**
@@ -19,6 +20,7 @@ public class AppUtilities {
 
         NumberFormat format = NumberFormat.getInstance();
         format.setMaximumFractionDigits(2);
+        format.setMinimumFractionDigits(2);
         return format.format(Double.valueOf(importe));
     }
 }

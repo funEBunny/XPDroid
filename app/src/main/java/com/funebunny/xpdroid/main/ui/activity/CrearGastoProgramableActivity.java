@@ -35,64 +35,39 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         Bundle bGastoProgramable = getIntent().getExtras();
+
         if (bGastoProgramable != null) {
+
             gastoProgramable = (GastoProgramable) bGastoProgramable.getSerializable(AppConstants.GASTO_PROGRAMABLE);
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).setText(gastoProgramable.getDescripcion());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(gastoProgramable.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(String.valueOf(gastoProgramable.getHora()));
-
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoProgramable.getCategoria()));
 
             Spinner sRepeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
+            sRepeticion.setEnabled(false);
+
             if (gastoProgramable instanceof GastoProgSemanal) {
+
                 sRepeticion.setSelection(((ArrayAdapter) sRepeticion.getAdapter()).getPosition(GastoProgSemanal.SEMANAL));
-
-                Spinner spDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
-                spDiasSemana.setVisibility(View.VISIBLE);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-                layoutParams.gravity = Gravity.CENTER_VERTICAL;
-                spDiasSemana.setLayoutParams(layoutParams);
-
+                Spinner sDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
                 String diaSemana = servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana());
-                spDiasSemana.setSelection(((ArrayAdapter) spDiasSemana.getAdapter()).getPosition(diaSemana));
+                sDiasSemana.setSelection(((ArrayAdapter) sDiasSemana.getAdapter()).getPosition(diaSemana));
+                sDiasSemana.setEnabled(false);
             } else {
                 sRepeticion.setSelection(((ArrayAdapter) sRepeticion.getAdapter()).getPosition(GastoProgDiario.DIARIO));
-                findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.INVISIBLE);
             }
 
             setTitle(R.string.title_activity_editar_gasto_programable);
 
-        } else { //MEJORAR ESTOO!!!!!
+        } else {
 
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(getHoraActual());
 
-            // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
-            Spinner repeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
-
-            repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                     @Override
-                                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                         if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
-                                                             Spinner spDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
-                                                             spDiasSemana.setVisibility(View.VISIBLE);
-                                                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-                                                             layoutParams.gravity = Gravity.CENTER_VERTICAL;
-                                                             spDiasSemana.setLayoutParams(layoutParams);
-
-                                                         } else {
-                                                             findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.GONE);
-
-                                                         }
-                                                     }
-
-                                                     @Override
-                                                     public void onNothingSelected(AdapterView<?> parent) {
-
-                                                     }
-                                                 }
-            );
         }
+
+        verificarSpinnerRepeticion();
     }
 
 
@@ -162,6 +137,34 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         int gasto_guardado_mensaje = R.string.gasto_programado_mensaje;
         showMessage(gasto_guardado_mensaje);
         this.finish();
+    }
+
+    private void verificarSpinnerRepeticion() {
+        // Lógica para ocultar/mostrar el spinner de días de la semana, según selección del spinner repetición
+        Spinner repeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);
+
+        repeticion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                 @Override
+                                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                     if (((Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion)).getSelectedItem().toString() == getResources().getString(R.string.semanal)) {
+                                                         Spinner spDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
+                                                         spDiasSemana.setVisibility(View.VISIBLE);
+                                                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                                                         layoutParams.gravity = Gravity.CENTER_VERTICAL;
+                                                         spDiasSemana.setLayoutParams(layoutParams);
+
+                                                     } else {
+                                                         findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana).setVisibility(View.GONE);
+
+                                                     }
+                                                 }
+
+                                                 @Override
+                                                 public void onNothingSelected(AdapterView<?> parent) {
+
+                                                 }
+                                             }
+        );
     }
 
 }

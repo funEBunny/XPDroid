@@ -52,7 +52,7 @@ public class ListAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
                 categoria.setText(gastoFavorito.getCategoria());
             }
             if (importe != null) {
-                importe.setText(AppUtilities.formatearImporte(gastoFavorito.getImporte()));
+                importe.setText("$" +  AppUtilities.formatearImporte(gastoFavorito.getImporte()));
             }
             if (descripcion != null) {
                 descripcion.setText(gastoFavorito.getDescripcion());
