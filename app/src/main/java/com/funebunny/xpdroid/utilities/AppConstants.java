@@ -24,5 +24,5 @@ public class AppConstants {
     public static final String FECHA_DB = "yyyyMMdd";
     public static final String ANIO = "yyyy";
     public static final String ANIO_MES = "yyyyMM";
-    public static final String CERO = "0";
+    public static final String CERO = "0.00";
 }

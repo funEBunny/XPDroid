@@ -30,6 +30,8 @@ import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A fragment representing a list of Items.
@@ -61,7 +63,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     //The Adapter which will be used to populate the ListView/GridView with Views.
     ExpandableAdapterHistorialGastos expandableAdapterHistorialGastos;
 
-    boolean[] groupExpandedArray;
+    private Map<Long, Boolean> groupExpandedMap;
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
@@ -114,7 +116,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
 
         Gasto gasto = (Gasto) info.targetView.getTag();
@@ -161,12 +162,19 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
         registerForContextMenu(expandableHistorial);
 
-        if (groupExpandedArray != null) {
-            for (int i = 0; i < groupExpandedArray.length; i++) {
-                if (groupExpandedArray[i] == true)
-                    expandableHistorial.expandGroup(i);
+        if (groupExpandedMap != null) {
+            boolean expandido;
+
+            for (int i = 0; i < listaHistorial.size(); i++) {
+                expandido = false;
+                try {
+                    expandido = groupExpandedMap.get(listaHistorial.get(i).getId());
+                } catch (Exception e) {
+                }
+                if (expandido) expandableHistorial.expandGroup(i);
             }
         }
+
     }
 
     @Override
@@ -229,12 +237,15 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
         inflater.inflate(R.menu.menu_crear_gasto, menu);
     }
 
-    private void verificarGruposExpandidos(){
-        int numberOfGroups = expandableAdapterHistorialGastos.getGroupCount();
-        groupExpandedArray = new boolean[numberOfGroups];
-        for (int i = 0; i < numberOfGroups; i++) {
-            groupExpandedArray[i] = expandableHistorial.isGroupExpanded(i);
+    private void verificarGruposExpandidos() {
+
+        groupExpandedMap = new HashMap<>();
+        ArrayList<Historial> groups = expandableAdapterHistorialGastos.getGroups();
+
+        for (int i = 0; i < groups.size(); i++) {
+            groupExpandedMap.put(groups.get(i).getId(), expandableHistorial.isGroupExpanded(i));
         }
+
     }
 
 }

@@ -23,6 +23,7 @@ import java.util.Map;
  */
 public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter {
 
+
     private ArrayList<Historial> groups;
     private Map<Integer, ArrayList<Gasto>> itemsMap = new HashMap<>();
     private LayoutInflater inflater;
@@ -118,7 +119,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
 
         });
 
-        return convertView; 
+        return convertView;
     }
 
     @Override
@@ -126,4 +127,7 @@ public class ExpandableAdapterHistorialGastos extends BaseExpandableListAdapter 
         return true;
     }
 
+    public ArrayList<Historial> getGroups() {
+        return groups;
+    }
 }

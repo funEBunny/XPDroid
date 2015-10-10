@@ -26,6 +26,7 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
 
     @Override
     public void eliminarHistorial(Gasto gasto) {
+
         String fechaGasto = gasto.getFecha();
         SimpleDateFormat dateFormat = new SimpleDateFormat(AppConstants.FECHA_VISTA);
         try {
@@ -35,12 +36,10 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
             int anioGasto = instance.get(Calendar.YEAR);
             int mesGasto = instance.get(Calendar.MONTH);
             Historial historial = servicioHistorialDAO.obtenerHistorial(mesGasto, anioGasto);
-            String totalHisorial = historial.getTotal();
-            String importeGasto = gasto.getImporte();
-            String total = restar(totalHisorial, importeGasto);
-            if (AppConstants.CERO.equalsIgnoreCase(total)){
+            String total = restar(historial.getTotal(), gasto.getImporte());
+            if (new BigDecimal(total).compareTo(BigDecimal.ZERO) == 0) {
                 servicioHistorialDAO.eliminarHistorial(historial.getId());
-            }else{
+            } else {
                 historial.setTotal(total);
                 servicioHistorialDAO.actualizarHistorial(historial);
             }
@@ -74,10 +73,12 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
                 servicioHistorialDAO.guardarHistorial(historial);
             }
 
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
+
+
     private String restar(String total, String importe) {
 
         BigDecimal bdTotal = new BigDecimal(total);
@@ -93,4 +94,5 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
         bdTotal = bdTotal.add(bdImporteGasto);
         return bdTotal.toPlainString();
     }
+
 }

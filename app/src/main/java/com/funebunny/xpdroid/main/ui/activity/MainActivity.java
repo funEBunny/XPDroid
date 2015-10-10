@@ -399,7 +399,6 @@ public class MainActivity extends XPDroidActivity
 
             mostrarTotal(rootView);
 
-
             //Verificación de presupuesto alcanzado
             verificarPresupuestos(rootView);
 

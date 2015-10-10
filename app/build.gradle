@@ -5,6 +5,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.0"
 
+    lintOptions{
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.funebunny.xpdroid"
         minSdkVersion 16
