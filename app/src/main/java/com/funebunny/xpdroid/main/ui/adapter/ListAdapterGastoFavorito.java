@@ -42,7 +42,7 @@ public class ListAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
 
         if (gastoFavorito != null) {
 
-            view.setTag(gastoFavorito); //Test PRB - Anclar el objeto
+            view.setTag(gastoFavorito); //Anclar el objeto
 
             TextView categoria = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_categoria);
             TextView importe = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_importe);

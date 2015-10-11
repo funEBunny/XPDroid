@@ -27,7 +27,6 @@ public interface IServicioGastosDAO {
 
     void actualizarGasto(Gasto gasto);
 
-//    GastoDAO obtenerGastoPorId(Long id);
 
     // Gastos Programables
 

@@ -19,10 +19,6 @@ import java.util.List;
  */
 public class ListAdapterGastoProgramable extends ArrayAdapter<GastoProgramable> {
 
-    public ListAdapterGastoProgramable(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-    }
-
     public ListAdapterGastoProgramable(Context context, int resource, List<GastoProgramable> items) {
         super(context, resource, items);
     }
@@ -64,7 +60,7 @@ public class ListAdapterGastoProgramable extends ArrayAdapter<GastoProgramable> 
             }
         }
 
-        view.setTag(gastoProgramable); //Test PRB - Anclar el objeto GastoDAO a la vista
+        view.setTag(gastoProgramable); //Anclar objeto a la vista
 
         return view;
 

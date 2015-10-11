@@ -67,7 +67,6 @@ public class MainActivity extends XPDroidActivity
     private CharSequence mTitle;
 
     private String[] navigationDrawerItems;
-    private DrawerLayout drawerLayout;
     private ListView drawerList;
 
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
@@ -237,7 +236,6 @@ public class MainActivity extends XPDroidActivity
             // Only show items in the action bar relevant to this screen if the drawer is not showing.
             // Otherwise, let the drawer decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            //restoreActionBar();
             ActionBar actionBar = getSupportActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             actionBar.setDisplayShowTitleEnabled(true);
@@ -277,19 +275,6 @@ public class MainActivity extends XPDroidActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-/*        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_agregar_gasto) {
-            Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
-            startActivity(intentCrearGasto);
-
-            //Mostrar mensaje de agregar gasto
-            Toast toast = Toast.makeText(this, R.string.action_crear_gasto, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast.show();
-        }*/
 
         //Animacion desde derecha a izquierda
         Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
@@ -398,10 +383,8 @@ public class MainActivity extends XPDroidActivity
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             mostrarTotal(rootView);
-
             //Verificación de presupuesto alcanzado
             verificarPresupuestos(rootView);
-
             //Botonera de Favoritos en pantalla de Inicio
             gastosFavoritos.addAll(servicioGastosBusiness.obtenerGastosFavoritos());
             if (gastosFavoritos.size() == 0) {

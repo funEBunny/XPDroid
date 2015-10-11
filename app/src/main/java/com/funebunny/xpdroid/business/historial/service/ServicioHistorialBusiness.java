@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by I823537 on 05/09/2015.
+ * Created by provirabosch on 05/09/2015.
  */
 public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
 

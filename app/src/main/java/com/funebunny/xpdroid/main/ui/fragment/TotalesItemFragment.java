@@ -36,15 +36,6 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
 
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private TotalesItemCallbacks mListener;
 
     /**
@@ -62,8 +53,6 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     public static TotalesItemFragment newInstance(int itemSelected) {
         TotalesItemFragment fragment = new TotalesItemFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, "param1");
-//        args.putString(ARG_PARAM2, "param2");
         args.putInt(AppConstants.ARG_DRAWER_ITEM_POSITION, itemSelected); // item seleccionado del navigation drawer (arranca desde "Inicio" que es posicion 0, "Gastos Favoritos" que es posicion 1, y asi...)
         fragment.setArguments(args);
         return fragment;
@@ -79,11 +68,6 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         // TODO: Change Adapter to display your content
         mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),

@@ -48,10 +48,6 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
 
     private static final String ARG_DRAWER_ITEM_POSITION = "section_number";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private PresupuestoItemCallbacks mListener;
     private List<Presupuesto> presupuesto = new ArrayList<Presupuesto>();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();

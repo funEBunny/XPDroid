@@ -90,17 +90,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//
-//        columnas = getResources().getStringArray(R.array.gastos_favoritos_columnas);
-
         gastosFavoritos.addAll(servicioGastos.obtenerGastosFavoritos());
-
-        // TODO: Change Adapter to display your content
-
         mAdapter = new ListAdapterGastoFavorito(getActivity(), R.layout.gastos_favoritos_list_item, gastosFavoritos);
 
     }

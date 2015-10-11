@@ -15,13 +15,9 @@ import java.text.NumberFormat;
 import java.util.List;
 
 /**
- * Created by I823537 on 21/08/2015.
+ * Created by provirabosch on 21/08/2015.
  */
 public class ListAdapterPresupuesto extends ArrayAdapter<Presupuesto> {
-
-    public ListAdapterPresupuesto(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-    }
 
     public ListAdapterPresupuesto(Context context, int resource, List<Presupuesto> items) {
         super(context, resource, items);
@@ -42,7 +38,7 @@ public class ListAdapterPresupuesto extends ArrayAdapter<Presupuesto> {
 
         if (presupuesto != null) {
 
-            view.setTag(presupuesto); //Test PRB - Anclar el objeto a la vista
+            view.setTag(presupuesto); //Anclar el objeto a la vista
 
             TextView periodo = (TextView) view.findViewById(R.id.presupuesto_list_item_tv_periodo);
             TextView importe = (TextView) view.findViewById(R.id.presupuesto_list_item_tv_importe);

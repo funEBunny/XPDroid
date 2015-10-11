@@ -51,10 +51,6 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
     private static final String ARG_DRAWER_ITEM_POSITION = "section_number";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private HistorialGastosItemCallbacks mListener;
 
 
