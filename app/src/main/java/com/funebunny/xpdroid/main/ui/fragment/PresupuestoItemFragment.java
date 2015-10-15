@@ -98,7 +98,7 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
 
         // Set the adapter
         mListView = (ListView) view.findViewById(R.id.fragment_presupuestoitem_list_lv_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -146,7 +146,7 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
         View view = getView();
 
         mListView = (ListView) view.findViewById(R.id.fragment_presupuestoitem_list_lv_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -204,7 +204,7 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
      */
     public interface PresupuestoItemCallbacks {
         // TODO: Update argument type and name
-        public void onPresupuestoItemSelected(String id);
+        void onPresupuestoItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)

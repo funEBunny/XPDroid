@@ -67,6 +67,6 @@ public class AcercaDeFragment extends Fragment implements AbsListView.OnItemClic
 
     public interface AcercaDeCallbacks {
         // TODO: Update argument type and name
-        public void onAcercaDeSelected(String id);
+        void onAcercaDeSelected(String id);
     }
 }

@@ -220,7 +220,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
      */
     public interface HistorialGastosItemCallbacks {
         // TODO: Update argument type and name
-        public void onHistorialGastosItemSelected(String id);
+        void onHistorialGastosItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)

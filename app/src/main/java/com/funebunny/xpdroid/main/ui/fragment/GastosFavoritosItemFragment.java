@@ -101,7 +101,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
 
         // Set the adapter
         mListView = (ListView) view.findViewById(R.id.fragment_gastosfavoritositem_list_lv_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -152,7 +152,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         View view = getView();
 
         mListView = (ListView) view.findViewById(R.id.fragment_gastosfavoritositem_list_lv_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -205,7 +205,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
      */
     public interface GastosFavoritosItemCallbacks {
         // TODO: Update argument type and name
-        public void onGastosFavoritosItemSelected(String id);
+        void onGastosFavoritosItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)

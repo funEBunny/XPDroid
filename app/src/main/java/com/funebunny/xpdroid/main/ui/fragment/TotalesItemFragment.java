@@ -159,7 +159,7 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
      */
     public interface TotalesItemCallbacks {
         // TODO: Update argument type and name
-        public void onTotalesItemSelected(String id);
+        void onTotalesItemSelected(String id);
     }
 
     private Spanned formatTextoTotal(String texto, String importe) {

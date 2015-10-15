@@ -102,7 +102,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.lista_gastos_programables_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -163,7 +163,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         View view = getView();
 
         mListView = (ListView) view.findViewById(R.id.lista_gastos_programables_lista);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -211,7 +211,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
      */
     public interface GastosProgramablesItemCallbacks {
         // TODO: Update argument type and name
-        public void onGastosProgramablesItemSelected(String id);
+        void onGastosProgramablesItemSelected(String id);
     }
 
     // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)

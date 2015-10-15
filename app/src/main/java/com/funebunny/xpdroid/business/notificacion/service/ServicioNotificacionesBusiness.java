@@ -88,11 +88,7 @@ public class ServicioNotificacionesBusiness implements IServicioNotificacionesBu
         String todayTime = timeFormat.format(today);
         String timeToCompare = time.replace(":", "");
 
-        if (Integer.valueOf(todayTime)>Integer.valueOf(timeToCompare)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Integer.valueOf(todayTime) > Integer.valueOf(timeToCompare);
     }
 
     public void actualizarAlarma(Context applicationContext, GastoProgramable gastoProgramable) {
