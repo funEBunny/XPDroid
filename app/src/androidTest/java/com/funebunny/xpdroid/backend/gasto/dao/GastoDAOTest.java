@@ -13,21 +13,20 @@ import java.util.Calendar;
 public class GastoDAOTest extends AndroidTestCase {
 
     private GastoDAO gastoDao;
-    SimpleDateFormat formatoEsperado = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+    SimpleDateFormat formatoEsperado;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
+
+        formatoEsperado = new SimpleDateFormat(AppConstants.FECHA_VISTA);
         gastoDao = new GastoDAO();
-        gastoDao.setFecha(formatoEsperado.format(Calendar.getInstance().getTime()));
     }
 
     public void testGetFecha_formatoFecha() {
-
+        gastoDao.setFecha(formatoEsperado.format(Calendar.getInstance().getTime()));
         String esperado = formatoEsperado.format(Calendar.getInstance().getTime());
         String real = gastoDao.getFecha();
-
         assertEquals(esperado, real);
-
     }
 }
