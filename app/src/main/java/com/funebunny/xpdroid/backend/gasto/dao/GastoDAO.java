@@ -68,7 +68,7 @@ public class GastoDAO extends Model {
         SimpleDateFormat myFormat = new SimpleDateFormat(AppConstants.FECHA_DB);
         try {
             fechaGasto = myFormat.format(fromUser.parse(fecha));
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.fecha = fechaGasto;
