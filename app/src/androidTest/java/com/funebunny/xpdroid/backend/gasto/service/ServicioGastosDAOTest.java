@@ -71,7 +71,8 @@ public class ServicioGastosDAOTest extends AndroidTestCase {
         while (gastosLista.get(i).getId()!= gasto.getId()){
             i++;
         }
-        assertNotSame(gasto.getDescripcion(), gastosLista.get(i).getDescripcion());
+        assertEquals("Gasto Test Editado",gastosLista.get(i).getDescripcion());
+
     }
 
     public void testGuardarGastoFavorito(){
