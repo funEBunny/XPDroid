@@ -78,7 +78,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     boolean isNuevaSemana() {
         Calendar calendar = Calendar.getInstance();
         int semanaActual = calendar.get(Calendar.WEEK_OF_YEAR);
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
         int semanaAyer = calendar.get(Calendar.WEEK_OF_YEAR);
         return semanaActual != semanaAyer;
     }
