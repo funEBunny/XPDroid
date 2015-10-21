@@ -2,9 +2,12 @@ package com.funebunny.xpdroid.business.presupuesto.service;
 
 import android.test.AndroidTestCase;
 
+import com.funebunny.xpdroid.business.gasto.model.Gasto;
+import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,12 +18,14 @@ import java.util.Date;
 public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
 
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness;
+    private ServicioGastosBusiness servicioGastosBusiness;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
         servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
+        servicioGastosBusiness = new ServicioGastosBusiness();
     }
 
     @Override
@@ -32,6 +37,8 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
         for (int i = 0; i < presupuestosLista.size(); i++) {
             servicioPresupuestoBusiness.eliminarPresupuesto(presupuestosLista.get(i).getId());
         }
+
+        servicioPresupuestoBusiness.limpiarTotales();
     }
 
     public void testGuardarPresupuesto() {
@@ -115,4 +122,66 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
         assertFalse(servicioPresupuestoBusiness.isMismoAnio(calendar));
     }
 
+    public void testTotales() {
+        Gasto gasto = crearGastoTest();
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        assertEquals(gasto.getImporte(), servicioPresupuestoBusiness.obtenerTotalDiario());
+        assertEquals(gasto.getImporte(), servicioPresupuestoBusiness.obtenerTotalSemanal());
+        assertEquals(gasto.getImporte(), servicioPresupuestoBusiness.obtenerTotalMensual());
+        assertEquals(gasto.getImporte(), servicioPresupuestoBusiness.obtenerTotalAnual());
+        servicioPresupuestoBusiness.descontarTotales(gasto);
+        assertEquals("0", servicioPresupuestoBusiness.obtenerTotalDiario());
+        assertEquals("0", servicioPresupuestoBusiness.obtenerTotalSemanal());
+        assertEquals("0", servicioPresupuestoBusiness.obtenerTotalMensual());
+        assertEquals("0", servicioPresupuestoBusiness.obtenerTotalAnual());
+    }
+
+//    public void testCalcularTotales_cambioDeDia() {
+//        Gasto gasto = servicioGastosBusiness.guardarGasto("Test","100","Test", "20/10/2015");
+//        servicioPresupuestoBusiness.calcularTotales();
+//        assertEquals(gasto.getImporte(),servicioPresupuestoBusiness.obtenerTotalDiario());
+//        servicioGastosBusiness.eliminarGasto(gasto.getId());
+//    }
+
+    public void testIsPresupuestoDiarioAlcanzado() {
+        Gasto gasto = crearGastoTest();
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_DIARIO, "99");
+        assertTrue(servicioPresupuestoBusiness.isPresupuestoDiarioAlcanzado());
+    }
+
+    public void testIsPresupuestoSemanalAlcanzado() {
+        Gasto gasto = crearGastoTest();
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_SEMANAL, "99");
+        assertTrue(servicioPresupuestoBusiness.isPresupuestoSemanalAlcanzado());
+    }
+
+    public void testIsPresupuestoMensualAlcanzado() {
+        Gasto gasto = crearGastoTest();
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_MENSUAL, "99");
+        assertTrue(servicioPresupuestoBusiness.isPresupuestoMensualAlcanzado());
+    }
+
+    public void testIsPresupuestoAnualAlcanzado() {
+        Gasto gasto = crearGastoTest();
+        servicioPresupuestoBusiness.calcularTotales(gasto);
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_ANUAL, "99");
+        assertTrue(servicioPresupuestoBusiness.isPresupuestoAnualAlcanzado());
+    }
+
+    public void testTotalPredeterminado() {
+        servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_DIARIO);
+        assertEquals(AppConstants.PERIODO_DIARIO, servicioPresupuestoBusiness.obtenerTotalPredeterminado());
+    }
+
+    private Gasto crearGastoTest() {
+        Gasto gasto = new Gasto();
+        SimpleDateFormat formato = new SimpleDateFormat(AppConstants.FECHA_VISTA);
+        gasto.setFecha(formato.format(Calendar.getInstance().getTime()));
+        gasto.setImporte("100");
+        gasto.setCategoria("Test");
+        return gasto;
+    }
 }
