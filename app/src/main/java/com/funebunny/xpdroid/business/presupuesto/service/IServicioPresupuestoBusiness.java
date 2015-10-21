@@ -48,4 +48,6 @@ public interface IServicioPresupuestoBusiness {
     String obtenerTotalPredeterminado();
 
     void actualizarTotalPredeterminado(String predeterminado);
+
+    void limpiarTotales();
 }

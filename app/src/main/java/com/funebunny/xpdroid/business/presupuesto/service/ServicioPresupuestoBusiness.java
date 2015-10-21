@@ -78,7 +78,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     boolean isNuevaSemana() {
         Calendar calendar = Calendar.getInstance();
         int semanaActual = calendar.get(Calendar.WEEK_OF_YEAR);
-        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         int semanaAyer = calendar.get(Calendar.WEEK_OF_YEAR);
         return semanaActual != semanaAyer;
     }
@@ -86,7 +86,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     boolean isNuevoMes() {
         Calendar calendar = Calendar.getInstance();
         int mesActual = calendar.get(Calendar.MONTH);
-        calendar.add(Calendar.MONTH, -1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         int mesAyer = calendar.get(Calendar.MONTH);
         return mesActual != mesAyer;
     }
@@ -94,7 +94,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     boolean isNuevoAnio() {
         Calendar calendar = Calendar.getInstance();
         int anioActual = calendar.get(Calendar.YEAR);
-        calendar.add(Calendar.YEAR, -1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         int anioAyer = calendar.get(Calendar.YEAR);
         return anioActual != anioAyer;
     }
@@ -330,12 +330,20 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         return servicioPresupuestoDAO.obtenerTotales().getTotalMensual();
     }
 
+    @Override
+    public void limpiarTotales() {
+        servicioPresupuestoDAO.guardarTotalDiario("0");
+        servicioPresupuestoDAO.guardarTotalSemanal("0");
+        servicioPresupuestoDAO.guardarTotalMensual("0");
+        servicioPresupuestoDAO.guardarTotalAnual("0");
+    }
+
     private String restar(String total, String importe) {
         BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
-        Log.d("XPDROID", "Restando: "+bdTotal+" - "+bdImporteGasto);
+        Log.d("XPDROID", "Restando: " + bdTotal + " - " + bdImporteGasto);
         bdTotal = bdTotal.subtract(bdImporteGasto);
-        Log.d("XPDROID", "Resultado: "+bdTotal);
+        Log.d("XPDROID", "Resultado: " + bdTotal);
         return bdTotal.toPlainString();
 
     }
@@ -343,9 +351,9 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
     private String sumar(String total, String importe) {
         BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdImporteGasto = new BigDecimal(importe);
-        Log.d("XPDROID", "Sumar: "+bdTotal+" - "+bdImporteGasto);
+        Log.d("XPDROID", "Sumar: " + bdTotal + " - " + bdImporteGasto);
         bdTotal = bdTotal.add(bdImporteGasto);
-        Log.d("XPDROID", "Resultado: "+bdTotal);
+        Log.d("XPDROID", "Resultado: " + bdTotal);
         return bdTotal.toPlainString();
     }
 
