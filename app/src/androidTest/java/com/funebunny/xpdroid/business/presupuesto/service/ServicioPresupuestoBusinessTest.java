@@ -3,14 +3,11 @@ package com.funebunny.xpdroid.business.presupuesto.service;
 import android.test.AndroidTestCase;
 
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
-import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,25 +16,19 @@ import java.util.List;
 public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
 
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness;
-    private ServicioGastosBusiness servicioGastosBusiness;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
         servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
-        servicioGastosBusiness = new ServicioGastosBusiness();
+        servicioPresupuestoBusiness.limpiarTotales();
+        borrarTablaPresupuesto();
     }
 
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
-
-        ArrayList<Presupuesto> presupuestosLista = (ArrayList<Presupuesto>) servicioPresupuestoBusiness.obtenerPresupuesto();
-
-        for (int i = 0; i < presupuestosLista.size(); i++) {
-            servicioPresupuestoBusiness.eliminarPresupuesto(presupuestosLista.get(i).getId());
-        }
 
         servicioPresupuestoBusiness.limpiarTotales();
     }
@@ -135,13 +126,6 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
         assertEquals("0", servicioPresupuestoBusiness.obtenerTotalAnual());
     }
 
-//    public void testCalcularTotales_cambioDeDia() {
-//        Gasto gasto = servicioGastosBusiness.guardarGasto("Test","100","Test", "20/10/2015");
-//        servicioPresupuestoBusiness.calcularTotales();
-//        assertEquals(gasto.getImporte(),servicioPresupuestoBusiness.obtenerTotalDiario());
-//        servicioGastosBusiness.eliminarGasto(gasto.getId());
-//    }
-
     public void testIsPresupuestoDiarioAlcanzado() {
         Gasto gasto = crearGastoTest();
         servicioPresupuestoBusiness.calcularTotales(gasto);
@@ -195,5 +179,13 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
             }
         }
         return presupuestoBuscado;
+    }
+
+    private void borrarTablaPresupuesto() {
+        List<Presupuesto> presupuestoList = servicioPresupuestoBusiness.obtenerPresupuesto();
+
+        for (Presupuesto presupuesto : presupuestoList) {
+            servicioPresupuestoBusiness.eliminarPresupuesto(presupuesto.getId());
+        }
     }
 }
