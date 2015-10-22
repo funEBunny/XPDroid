@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by provirabosch on 17/10/2015.
@@ -48,17 +49,15 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
 
     public void testEliminarPresupuesto() {
         servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_DIARIO, "100");
-        ArrayList<Presupuesto> presupuestosLista = (ArrayList<Presupuesto>) servicioPresupuestoBusiness.obtenerPresupuesto();
-        Presupuesto presupuesto = presupuestosLista.get(0);
+        Presupuesto presupuesto = buscarPresupuesto(AppConstants.PERIODO_DIARIO);
         servicioPresupuestoBusiness.eliminarPresupuesto(presupuesto.getId());
-        presupuestosLista = (ArrayList<Presupuesto>) servicioPresupuestoBusiness.obtenerPresupuesto();
-        assertFalse(presupuestosLista.contains(presupuesto));
+        List<Presupuesto> presupuestoList = servicioPresupuestoBusiness.obtenerPresupuesto();
+        assertFalse(presupuestoList.contains(presupuesto));
     }
 
     public void testActualizarPresupuesto() {
         servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_SEMANAL, "1000");
-        ArrayList<Presupuesto> presupuestosLista = (ArrayList<Presupuesto>) servicioPresupuestoBusiness.obtenerPresupuesto();
-        Presupuesto presupuesto = presupuestosLista.get(0);
+        Presupuesto presupuesto = buscarPresupuesto(AppConstants.PERIODO_SEMANAL);
         String esperado = "2000";
         presupuesto.setImporte(esperado);
         servicioPresupuestoBusiness.actualizarPresupuesto(presupuesto);
@@ -183,5 +182,18 @@ public class ServicioPresupuestoBusinessTest extends AndroidTestCase {
         gasto.setImporte("100");
         gasto.setCategoria("Test");
         return gasto;
+    }
+
+    private Presupuesto buscarPresupuesto(String periodo) {
+        Presupuesto presupuestoBuscado = null;
+        List<Presupuesto> presupuestoList = servicioPresupuestoBusiness.obtenerPresupuesto();
+
+        for (Presupuesto presupuesto : presupuestoList) {
+            String periodoPresupuesto = presupuesto.getPeriodo();
+            if (periodo.equals(periodoPresupuesto)) {
+                presupuestoBuscado = presupuesto;
+            }
+        }
+        return presupuestoBuscado;
     }
 }
