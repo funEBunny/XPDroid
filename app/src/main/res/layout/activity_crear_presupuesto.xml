@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/guardar"
-            android:id="@+id/button"
+            android:id="@+id/activity_crear_presupuesto_bt_guardar"
             android:layout_centerInParent="true"
             android:onClick="guardarPresupuesto" />
     </RelativeLayout>
