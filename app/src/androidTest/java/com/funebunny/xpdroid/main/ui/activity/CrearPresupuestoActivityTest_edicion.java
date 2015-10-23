@@ -29,14 +29,13 @@ public class CrearPresupuestoActivityTest_edicion extends ActivityInstrumentatio
 
     public CrearPresupuestoActivityTest_edicion() {
         super(CrearPresupuestoActivity.class);
-
-        servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
-        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_DIARIO, "100");
     }
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_DIARIO, "100");
 
         injectInstrumentation(InstrumentationRegistry.getInstrumentation());
 
