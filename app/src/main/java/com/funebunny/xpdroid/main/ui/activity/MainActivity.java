@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Gravity;
@@ -92,7 +91,6 @@ public class MainActivity extends XPDroidActivity
 
         //To allow Up navigation with the app icon in the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override //Implementing method from NavigationDrawerFragment.NavigationDrawerCallbacks
