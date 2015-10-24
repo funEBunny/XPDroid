@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +10,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
+import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
+import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
+import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.List;
 
@@ -30,11 +34,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     private MainActivity mainActivity;
     private ServicioGastosBusiness servicioGastosBusiness;
+    private ServicioPresupuestoBusiness servicioPresupuestoBusiness;
 
     public MainActivityTest() {
         super(MainActivity.class);
         servicioGastosBusiness = new ServicioGastosBusiness();
+        servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
         borrarTablaGastoFavorito();
+        borrarTablaPresupuesto();
     }
 
     @Override
@@ -136,7 +143,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         onView(withId(R.id.action_crear_presupuesto)).perform(click());
     }
 
-    public void testTotales() {
+    public void testTotales_diario() {
 
         mainActivity.runOnUiThread(new Runnable() {
             @Override
@@ -151,11 +158,126 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 .perform(click());
 
         onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
+        ViewActions.closeSoftKeyboard();
         onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
         onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
         onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
         onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
+
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(0)
+//                .perform(click());
     }
+
+//    public void testTotales_semanal() {
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(5)
+//                .perform(click());
+//
+//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
+//        ViewActions.closeSoftKeyboard();
+////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
+//        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(0)
+//                .perform(click());
+//    }
+//
+//    public void testTotales_mensual() {
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(5)
+//                .perform(click());
+//
+//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
+//        ViewActions.closeSoftKeyboard();
+////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
+//        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(0)
+//                .perform(click());
+//    }
+//
+//    public void testTotales_anual() {
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(5)
+//                .perform(click());
+//
+//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
+//        ViewActions.closeSoftKeyboard();
+////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
+////        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
+//        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
+//
+//        mainActivity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                openDrawer();
+//            }
+//        });
+//
+//        onData(anything())
+//                .inAdapterView(withId(R.id.navigation_drawer))
+//                .atPosition(0)
+//                .perform(click());
+//    }
 
     public void testAcercaDe() {
 
@@ -176,7 +298,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     public void testCrearGastoPorFavorito() {
 
-        servicioGastosBusiness.guardarGastoFavorito("Favorito","10","Varios");
+        servicioGastosBusiness.guardarGastoFavorito("Favorito", "10", "Varios");
         mainActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -197,6 +319,27 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     }
 
+    public void testAlertaPresupuesto() {
+        borrarTablaPresupuesto();
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_DIARIO, "1");
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_SEMANAL, "2");
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_MENSUAL, "3");
+        servicioPresupuestoBusiness.guardarPresupuesto(AppConstants.PERIODO_ANUAL, "4");
+        servicioGastosBusiness.guardarGasto("Test Presupuesto", "5", "Varios", "24/10/2015");
+        mainActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                openDrawer();
+            }
+        });
+
+        onData(anything())
+                .inAdapterView(withId(R.id.navigation_drawer))
+                .atPosition(0)
+                .perform(click());
+        onView(withId(R.id.fragment_main_el_alerta_presupuesto)).perform(click());
+    }
+
     private void openDrawer() {
         DrawerLayout drawerLayout = (DrawerLayout) mainActivity.findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(GravityCompat.START);
@@ -207,6 +350,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         for (GastoFavorito gastoFavorito : gastoFavoritoList) {
             servicioGastosBusiness.eliminarGastoFavorito(gastoFavorito.getId());
+        }
+    }
+
+    private void borrarTablaPresupuesto() {
+        List<Presupuesto> presupuestoList = servicioPresupuestoBusiness.obtenerPresupuesto();
+
+        for (Presupuesto presupuesto : presupuestoList) {
+            servicioPresupuestoBusiness.eliminarPresupuesto(presupuesto.getId());
         }
     }
 
