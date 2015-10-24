@@ -27,7 +27,7 @@ public interface IServicioGastosBusiness {
     String getDiaSemana(int diaSemana);
 
     // Gastos Favoritos
-    void guardarGastoFavorito(String descripcion, String importe, String categoria);
+    GastoFavorito guardarGastoFavorito(String descripcion, String importe, String categoria);
 
     List<GastoFavorito> obtenerGastosFavoritos();
 

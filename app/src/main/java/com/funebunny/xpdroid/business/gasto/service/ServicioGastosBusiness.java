@@ -131,14 +131,15 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
 
     }
     // Gastos Favoritos
-    public void guardarGastoFavorito(String descripcion, String importe, String categoria) {
+    public GastoFavorito guardarGastoFavorito(String descripcion, String importe, String categoria) {
         Log.d("XPDROID", "Guardar Gasto Favorito");
         GastoFavorito gastoFavorito = new GastoFavorito();
         gastoFavorito.setDescripcion(descripcion);
         gastoFavorito.setImporte(importe);
         gastoFavorito.setCategoria(categoria);
-        servicioGastosDAO.guardarGastoFavorito(gastoFavorito);
-
+//        servicioGastosDAO.guardarGastoFavorito(gastoFavorito);
+        gastoFavorito.setId(servicioGastosDAO.guardarGastoFavorito(gastoFavorito));
+        return gastoFavorito;
     }
 
     public List<GastoFavorito> obtenerGastosFavoritos() {
