@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
@@ -16,7 +12,6 @@ import com.funebunny.xpdroid.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static com.funebunny.xpdroid.utilities.AppUtilities.hideSoftKeyboard;
 
 public class XPDroidActivity extends ActionBarActivity {
 
@@ -73,33 +68,5 @@ public class XPDroidActivity extends ActionBarActivity {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
-    }
-
-    // Lógica para ocultar teclado cuando se toca fuera del EditText activo
-    protected void setupUI(View view) {
-
-        //Set up touch listener for non-text box views to hide keyboard.
-        if (!(view instanceof EditText)) {
-
-            view.setOnTouchListener(new View.OnTouchListener() {
-
-                public boolean onTouch(View v, MotionEvent event) {
-                    hideSoftKeyboard(XPDroidActivity.this);
-                    return false;
-                }
-
-            });
-        }
-
-        //If a layout container, iterate over children and seed recursion.
-        if (view instanceof ViewGroup) {
-
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-
-                View innerView = ((ViewGroup) view).getChildAt(i);
-
-                setupUI(innerView);
-            }
-        }
     }
 }

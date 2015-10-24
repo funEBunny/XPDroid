@@ -143,7 +143,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         onView(withId(R.id.action_crear_presupuesto)).perform(click());
     }
 
-    public void testTotales_diario() {
+    public void testTotales() {
 
         mainActivity.runOnUiThread(new Runnable() {
             @Override
@@ -164,120 +164,58 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
         onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
 
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(0)
-//                .perform(click());
     }
 
-//    public void testTotales_semanal() {
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(5)
-//                .perform(click());
-//
-//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
-//        ViewActions.closeSoftKeyboard();
-////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
-//        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(0)
-//                .perform(click());
-//    }
-//
-//    public void testTotales_mensual() {
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(5)
-//                .perform(click());
-//
-//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
-//        ViewActions.closeSoftKeyboard();
-////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
-//        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(0)
-//                .perform(click());
-//    }
-//
-//    public void testTotales_anual() {
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(5)
-//                .perform(click());
-//
-//        onView(allOf(withText("Totales"), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
-//        ViewActions.closeSoftKeyboard();
-////        onView(withId(R.id.fragment_totalesitem_list_rb_diario)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_semanal)).perform(click());
-////        onView(withId(R.id.fragment_totalesitem_list_rb_mensual)).perform(click());
-//        onView(withId(R.id.fragment_totalesitem_list_rb_anual)).perform(click());
-//
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                openDrawer();
-//            }
-//        });
-//
-//        onData(anything())
-//                .inAdapterView(withId(R.id.navigation_drawer))
-//                .atPosition(0)
-//                .perform(click());
-//    }
+    public void testTotales_semanal() {
+
+        servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_SEMANAL);
+
+        mainActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                openDrawer();
+            }
+        });
+
+        onData(anything())
+                .inAdapterView(withId(R.id.navigation_drawer))
+                .atPosition(0)
+                .perform(click());
+    }
+
+    public void testTotales_mensuall() {
+
+        servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_MENSUAL);
+
+        mainActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                openDrawer();
+            }
+        });
+
+        onData(anything())
+                .inAdapterView(withId(R.id.navigation_drawer))
+                .atPosition(0)
+                .perform(click());
+    }
+
+    public void testTotales_anual() {
+
+        servicioPresupuestoBusiness.actualizarTotalPredeterminado(AppConstants.PERIODO_ANUAL);
+
+        mainActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                openDrawer();
+            }
+        });
+
+        onData(anything())
+                .inAdapterView(withId(R.id.navigation_drawer))
+                .atPosition(0)
+                .perform(click());
+    }
 
     public void testAcercaDe() {
 

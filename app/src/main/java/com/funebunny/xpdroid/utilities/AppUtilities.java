@@ -9,12 +9,7 @@ package com.funebunny.xpdroid.utilities;
 /**
  * Created by provirabosch on 01/05/2015.
  */
-public class AppUtilities {
-
-    public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
+public final class AppUtilities {
 
     public static String formatearImporte(String importe){
 

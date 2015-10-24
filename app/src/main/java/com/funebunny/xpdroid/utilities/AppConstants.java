@@ -3,7 +3,7 @@ package com.funebunny.xpdroid.utilities;
 /**
  * Created by provirabosch on 01/05/2015.
  */
-public class AppConstants {
+public final class AppConstants {
 
     public static final int SPLASH_TIME_OUT = 1000;
 
