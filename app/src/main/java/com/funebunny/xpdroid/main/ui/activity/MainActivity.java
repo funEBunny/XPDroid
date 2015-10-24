@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Gravity;
@@ -278,9 +279,9 @@ public class MainActivity extends XPDroidActivity
         Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
 
         switch (id) {
-            case R.id.action_settings: {
-                return true;
-            }
+//            case R.id.action_settings: {
+//                return true;
+//            }
 
             case R.id.action_crear_gasto: {
                 Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
@@ -338,7 +339,6 @@ public class MainActivity extends XPDroidActivity
 
         return super.onOptionsItemSelected(item);
     }
-
 
     //TODO: VA A SER UTILIZADO SOLO PARA LA OPCION DE NAV DRAWER "Inicio"
 
@@ -480,65 +480,65 @@ public class MainActivity extends XPDroidActivity
                 }
             }
 
-            List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
-            RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.fragment_totales_rl);
-            rl.removeAllViews();
-            int id = 0;
-            for (Presupuesto presupuesto : presupuestos) {
-                String periodo = presupuesto.getPeriodo();
-                String predeterminado = servicioPresupuestoBusiness.obtenerTotalPredeterminado();
-                if (!predeterminado.equalsIgnoreCase(periodo)) {
-                    if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
-                        id++;
-                        TextView tv = new TextView(this.getActivity().getApplicationContext());
-                        tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
-                        tv.setId(id);
-                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        if (id > 1) {
-                            lp.addRule(RelativeLayout.BELOW, id - 1);
-                        }
-                        tv.setLayoutParams(lp);
-                        rl.addView(tv);
-                    }
-                    if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)) {
-                        id++;
-                        TextView tv = new TextView(this.getActivity().getApplicationContext());
-                        tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
-                        tv.setId(id);
-                        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        if (id > 1) {
-                            lp2.addRule(RelativeLayout.BELOW, id - 1);
-                        }
-                        tv.setLayoutParams(lp2);
-                        rl.addView(tv);
-                    }
-                    if (AppConstants.PERIODO_MENSUAL.equalsIgnoreCase(periodo)) {
-                        id++;
-                        TextView tv = new TextView(this.getActivity().getApplicationContext());
-                        tv.setText("Total Mensual = $" + servicioPresupuestoBusiness.obtenerTotalMensual());
-                        tv.setId(id);
-                        RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        if (id > 1) {
-                            lp3.addRule(RelativeLayout.BELOW, id - 1);
-                        }
-                        tv.setLayoutParams(lp3);
-                        rl.addView(tv);
-                    }
-                    if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)) {
-                        id++;
-                        TextView tv = new TextView(this.getActivity().getApplicationContext());
-                        tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
-                        tv.setId(id);
-                        RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        if (id > 1) {
-                            lp4.addRule(RelativeLayout.BELOW, id - 1);
-                        }
-                        tv.setLayoutParams(lp4);
-                        rl.addView(tv);
-                    }
-
-                }
-            }
+//            List<Presupuesto> presupuestos = servicioPresupuestoBusiness.obtenerPresupuesto();
+//            RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.fragment_totales_rl);
+//            rl.removeAllViews();
+//            int id = 0;
+//            for (Presupuesto presupuesto : presupuestos) {
+//                String periodo = presupuesto.getPeriodo();
+//                String predeterminado = servicioPresupuestoBusiness.obtenerTotalPredeterminado();
+//                if (!predeterminado.equalsIgnoreCase(periodo)) {
+//                    if (AppConstants.PERIODO_DIARIO.equalsIgnoreCase(periodo)) {
+//                        id++;
+//                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+//                        tv.setText("Total Diario = $" + servicioPresupuestoBusiness.obtenerTotalDiario());
+//                        tv.setId(id);
+//                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                        if (id > 1) {
+//                            lp.addRule(RelativeLayout.BELOW, id - 1);
+//                        }
+//                        tv.setLayoutParams(lp);
+//                        rl.addView(tv);
+//                    }
+//                    if (AppConstants.PERIODO_SEMANAL.equalsIgnoreCase(periodo)) {
+//                        id++;
+//                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+//                        tv.setText("Total Semanal = $" + servicioPresupuestoBusiness.obtenerTotalSemanal());
+//                        tv.setId(id);
+//                        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                        if (id > 1) {
+//                            lp2.addRule(RelativeLayout.BELOW, id - 1);
+//                        }
+//                        tv.setLayoutParams(lp2);
+//                        rl.addView(tv);
+//                    }
+//                    if (AppConstants.PERIODO_MENSUAL.equalsIgnoreCase(periodo)) {
+//                        id++;
+//                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+//                        tv.setText("Total Mensual = $" + servicioPresupuestoBusiness.obtenerTotalMensual());
+//                        tv.setId(id);
+//                        RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                        if (id > 1) {
+//                            lp3.addRule(RelativeLayout.BELOW, id - 1);
+//                        }
+//                        tv.setLayoutParams(lp3);
+//                        rl.addView(tv);
+//                    }
+//                    if (AppConstants.PERIODO_ANUAL.equalsIgnoreCase(periodo)) {
+//                        id++;
+//                        TextView tv = new TextView(this.getActivity().getApplicationContext());
+//                        tv.setText("Total Anual = $" + servicioPresupuestoBusiness.obtenerTotalAnual());
+//                        tv.setId(id);
+//                        RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                        if (id > 1) {
+//                            lp4.addRule(RelativeLayout.BELOW, id - 1);
+//                        }
+//                        tv.setLayoutParams(lp4);
+//                        rl.addView(tv);
+//                    }
+//
+//                }
+//            }
         }
     }
 
