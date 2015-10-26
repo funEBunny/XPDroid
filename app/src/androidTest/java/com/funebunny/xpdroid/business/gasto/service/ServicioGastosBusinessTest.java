@@ -4,6 +4,7 @@ import android.test.AndroidTestCase;
 
 import com.funebunny.xpdroid.backend.gasto.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
+import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
 
 import java.util.Calendar;
@@ -17,6 +18,8 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
     private ServicioGastosBusiness servicioGastosBusiness;
     private List<Gasto> gastos;
     private Gasto gasto;
+    private List<GastoFavorito> gastoFavoritos;
+    private GastoFavorito gastoFavorito;
     private List<GastoProgramable> gastoProgramables;
     private GastoProgramable gastoProgramable;
 
@@ -123,32 +126,101 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
     public void testGuardarActualizarObtenerEliminarGastoFavoritos(){
 
         // GUARDAR
+        servicioGastosBusiness.guardarGastoFavorito("Gastos1", "100.50", "Varios");
+        gastoFavoritos = servicioGastosBusiness.obtenerGastosFavoritos();
+        gastoFavorito = gastoFavoritos.get(0);
+        assertEquals("Gastos1", gastoFavorito.getDescripcion());
+        assertEquals("100.50", gastoFavorito.getImporte());
+        assertEquals("Varios", gastoFavorito.getCategoria());
 
+        servicioGastosBusiness.guardarGastoFavorito("Gastos2", "1500", "Supermercado");
+        gastoFavoritos = servicioGastosBusiness.obtenerGastosFavoritos();
+        assertEquals(2, gastoFavoritos.size());
+
+        gastoFavorito = gastoFavoritos.get(0); // obtenerGastos ordena por Categoria solo
+        assertEquals("Gastos1", gastoFavorito.getDescripcion());
+        assertEquals("100.50", gastoFavorito.getImporte());
+        assertEquals("Varios", gastoFavorito.getCategoria());
+
+        gastoFavorito = gastoFavoritos.get(1);
+        assertEquals("Gastos2", gastoFavorito.getDescripcion());
+        assertEquals("1500", gastoFavorito.getImporte());
+        assertEquals("Supermercado", gastoFavorito.getCategoria());
 
         // ACTUALIZAR
-
-
-        // OBTENER
-
+        gastoFavorito = gastoFavoritos.get(1);
+        gastoFavorito.setDescripcion("Gastos2");
+        gastoFavorito.setImporte("2000");
+        gastoFavorito.setCategoria("Supermercado");
+        servicioGastosBusiness.actualizarGastoFavorito(gastoFavorito);
+        gastoFavoritos = servicioGastosBusiness.obtenerGastosFavoritos();
+        gastoFavorito = gastoFavoritos.get(1);
+        assertEquals("Gastos2", gastoFavorito.getDescripcion());
+        assertEquals("2000", gastoFavorito.getImporte());
+        assertEquals("Supermercado", gastoFavorito.getCategoria());
 
         // ELIMINAR
-
+        gastoFavoritos = servicioGastosBusiness.obtenerGastosFavoritos();
+        for (GastoFavorito gf: gastoFavoritos) {
+            servicioGastosBusiness.eliminarGastoFavorito(gf.getId());
+        }
+        gastoFavoritos = servicioGastosBusiness.obtenerGastosFavoritos();
+        assertEquals(0, gastoFavoritos.size());
 
     }
 
     public void testGuardarActualizarObtenerEliminarGastoProgramables(){
 
-        // GUARDAR
+//        // GUARDAR
+//        servicioGastosBusiness.guardarGastoProgramable(getContext(), );
+//        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+//        gastoProgramable = gastoProgramables.get(0);
+//        assertEquals("", gastoProgramable.getDescripcion());
+//        assertEquals("", gastoProgramable.getHora());
+//        assertEquals("", gastoProgramable.getImporte());
+//        assertEquals("", gastoProgramable.getCategoria());
+//
+//        servicioGastosBusiness.guardarGastoProgramable(getContext(), );
+//        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+//        assertEquals(2, gastoProgramables.size());
+//
+//        gastoProgramable = gastoProgramables.get(0); // obtenerGastos ordena por Categoria solo
+//        assertEquals("Gastos1", gastoProgramable.getDescripcion());
+//        assertEquals("100.50", gastoProgramable.getImporte());
+//        assertEquals("Varios", gastoProgramable.getCategoria());
+//        assertEquals("", gastoProgramable.getHora());
+//
+//        gastoProgramable = gastoProgramables.get(1);
+//        assertEquals("Gastos2", gastoProgramable.getDescripcion());
+//        assertEquals("1500", gastoProgramable.getImporte());
+//        assertEquals("Supermercado", gastoProgramable.getCategoria());
+//        assertEquals("", gastoProgramable.getHora());
+//
+//        // ACTUALIZAR
+//        gastoProgramable = gastoProgramables.get(1);
+//        gastoProgramable.setDescripcion("Gastos2");
+//        gastoProgramable.setCategoria("Supermercado");
+//        gastoProgramable.setImporte("2000");
+//        gastoProgramable.setHora("");
+//        servicioGastosBusiness.actualizarGastoProgramable(getContext(), gastoProgramable);
+//        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+//        gastoProgramable = gastoProgramables.get(1);
+//        assertEquals("Gastos2", gastoProgramable.getDescripcion());
+//        assertEquals("2000", gastoProgramable.getImporte());
+//        assertEquals("Supermercado", gastoProgramable.getCategoria());
+//        assertEquals("", gastoProgramable.getHora());
+//
+//        // ELIMINAR
+//        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+//        for (GastoProgramable gp: gastoProgramables) {
+//            servicioGastosBusiness.eliminarGastoProgramable(getContext(), gp.getId());
+//        }
+//        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+//        assertEquals(0, gastoProgramables.size());
 
+    }
 
-        // ACTUALIZAR
-
-
-        // OBTENER
-
-
-        // ELIMINAR
-
+    public void testGetDiaSemana() {
 
     }
 
