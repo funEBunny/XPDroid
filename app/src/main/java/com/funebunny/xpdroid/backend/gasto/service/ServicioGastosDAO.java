@@ -159,15 +159,15 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
                     ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
                     break;
                 }
-                case GastoProgramableDAO.MENSUAL: {
-                    gastoProgramable = new GastoProgMensual();
-                    ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
-                    break;
-                }
-                case GastoProgramableDAO.ANUAL: {
-                    gastoProgramable = new GastoProgAnual();
-                    break;
-                }
+//                case GastoProgramableDAO.MENSUAL: {
+//                    gastoProgramable = new GastoProgMensual();
+//                    ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+//                    break;
+//                }
+//                case GastoProgramableDAO.ANUAL: {
+//                    gastoProgramable = new GastoProgAnual();
+//                    break;
+//                }
                 default: {
                     gastoProgramable = new GastoProgDiario();
                     break;
@@ -207,15 +207,15 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
                 ((GastoProgSemanal) gastoProgramable).setDiaSemana(gastoProgramableDAO.getDiaSemana());
                 break;
             }
-            case GastoProgramableDAO.MENSUAL: {
-                gastoProgramable = new GastoProgMensual();
-                ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
-                break;
-            }
-            case GastoProgramableDAO.ANUAL: {
-                gastoProgramable = new GastoProgAnual();
-                break;
-            }
+//            case GastoProgramableDAO.MENSUAL: {
+//                gastoProgramable = new GastoProgMensual();
+//                ((GastoProgMensual) gastoProgramable).setDiaMes(gastoProgramableDAO.getDiaMes());
+//                break;
+//            }
+//            case GastoProgramableDAO.ANUAL: {
+//                gastoProgramable = new GastoProgAnual();
+//                break;
+//            }
             default: {
                 gastoProgramable = new GastoProgDiario();
                 break;
@@ -333,7 +333,5 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         ArrayList<GastoFavoritoDAO> gastosFavLista = new Select().from(GastoFavoritoDAO.class).where("Id = ?", id).execute();
         return gastosFavLista.get(0);
     }
-
-
 
 }

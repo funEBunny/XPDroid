@@ -137,7 +137,6 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         gastoFavorito.setDescripcion(descripcion);
         gastoFavorito.setImporte(importe);
         gastoFavorito.setCategoria(categoria);
-//        servicioGastosDAO.guardarGastoFavorito(gastoFavorito);
         gastoFavorito.setId(servicioGastosDAO.guardarGastoFavorito(gastoFavorito));
         return gastoFavorito;
     }
