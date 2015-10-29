@@ -262,6 +262,7 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos4", "semanal", "15:04", "2503", "Varios", "Jueves");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos5", "semanal", "15:05", "2504", "Varios", "Viernes");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Sabado");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Domingo");
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(0);
         assertEquals("Lunes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
@@ -280,6 +281,9 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(5);
         assertEquals("Sabado", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(6);
+        assertEquals("Domingo", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
 
         // ELIMINAR
         gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
