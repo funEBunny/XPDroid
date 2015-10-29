@@ -6,6 +6,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.funebunny.xpdroid.R;
 
+import java.util.Locale;
+
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -42,7 +44,11 @@ public class CrearGastoActivityTest extends ActivityInstrumentationTestCase2<Cre
         String descripcionEsperada = "Test Gasto";
         onView(withId(R.id.activity_crear_gasto_et_importe)).perform(typeText(importeEsperado), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.activity_crear_gasto_ib_date_picker)).perform(click());
-        onView(withText("Set")).perform(click());
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            onView(withText("Set")).perform(click());
+        } else {
+            onView(withText("Listo")).perform(click());
+        }
         onView(withId(R.id.activity_crear_gasto_sp_categoria)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(categoriaEsperada))).perform(click());
         onView(withId(R.id.activity_crear_gasto_et_descripcion)).perform(typeText(descripcionEsperada), ViewActions.closeSoftKeyboard());
