@@ -5,6 +5,7 @@ import android.test.AndroidTestCase;
 import com.funebunny.xpdroid.backend.gasto.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
+import com.funebunny.xpdroid.business.gasto.model.GastoProgSemanal;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
 
 import java.util.Calendar;
@@ -206,7 +207,7 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
         assertEquals("1500", gastoProgramable.getImporte());
         assertEquals("Supermercado", gastoProgramable.getCategoria());
 
-        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos2", "semanal", "15:01", "2500", "Varios", "lunes");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos2", "semanal", "15:01", "2500", "Varios", "Lunes");
         gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
         assertEquals(2, gastoProgramables.size());
 
@@ -247,7 +248,46 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
     }
 
     public void testGetDiaSemana() {
+        // LIMPIA TODOS LOS GASTOS PROGRAMABLES CARGADOS EN OTROS TESTS!!!
+        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+        for (GastoProgramable gp: gastoProgramables) {
+            servicioGastosBusiness.eliminarGastoProgramable(getContext(), gp.getId());
+        }
+        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+        assertEquals(0, gastoProgramables.size());
 
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos1", "semanal", "15:01", "2500", "Varios", "Lunes");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos2", "semanal", "15:02", "2501", "Varios", "Martes");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos3", "semanal", "15:03", "2502", "Varios", "Miercoles");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos4", "semanal", "15:04", "2503", "Varios", "Jueves");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos5", "semanal", "15:05", "2504", "Varios", "Viernes");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Sabado");
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(0);
+        assertEquals("Lunes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(1);
+        assertEquals("Martes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(2);
+        assertEquals("Miercoles", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(3);
+        assertEquals("Jueves", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(4);
+        assertEquals("Viernes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(5);
+        assertEquals("Sabado", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+
+        // ELIMINAR
+        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+        for (GastoProgramable gp: gastoProgramables) {
+            servicioGastosBusiness.eliminarGastoProgramable(getContext(), gp.getId());
+        }
+        gastoProgramables = servicioGastosBusiness.obtenerGastosProgramables();
+        assertEquals(0, gastoProgramables.size());
     }
 
 }
