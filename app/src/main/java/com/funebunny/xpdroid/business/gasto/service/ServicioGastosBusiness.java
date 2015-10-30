@@ -89,7 +89,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
                 dia = Calendar.SATURDAY;
                 break;
             default:
-                dia = Calendar.SATURDAY;
+                dia = Calendar.SUNDAY;
                 break;
         }
         return dia;
