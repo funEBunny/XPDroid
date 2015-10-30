@@ -16,7 +16,7 @@ public interface IServicioGastosBusiness {
 
     List<GastoProgramable> obtenerGastosProgramables();
 
-    void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana);
+    GastoProgramable guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana);
 
     void eliminarGastoProgramable(Context applicationContext, Long id);
 

@@ -34,7 +34,7 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         return  servicioGastosDAO.obtenerGastosProgramables();
     }
 
-    public void guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana) {
+    public GastoProgramable guardarGastoProgramable(Context applicationContext, String descripcion, String repeticion, String horario, String importe, String categoria, String diaSemana) {
         Log.d("XPDROID", "Guardando Gastos Programables");
         GastoProgramable gp;
 
@@ -49,15 +49,15 @@ public class ServicioGastosBusiness implements IServicioGastosBusiness {
         gp.setImporte(importe);
         gp.setDescripcion(descripcion);
         gp.setCategoria(categoria);
-
-        Long id = servicioGastosDAO.guardarGastoProgramable(gp);
-
+        gp.setId(servicioGastosDAO.guardarGastoProgramable(gp));
 
         if (SEMANAL.equalsIgnoreCase(repeticion)) {
-            notificationsService.activarAlarmaSemanal(applicationContext, getDiaSemana(diaSemana), gp.getHora(), id);
+            notificationsService.activarAlarmaSemanal(applicationContext, getDiaSemana(diaSemana), gp.getHora(), gp.getId());
         } else {
-            notificationsService.activarAlarmaDiaria(applicationContext, gp.getHora(), id);
+            notificationsService.activarAlarmaDiaria(applicationContext, gp.getHora(), gp.getId());
         }
+
+        return gp;
     }
 
     public void eliminarGastoProgramable(Context applicationContext, Long id) {
