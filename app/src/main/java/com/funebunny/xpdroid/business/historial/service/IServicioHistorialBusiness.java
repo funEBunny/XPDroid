@@ -16,4 +16,6 @@ public interface IServicioHistorialBusiness {
 
     void guardarHistorial(Gasto gasto);
 
+    void limpiarHistoriales();
+
 }

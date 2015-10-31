@@ -78,6 +78,14 @@ public class ServicioHistorialBusiness implements IServicioHistorialBusiness {
         }
     }
 
+    @Override
+    public void limpiarHistoriales() {
+        List<Historial> historials = servicioHistorialDAO.obtenerListaHistorial();
+        for (Historial historial:historials){
+            servicioHistorialDAO.eliminarHistorial(historial.getId());
+        }
+    }
+
 
     private String restar(String total, String importe) {
 

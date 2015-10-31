@@ -14,49 +14,64 @@ import java.util.List;
  */
 public class ServicioHistorialBusinessTest extends AndroidTestCase {
     ServicioHistorialBusiness servicioHistorialBusiness;
+
+    public ServicioHistorialBusinessTest() {
+        this.servicioHistorialBusiness = new ServicioHistorialBusiness();
+        servicioHistorialBusiness.limpiarHistoriales();
+    }
+
+    /**
+     * @throws Exception
+     */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        servicioHistorialBusiness = new ServicioHistorialBusiness();
-
     }
 
-    public void testObtenerListaHistorial(){
-        List<Historial> historial = servicioHistorialBusiness.obtenerListaHistorial();
 
-    }
+    public void testGuardarEliminarHistorial(){
+        Gasto gasto = new Gasto();
+        gasto.setCategoria("Transporte");
+        gasto.setDescripcion("Gasto Test");
+        gasto.setFecha("23/09/2015");
+        gasto.setImporte("100");
+        servicioHistorialBusiness.guardarHistorial(gasto);
+        List<Historial> historiales = servicioHistorialBusiness.obtenerListaHistorial();
+        Historial historial = historiales.get(0);
+        int anio = historial.getAnio();
+        int mes = historial.getMes();
+        String total = historial.getTotal();
 
-    public void testGuardarNuevoHistorial(){
-//        Gasto gasto = new Gasto();
-//        gasto.setCategoria("Transporte");
-//        gasto.setDescripcion("Gasto Test");
-//        gasto.setFecha("23/09/2015");
-//        gasto.setImporte("100");
-//        servicioHistorialBusiness.guardarHistorial(gasto);
-//        List<Historial> historiales = servicioHistorialBusiness.obtenerListaHistorial();
-//        Historial historial = historiales.get(0);
-//        int anio = historial.getAnio();
-//        int mes = historial.getMes();
-//        String total = historial.getTotal();
-//
-//        assertEquals("2015",String.valueOf(anio));
-//        assertEquals("8",String.valueOf(mes));
-//        assertEquals("100",total);
-//
-//        gasto = new Gasto();
-//        gasto.setCategoria("Transporte");
-//        gasto.setDescripcion("Gasto Test2");
-//        gasto.setFecha("23/09/2015");
-//        gasto.setImporte("100");
-//        servicioHistorialBusiness.guardarHistorial(gasto);
-//        historiales = servicioHistorialBusiness.obtenerListaHistorial();
-//        historial = historiales.get(0);
-//        anio = historial.getAnio();
-//        mes = historial.getMes();
-//        total = historial.getTotal();
-//
-//        assertEquals("2015", String.valueOf(anio));
-//        assertEquals("8", String.valueOf(mes));
-//        assertEquals("200", total);
+        assertEquals("2015",String.valueOf(anio));
+        assertEquals("8",String.valueOf(mes));
+        assertEquals("100",total);
+
+        gasto = new Gasto();
+        gasto.setCategoria("Transporte");
+        gasto.setDescripcion("Gasto Test2");
+        gasto.setFecha("23/09/2015");
+        gasto.setImporte("100");
+        servicioHistorialBusiness.guardarHistorial(gasto);
+        historiales = servicioHistorialBusiness.obtenerListaHistorial();
+        historial = historiales.get(0);
+        anio = historial.getAnio();
+        mes = historial.getMes();
+        total = historial.getTotal();
+
+        assertEquals("2015", String.valueOf(anio));
+        assertEquals("8", String.valueOf(mes));
+        assertEquals("200", total);
+
+        servicioHistorialBusiness.eliminarHistorial(gasto);
+        historiales = servicioHistorialBusiness.obtenerListaHistorial();
+        historial = historiales.get(0);
+        anio = historial.getAnio();
+        mes = historial.getMes();
+        total = historial.getTotal();
+
+        assertEquals("2015", String.valueOf(anio));
+        assertEquals("8", String.valueOf(mes));
+        assertEquals("100", total);
+
     }
 }
