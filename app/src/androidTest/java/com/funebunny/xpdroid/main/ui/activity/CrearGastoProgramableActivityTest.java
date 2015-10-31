@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.action.ViewActions;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -45,10 +46,16 @@ public class CrearGastoProgramableActivityTest extends ActivityInstrumentationTe
         String repeticionEsperada = "Diario";
         onView(withId(R.id.activity_crear_gasto_programable_et_importe)).perform(typeText(importeEsperado), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.activity_crear_gasto_programable_ib_time_picker)).perform(click());
-        if(Locale.getDefault().getLanguage().equals("en")) {
-            onView(withText("Set")).perform(click());
-        } else {
-            onView(withText("Listo")).perform(click());
+
+        switch(Locale.getDefault().getLanguage()){
+            case "en":
+                onView(withText("Set")).perform(click());
+            case "es":
+                try {
+                    onView(withText("Definir")).perform(click());
+                } catch (NoMatchingViewException e) {
+                    onView(withText("Listo")).perform(click());
+                }
         }
         onView(withId(R.id.activity_crear_gasto_programable_sp_categoria)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(categoriaEsperada))).perform(click());
@@ -66,10 +73,16 @@ public class CrearGastoProgramableActivityTest extends ActivityInstrumentationTe
         String diaEsperado = "Jueves";
         onView(withId(R.id.activity_crear_gasto_programable_et_importe)).perform(typeText(importeEsperado), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.activity_crear_gasto_programable_ib_time_picker)).perform(click());
-        if(Locale.getDefault().getLanguage().equals("en")) {
-            onView(withText("Set")).perform(click());
-        } else {
-            onView(withText("Listo")).perform(click());
+
+        switch(Locale.getDefault().getLanguage()){
+            case "en":
+                onView(withText("Set")).perform(click());
+            case "es":
+                try {
+                    onView(withText("Definir")).perform(click());
+                } catch (NoMatchingViewException e) {
+                    onView(withText("Listo")).perform(click());
+                }
         }
         onView(withId(R.id.activity_crear_gasto_programable_sp_categoria)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(categoriaEsperada))).perform(click());
