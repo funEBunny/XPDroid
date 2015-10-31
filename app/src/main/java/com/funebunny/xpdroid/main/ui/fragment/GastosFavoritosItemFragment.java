@@ -18,13 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-
 import com.funebunny.xpdroid.business.gasto.model.GastoFavorito;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoFavoritoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGastoFavorito;
-import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
@@ -178,11 +176,7 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onGastosFavoritosItemSelected(DummyContent.ITEMS.get(position).id);
-        }
+
     }
 
     /**

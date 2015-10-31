@@ -18,13 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearPresupuestoActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.adapter.ListAdapterPresupuesto;
-import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
@@ -172,11 +170,7 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onPresupuestoItemSelected(DummyContent.ITEMS.get(position).id);
-        }
+
     }
 
     /**

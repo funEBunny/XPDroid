@@ -23,7 +23,6 @@ import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoProgramableActivity;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
 import com.funebunny.xpdroid.main.ui.adapter.ListAdapterGastoProgramable;
-import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
@@ -177,14 +176,7 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
     }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onGastosProgramablesItemSelected(DummyContent.ITEMS.get(position).id);
-        }
-    }
+
 
     /**
      * The default content for this Fragment has a TextView that is shown when
@@ -197,6 +189,11 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     /**

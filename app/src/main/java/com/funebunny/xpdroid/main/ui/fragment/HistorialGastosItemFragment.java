@@ -17,16 +17,14 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.funebunny.xpdroid.R;
-
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.historial.model.Historial;
 import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity;
-import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapterHistorialGastos;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.dummy.DummyContent;
+import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapterHistorialGastos;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.util.ArrayList;
@@ -187,11 +185,7 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onHistorialGastosItemSelected(DummyContent.ITEMS.get(position).id);
-        }
+
     }
 
 

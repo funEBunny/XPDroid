@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 
 import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.main.ui.activity.MainActivity;
-import com.funebunny.xpdroid.main.ui.fragment.dummy.DummyContent;
 
 /**
  * Created by I823537 on 15/09/2015.
@@ -58,11 +57,7 @@ public class AcercaDeFragment extends Fragment implements AbsListView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onAcercaDeSelected(DummyContent.ITEMS.get(position).id);
-        }
+
     }
 
     public interface AcercaDeCallbacks {
