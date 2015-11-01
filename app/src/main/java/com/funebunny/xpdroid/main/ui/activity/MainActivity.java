@@ -279,9 +279,6 @@ public class MainActivity extends XPDroidActivity
         Bundle animation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.animator.in_right, R.animator.out_left).toBundle();
 
         switch (id) {
-//            case R.id.action_settings: {
-//                return true;
-//            }
 
             case R.id.action_crear_gasto: {
                 Intent intentCrearGasto = new Intent(this, CrearGastoActivity.class);
@@ -453,7 +450,7 @@ public class MainActivity extends XPDroidActivity
             switch (servicioPresupuestoBusiness.obtenerTotalPredeterminado()) {
 
                 case AppConstants.PERIODO_DIARIO: {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd", new Locale("es", "ES"));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d", new Locale("es", "ES"));
                     String dia = dateFormat.format(Calendar.getInstance().getTime());
                     dia = Character.toUpperCase(dia.charAt(0)) + dia.substring(1);
                     ((TextView) view.findViewById(R.id.fragment_main_tv_periodo)).setText(dia);
