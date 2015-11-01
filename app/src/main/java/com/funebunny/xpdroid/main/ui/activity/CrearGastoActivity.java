@@ -42,6 +42,7 @@ public class CrearGastoActivity extends XPDroidActivity {
 
             if (gasto.getId() != null) {    //Se está editando un gasto, entonces tomo la fecha del gasto
                 ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(gasto.getFecha());
+                setTitle(R.string.title_activity_editar_gasto);
             } else {    //Se trata de un gasto programable, entonces uso fecha del día
                 ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(getFechaActual());
             }
