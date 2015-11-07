@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:clickable="false"
-    android:id="@+id/fragment_historialgastos_ll_main">
+    android:id="@+id/fragment_historialgastos_rl_main">
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -24,6 +24,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_historialgastos_el_gastos"
-        android:divider="@drawable/abc_list_divider_mtrl_alpha" />
+        android:divider="@drawable/abc_list_divider_mtrl_alpha"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/no_hay_gastos"
+        android:id="@+id/fragment_historialgastos_tv_nodata"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

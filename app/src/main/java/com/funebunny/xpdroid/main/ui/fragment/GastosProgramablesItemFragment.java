@@ -158,6 +158,10 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         super.onResume();
         this.gastosProgramables.clear();
         this.gastosProgramables.addAll(servicioGastosBusiness.obtenerGastosProgramables());
+
+        if (gastosProgramables.isEmpty()) mostrarNoData();
+        else ocultarNoData();
+
         mAdapter = new ListAdapterGastoProgramable(getActivity(), R.layout.gastos_programables_list_item, gastosProgramables);
         View view = getView();
 
@@ -174,8 +178,6 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         super.onDetach();
         mListener = null;
     }
-
-
 
 
     /**
@@ -216,8 +218,17 @@ public class GastosProgramablesItemFragment extends Fragment implements AbsListV
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_gasto_programable, menu);
     }
 
+    private void mostrarNoData() {
+        //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados
+        getView().findViewById(R.id.fragment_gastosprogramables_tv_nodata).setVisibility(View.VISIBLE);
+    }
+
+    private void ocultarNoData() {
+        (getView().findViewById(R.id.fragment_gastosprogramables_tv_nodata)).setVisibility(View.GONE);
+    }
 }

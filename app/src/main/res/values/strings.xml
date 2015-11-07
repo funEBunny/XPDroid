@@ -111,6 +111,9 @@
     <string name="info_limite_presupuesto_alcanzado">Límite de presupuesto alcanzado</string>
     <string name="presupuesto_existente">Presupuesto %1$s existente</string>
     <string name="no_hay_favoritos">No hay Favoritos grabados</string>
+    <string name="no_hay_gastos">No hay Gastos grabados</string>
+    <string name="no_hay_programables">No hay Gastos Programables grabados</string>
+    <string name="no_hay_presupuesto">No hay Presupuestos grabados</string>
     <string name="mis_favoritos">Mis Favoritos</string>
     <string name="alerta_presupuesto">Presupuesto excedido!</string>
     <string name="gastos_programados_titulo">Gastos Programados:</string>

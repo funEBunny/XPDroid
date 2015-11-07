@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.funebunny.xpdroid.main.ui.fragment.PresupuestoItemFragment"
     android:orientation="vertical"
-    android:id="@+id/fragment_presupuestoitem_list_ll_main">
+    android:id="@+id/fragment_presupuestoitem_list_rl_main">
 
     <ListView android:id="@+id/fragment_presupuestoitem_list_lv_lista" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/no_hay_presupuesto"
+        android:id="@+id/fragment_presupuestoitem_list_tv_nodata"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

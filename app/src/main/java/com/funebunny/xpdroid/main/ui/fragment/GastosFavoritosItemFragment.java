@@ -146,6 +146,9 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
         this.gastosFavoritos.clear();
         this.gastosFavoritos.addAll(servicioGastos.obtenerGastosFavoritos());
 
+        if (gastosFavoritos.isEmpty()) mostrarNoData();
+        else ocultarNoData();
+
         mAdapter = new ListAdapterGastoFavorito(getActivity(), R.layout.gastos_favoritos_list_item, gastosFavoritos);
         View view = getView();
 
@@ -210,5 +213,14 @@ public class GastosFavoritosItemFragment extends Fragment implements AbsListView
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_gasto_favorito, menu);
+    }
+
+    private void mostrarNoData() {
+        //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados
+        getView().findViewById(R.id.fragment_gastosfavoritos_tv_nodata).setVisibility(View.VISIBLE);
+    }
+
+    private void ocultarNoData() {
+        (getView().findViewById(R.id.fragment_gastosfavoritos_tv_nodata)).setVisibility(View.GONE);
     }
 }

@@ -152,6 +152,10 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
         expandableHistorial = (ExpandableListView) getView().findViewById(R.id.fragment_historialgastos_el_gastos);
         ArrayList<Historial> listaHistorial = (ArrayList<Historial>) servicioHistorialBusiness.obtenerListaHistorial();
+
+        if (listaHistorial.isEmpty()) mostrarNoData();
+        else ocultarNoData();
+
         expandableAdapterHistorialGastos = new ExpandableAdapterHistorialGastos(getView().getContext(), listaHistorial);
         expandableHistorial.setAdapter(expandableAdapterHistorialGastos);
         registerForContextMenu(expandableHistorial);
@@ -238,4 +242,12 @@ public class HistorialGastosItemFragment extends Fragment implements AbsListView
 
     }
 
+    private void mostrarNoData() {
+        //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados
+        getView().findViewById(R.id.fragment_historialgastos_tv_nodata).setVisibility(View.VISIBLE);
+    }
+
+    private void ocultarNoData() {
+        (getView().findViewById(R.id.fragment_historialgastos_tv_nodata)).setVisibility(View.GONE);
+    }
 }

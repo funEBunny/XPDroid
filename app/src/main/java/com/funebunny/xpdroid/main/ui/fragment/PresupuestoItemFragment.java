@@ -140,6 +140,9 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
         this.presupuesto.clear();
         this.presupuesto.addAll(servicioPresupuestoBusiness.obtenerPresupuesto());
 
+        if (presupuesto.isEmpty()) mostrarNoData();
+        else ocultarNoData();
+
         mAdapter = new ListAdapterPresupuesto(getActivity(), R.layout.presupuesto_list_item, presupuesto);
         View view = getView();
 
@@ -208,5 +211,13 @@ public class PresupuestoItemFragment extends Fragment implements AbsListView.OnI
     }
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_crear_presupuesto, menu);
+    }
+    private void mostrarNoData() {
+        //Mensaje en pantalla principal que indica que no hay gastos favoritos grabados
+        getView().findViewById(R.id.fragment_presupuestoitem_list_tv_nodata).setVisibility(View.VISIBLE);
+    }
+
+    private void ocultarNoData() {
+        (getView().findViewById(R.id.fragment_presupuestoitem_list_tv_nodata)).setVisibility(View.GONE);
     }
 }

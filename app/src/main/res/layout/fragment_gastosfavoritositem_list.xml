@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment"
     android:orientation="vertical"
-    android:id="@+id/fragment_gastosfavoritositem_list_ll_main">
+    android:id="@+id/fragment_gastosfavoritositem_list_rl_main">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/fragment_gastosfavoritos_tv_nodata"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:text="@string/no_hay_favoritos" />
 
     <ListView android:id="@+id/fragment_gastosfavoritositem_list_lv_lista" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:longClickable="false"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-</LinearLayout>
+</RelativeLayout>

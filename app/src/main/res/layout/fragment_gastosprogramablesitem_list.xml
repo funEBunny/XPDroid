@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:clickable="true">
+    android:clickable="true"
+    android:id="@+id/fragment_gastosprogramablesitem_list_rl_main">
 
     <ListView android:id="@+id/lista_gastos_programables_lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/fragment_gastosprogramables_tv_nodata"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="@string/no_hay_programables" />
+
+</RelativeLayout>
