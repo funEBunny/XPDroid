@@ -30,7 +30,7 @@
             android:id="@+id/activity_crear_presupuesto_et_importe"
             android:layout_centerInParent="true"
             android:hint="@string/importe"
-            style="@style/XPDroidEditText"
+            style="@style/XPDroidEditTextImporte"
             android:layout_weight="2"
             android:layout_gravity="center" />
 

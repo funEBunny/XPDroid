@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +26,14 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_presupuesto);
 
+        //Limitador de dígitos enteros y decimales para campo Importe
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_presupuesto_et_importe);
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
+
         Bundle bPresupuesto = getIntent().getExtras();
         if (bPresupuesto != null) {
             presupuesto = (Presupuesto) bPresupuesto.getSerializable(AppConstants.PRESUPUESTO);
-            ((EditText) findViewById(R.id.activity_crear_presupuesto_et_importe)).setText(presupuesto.getImporte());
+            etImporte.setText(presupuesto.getImporte());
             Spinner sPeriodo = (Spinner) findViewById(R.id.activity_crear_presupuesto_sp_periodo);
             sPeriodo.setSelection(((ArrayAdapter) sPeriodo.getAdapter()).getPosition(presupuesto.getPeriodo()));
             sPeriodo.setEnabled(false);

@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.sax.RootElement;
+import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,13 +35,16 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_gasto_programable);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        Bundle bGastoProgramable = getIntent().getExtras();
+        //Limitador de dígitos enteros y decimales para campo Importe
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe);
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
 
+        Bundle bGastoProgramable = getIntent().getExtras();
         if (bGastoProgramable != null) {
 
             gastoProgramable = (GastoProgramable) bGastoProgramable.getSerializable(AppConstants.GASTO_PROGRAMABLE);
+            etImporte.setText(gastoProgramable.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).setText(gastoProgramable.getDescripcion());
-            ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe)).setText(gastoProgramable.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(String.valueOf(gastoProgramable.getHora()));
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoProgramable.getCategoria()));

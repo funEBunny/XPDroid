@@ -2,6 +2,9 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spanned;
+import android.text.method.DigitsKeyListener;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,4 +72,41 @@ public class XPDroidActivity extends ActionBarActivity {
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
+
+    public class DigitosImporteKeyListener extends DigitsKeyListener{
+
+        private int parteEntera;
+        private int parteDecimal;
+        private Editable text;
+
+        public DigitosImporteKeyListener(int digitosParteEntera, int digitosParteDecimal, Editable etText) {
+            super(false, true);
+            parteDecimal = digitosParteDecimal;
+            parteEntera = digitosParteEntera;
+            text = etText;
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            String temp = text + source.toString();
+
+            if (temp.equals(".")) {
+                return "0.";
+            } else if (temp.toString().indexOf(".") == -1) {
+
+                if (temp.length() > parteEntera) {
+                    return "";
+                }
+            } else {
+                temp = temp.substring(temp.indexOf(".") + 1);
+                if (temp.length() > parteDecimal) {
+                    return "";
+                }
+            }
+
+            return super.filter(source, start, end, dest, dstart, dend);
+        }
+    }
+
 }

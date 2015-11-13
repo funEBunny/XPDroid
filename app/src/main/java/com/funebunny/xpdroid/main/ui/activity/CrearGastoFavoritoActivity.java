@@ -1,6 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +25,15 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_gasto_favorito);
         getSupportActionBar().setHomeButtonEnabled(true);   // Botón para volver a actividad anterior
 
+        //Limitador de dígitos enteros y decimales para campo Importe
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe);
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
+
         Bundle bGastoFavorito = getIntent().getExtras();
         if (bGastoFavorito != null) {
             gastoFavorito = (GastoFavorito) bGastoFavorito.getSerializable(AppConstants.GASTO_FAVORITO);
+            etImporte.setText(gastoFavorito.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_descripcion)).setText(gastoFavorito.getDescripcion());
-            ((EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe)).setText(gastoFavorito.getImporte());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_favorito_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoFavorito.getCategoria()));
 

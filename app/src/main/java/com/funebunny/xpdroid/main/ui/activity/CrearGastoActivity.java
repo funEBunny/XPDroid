@@ -2,6 +2,7 @@ package com.funebunny.xpdroid.main.ui.activity;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,13 +31,15 @@ public class CrearGastoActivity extends XPDroidActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
+        //Limitador de dígitos enteros y decimales para campo Importe
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
 
         Bundle bGasto = getIntent().getExtras();
         if (bGasto != null) {
-
             gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
+            etImporte.setText(gasto.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(gasto.getDescripcion());
-            ((EditText) findViewById(R.id.activity_crear_gasto_et_importe)).setText(gasto.getImporte());
             Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
 

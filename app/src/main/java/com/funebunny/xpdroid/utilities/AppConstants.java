@@ -24,4 +24,6 @@ public final class AppConstants {
     public static final String FECHA_DB = "yyyyMMdd";
     public static final String ANIO = "yyyy";
     public static final String ANIO_MES = "yyyyMM";
+    public static final int CANTIDAD_DECIMALES = 2;
+    public static final int CANTIDAD_ENTEROS = 6;
 }

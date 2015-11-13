@@ -24,7 +24,7 @@
 
         <EditText
             android:id="@+id/activity_crear_gasto_programable_et_importe"
-            style="@style/XPDroidEditText"
+            style="@style/XPDroidEditTextImporte"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -162,7 +162,7 @@
 
         <EditText
             android:id="@+id/activity_crear_gasto_programable_et_descripcion"
-            style="@style/XPDroidEditText"
+            style="@style/XPDroidEditTextDescripcion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
