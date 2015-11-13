@@ -1,9 +1,7 @@
 package com.funebunny.xpdroid.main.ui.activity;
 
-import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.sax.RootElement;
 import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
@@ -23,6 +20,8 @@ import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
+
+import java.math.BigDecimal;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
@@ -119,12 +118,11 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
-        //Validar primer dígito del Importe
-        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))) {
+        //Validar que el importe no sea CERO
+        if (new BigDecimal(importe).compareTo(BigDecimal.ZERO) == 0) {
             etImporte.setError(getResources().getString(R.string.importe_incorrecto));
             return;
         }
-
 
         if (gastoProgramable == null) {
             servicioGastosBusiness.guardarGastoProgramable(getApplicationContext(), descripcion, repeticion, horario, importe, categoria, diaSemana);

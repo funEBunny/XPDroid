@@ -19,6 +19,8 @@ import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBus
 import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
+import java.math.BigDecimal;
+
 
 public class CrearGastoActivity extends XPDroidActivity {
 
@@ -98,12 +100,11 @@ public class CrearGastoActivity extends XPDroidActivity {
             etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
-        //Validar primer dígito del Importe
-        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))) {
+        //Validar que el importe no sea CERO
+        if (new BigDecimal(importe).compareTo(BigDecimal.ZERO) == 0) {
             etImporte.setError(getResources().getString(R.string.importe_incorrecto));
             return;
         }
-
 
         if (gasto == null || gasto.getId() == null) {
             gasto = servicioGastosBusiness.guardarGasto(descripcion, importe, categoria, fecha);

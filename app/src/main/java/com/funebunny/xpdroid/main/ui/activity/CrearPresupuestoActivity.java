@@ -3,7 +3,6 @@ package com.funebunny.xpdroid.main.ui.activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +14,8 @@ import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.presupuesto.model.Presupuesto;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
+
+import java.math.BigDecimal;
 
 public class CrearPresupuestoActivity extends XPDroidActivity {
 
@@ -77,8 +78,8 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
             etImporte.setError(getResources().getString(R.string.campo_obligatorio));
             return;
         }
-        //Validar primer dígito del Importe
-        if (!Character.isDigit(String.valueOf(etImporte.getText()).charAt(0))){
+        //Validar que el importe no sea CERO
+        if (new BigDecimal(importe).compareTo(BigDecimal.ZERO) == 0) {
             etImporte.setError(getResources().getString(R.string.importe_incorrecto));
             return;
         }

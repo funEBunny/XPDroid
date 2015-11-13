@@ -8,10 +8,12 @@ import android.text.method.DigitsKeyListener;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.funebunny.xpdroid.R;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -73,7 +75,7 @@ public class XPDroidActivity extends ActionBarActivity {
         toast.show();
     }
 
-    public class DigitosImporteKeyListener extends DigitsKeyListener{
+    public class DigitosImporteKeyListener extends DigitsKeyListener {
 
         private int parteEntera;
         private int parteDecimal;
