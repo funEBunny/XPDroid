@@ -80,16 +80,16 @@
 
     <string name="lunes">Lunes</string>
     <string name="martes">Martes</string>
-    <string name="miercoles">Miercoles</string>
+    <string name="miercoles">Miércoles</string>
     <string name="jueves">Jueves</string>
     <string name="viernes">Viernes</string>
-    <string name="sabado">Sabado</string>
+    <string name="sabado">Sábado</string>
     <string name="domingo">Domingo</string>
     <string name="diario">Diario</string>
     <string name="semanal">Semanal</string>
     <string name="mensual">Mensual</string>
     <string name="anual">Anual</string>
-    <string name="title_activity_historial_gastos_completo">Busqueda de Gastos Realizados</string>
+    <string name="title_activity_historial_gastos_completo">Búsqueda de Gastos Realizados</string>
     <string name="title_activity_tratar_gasto">Tratar Gasto</string>
     <string name="title_activity_editar_gasto">Editar Gasto</string>
     <string name="title_activity_editar_presupuesto">Editar Presupuesto</string>

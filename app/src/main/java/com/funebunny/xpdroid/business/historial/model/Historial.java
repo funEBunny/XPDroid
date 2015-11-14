@@ -1,7 +1,6 @@
 package com.funebunny.xpdroid.business.historial.model;
 
 import java.text.DateFormatSymbols;
-import java.util.Calendar;
 import java.util.Locale;
 
 /**

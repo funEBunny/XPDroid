@@ -57,7 +57,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
                 Spinner sDiasSemana = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_dias_semana);
                 String diaSemana = servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana());
                 sDiasSemana.setSelection(((ArrayAdapter) sDiasSemana.getAdapter()).getPosition(diaSemana));
-                sDiasSemana.setEnabled(false);
+                sDiasSemana.setEnabled(true);
             } else {
                 sRepeticion.setSelection(((ArrayAdapter) sRepeticion.getAdapter()).getPosition(GastoProgDiario.DIARIO));
             }
@@ -132,6 +132,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             gastoProgramable.setCategoria(categoria);
             gastoProgramable.setImporte(importe);
             gastoProgramable.setHora(horario);
+            if (gastoProgramable instanceof GastoProgSemanal)
+                ((GastoProgSemanal) gastoProgramable).setDiaSemana(servicioGastosBusiness.getDiaSemana(diaSemana));
             servicioGastosBusiness.actualizarGastoProgramable(getApplicationContext(), gastoProgramable);
         }
 
