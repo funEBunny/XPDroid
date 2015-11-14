@@ -68,15 +68,15 @@
     <string name="boton_buscar">Buscar</string>
 
     <string name="categoria0">Cualquiera</string>
-    <string name="categoria1">Transportes</string>
+    <string name="categoria9">Transportes</string>
     <string name="categoria2">Alimentos</string>
-    <string name="categoria3">Supermercado</string>
-    <string name="categoria4">Varios</string>
-    <string name="categoria5">Servicios</string>
-    <string name="categoria6">Impuestos</string>
-    <string name="categoria7">Farmacia</string>
-    <string name="categoria8">Indumentaria</string>
-    <string name="categoria9">Ocio</string>
+    <string name="categoria8">Supermercado</string>
+    <string name="categoria1">Varios</string>
+    <string name="categoria7">Servicios</string>
+    <string name="categoria4">Impuestos</string>
+    <string name="categoria3">Farmacia</string>
+    <string name="categoria5">Indumentaria</string>
+    <string name="categoria6">Ocio</string>
 
     <string name="lunes">Lunes</string>
     <string name="martes">Martes</string>
