@@ -19,7 +19,7 @@ public class ServicioHistorialDAO implements IServicioHistorialDAO {
     public List<Historial> obtenerListaHistorial() {
         Log.d("XPDROID", "Obtener Historial");
         List<Historial> listaHistorial = new ArrayList<>();
-        ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).orderBy("Anio DESC").orderBy("Mes DESC").execute();
+        ArrayList<HistorialDAO> listaHistorialDAO = new Select().from(HistorialDAO.class).orderBy("Anio DESC , Mes DESC").execute();
 
         for (int i = 0; i < listaHistorialDAO.size(); i++) {
 

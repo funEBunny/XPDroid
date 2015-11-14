@@ -74,7 +74,7 @@ public class ServicioGastosDAO implements IServicioGastosDAO {
         Log.d("XPDROID", "Obteniendo Gastos por fecha: " + fecha);
         String fechaBuscar = "%" + fecha + "%";
         List<Gasto> gastos = new ArrayList<>();
-        ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha LIKE ?", fechaBuscar).orderBy("Fecha DESC").execute();
+        ArrayList<GastoDAO> gastosDAO = new Select().from(GastoDAO.class).where("Fecha LIKE ?", fechaBuscar).orderBy("Fecha DESC, Id DESC").execute();
 
         for (int i = 0; i < gastosDAO.size(); i++) {
 
