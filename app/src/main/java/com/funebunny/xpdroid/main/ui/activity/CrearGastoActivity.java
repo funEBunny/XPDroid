@@ -33,10 +33,8 @@ public class CrearGastoActivity extends XPDroidActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
-        //Limitador de dígitos enteros y decimales para campo Importe
-        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
-        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
 
+        EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
         Bundle bGasto = getIntent().getExtras();
         if (bGasto != null) {
             gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
@@ -56,6 +54,8 @@ public class CrearGastoActivity extends XPDroidActivity {
             // Fijar por defecto la fecha del día cuando se trata de un gasto nuevo
             ((EditText) findViewById(R.id.activity_crear_gasto_et_fecha)).setText(getFechaActual());
         }
+        //Limitador de dígitos enteros y decimales para campo Importe
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
     }
 
     @Override

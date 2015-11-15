@@ -44,9 +44,9 @@ public class ButtonAdapterGastoFavorito extends ArrayAdapter<GastoFavorito> {
 
             if (bGastoFavorito != null) {
 
-                bGastoFavorito.setText(Html.fromHtml("<b><big>" + gastoFavorito.getDescripcion() +
-                        "&nbsp;&nbsp;$" + AppUtilities.formatearImporte(gastoFavorito.getImporte()) + "</big></b>" + "<br />" +
-                        "<small>" + gastoFavorito.getCategoria() + "</small>"));
+                bGastoFavorito.setText(Html.fromHtml("<b><big>" + "$" + AppUtilities.formatearImporte(gastoFavorito.getImporte()) + "</big></b>" + "<br />"
+                        + "<medium>" + gastoFavorito.getDescripcion() + "</medium>" +"<br />"
+                        + "<small>" + gastoFavorito.getCategoria() + "</small>"));
 
             }
 

@@ -27,10 +27,7 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_presupuesto);
 
-        //Limitador de dígitos enteros y decimales para campo Importe
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_presupuesto_et_importe);
-        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
-
         Bundle bPresupuesto = getIntent().getExtras();
         if (bPresupuesto != null) {
             presupuesto = (Presupuesto) bPresupuesto.getSerializable(AppConstants.PRESUPUESTO);
@@ -40,7 +37,8 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
             sPeriodo.setEnabled(false);
             setTitle(R.string.title_activity_editar_presupuesto);
         }
-
+        //Limitador de dígitos enteros y decimales para campo Importe
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
     }
 
 
@@ -84,15 +82,15 @@ public class CrearPresupuestoActivity extends XPDroidActivity {
             return;
         }
 
-        if (presupuesto == null){
-            if (servicioPresupuestoBusiness.tipoPresupuestoExiste(periodo)){
+        if (presupuesto == null) {
+            if (servicioPresupuestoBusiness.tipoPresupuestoExiste(periodo)) {
                 Resources res = getResources();
                 String mensaje = String.format(res.getString(R.string.presupuesto_existente), periodo);
                 showMessage(mensaje);
                 return;
             }
             servicioPresupuestoBusiness.guardarPresupuesto(periodo, importe);
-        }else{
+        } else {
             presupuesto.setImporte(importe);
             presupuesto.setPeriodo(periodo);
             servicioPresupuestoBusiness.actualizarPresupuesto(presupuesto);

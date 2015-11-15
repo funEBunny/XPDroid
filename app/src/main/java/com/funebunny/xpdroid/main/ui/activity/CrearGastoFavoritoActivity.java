@@ -27,10 +27,7 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_gasto_favorito);
         getSupportActionBar().setHomeButtonEnabled(true);   // Botón para volver a actividad anterior
 
-        //Limitador de dígitos enteros y decimales para campo Importe
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_favorito_et_importe);
-        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
-
         Bundle bGastoFavorito = getIntent().getExtras();
         if (bGastoFavorito != null) {
             gastoFavorito = (GastoFavorito) bGastoFavorito.getSerializable(AppConstants.GASTO_FAVORITO);
@@ -41,6 +38,8 @@ public class CrearGastoFavoritoActivity extends XPDroidActivity {
 
             setTitle(R.string.title_activity_editar_gasto_favorito);
         }
+        //Limitador de dígitos enteros y decimales para campo Importe
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
     }
 
 

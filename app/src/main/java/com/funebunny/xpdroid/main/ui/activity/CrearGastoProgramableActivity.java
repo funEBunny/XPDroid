@@ -34,10 +34,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_gasto_programable);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        //Limitador de dígitos enteros y decimales para campo Importe
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe);
-        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
-
         Bundle bGastoProgramable = getIntent().getExtras();
         if (bGastoProgramable != null) {
 
@@ -69,7 +66,8 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(getHoraActual());
 
         }
-
+        //Limitador de dígitos enteros y decimales para campo Importe
+        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
         verificarSpinnerRepeticion();
     }
 
