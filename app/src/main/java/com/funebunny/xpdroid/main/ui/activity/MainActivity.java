@@ -3,6 +3,7 @@ package com.funebunny.xpdroid.main.ui.activity;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,6 +32,7 @@ import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBus
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapaterAlertaPresupuesto;
 import com.funebunny.xpdroid.main.ui.fragment.AcercaDeFragment;
+import com.funebunny.xpdroid.main.ui.fragment.DriveBackup;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.HistorialGastosItemFragment;
@@ -56,7 +58,8 @@ public class MainActivity extends XPDroidActivity
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
         PresupuestoItemFragment.PresupuestoItemCallbacks,
         TotalesItemFragment.TotalesItemCallbacks,
-        AcercaDeFragment.AcercaDeCallbacks {
+        AcercaDeFragment.AcercaDeCallbacks,
+        DriveBackup.DriveBackupCallbacks{
 
     // Fragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -135,7 +138,13 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 6: { //Acerca de
+            case 6: { //Backup en Google Drive
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, DriveBackup.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+            case 7: { //Acerca de
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, AcercaDeFragment.newInstance(position + 1))
                         .commit();
@@ -213,6 +222,11 @@ public class MainActivity extends XPDroidActivity
 
     @Override
     public void onAcercaDeSelected(String id) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
@@ -403,7 +417,6 @@ public class MainActivity extends XPDroidActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(AppConstants.ARG_DRAWER_ITEM_POSITION));
         }
-
 
         // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
         public void onActivityCreated(Bundle savedInstanceState) {

@@ -258,10 +258,10 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
 
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos1", "semanal", "15:01", "2500", "Varios", "Lunes");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos2", "semanal", "15:02", "2501", "Varios", "Martes");
-        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos3", "semanal", "15:03", "2502", "Varios", "Miercoles");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos3", "semanal", "15:03", "2502", "Varios", "Miércoles");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos4", "semanal", "15:04", "2503", "Varios", "Jueves");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos5", "semanal", "15:05", "2504", "Varios", "Viernes");
-        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Sabado");
+        servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Sábado");
         servicioGastosBusiness.guardarGastoProgramable(getContext(), "Gastos6", "semanal", "15:06", "2505", "Varios", "Domingo");
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(0);
@@ -271,7 +271,7 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
         assertEquals("Martes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(2);
-        assertEquals("Miercoles", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+        assertEquals("Miércoles", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(3);
         assertEquals("Jueves", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
@@ -280,7 +280,7 @@ public class ServicioGastosBusinessTest extends AndroidTestCase{
         assertEquals("Viernes", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(5);
-        assertEquals("Sabado", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
+        assertEquals("Sábado", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));
 
         gastoProgramable = servicioGastosBusiness.obtenerGastosProgramables().get(6);
         assertEquals("Domingo", servicioGastosBusiness.getDiaSemana(((GastoProgSemanal) gastoProgramable).getDiaSemana()));

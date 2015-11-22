@@ -26,4 +26,5 @@ public final class AppConstants {
     public static final String ANIO_MES = "yyyyMM";
     public static final int CANTIDAD_DECIMALES = 2;
     public static final int CANTIDAD_ENTEROS = 6;
+    public static final String DB_NAME = "xpdroid.db";
 }

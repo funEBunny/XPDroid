@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.funebunny.xpdroid" >
+    package="com.funebunny.xpdroid">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -11,34 +11,32 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="AA_DB_NAME"
             android:value="xpdroid.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="2" />
+            android:value="1" />
         <meta-data
             android:name="AA_MODELS"
             android:value="com.funebunny.xpdroid.gastos.dao.Gasto com.funebunny.xpdroid.gastos.dao.GastoProgramableDAO" />
 
-        <receiver android:name=".business.alarma.AlarmChecker" >
-        </receiver>
+        <receiver android:name=".business.alarma.AlarmChecker"></receiver>
 
         <receiver android:name=".business.alarma.DeviceBootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".main.ui.activity.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".main.ui.activity.CrearGastoActivity"
             android:label="@string/title_activity_crear_gasto"
-            android:parentActivityName=".main.ui.activity.MainActivity" >
+            android:parentActivityName=".main.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.activity.MainActivity" />
@@ -46,7 +44,7 @@
         <activity
             android:name=".main.ui.activity.CrearGastoProgramableActivity"
             android:label="@string/title_activity_crear_gasto_programable"
-            android:parentActivityName=".main.ui.activity.MainActivity" >
+            android:parentActivityName=".main.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.activity.MainActivity" />
@@ -54,7 +52,7 @@
         <activity
             android:name=".main.ui.activity.CrearGastoFavoritoActivity"
             android:label="@string/title_activity_crear_gasto_favorito"
-            android:parentActivityName=".main.ui.activity.MainActivity" >
+            android:parentActivityName=".main.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.activity.MainActivity" />
@@ -62,17 +60,23 @@
         <activity
             android:name=".main.ui.activity.CrearPresupuestoActivity"
             android:label="@string/title_activity_crear_presupuesto"
-            android:parentActivityName=".main.ui.activity.MainActivity" >
+            android:parentActivityName=".main.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.ui.activity.MainActivity" />
         </activity>
         <activity
+            android:name=".main.ui.activity.DriveBackupActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".main.ui.activity.DriveRestoreActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".main.ui.activity.XPDroidActivity"
             android:label="@string/title_activity_xpdroid" />
         <activity
             android:name=".main.ui.activity.InicioActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
