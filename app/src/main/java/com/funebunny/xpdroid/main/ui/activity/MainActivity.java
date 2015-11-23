@@ -134,7 +134,7 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 5: { //Acerca de
+            case 5: { //Categorías
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, CategoriasItemFragment.newInstance(position + 1))
                         .commit();
@@ -146,7 +146,7 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 7: { //Backup en Google Drive
+            case 7: { //Copia de Seguridad
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, DriveBackup.newInstance(position + 1))
                         .commit();

@@ -33,6 +33,8 @@ public interface IServicioPresupuestoBusiness {
 
     void calcularTotales();
 
+    void calcularTotalesRestore();
+
     void calcularTotales(Gasto gasto);
 
     void descontarTotales(Gasto gasto);

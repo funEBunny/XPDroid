@@ -199,7 +199,7 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         BigDecimal bdTotal = new BigDecimal(total);
         BigDecimal bdPresupuesto = new BigDecimal(presupuesto);
         int i = bdTotal.compareTo(bdPresupuesto);
-        alcanzado = i != -1;
+        alcanzado = i == 1;
         return alcanzado;
     }
 
@@ -242,8 +242,43 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
             }
             servicioPresupuestoDAO.guardarTotalAnual(totalAnio);
         }
+    }
+
+    @Override
+    public void calcularTotalesRestore() {
+        String totalDia = "0";
+        List<Gasto> gastos = servicioGastosBusiness.obtenerGastosDia(Calendar.getInstance());
+        for (Gasto gasto : gastos) {
+            String importeGasto = gasto.getImporte();
+            totalDia = sumar(totalDia, importeGasto);
+        }
+        servicioPresupuestoDAO.guardarTotalDiario(totalDia);
+
+        String totalSemana = "0";
+        gastos = servicioGastosBusiness.obtenerGastosSemana(Calendar.getInstance());
+        for (Gasto gasto : gastos) {
+            String importeGasto = gasto.getImporte();
+            totalSemana = sumar(totalSemana, importeGasto);
+        }
+        servicioPresupuestoDAO.guardarTotalSemanal(totalSemana);
 
 
+        String totalMes = "0";
+        gastos = servicioGastosBusiness.obtenerGastosMes(Calendar.getInstance());
+        for (Gasto gasto : gastos) {
+            String importeGasto = gasto.getImporte();
+            totalMes = sumar(totalMes, importeGasto);
+        }
+        servicioPresupuestoDAO.guardarTotalMensual(totalMes);
+
+
+        String totalAnio = "0";
+        gastos = servicioGastosBusiness.obtenerGastosAnio(Calendar.getInstance());
+        for (Gasto gasto : gastos) {
+            String importeGasto = gasto.getImporte();
+            totalAnio = sumar(totalAnio, importeGasto);
+        }
+        servicioPresupuestoDAO.guardarTotalAnual(totalAnio);
     }
 
     @Override
