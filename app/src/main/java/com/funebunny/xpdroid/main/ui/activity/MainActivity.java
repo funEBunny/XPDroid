@@ -32,6 +32,7 @@ import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBus
 import com.funebunny.xpdroid.main.ui.adapter.ButtonAdapterGastoFavorito;
 import com.funebunny.xpdroid.main.ui.adapter.ExpandableAdapaterAlertaPresupuesto;
 import com.funebunny.xpdroid.main.ui.fragment.AcercaDeFragment;
+import com.funebunny.xpdroid.main.ui.fragment.CategoriasItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.DriveBackup;
 import com.funebunny.xpdroid.main.ui.fragment.GastosFavoritosItemFragment;
 import com.funebunny.xpdroid.main.ui.fragment.GastosProgramablesItemFragment;
@@ -57,6 +58,7 @@ public class MainActivity extends XPDroidActivity
         GastosFavoritosItemFragment.GastosFavoritosItemCallbacks,
         GastosProgramablesItemFragment.GastosProgramablesItemCallbacks,
         PresupuestoItemFragment.PresupuestoItemCallbacks,
+        CategoriasItemFragment.CategoriasItemCallbacks,
         TotalesItemFragment.TotalesItemCallbacks,
         AcercaDeFragment.AcercaDeCallbacks,
         DriveBackup.DriveBackupCallbacks{
@@ -132,19 +134,25 @@ public class MainActivity extends XPDroidActivity
                         .commit();
                 break;
             }
-            case 5: { //Totales
+            case 5: { //Acerca de
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, CategoriasItemFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            }
+            case 6: { //Totales
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, TotalesItemFragment.newInstance(position + 1))
                         .commit();
                 break;
             }
-            case 6: { //Backup en Google Drive
+            case 7: { //Backup en Google Drive
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, DriveBackup.newInstance(position + 1))
                         .commit();
                 break;
             }
-            case 7: { //Acerca de
+            case 8: { //Acerca de
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, AcercaDeFragment.newInstance(position + 1))
                         .commit();
@@ -212,6 +220,11 @@ public class MainActivity extends XPDroidActivity
 
     @Override
     public void onTotalesItemSelected(String id) {
+
+    }
+
+    @Override
+    public void onCategoriasItemSelected(String id) {
 
     }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categoria_list_item_ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/list_selector"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:longClickable="true"
+    android:orientation="vertical"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall">
+
+    <LinearLayout
+        android:id="@+id/categoria_list_item_ll_datos1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/categoria_list_item_tv_nombre"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ff000000"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:textStyle="bold"
+            android:gravity="left|center_vertical"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:id="@+id/gastos_favoritos_list_item_ll_datos2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/gastos_favoritos_list_item_tv_descripcion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical" />
+
+        <TextView
+            android:id="@+id/gastos_favoritos_list_item_tv_importe"
+            style="@style/XPDroidTextViewImporte"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1" />
+    </LinearLayout>
+    -->
+
+</LinearLayout>

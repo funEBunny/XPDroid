@@ -1,12 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.funebunny.xpdroid.main.ui.activity.InicioActivity">
+    tools:context="com.funebunny.xpdroid.main.ui.activity.MainActivity">
 
     <item android:id="@+id/icono_xpdroid"
         android:title="@string/app_name"
         android:icon="@drawable/ic_xpdroid"
-        android:clickable="false"
         app:showAsAction="always" />
 
 </menu>

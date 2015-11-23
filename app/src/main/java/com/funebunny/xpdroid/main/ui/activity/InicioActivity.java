@@ -28,7 +28,7 @@ public class InicioActivity extends ActionBarActivity {
         if (isFirstRun)
         {
             // Code to run once
-            Log.d("XPDROID", " Activando notificacion diara para totales");
+            Log.d("XPDROID", " Activando notificacion diaria para totales");
             ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
             notificationsService.activarAlarmaDiaria(this.getApplicationContext(), AppConstants.CERO_HORAS, AppConstants.ID_ALARMA_TOTALES);
 

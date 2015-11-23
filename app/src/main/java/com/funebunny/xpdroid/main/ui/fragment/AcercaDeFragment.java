@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -63,5 +65,15 @@ public class AcercaDeFragment extends Fragment implements AbsListView.OnItemClic
     public interface AcercaDeCallbacks {
         // TODO: Update argument type and name
         void onAcercaDeSelected(String id);
+    }
+
+    // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_solo_logo, menu); //Tiene el mismo action bar que la opcion de totales
     }
 }

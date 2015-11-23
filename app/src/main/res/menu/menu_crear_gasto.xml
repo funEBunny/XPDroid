@@ -3,10 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.funebunny.xpdroid.main.ui.activity.CrearGastoActivity">
 
+    <item android:id="@+id/icono_xpdroid"
+        android:title="@string/app_name"
+        android:icon="@drawable/ic_xpdroid"
+        android:clickable="false"
+        app:showAsAction="always" />
+
     <item android:id="@+id/action_crear_gasto"
-    android:title="@string/action_crear_gasto"
-    android:icon="@drawable/ic_action_new"
-    app:showAsAction="always" />
+        android:title="@string/action_crear_gasto"
+        android:icon="@drawable/ic_action_new"
+        app:showAsAction="always" />
 
 
     <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"-->

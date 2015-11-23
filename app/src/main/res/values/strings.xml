@@ -6,6 +6,7 @@
     <string name="action_crear_gasto_favorito">Crear Gasto Favorito!</string>
     <string name="action_crear_gasto_programable">Crear Gasto Programable!</string>
     <string name="action_crear_presupuesto">Crear Presupuesto de Gastos!</string>
+    <string name="action_crear_categoria">Crear Categoria!</string>
     <string name="action_crear_recordatorio">Crear Recordatorio!</string>
     <string name="action_ver_historial">Buscar mas Gastos!</string>
     <string name="gasto_guardado_mensaje">Gasto guardado exitosamente!</string>
@@ -15,6 +16,7 @@
     <string name="gasto_favorito_guardado_mensaje">Favorito guardado exitosamente!</string>
     <string name="favorito_eliminado_mensaje">Favorito eliminado exitosamente!</string>
     <string name="favorito_actualizado_mensaje">Favorito actualizado exitosamente!</string>
+    <string name="categoria_guardado_mensaje">Categoria guardada exitosamente!</string>
     <string name="presupuesto_actualizado_mensaje">Presupuesto actualizado exitosamente!</string>
     <string name="presupuesto_guardado_mensaje">Presupuesto guardado exitosamente!</string>
     <string name="presupuesto_eliminado_mensaje">Presupuesto eliminado exitosamente!</string>
@@ -25,9 +27,11 @@
     <string name="navdrawitem3">Favoritos</string>
     <string name="navdrawitem4">Programables</string>
     <string name="navdrawitem5">Presupuesto</string>
-    <string name="navdrawitem6">Totales</string>
-    <string name="navdrawitem7">Copia de Seguridad</string>
-    <string name="navdrawitem8">Acerca de</string>
+    <string name="navdrawitem6">Categorias</string>
+    <string name="navdrawitem7">Totales</string>
+    <string name="navdrawitem8">Copia de Seguridad</string>
+    <string name="navdrawitem9">Acerca de</string>
+
 
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
@@ -111,6 +115,7 @@
     <string name="no_hay_favoritos">No hay Favoritos grabados</string>
     <string name="no_hay_gastos">No hay Gastos grabados</string>
     <string name="no_hay_programables">No hay Gastos Programables grabados</string>
+    <string name="no_hay_categorias">No hay Categorias grabadas</string>
     <string name="no_hay_presupuesto">No hay Presupuestos grabados</string>
     <string name="mis_favoritos">Mis Favoritos</string>
     <string name="alerta_presupuesto">Presupuesto excedido!</string>

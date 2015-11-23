@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -150,6 +152,16 @@ public class TotalesItemFragment extends Fragment implements AbsListView.OnItemC
     public interface TotalesItemCallbacks {
         // TODO: Update argument type and name
         void onTotalesItemSelected(String id);
+    }
+
+    // Estos 2 métodos (onActivityCreated y onCreateOptionsMenu) anulan el menu anterior y setean el menu del Fragment seleccionado (actual)
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_solo_logo, menu);
     }
 
     private Spanned formatTextoTotal(String texto, String importe) {

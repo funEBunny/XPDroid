@@ -13,6 +13,7 @@ public final class AppConstants {
     public static final String GASTO_FAVORITO = "gasto favorito";
     public static final String GASTO_PROGRAMABLE = "gasto programable";
     public static final String PRESUPUESTO = "presupuesto";
+    public static final String CATEGORIA = "categoria";
     public static final int CANT_MAX_PRESUPUESTO = 4;
     public static final String CERO_HORAS = "00:00";
     public static final long ID_ALARMA_TOTALES = 0L;
