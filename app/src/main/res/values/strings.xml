@@ -32,7 +32,7 @@
     <string name="navdrawitem8">Copia de Seguridad</string>
     <string name="navdrawitem9">Acerca de</string>
 
-
+    <string name="title_activity_crear_categoria">Crear Categoria</string>
     <string name="title_activity_crear_gasto">Crear Gasto</string>
     <string name="title_activity_gastos_favoritos">Gastos Favoritos</string>
     <string name="fecha">Fecha</string>

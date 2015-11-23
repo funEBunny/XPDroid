@@ -165,7 +165,7 @@ public class CategoriasItemFragment extends Fragment implements AbsListView.OnIt
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_solo_logo, menu);
+        inflater.inflate(R.menu.menu_crear_categoria, menu);
     }
 
     private void mostrarNoData() {

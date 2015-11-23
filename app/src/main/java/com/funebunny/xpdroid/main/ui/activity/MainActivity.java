@@ -337,6 +337,17 @@ public class MainActivity extends XPDroidActivity
                 break;
             }
 
+            case R.id.action_crear_categoria: {
+                Intent intentCrearCategoria = new Intent(this, CrearCategoriaActivity.class);
+                startActivity(intentCrearCategoria, animation);
+
+                //Mostrar mensaje de crear gasto programable
+                Toast toast = Toast.makeText(this, R.string.action_crear_categoria, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                break;
+            }
+
             case R.id.action_crear_presupuesto: {
 
                 if (servicioPresupuestoBusiness.isLimitePresupuestoAlcanzado()) {

@@ -66,6 +66,14 @@
                 android:value=".main.ui.activity.MainActivity" />
         </activity>
         <activity
+            android:name=".main.ui.activity.CrearCategoriaActivity"
+            android:label="@string/title_activity_crear_categoria"
+            android:parentActivityName=".main.ui.activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.ui.activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".main.ui.activity.DriveBackupActivity"
             android:exported="true"></activity>
         <activity
