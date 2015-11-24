@@ -455,18 +455,26 @@ public class MainActivity extends XPDroidActivity
         private void verificarPresupuestos(View view) {
 
             ArrayList<String> presupuestosAlcanzados = new ArrayList<String>();
-
+            String presupuesto,total;
             if (servicioPresupuestoBusiness.isPresupuestoDiarioAlcanzado()) {
-                presupuestosAlcanzados.add(getResources().getString(R.string.diario));
+                presupuesto = servicioPresupuestoBusiness.obtenerPresupuestoDiario();
+                total = servicioPresupuestoBusiness.obtenerTotalDiario();
+                presupuestosAlcanzados.add(getResources().getString(R.string.diario).concat(" | Presupuesto: $"+presupuesto+" | Gastos Periodo: $"+total));
             }
             if (servicioPresupuestoBusiness.isPresupuestoSemanalAlcanzado()) {
-                presupuestosAlcanzados.add(getResources().getString(R.string.semanal));
+                presupuesto = servicioPresupuestoBusiness.obtenerPresupuestoSemanal();
+                total = servicioPresupuestoBusiness.obtenerTotalSemanal();
+                presupuestosAlcanzados.add(getResources().getString(R.string.semanal).concat(" | Presupuesto: $" + presupuesto + " | Gastos Periodo: $" + total));
             }
             if (servicioPresupuestoBusiness.isPresupuestoMensualAlcanzado()) {
-                presupuestosAlcanzados.add(getResources().getString(R.string.mensual));
+                presupuesto = servicioPresupuestoBusiness.obtenerPresupuestoMensual();
+                total = servicioPresupuestoBusiness.obtenerTotalMensual();
+                presupuestosAlcanzados.add(getResources().getString(R.string.mensual).concat(" | Presupuesto: $" + presupuesto + " | Gastos Periodo: $" + total));
             }
             if (servicioPresupuestoBusiness.isPresupuestoAnualAlcanzado()) {
-                presupuestosAlcanzados.add(getResources().getString(R.string.anual));
+                presupuesto = servicioPresupuestoBusiness.obtenerPresupuestoAnual();
+                total = servicioPresupuestoBusiness.obtenerTotalAnual();
+                presupuestosAlcanzados.add(getResources().getString(R.string.anual).concat(" | Presupuesto: $"+presupuesto+" | Gastos Periodo: $"+total));
             }
 
             if (!presupuestosAlcanzados.isEmpty()) {

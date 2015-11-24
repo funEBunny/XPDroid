@@ -37,22 +37,22 @@ public class ServicioPresupuestoBusiness implements IServicioPresupuestoBusiness
         return servicioPresupuestoDAO.obtenerPresupuesto();
     }
 
-    String obtenerPresupuestoDiario() {
+    public String obtenerPresupuestoDiario() {
         Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_DIARIO);
         return presupuesto == null ? "" : presupuesto.getImporte();
     }
 
-    String obtenerPresupuestoSemanal() {
+    public String obtenerPresupuestoSemanal() {
         Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_SEMANAL);
         return presupuesto == null ? "" : presupuesto.getImporte();
     }
 
-    String obtenerPresupuestoMensual() {
+    public String obtenerPresupuestoMensual() {
         Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_MENSUAL);
         return presupuesto == null ? "" : presupuesto.getImporte();
     }
 
-    String obtenerPresupuestoAnual() {
+    public String obtenerPresupuestoAnual() {
         Presupuesto presupuesto = servicioPresupuestoDAO.obtenerPresupuestoPorPeriodo(AppConstants.PERIODO_ANUAL);
         return presupuesto == null ? "" : presupuesto.getImporte();
     }
