@@ -35,7 +35,7 @@ public class ListAdapterCategoria extends ArrayAdapter<Categoria> {
         if (view == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            view = vi.inflate(R.layout.gastos_favoritos_list_item, null);
+            view = vi.inflate(R.layout.categoria_list_item, null);
         }
 
         Categoria categoria = getItem(position);
@@ -45,8 +45,6 @@ public class ListAdapterCategoria extends ArrayAdapter<Categoria> {
             view.setTag(categoria); //Anclar el objeto
 
             TextView nombre = (TextView) view.findViewById(R.id.categoria_list_item_tv_nombre);
-            TextView importe = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_importe);
-            TextView descripcion = (TextView) view.findViewById(R.id.gastos_favoritos_list_item_tv_descripcion);
 
             if (nombre != null) {
                 nombre.setText(categoria.getnombre());
