@@ -47,7 +47,8 @@
             android:hint="@string/descripcion"
             android:layout_weight="2"
             style="@style/XPDroidEditTextDescripcion"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:maxLength="15" />
 
         <RelativeLayout
             android:layout_width="0dp"

@@ -27,7 +27,7 @@
     <string name="navdrawitem3">Favoritos</string>
     <string name="navdrawitem4">Programables</string>
     <string name="navdrawitem5">Presupuesto</string>
-    <string name="navdrawitem6">Categorias</string>
+    <string name="navdrawitem6">Categorías</string>
     <string name="navdrawitem7">Totales</string>
     <string name="navdrawitem8">Copia de Seguridad</string>
     <string name="navdrawitem9">Acerca de</string>
@@ -122,8 +122,8 @@
     <string name="gastos_programados_titulo">Gastos Programados:</string>
     <string name="seleccione_total_predeterminado">Seleccione la opción predeterminada para ver en Inicio</string>
 
-    <string name="respaldar">Copia de Seguridad</string>
-    <string name="restaurar">Restaurar Copia</string>
+    <string name="boton_respaldar">Copia de\n Seguridad</string>
+    <string name="boton_restaurar">Restaurar\n Copia</string>
     <string name="backup_exitoso">Copia de Seguridad realizada con éxito</string>
     <string name="restore_exitoso">Copia restaurada con éxito</string>
     <string name="info_google_drive_respaldar">Utilice Google Drive para realizar una copia de seguridad o restaurar una copia anterior</string>

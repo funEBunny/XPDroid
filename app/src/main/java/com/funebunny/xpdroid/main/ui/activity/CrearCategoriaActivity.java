@@ -26,22 +26,6 @@ public class CrearCategoriaActivity extends XPDroidActivity {
         setContentView(R.layout.activity_crear_categoria);
         getSupportActionBar().setHomeButtonEnabled(true);   // Botón para volver a actividad anterior
 
-        /*
-        EditText etImporte = (EditText) findViewById(R.id.activity_crear_categoria_et_importe);
-
-        Bundle bcategoria = getIntent().getExtras();
-        if (bcategoria != null) {
-            categoria = (categoria) bcategoria.getSerializable(AppConstants.categoria);
-            etImporte.setText(categoria.getImporte());
-            ((EditText) findViewById(R.id.activity_crear_categoria_et_descripcion)).setText(categoria.getDescripcion());
-            Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_categoria_sp_categoria);
-            sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(categoria.getCategoria()));
-
-            setTitle(R.string.title_activity_editar_categoria);
-        }
-        //Limitador de dígitos enteros y decimales para campo Importe
-        etImporte.setFilters(new InputFilter[]{new DigitosImporteKeyListener(AppConstants.CANTIDAD_ENTEROS, AppConstants.CANTIDAD_DECIMALES, etImporte.getText())});
-        */
     }
 
 

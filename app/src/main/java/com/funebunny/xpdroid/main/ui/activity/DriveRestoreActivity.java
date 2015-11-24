@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.business.alarma.DeviceBootReceiver;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 import com.google.android.gms.common.api.ResultCallback;
@@ -124,6 +125,8 @@ public class DriveRestoreActivity extends BaseDriveActivity {
             }
             ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
             servicioPresupuestoBusiness.calcularTotalesRestore();
+            DeviceBootReceiver deviceBootReceiver = new DeviceBootReceiver();
+            deviceBootReceiver.actualizarAlarma(getApplicationContext());
             showMessage(getResources().getString(R.string.restore_exitoso));
             finish();
         }
