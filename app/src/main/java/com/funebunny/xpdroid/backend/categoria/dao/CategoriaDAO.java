@@ -7,7 +7,7 @@ import com.activeandroid.annotation.Table;
 /**
  * Created by schmidt0 on 11/24/2015.
  */
-@Table(name = "Gasto")
+@Table(name = "Categoria")
 public class CategoriaDAO extends Model {
 
     public String getNombre() {
@@ -18,6 +18,6 @@ public class CategoriaDAO extends Model {
         this.nombre = nombre;
     }
 
-    @Column(name = "Descripcion")
+    @Column(name = "Nombre")
     String nombre;
 }
