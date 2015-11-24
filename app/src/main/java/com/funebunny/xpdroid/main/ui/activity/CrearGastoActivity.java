@@ -12,6 +12,9 @@ import android.widget.Spinner;
 
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.backend.categoria.service.ServicioCategoriasDAO;
+import com.funebunny.xpdroid.business.categoria.model.Categoria;
+import com.funebunny.xpdroid.business.categoria.service.ServicioCategoriaBusiness;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
 import com.funebunny.xpdroid.business.gasto.service.ServicioGastosBusiness;
 import com.funebunny.xpdroid.business.historial.service.ServicioHistorialBusiness;
@@ -20,6 +23,7 @@ import com.funebunny.xpdroid.main.ui.fragment.DatePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class CrearGastoActivity extends XPDroidActivity {
@@ -27,6 +31,7 @@ public class CrearGastoActivity extends XPDroidActivity {
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
     private ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
     private ServicioHistorialBusiness servicioHistorialBusiness = new ServicioHistorialBusiness();
+    private ServicioCategoriaBusiness servicioCategoriaBusiness = new ServicioCategoriaBusiness();
     private Gasto gasto;
 
     @Override
@@ -34,13 +39,22 @@ public class CrearGastoActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto);
 
+        List<Categoria> categorias = servicioCategoriaBusiness.obtenerCategorias();
+        String[] catArray = new String[categorias.size()];
+        for (int i = 0; i < categorias.size(); i++) {
+            catArray[i]=categorias.get(i).getnombre();
+        }
+        Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, catArray);
+        sCategoria.setAdapter(adapter);
+
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
+
         Bundle bGasto = getIntent().getExtras();
         if (bGasto != null) {
             gasto = (Gasto) bGasto.getSerializable(AppConstants.GASTO);
             etImporte.setText(gasto.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_et_descripcion)).setText(gasto.getDescripcion());
-            Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gasto.getCategoria()));
 
             if (gasto.getId() != null) {    //Se está editando un gasto, entonces tomo la fecha del gasto

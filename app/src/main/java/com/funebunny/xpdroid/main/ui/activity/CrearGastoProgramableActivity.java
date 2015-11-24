@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.business.categoria.model.Categoria;
+import com.funebunny.xpdroid.business.categoria.service.ServicioCategoriaBusiness;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgDiario;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgSemanal;
 import com.funebunny.xpdroid.business.gasto.model.GastoProgramable;
@@ -22,10 +24,12 @@ import com.funebunny.xpdroid.main.ui.fragment.TimePickerFragment;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CrearGastoProgramableActivity extends XPDroidActivity {
 
     private ServicioGastosBusiness servicioGastosBusiness = new ServicioGastosBusiness();
+    private ServicioCategoriaBusiness servicioCategoriaBusiness = new ServicioCategoriaBusiness();
     private GastoProgramable gastoProgramable;
 
     @Override
@@ -33,6 +37,15 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_gasto_programable);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        List<Categoria> categorias = servicioCategoriaBusiness.obtenerCategorias();
+        String[] catArray = new String[categorias.size()];
+        for (int i = 0; i < categorias.size(); i++) {
+            catArray[i]=categorias.get(i).getnombre();
+        }
+        Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, catArray);
+        sCategoria.setAdapter(adapter);
 
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_programable_et_importe);
         Bundle bGastoProgramable = getIntent().getExtras();
@@ -42,7 +55,7 @@ public class CrearGastoProgramableActivity extends XPDroidActivity {
             etImporte.setText(gastoProgramable.getImporte());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_descripcion)).setText(gastoProgramable.getDescripcion());
             ((EditText) findViewById(R.id.activity_crear_gasto_programable_et_horario)).setText(String.valueOf(gastoProgramable.getHora()));
-            Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
+            sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_categoria);
             sCategoria.setSelection(((ArrayAdapter) sCategoria.getAdapter()).getPosition(gastoProgramable.getCategoria()));
 
             Spinner sRepeticion = (Spinner) findViewById(R.id.activity_crear_gasto_programable_sp_repeticion);

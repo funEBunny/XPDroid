@@ -3,6 +3,7 @@ package com.funebunny.xpdroid.business.categoria.service;
 import android.content.Context;
 import android.util.Log;
 
+import com.funebunny.xpdroid.backend.categoria.service.ServicioCategoriasDAO;
 import com.funebunny.xpdroid.backend.gasto.service.ServicioGastosDAO;
 import com.funebunny.xpdroid.business.categoria.model.Categoria;
 import com.funebunny.xpdroid.business.gasto.model.Gasto;
@@ -26,25 +27,21 @@ import java.util.List;
  */
 public class ServicioCategoriaBusiness implements IServicioCategoriaBusiness {
 
-    //ServicioCategoriasDAO servicioCategoriasDAO = new ServicioCategoriasDAO();
+    ServicioCategoriasDAO servicioCategoriasDAO = new ServicioCategoriasDAO();
 
     @Override
     public List<Categoria> obtenerCategorias() {
         Log.d("XPDROID", "Obteniendo Categorias");
-        //return servicioCategoriasDAO.obtenerCategorias();
+        return servicioCategoriasDAO.obtenerCategorias();
 
-        //FIXME
-        return new ArrayList<Categoria>();
     }
 
     @Override
     public Categoria guardarCategoria(String nombre) {
         Log.d("XPDROID", "Guardando Categorias");
         Categoria c = new Categoria();
-
         c.setnombre(nombre);
-        //FIXME
-        //c.setId(servicioCategoriasDAO.guardarGastoProgramable(gp));
+        c.setId(servicioCategoriasDAO.insertrCategoria(c));
         return c;
     }
 }

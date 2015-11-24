@@ -56,7 +56,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_crear_gasto_favorito_sp_categoria"
             android:layout_centerInParent="true"
-            android:entries="@array/categorias"
             android:layout_gravity="center"
             android:layout_weight="2" />
 

@@ -59,8 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_weight="2"
-            android:entries="@array/categorias" />
+            android:layout_weight="2" />
 
         <RelativeLayout
             android:layout_width="0dp"

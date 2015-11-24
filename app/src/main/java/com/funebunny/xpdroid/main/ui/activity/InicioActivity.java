@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.funebunny.xpdroid.R;
+import com.funebunny.xpdroid.business.categoria.service.ServicioCategoriaBusiness;
 import com.funebunny.xpdroid.business.notificacion.service.ServicioNotificacionesBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 
@@ -31,6 +32,12 @@ public class InicioActivity extends ActionBarActivity {
             Log.d("XPDROID", " Activando notificacion diaria para totales");
             ServicioNotificacionesBusiness notificationsService = new ServicioNotificacionesBusiness();
             notificationsService.activarAlarmaDiaria(this.getApplicationContext(), AppConstants.CERO_HORAS, AppConstants.ID_ALARMA_TOTALES);
+
+            ServicioCategoriaBusiness servicioCategoriaBusiness = new ServicioCategoriaBusiness();
+            String[] categorias = getResources().getStringArray(R.array.categorias);
+            for (int i = 0; i < categorias.length; i++) {
+                servicioCategoriaBusiness.guardarCategoria(categorias[i]);
+            }
 
             SharedPreferences.Editor editor = wmbPreference.edit();
             editor.putBoolean("FIRSTRUN", false);
