@@ -14,6 +14,7 @@ import android.content.IntentSender;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.business.presupuesto.service.ServicioPresupuestoBusiness;
 import com.funebunny.xpdroid.utilities.AppConstants;
 import com.google.android.gms.common.api.ResultCallback;
@@ -123,6 +124,7 @@ public class DriveRestoreActivity extends BaseDriveActivity {
             }
             ServicioPresupuestoBusiness servicioPresupuestoBusiness = new ServicioPresupuestoBusiness();
             servicioPresupuestoBusiness.calcularTotalesRestore();
+            showMessage(getResources().getString(R.string.restore_exitoso));
             finish();
         }
     };

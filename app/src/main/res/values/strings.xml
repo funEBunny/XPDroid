@@ -124,5 +124,7 @@
 
     <string name="respaldar">Copia de Seguridad</string>
     <string name="restaurar">Restaurar Copia</string>
+    <string name="backup_exitoso">Copia de Seguridad realizada con éxito</string>
+    <string name="restore_exitoso">Copia restaurada con éxito</string>
     <string name="info_google_drive_respaldar">Utilice Google Drive para realizar una copia de seguridad o restaurar una copia anterior</string>
 </resources>

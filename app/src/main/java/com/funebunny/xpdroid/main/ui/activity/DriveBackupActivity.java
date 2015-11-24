@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.funebunny.xpdroid.R;
 import com.funebunny.xpdroid.utilities.AppConstants;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
@@ -85,7 +86,6 @@ public class DriveBackupActivity extends BaseDriveActivity {
                     } catch (SendIntentException e) {
                         Log.i(TAG, "Failed to launch file chooser.");
                     }
-                    finish();
                 }
             };
 
@@ -96,7 +96,7 @@ public class DriveBackupActivity extends BaseDriveActivity {
         switch (requestCode) {
             case REQUEST_CODE_CREATOR:
                 if (resultCode == RESULT_OK) {
-                     showMessage("File created with ID: ");
+                     showMessage(getResources().getString(R.string.backup_exitoso));
                 }
                 finish();
                 break;
