@@ -45,7 +45,7 @@ public class CrearGastoActivity extends XPDroidActivity {
             catArray[i]=categorias.get(i).getnombre();
         }
         Spinner sCategoria = (Spinner) findViewById(R.id.activity_crear_gasto_sp_categoria);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, catArray);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, catArray);
         sCategoria.setAdapter(adapter);
 
         EditText etImporte = (EditText) findViewById(R.id.activity_crear_gasto_et_importe);
